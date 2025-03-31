@@ -22,6 +22,7 @@
   "scripts": {
     "dev": "vite && npm-run-all --parallel watch start",
     "build": "vite build && sass src/scss:dist/css",
+    "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
     "test": "vitest",
