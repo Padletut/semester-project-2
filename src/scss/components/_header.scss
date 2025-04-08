@@ -3,10 +3,29 @@ header {
 
   .navbar {
     min-height: 170px;
+    .nav-link {
+      color: $body-bg;
+      &:hover {
+        color: $body-bg;
+      }
+    }
+
+    .nav-link.active {
+      color: $secondary;
+      &:hover {
+        color: $secondary;
+      }
+    }
   }
 
   .display-credits {
     margin-right: 1em;
+    padding: 0.5em 1em;
+    background: black;
+    opacity: 0.66;
+    border-radius: 8px;
+    color: $body-bg;
+    text-decoration: underline;
   }
 }
 
