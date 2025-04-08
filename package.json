@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "vite && npm-run-all --parallel watch start",
-    "build": "vite build && sass src/scss:dist/css",
+    "build": "vite build && sass src/scss:dist/css --style=compressed && postcss dist/css/*.css --use autoprefixer -d dist/css/",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
@@ -30,6 +30,9 @@
     "start": "live-server"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "autoprefixer": "^10.4.21",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "postcss-cli": "^11.0.1"
   }
 }
