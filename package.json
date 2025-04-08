@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "vite && npm-run-all --parallel watch start",
-    "build": "vite build && sass src/scss:dist/css --style=compressed && postcss dist/css/*.css --use autoprefixer -d dist/css/",
+    "build": "vite build && sass src/scss:dist/css --style=compressed && postcss dist/css/*.css --use autoprefixer -d dist/css/ && cp -R node_modules/bootstrap-icons/font/fonts dist/css/fonts",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
