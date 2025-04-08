@@ -15,4 +15,8 @@ export default {
     port: 3000,
     open: true,
   },
+  build: {
+    outDir: path.resolve(__dirname, "dist"),
+    emptyOutDir: true,
+  },
 };

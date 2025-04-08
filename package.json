@@ -8,7 +8,6 @@
     "globals": "^16.0.0",
     "husky": "^8.0.0",
     "jsdoc": "^4.0.4",
-    "live-server": "^1.2.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.5.3",
     "sass": "^1.86.0",
@@ -21,14 +20,12 @@
     "*.html": "prettier --write"
   },
   "scripts": {
-    "dev": "vite && npm-run-all --parallel watch start",
-    "build": "vite build && sass src/scss:dist/css --style=compressed && postcss dist/css/*.css --use autoprefixer -d dist/css/ && cp -R node_modules/bootstrap-icons/font/fonts dist/css/fonts",
+    "dev": "vite",
+    "build": "vite build && postcss dist/css/*.css --use autoprefixer -d dist/css/ && cp -R node_modules/bootstrap-icons/font/fonts dist/css/fonts",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
-    "test": "vitest",
-    "watch": "sass src/scss:dist/css --watch",
-    "start": "live-server"
+    "test": "vitest"
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
