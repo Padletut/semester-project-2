@@ -4,6 +4,7 @@
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.13.14",
     "eslint": "^9.23.0",
+    "eslint-plugin-html": "^8.1.2",
     "globals": "^16.0.0",
     "husky": "^8.0.0",
     "jsdoc": "^4.0.4",

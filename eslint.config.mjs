@@ -1,6 +1,7 @@
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 import js from "@eslint/js";
+import html from "eslint-plugin-html";
 
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs}"] },
@@ -17,5 +18,15 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
     extends: ["js/recommended"],
+  },
+  {
+    // Add support for HTML files
+    files: ["**/*.html"],
+    plugins: { html },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
   },
 ]);
