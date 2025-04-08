@@ -2,7 +2,7 @@ header {
   background-color: $primary;
 
   .navbar {
-    min-height: 170px;
+    min-height: 150px;
     .nav-link {
       color: $body-bg;
       &:hover {
@@ -40,6 +40,15 @@ header {
       text-decoration-thickness: auto;
       text-underline-offset: auto;
       text-underline-position: from-font;
+      color: $body-bg;
+    }
+  }
+  .custom-search-button {
+    background-color: $body-bg;
+    color: #49454f;
+    border: none;
+    &:hover {
+      background-color: $secondary;
       color: $body-bg;
     }
   }
