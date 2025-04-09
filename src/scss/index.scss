@@ -4,7 +4,14 @@ $bootstrap-icons-font-dir: "/fonts";
 @import "~bootstrap-icons/font/bootstrap-icons";
 @import "components/header";
 @import "components/buttons";
+@import "components/switches";
 
 * {
   scroll-behavior: smooth;
+}
+
+h1 {
+  font-family: $font-family-base;
+  font-size: 32px;
+  font-weight: 700;
 }
