@@ -1,3 +1,6 @@
+.btn-secondary {
+  color: $body-bg;
+}
 .add-listing-button {
   background-color: $secondary;
   border-color: $secondary;
@@ -5,4 +8,14 @@
   i {
     margin-right: 5px;
   }
+}
+
+.card-tags a {
+  padding: 3px 15px;
+  color: $body-bg;
+  background: #4a4458;
+  border-color: #4a4458;
+  box-shadow:
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3);
 }

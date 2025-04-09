@@ -1,0 +1,19 @@
+.card {
+  width: 18rem;
+  background: #d9d9d9;
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    aspect-ratio: 326/218;
+  }
+
+  .card-recent-bids {
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+  }
+}
