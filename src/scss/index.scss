@@ -3,6 +3,7 @@ $bootstrap-icons-font-dir: "/fonts";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-icons/font/bootstrap-icons";
 @import "components/header";
+@import "components/buttons";
 
 * {
   scroll-behavior: smooth;
