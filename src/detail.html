@@ -61,84 +61,62 @@
         </div>
       </div>
       <section class="container mt-2 mb-5">
-        <div
-          class="container-fluid mb-5 ps-0 pe-0 d-flex justify-content-between"
-        >
-          <div class="container-fluid d-flex mb-3">
-            <h1 class="text-center mt-5 ms-0">Product Detail</h1>
-          </div>
-          <div class="container-fluid d-flex justify-content-start mb-3">
-            <h1 class="text-center mt-5 me-0">Place a Bid</h1>
-          </div>
-        </div>
-        <div class="card">
-          <img
-            src="img/sunflowers-1719119_640.jpg"
-            class="card-img-top"
-            alt="Flower Vase"
-          />
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h2 class="card-title text-nowrap">Flower Vase</h2>
+        <div class="container-fluid d-flex flex-row justify-content-start">
+          <div class="container-fluid">
+            <h1 class="mt-5 ms-0">Product Detail</h1>
+            <div
+              class="container-fluid card mb-5 ms-0 ps-0 pe-0 d-flex flex-row"
+            >
+              <img
+                src="img/sunflowers-1719119_640.jpg"
+                class="card-img-top"
+                alt="Flower Vase"
+              />
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h2 class="card-title text-nowrap">Flower Vase</h2>
+                  </div>
+                  <div>
+                    <small class="text-nowrap">Posted Aug 03.2025</small>
+                  </div>
+                </div>
+                <i class="card-author">By <a href="#">Ola Nordmann</a></i>
+                <div>
+                  <div>Total Bids:<span>1</span></div>
+                  <div>Highest Bid:<span>10</span></div>
+                  <div>Ends at:<span>Mars 27.2025</span></div>
+                </div>
+                <p class="card-text mt-5">
+                  Beautiful flower vase with a unique design. Perfect for home
+                  decor.
+                </p>
               </div>
-              <div>
-                <small class="text-nowrap">Posted Aug 03.2025</small>
-              </div>
             </div>
-            <i class="card-author">By <a href="#">Ola Nordmann</a></i>
-            <div class="d-flex gap-2 mt-3 mb-3 card-tags">
-              <a
-                href="#"
-                class="btn btn-secondary btn-sm rounded-5"
-                data-bs-toggle="offcanvas"
-                role="button"
-                >Flower</a
-              >
-              <a
-                href="#"
-                class="btn btn-secondary btn-sm rounded-5"
-                data-bs-toggle="offcanvas"
-                role="button"
-                >Flora</a
-              >
-              <a
-                href="#"
-                class="btn btn-secondary btn-sm rounded-5"
-                data-bs-toggle="offcanvas"
-                role="button"
-                >Vase</a
-              >
-            </div>
-            <p class="card-text mt-5">
-              Beautiful flower vase with a unique design. Perfect for home
-              decor.
-            </p>
-            <div class="container-fluid card-recent-bids p-0 pt-3 pb-4">
-              <h2>Recent Bids:</h2>
-              <ul>
-                <li>5 Credits By<a href="#">Ola Nordmann</a></li>
-                <li>10 Credits By<a href="#">Alice Delice</a></li>
-                <li>15 Credits By<a href="#">John Doe</a></li>
-              </ul>
-            </div>
-            <form>
-              <div class="input-group mb-3">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Enter your bid"
-                  aria-label="Bid Amount"
-                />
+          </div>
+          <div class="container-fluid d-flex flex-column justify-content-start">
+            <h1 class="ms-5 mt-5 me-0">Place a Bid</h1>
+            <div
+              class="container-fluid d-flex justify-self-start ms-5 mb-3 mt-5 p-5 w-50 place-bid-card"
+            >
+              <form>
+                <div class="container p-0 mb-3">
+                  <input
+                    type="number"
+                    class="form-control mb-3"
+                    placeholder="Enter your bid"
+                    aria-label="Bid Amount"
+                  />
+                </div>
                 <button
-                  class="btn btn-secondary"
+                  class="btn btn-secondary w-100"
                   type="submit"
                   title="Submit Bid"
                 >
                   Place Bid
                 </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </section>
