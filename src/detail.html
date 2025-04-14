@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tradeauction is a auction website" />
+    <meta name="keywords" content="auction, trade, buy, sell" />
+    <script type="module" src="js/index.mjs"></script>
+    <title>Item detail | Tradeauction</title>
+  </head>
+  <body>
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand position-absolute" href="#">
+            <img
+              src="img/logo.png"
+              alt="Logo"
+              width="227"
+              height="170"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-nowrap position-absolute display-credits">
+          <i>1000 Cr</i>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div
+        id="loader"
+        class="position-absolute top-50 start-50 translate-middle"
+      >
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <section class="container mt-2 mb-5">
+        <div
+          class="container-fluid mb-5 ps-0 pe-0 d-flex justify-content-between"
+        >
+          <div class="container-fluid d-flex mb-3">
+            <h1 class="text-center mt-5 ms-0">Product Detail</h1>
+          </div>
+          <div class="container-fluid d-flex justify-content-start mb-3">
+            <h1 class="text-center mt-5 me-0">Place a Bid</h1>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="img/sunflowers-1719119_640.jpg"
+            class="card-img-top"
+            alt="Flower Vase"
+          />
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h2 class="card-title text-nowrap">Flower Vase</h2>
+              </div>
+              <div>
+                <small class="text-nowrap">Posted Aug 03.2025</small>
+              </div>
+            </div>
+            <i class="card-author">By <a href="#">Ola Nordmann</a></i>
+            <div class="d-flex gap-2 mt-3 mb-3 card-tags">
+              <a
+                href="#"
+                class="btn btn-secondary btn-sm rounded-5"
+                data-bs-toggle="offcanvas"
+                role="button"
+                >Flower</a
+              >
+              <a
+                href="#"
+                class="btn btn-secondary btn-sm rounded-5"
+                data-bs-toggle="offcanvas"
+                role="button"
+                >Flora</a
+              >
+              <a
+                href="#"
+                class="btn btn-secondary btn-sm rounded-5"
+                data-bs-toggle="offcanvas"
+                role="button"
+                >Vase</a
+              >
+            </div>
+            <p class="card-text mt-5">
+              Beautiful flower vase with a unique design. Perfect for home
+              decor.
+            </p>
+            <div class="container-fluid card-recent-bids p-0 pt-3 pb-4">
+              <h2>Recent Bids:</h2>
+              <ul>
+                <li>5 Credits By<a href="#">Ola Nordmann</a></li>
+                <li>10 Credits By<a href="#">Alice Delice</a></li>
+                <li>15 Credits By<a href="#">John Doe</a></li>
+              </ul>
+            </div>
+            <form>
+              <div class="input-group mb-3">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter your bid"
+                  aria-label="Bid Amount"
+                />
+                <button
+                  class="btn btn-secondary"
+                  type="submit"
+                  title="Submit Bid"
+                >
+                  Place Bid
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container-fluid bg-primary">
+        <p class="text-light mt-3 p-3">Tradeauction &copy; 2025</p>
+      </div>
+    </footer>
+  </body>
+</html>
