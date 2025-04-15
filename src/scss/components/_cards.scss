@@ -67,6 +67,15 @@
     text-decoration: none;
   }
 
+  .card-header {
+    flex: 2;
+  }
+
+  .col-md-8 {
+    flex: 1;
+    min-width: 320px;
+  }
+
   .card-body {
     background: #d9d9d9;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
