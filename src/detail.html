@@ -12,7 +12,7 @@
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand position-absolute" href="#">
+          <a class="navbar-brand position-absolute" href="index.html">
             <img
               src="img/logo.png"
               alt="Logo"
@@ -35,7 +35,9 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
+                <a class="nav-link" aria-current="page" href="index.html"
+                  >Home</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="#">Profile</a>
@@ -54,52 +56,60 @@
     <main>
       <div
         id="loader"
-        class="position-absolute top-50 start-50 translate-middle"
+        class="position-absolute top-50 start-50 translate-middle z-3"
       >
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-      <section class="container mt-2 mb-5">
-        <div class="container-fluid d-flex flex-row justify-content-start">
-          <div class="container-fluid">
-            <h1 class="mt-5 ms-0">Product Detail</h1>
-            <div
-              class="container-fluid card mb-5 ms-0 ps-0 pe-0 d-flex flex-row"
-            >
-              <img
-                src="img/sunflowers-1719119_640.jpg"
-                class="card-img-top"
-                alt="Flower Vase"
-              />
-              <div class="card-body">
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <h2 class="card-title text-nowrap">Flower Vase</h2>
-                  </div>
-                  <div>
-                    <small class="text-nowrap">Posted Aug 03.2025</small>
+      <section class="container-fluid mt-2 mb-5">
+        <div class="d-flex">
+          <div class="container-fluid d-inline-flex flex-column ms-5">
+            <div class="card-detail mb-3">
+              <h1 class="mt-5 mb-5 ms-0">Product Detail</h1>
+              <div class="row g-0">
+                <div class="card-header d-flex col-md-4 p-0">
+                  <img
+                    src="img/sunflowers-1719119_640.jpg"
+                    class="img-fluid rounded-start"
+                    alt="Flower Vase"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body rounded-3 p-3">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <h2 class="card-title text-nowrap">Flower Vase</h2>
+                      </div>
+                      <div>
+                        <small class="text-nowrap">Posted Aug 03.2025</small>
+                      </div>
+                    </div>
+                    <div></div>
+
+                    <i class="card-author">By <a href="#">Ola Nordmann</a></i>
+                    <div>
+                      <div>Total Bids:<span>1</span></div>
+                      <div>Highest Bid:<span>10</span></div>
+                      <div>Ends at:<span>Mars 27.2025</span></div>
+                    </div>
+                    <p class="card-text mt-5">
+                      Beautiful flower vase with a unique design. Perfect for
+                      home decor.
+                    </p>
                   </div>
                 </div>
-                <i class="card-author">By <a href="#">Ola Nordmann</a></i>
-                <div>
-                  <div>Total Bids:<span>1</span></div>
-                  <div>Highest Bid:<span>10</span></div>
-                  <div>Ends at:<span>Mars 27.2025</span></div>
-                </div>
-                <p class="card-text mt-5">
-                  Beautiful flower vase with a unique design. Perfect for home
-                  decor.
-                </p>
               </div>
             </div>
           </div>
-          <div class="container-fluid d-flex flex-column justify-content-start">
-            <h1 class="ms-5 mt-5 me-0">Place a Bid</h1>
+          <div
+            class="container-fluid d-inline-flex flex-column align-items-end"
+          >
             <div
-              class="container-fluid d-flex justify-self-start ms-5 mb-3 mt-5 p-5 w-50 place-bid-card"
+              class="container-fluid d-flex flex-column p-5 justify-content-center place-bid-card"
             >
-              <form>
+              <h1 class="m-0 mb-5">Place a Bid</h1>
+              <form class="p-5 rounded-3">
                 <div class="container p-0 mb-3">
                   <input
                     type="number"
@@ -119,10 +129,38 @@
             </div>
           </div>
         </div>
+        <div class="container-fluid bid-history">
+          <h1 class="mt-5 ms-5 mb-4">Bid History</h1>
+          <div class="ms-5 me-5 p-4 ps-3 pb-3 rounded-3 bid-history-list">
+            <ul>
+              <li class="d-flex justify-content-between">
+                <div class="bid-history-name flex-grow-1">Ola Nordmann</div>
+                <div class="bid-history-date flex-grow-1 text-center">
+                  Mars 26.2025
+                </div>
+                <div class="bid-history-amount flex-grow-1 text-end">10 Cr</div>
+              </li>
+              <li class="d-flex justify-content-between">
+                <div class="bid-history-name flex-grow-1">Ola Nordmann</div>
+                <div class="bid-history-date flex-grow-1 text-center">
+                  Mars 26.2025
+                </div>
+                <div class="bid-history-amount flex-grow-1 text-end">10 Cr</div>
+              </li>
+              <li class="d-flex justify-content-between">
+                <div class="bid-history-name flex-grow-1">Ola Nordmann</div>
+                <div class="bid-history-date flex-grow-1 text-center">
+                  Mars 26.2025
+                </div>
+                <div class="bid-history-amount flex-grow-1 text-end">10 Cr</div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </section>
     </main>
     <footer>
-      <div class="container-fluid bg-primary">
+      <div class="container-fluid bg-primary fixed-bottom">
         <p class="text-light mt-3 p-3">Tradeauction &copy; 2025</p>
       </div>
     </footer>
