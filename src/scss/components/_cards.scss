@@ -42,6 +42,18 @@
     font-weight: 400;
   }
 
+  .card-body {
+    .card-body-bid-info {
+      font-family: "Lato", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      span {
+        font-weight: 400;
+        margin-left: 0.5em;
+      }
+    }
+  }
+
   .card-recent-bids {
     ul {
       padding: 0;
@@ -97,6 +109,29 @@
 }
 
 .bid-history-list {
+  .bid-history-list-body {
+    background: #d9d9d9;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+    .bid-list-name .bid-list-amount {
+      font-family: "Lato", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .bid-list-date {
+      font-family: "Lato", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+.card-profile {
   background: #d9d9d9;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+
+  .card-profile-img {
+    width: 120px;
+    height: 120px;
+    border-width: 2px;
+  }
 }
