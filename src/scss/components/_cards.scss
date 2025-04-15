@@ -43,6 +43,8 @@
   }
 
   .card-body {
+    background: #d9d9d9;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
     .card-body-bid-info {
       font-family: "Lato", sans-serif;
       font-size: 12px;
@@ -134,4 +136,8 @@
     height: 120px;
     border-width: 2px;
   }
+}
+
+.card-custom {
+  max-height: fit-content;
 }

@@ -19,3 +19,16 @@
     0px 4px 8px 3px rgba(0, 0, 0, 0.15),
     0px 1px 3px 0px rgba(0, 0, 0, 0.3);
 }
+
+.btn-custom {
+  background-color: $primary;
+  border-color: $primary;
+  color: $body-bg;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow:
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
