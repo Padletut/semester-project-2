@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tradeauction is a auction website" />
+    <meta name="keywords" content="auction, trade, buy, sell" />
+    <script type="module" src="js/index.mjs"></script>
+    <title>Authorization | Tradeauction</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h1 class="text-center">Welcome to Tradeauction</h1>
+      <section class="container-fluid d-flex justify-content-center">
+        <div
+          class="card bg-white rounded-3 flex-grow-1 flex-sm-grow-0 card-custom"
+        >
+          <div class="card-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="authTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="signIn-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#signIn"
+                  type="button"
+                  role="tab"
+                  aria-controls="signIn"
+                  aria-selected="true"
+                >
+                  Sign In
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link fw-medium"
+                  id="signUp-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#signUp"
+                  type="button"
+                  role="tab"
+                  aria-controls="signUp"
+                  aria-selected="false"
+                >
+                  Sign Up
+                </button>
+              </li>
+            </ul>
+            <!-- Tab panes -->
+            <!-- Login pane -->
+            <div class="tab-content">
+              <div
+                class="tab-pane fade show active"
+                id="signIn"
+                role="tabpanel"
+                aria-labelledby="signIn-tab"
+              >
+                <form
+                  id="signInForm"
+                  class="needs-validation d-flex flex-column gap-3"
+                  novalidate
+                >
+                  <h2 class="fw-semibold">
+                    <p class="h1">Sign in to your account</p>
+                  </h2>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="Email"
+                      placeholder="name@example.com"
+                      aria-describedby="emailHelp"
+                      required
+                    />
+                    <label for="Email" class="form-label">Email</label>
+                    <div class="invalid-feedback">
+                      Please enter a valid email address
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="Password"
+                      placeholder="password"
+                      minlength="8"
+                      required
+                    />
+                    <label for="Password" class="form-label">Password</label>
+                    <div class="invalid-feedback">
+                      Please enter your password with at least 8 characters
+                    </div>
+                  </div>
+                  <div class="form-check-container d-flex">
+                    <div class="mb-3 form-check">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="rememberme"
+                      />
+                      <label class="form-check-label" for="rememberme"
+                        >Remember me</label
+                      >
+                    </div>
+                    <div class="mb-3 ms-3">
+                      <a href="#" class="btn-link">Forgot password?</a>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <button
+                      type="submit"
+                      class="btn btn-custom w-100"
+                      id="signInButton"
+                    >
+                      Sign in
+                    </button>
+                  </div>
+                  <div class="mb-3">
+                    <p>Don’t have an account yet?</p>
+                    <a
+                      href="profile/index.html"
+                      class="btn-link"
+                      id="signUpLink"
+                      >Sign up</a
+                    >
+                  </div>
+                </form>
+              </div>
+
+              <!-- Sign up tab -->
+
+              <div
+                class="tab-pane fade"
+                id="signUp"
+                role="tabpanel"
+                aria-labelledby="signUp-tab"
+              >
+                <form
+                  id="signUpForm"
+                  class="needs-validation d-flex flex-column gap-3"
+                  novalidate
+                >
+                  <h2 class="fw-semibold">
+                    <p class="h1">Create your account</p>
+                  </h2>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      aria-describedby="nameHelp"
+                      placeholder="First name"
+                      required
+                    />
+                    <label for="firstName" class="form-label">First name</label>
+                    <div class="invalid-feedback">
+                      Please enter your First name
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="signUpEmail"
+                      aria-describedby="emailHelp"
+                      placeholder="Email"
+                      required
+                    />
+                    <label for="signUpEmail" class="form-label">Email</label>
+                    <div class="invalid-feedback">
+                      Please enter a valid email address
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="signUpPassword"
+                      placeholder="password"
+                      minlength="8"
+                      required
+                    />
+                    <label for="signUpPassword" class="form-label"
+                      >Password</label
+                    >
+                    <div class="invalid-feedback">
+                      Please enter a password with at least 8 characters
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      placeholder="password"
+                      minlength="8"
+                      required
+                    />
+                    <label for="confirmPassword" class="form-label"
+                      >Confirm Password</label
+                    >
+                    <div class="invalid-feedback">
+                      Please confirm your password
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <button
+                      type="submit"
+                      class="btn btn-custom w-100"
+                      id="signUpButton"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+                  <div class="mb-3">
+                    <p>Already have an account?</p>
+                    <a href="#" class="btn-link" id="signInLink">Sign in</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>
