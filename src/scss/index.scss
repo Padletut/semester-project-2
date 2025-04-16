@@ -1,14 +1,13 @@
 $bootstrap-icons-font-dir: "/fonts";
-@import "variables.scss";
-@import "~bootstrap/scss/bootstrap";
-@import "~bootstrap-icons/font/bootstrap-icons";
-@import "components/header";
-@import "components/buttons";
-@import "components/switches";
-@import "components/cards";
-@import "components/footer";
-@import "components/authorization";
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+@use "bootstrap" as *;
+@use "variables.scss";
+@use "components/header";
+@use "components/buttons";
+@use "components/switches";
+@use "components/cards";
+@use "components/footer";
+@use "components/authorization";
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 * {
@@ -16,13 +15,13 @@ $bootstrap-icons-font-dir: "/fonts";
 }
 
 h1 {
-  font-family: $font-family-base;
+  font-family: variables.$font-family-base;
   font-size: 32px;
   font-weight: 700;
 }
 
 h2 {
-  font-family: $font-family-base;
+  font-family: variables.$font-family-base;
   font-size: 24px;
   font-weight: 700;
 }

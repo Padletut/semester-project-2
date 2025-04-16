@@ -1,24 +1,26 @@
+@use "../variables";
+
 header {
-  background-color: $primary;
+  background-color: variables.$primary;
 
   .navbar {
     min-height: 150px;
     .nav-link {
-      color: $body-bg;
+      color: variables.$body-bg;
       &:hover {
-        color: $body-bg;
+        color: variables.$body-bg;
       }
     }
 
     .nav-link.active {
-      color: $secondary;
+      color: variables.$secondary;
       &:hover {
-        color: $secondary;
+        color: variables.$secondary;
       }
     }
     a {
-      font-family: $font-family-base;
-      font-size: $font-size-navigation;
+      font-family: variables.$font-family-base;
+      font-size: variables.$font-size-navigation;
     }
   }
 
@@ -40,16 +42,16 @@ header {
       text-decoration-thickness: auto;
       text-underline-offset: auto;
       text-underline-position: from-font;
-      color: $body-bg;
+      color: variables.$body-bg;
     }
   }
   .custom-search-button {
-    background-color: $body-bg;
+    background-color: variables.$body-bg;
     color: #49454f;
     border: none;
     &:hover {
-      background-color: $secondary;
-      color: $body-bg;
+      background-color: variables.$secondary;
+      color: variables.$body-bg;
     }
   }
 }

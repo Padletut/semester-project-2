@@ -20,16 +20,17 @@
     "*.html": "prettier --write"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && postcss dist/css/*.css --use autoprefixer -d dist/css/ && cp -R node_modules/bootstrap-icons/font/fonts dist/css/fonts",
+    "start": "vite",
+    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/ && cp -R node_modules/bootstrap-icons/font/fonts dist/assets/fonts",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
     "test": "vitest"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "autoprefixer": "^10.4.21",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.5",
     "bootstrap-icons": "^1.11.3",
     "postcss-cli": "^11.0.1"
   }

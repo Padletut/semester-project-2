@@ -1,9 +1,11 @@
+@use "../variables";
+
 .btn-secondary {
-  color: $body-bg;
+  color: variables.$body-bg;
 }
 .add-listing-button {
-  background-color: $secondary;
-  border-color: $secondary;
+  background-color: variables.$secondary;
+  border-color: variables.$secondary;
   padding: 10px 24px;
   i {
     margin-right: 5px;
@@ -12,7 +14,7 @@
 
 .card-tags a {
   padding: 3px 15px;
-  color: $body-bg;
+  color: variables.$body-bg;
   background: #4a4458;
   border-color: #4a4458;
   box-shadow:
@@ -21,9 +23,9 @@
 }
 
 .btn-custom {
-  background-color: $primary;
-  border-color: $primary;
-  color: $body-bg;
+  background-color: variables.$primary;
+  border-color: variables.$primary;
+  color: variables.$body-bg;
   padding: 10px 24px;
   font-size: 14px;
   font-weight: 700;
