@@ -9,13 +9,10 @@
     <title>Authorization | Tradeauction</title>
   </head>
   <body>
-    <header class="header-auth">
-      <h1 class="text-center p-5 pb-0">Welcome to Tradeauction</h1>
-    </header>
+    <header></header>
     <main>
-      <section
-        class="container d-flex flex-column align-items-center justify-content-center auth-section"
-      >
+      <h1 class="text-center">Welcome to Tradeauction</h1>
+      <section class="container-fluid d-flex justify-content-center">
         <div
           class="card bg-white rounded-3 flex-grow-1 flex-sm-grow-0 card-custom"
         >
@@ -65,8 +62,8 @@
                   class="needs-validation d-flex flex-column gap-3"
                   novalidate
                 >
-                  <h2 class="fw-semibold text-center">
-                    <p class="h1">Login</p>
+                  <h2 class="fw-semibold">
+                    <p class="h1">Sign in to your account</p>
                   </h2>
                   <div class="form-floating mb-3">
                     <input
@@ -96,22 +93,37 @@
                       Please enter your password with at least 8 characters
                     </div>
                   </div>
-                  <div class="d-flex justify-content-center mb-3">
+                  <div class="form-check-container d-flex">
+                    <div class="mb-3 form-check">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="rememberme"
+                      />
+                      <label class="form-check-label" for="rememberme"
+                        >Remember me</label
+                      >
+                    </div>
+                    <div class="mb-3 ms-3">
+                      <a href="#" class="btn-link">Forgot password?</a>
+                    </div>
+                  </div>
+                  <div class="mb-3">
                     <button
                       type="submit"
-                      class="btn btn-custom"
+                      class="btn btn-custom w-100"
                       id="signInButton"
                     >
-                      Login
+                      Sign in
                     </button>
                   </div>
-                  <div class="d-flex flex-column align-items-center mb-3">
+                  <div class="mb-3">
                     <p>Don’t have an account yet?</p>
                     <a
                       href="profile/index.html"
                       class="btn-link"
                       id="signUpLink"
-                      >Register Here</a
+                      >Sign up</a
                     >
                   </div>
                 </form>
@@ -130,8 +142,8 @@
                   class="needs-validation d-flex flex-column gap-3"
                   novalidate
                 >
-                  <h2 class="fw-semibold text-center">
-                    <p class="h1">Create Account</p>
+                  <h2 class="fw-semibold">
+                    <p class="h1">Create your account</p>
                   </h2>
                   <div class="form-floating mb-3">
                     <input
@@ -193,16 +205,16 @@
                       Please confirm your password
                     </div>
                   </div>
-                  <div class="d-flex justify-content-center mb-3">
+                  <div class="mb-3">
                     <button
                       type="submit"
-                      class="btn btn-custom"
+                      class="btn btn-custom w-100"
                       id="signUpButton"
                     >
-                      Register
+                      Sign Up
                     </button>
                   </div>
-                  <div class="d-flex flex-column align-items-center mb-3">
+                  <div class="mb-3">
                     <p>Already have an account?</p>
                     <a href="#" class="btn-link" id="signInLink">Sign in</a>
                   </div>
