@@ -139,3 +139,12 @@
     border-width: 2px;
   }
 }
+
+.bids-container {
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}

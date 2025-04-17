@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/scss/ && cp -R node_modules/bootstrap-icons/font/fonts dist/scss/fonts",
+    "build": "vite build && postcss dist/scss/*.css --use autoprefixer -d dist/scss/ && cp -R node_modules/bootstrap-icons/font/fonts dist/scss/fonts",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",

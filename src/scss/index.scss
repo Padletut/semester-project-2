@@ -1,6 +1,6 @@
 $bootstrap-icons-font-dir: "/fonts";
-@use "variables.scss" as *;
-@use "~bootstrap/scss/bootstrap";
+@use "variables.scss";
+@use "~bootstrap/scss/bootstrap" as *;
 @use "~bootstrap-icons/font/bootstrap-icons";
 @use "components/header";
 @use "components/buttons";
