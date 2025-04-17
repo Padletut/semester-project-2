@@ -4,6 +4,7 @@
     "@eslint/js": "^9.23.0",
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.13.14",
+    "cpx": "^1.5.0",
     "eslint": "^9.23.0",
     "eslint-plugin-html": "^8.1.2",
     "globals": "^16.0.0",
@@ -21,7 +22,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/ || echo No CSS files to process",
+    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/ && cpx \"node_modules/bootstrap-icons/font/fonts/**/*\" dist/assets/fonts",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
