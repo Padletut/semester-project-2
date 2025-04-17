@@ -21,6 +21,14 @@ export default {
   },
   build: {
     outDir: resolve(__dirname, "dist"),
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "src/index.html"),
+        authorization: resolve(__dirname, "src/authorization.html"),
+        detail: resolve(__dirname, "src/detail.html"),
+        profile: resolve(__dirname, "src/profile.html"),
+      },
+    },
     emptyOutDir: true,
   },
 };
