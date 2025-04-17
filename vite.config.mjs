@@ -23,7 +23,7 @@ export default {
     rollupOptions: {
       external: ["bootstrap"], // Mark Bootstrap as an external dependency
     },
-    outDir: resolve(__dirname, "dist"),
+    outDir: resolve(__dirname, "../dist"),
     emptyOutDir: true,
   },
 };

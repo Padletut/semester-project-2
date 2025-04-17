@@ -8,3 +8,5 @@ node_modules/
 .env
 /dist/
 /.husky/
+# Local Netlify folder
+.netlify
