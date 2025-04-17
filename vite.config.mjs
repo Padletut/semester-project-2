@@ -20,6 +20,9 @@ export default {
     open: true,
   },
   build: {
+    rollupOptions: {
+      external: ["bootstrap"], // Mark Bootstrap as an external dependency
+    },
     outDir: resolve(__dirname, "dist"),
     emptyOutDir: true,
   },
