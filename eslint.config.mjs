@@ -4,20 +4,17 @@ import js from "@eslint/js";
 import html from "eslint-plugin-html";
 
 export default defineConfig([
-  { files: ["**/*.{js,mjs,cjs}"] },
   {
     files: ["**/*.{js,mjs,cjs}"],
+    ignores: ["dist/**", "node_modules/**"], // Ignore dist and node_modules
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node, // Add Node.js globals
       },
     },
-  },
-  {
-    files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
-    extends: ["js/recommended"],
+    extends: ["js/recommended"], // Combine the "js/recommended" extension here
   },
   {
     // Add support for HTML files
