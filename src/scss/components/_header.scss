@@ -5,6 +5,11 @@ header {
 
   .navbar {
     min-height: 150px;
+    @media (min-width: 992px) {
+      .navbar-brand {
+        position: absolute;
+      }
+    }
     .nav-link {
       color: variables.$body-bg;
       &:hover {
