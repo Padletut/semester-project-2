@@ -1,4 +1,5 @@
 import { resolve } from "path";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default {
   root: resolve(__dirname, "src"),
@@ -31,4 +32,14 @@ export default {
     },
     emptyOutDir: true,
   },
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: "../node_modules/bootstrap-icons/font/fonts/*",
+          dest: "assets/fonts",
+        },
+      ],
+    }),
+  ],
 };
