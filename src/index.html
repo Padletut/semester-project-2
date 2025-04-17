@@ -50,42 +50,42 @@
                 >
               </li>
             </ul>
+            <div class="container-fluid w-50 pb-2 search-container">
+              <form class="d-flex" role="search">
+                <div class="input-group mb-3">
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    name="search"
+                    required
+                  />
+                  <button
+                    class="btn btn-outline-success me-2 custom-search-button"
+                    type="submit"
+                    title="Search"
+                  >
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+                <div class="input-group mb-3">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Filter By Tags(comma separated)"
+                    aria-label="Filter"
+                    name="filter-tags"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
         <div class="text-nowrap position-absolute display-credits">
           <i>1000 Cr</i>
         </div>
       </nav>
-      <div class="container-fluid w-50 pb-2">
-        <form class="d-flex" role="search">
-          <div class="input-group mb-3">
-            <input
-              class="form-control"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              name="search"
-              required
-            />
-            <button
-              class="btn btn-outline-success me-2 custom-search-button"
-              type="submit"
-              title="Search"
-            >
-              <i class="bi bi-search"></i>
-            </button>
-          </div>
-          <div class="input-group mb-3">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Filter By Tags(comma separated)"
-              aria-label="Filter"
-              name="filter-tags"
-            />
-          </div>
-        </form>
-      </div>
     </header>
     <main>
       <div
@@ -637,7 +637,7 @@
       </section>
     </main>
     <footer>
-      <div class="container-fluid bg-primary sticky-bottom">
+      <div class="container-fluid sticky-bottom">
         <p class="text-light mt-3 p-3">Tradeauction &copy; 2025</p>
       </div>
     </footer>

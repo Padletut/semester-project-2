@@ -1,4 +1,7 @@
+@use "../variables";
+
 footer {
+  background: variables.$primary;
   p {
     margin: 0;
     padding: 0;

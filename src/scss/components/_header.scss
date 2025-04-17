@@ -76,3 +76,10 @@ header {
 .navbar-brand {
   z-index: 10;
 }
+
+.search-container {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
+}
