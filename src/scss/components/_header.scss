@@ -10,6 +10,18 @@ header {
         position: absolute;
       }
     }
+    @media (max-width: 768px) {
+      .navbar-brand {
+        img {
+          width: 100px;
+          height: 75px;
+        }
+      }
+
+      .navbar-collapse {
+        text-align: center;
+      }
+    }
     .nav-link {
       color: variables.$body-bg;
       &:hover {
