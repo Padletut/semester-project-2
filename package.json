@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/",
+    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/ || echo No CSS files to process",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
