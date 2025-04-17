@@ -35,7 +35,9 @@
     font-family: "Lato", sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: #49454f;
+    a {
+      color: variables.$link-color;
+    }
   }
 
   .card-text {
@@ -71,6 +73,11 @@
       font-family: "Lato", sans-serif;
       font-size: 14px;
       font-weight: 700;
+    }
+
+    a {
+      color: variables.$link-color;
+      padding-left: 0.5em;
     }
   }
 }

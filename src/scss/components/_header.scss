@@ -6,7 +6,7 @@ header {
   .navbar {
     min-height: 150px;
     .nav-border-custom {
-      border-bottom: 2px solid variables.$secondary;
+      border-bottom: 2px solid variables.$active-nav-item;
     }
     @media (min-width: 992px) {
       .navbar-brand {
@@ -39,9 +39,9 @@ header {
     }
 
     .nav-link.active {
-      color: variables.$secondary;
+      color: variables.$active-nav-item;
       &:hover {
-        color: variables.$secondary;
+        color: variables.$active-nav-item;
       }
     }
     a {
