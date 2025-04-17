@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/",
+    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/ && cpx \"node_modules/bootstrap-icons/font/fonts/**/*\" dist/assets/fonts && cpx \"src/*.html\" dist/ && cpx \"src/img/**/*\" dist/img && cpx \"src/js/**/*\" dist/js",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
