@@ -1,6 +1,5 @@
 import "../scss/index.scss";
-import "../../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
-import "@popperjs/core";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 // Switch between Login and Register account tabs
 
