@@ -8,6 +8,13 @@ export default {
       "~bootstrap-icons": resolve(__dirname, "node_modules/bootstrap-icons"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true, // Suppress deprecation warnings for dependencies
+      },
+    },
+  },
   server: {
     port: 5000,
     open: true,
