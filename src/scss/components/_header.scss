@@ -5,6 +5,9 @@ header {
 
   .navbar {
     min-height: 150px;
+    .nav-border-custom {
+      border-bottom: 2px solid variables.$secondary;
+    }
     @media (min-width: 992px) {
       .navbar-brand {
         position: absolute;
