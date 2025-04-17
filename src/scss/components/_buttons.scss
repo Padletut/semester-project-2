@@ -7,9 +7,19 @@
   background-color: variables.$secondary;
   border-color: variables.$secondary;
   padding: 10px 24px;
+  font-family: "Lato", sans-serif;
   i {
     margin-right: 5px;
   }
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}
+
+.place-bid-button {
+  background: variables.$secondary;
+  border-color: variables.$secondary;
 }
 
 .card-tags a {

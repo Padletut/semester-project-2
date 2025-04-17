@@ -1,6 +1,8 @@
+@use "../variables";
+
 .card {
   width: 19rem;
-  background: #d9d9d9;
+  background: variables.$card-bg;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
   a {
     text-decoration: none;
@@ -43,7 +45,7 @@
   }
 
   .card-body {
-    background: #d9d9d9;
+    background: variables.$card-bg;
     .card-body-bid-info {
       font-family: "Lato", sans-serif;
       font-size: 12px;
@@ -90,7 +92,7 @@
   }
 
   .card-body {
-    background: #d9d9d9;
+    background: variables.$card-bg;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
   }
   .img-fluid {
@@ -101,7 +103,7 @@
 .place-bid-card {
   justify-self: flex-end;
   form {
-    background: #d9d9d9;
+    background: variables.$card-bg;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
   }
   input[type="number"] {
@@ -111,7 +113,7 @@
 
 .bid-history-list {
   .bid-history-list-body {
-    background: #d9d9d9;
+    background: variables.$card-bg;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
     .bid-list-name .bid-list-amount {
       font-family: "Lato", sans-serif;
@@ -127,7 +129,7 @@
 }
 
 .card-profile {
-  background: #d9d9d9;
+  background: variables.$card-bg;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
 
   .img-fluid {
