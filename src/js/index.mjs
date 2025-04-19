@@ -2,7 +2,7 @@ import "../scss/index.scss";
 import "~bootstrap/dist/js/bootstrap.bundle.js";
 
 // Ensure bootstrap is globally available
-window.bootstrap = bootstrap;
+window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
 
 // Switch between Login and Register account tabs
 
