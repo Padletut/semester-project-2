@@ -37,21 +37,27 @@ document.querySelectorAll(".card-auction-item").forEach((card) => {
 });
 
 // Fetch items from the server and display them with console.log
-const response = await getItems(
-  new URLSearchParams({
-    _author: "true",
-    _comments: "true",
-    _reactions: "true",
-    limit: "10",
-    page: "1",
-  }),
-  false,
-);
+async function fetchAndDisplayItems() {
+  const response = await getItems(
+    new URLSearchParams({
+      _author: "true",
+      _comments: "true",
+      _reactions: "true",
+      limit: "10",
+      page: "1",
+    }),
+    false,
+  );
 
-if (response) {
-  console.log("Fetched items:", response);
+  if (response) {
+    console.log("Fetched items:", response);
+  }
+
+  // Handle errors
+  if (response instanceof Error) {
+    renderErrors(response);
+  }
 }
-// Handle errors
-if (response instanceof Error) {
-  renderErrors(response);
-}
+
+// Call the async function
+fetchAndDisplayItems();
