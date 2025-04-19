@@ -1,5 +1,5 @@
 import "../scss/index.scss";
-import "../../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
+import "~bootstrap/dist/js/bootstrap.bundle.js";
 
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
