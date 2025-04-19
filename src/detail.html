@@ -63,12 +63,14 @@
         </div>
       </div>
       <section class="container-fluid mt-2 mb-5 product-section">
-        <div class="d-flex">
-          <div class="container-fluid d-inline-flex flex-column ms-5">
+        <div class="d-flex product-detail-container">
+          <div
+            class="container-fluid d-inline-flex flex-column col-12 col-sm-7"
+          >
             <div class="card-detail mb-3">
               <h1 class="mt-5 mb-5 ms-0">Product Detail</h1>
               <div class="row g-0">
-                <div class="card-header d-flex col-md-4 p-0">
+                <div class="col-md-4">
                   <img
                     src="img/sunflowers-1719119_640.jpg"
                     class="img-fluid rounded-start"
@@ -103,10 +105,10 @@
             </div>
           </div>
           <div
-            class="container-fluid d-inline-flex flex-column align-items-end"
+            class="container-fluid d-inline-flex flex-column align-items-end col-12 col-sm-7 col-lg-5"
           >
             <div
-              class="container-fluid d-flex flex-column p-5 justify-content-center place-bid-card"
+              class="container-fluid d-flex flex-column pt-5 justify-content-center place-bid-card"
             >
               <h1 class="m-0 mb-5">Place a Bid</h1>
               <form class="p-5 rounded-3">
@@ -129,38 +131,40 @@
             </div>
           </div>
         </div>
-        <div class="container-fluid bid-history">
-          <h1 class="mt-5 ms-5 mb-4">Bid History</h1>
-          <div class="ms-5 me-5 p-4 ps-3 pb-3 rounded-3 bid-history-list">
-            <ul>
+        <div
+          class="container-fluid bid-history-list col-12 col-sm-7 col-lg-12 pb-5"
+        >
+          <h1 class="mt-5 mb-4">Bid History</h1>
+          <div class="p-3 pb-1 rounded-3 bid-history-list-body">
+            <ul class="p-0">
               <li class="d-flex justify-content-between">
-                <div class="bid-history-name flex-grow-1">Ola Nordmann</div>
-                <div class="bid-history-date flex-grow-1 text-center">
+                <div class="bid-list-name flex-grow-1">Ola Nordmann</div>
+                <div class="bid-list-date flex-grow-1 text-center">
                   Mars 26.2025
                 </div>
-                <div class="bid-history-amount flex-grow-1 text-end">10 Cr</div>
+                <div class="bid-list-amount flex-grow-1 text-end">10 Cr</div>
               </li>
               <li class="d-flex justify-content-between">
-                <div class="bid-history-name flex-grow-1">Ola Nordmann</div>
-                <div class="bid-history-date flex-grow-1 text-center">
+                <div class="bid-list-name flex-grow-1">Ola Nordmann</div>
+                <div class="bid-list-date flex-grow-1 text-center">
                   Mars 26.2025
                 </div>
-                <div class="bid-history-amount flex-grow-1 text-end">10 Cr</div>
+                <div class="bid-list-amount flex-grow-1 text-end">10 Cr</div>
               </li>
               <li class="d-flex justify-content-between">
-                <div class="bid-history-name flex-grow-1">Ola Nordmann</div>
-                <div class="bid-history-date flex-grow-1 text-center">
+                <div class="bid-list-name flex-grow-1">Ola Nordmann</div>
+                <div class="bid-list-date flex-grow-1 text-center">
                   Mars 26.2025
                 </div>
-                <div class="bid-history-amount flex-grow-1 text-end">10 Cr</div>
+                <div class="bid-list-amount flex-grow-1 text-end">10 Cr</div>
               </li>
             </ul>
           </div>
         </div>
       </section>
     </main>
-    <footer>
-      <div class="container-fluid sticky-bottom">
+    <footer class="fixed-bottom">
+      <div class="container-fluid">
         <p class="text-light mt-3 p-3">Tradeauction &copy; 2025</p>
       </div>
     </footer>

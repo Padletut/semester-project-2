@@ -83,19 +83,9 @@
 }
 
 .card-detail {
-  max-width: 540px;
   a {
     text-decoration: none;
   }
-
-  .card-header {
-    flex: 2;
-  }
-
-  /* .col-md-8 {
-    flex: 1;
-    min-width: 320px;
-  } */
 
   .row {
     background: variables.$card-bg;
