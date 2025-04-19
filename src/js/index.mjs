@@ -1,5 +1,8 @@
 import "../scss/index.scss";
 import * as bootstrap from "bootstrap";
+import * as constants from "./constants.mjs";
+import { getItems } from "./API/listings/getitems.mjs";
+import { renderErrors } from "./ui/shared/rendererrors.mjs";
 
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
@@ -32,3 +35,23 @@ document.querySelectorAll(".card-auction-item").forEach((card) => {
     window.location.href = "detail.html";
   });
 });
+
+// Fetch items from the server and display them with console.log
+const response = await getItems(
+  new URLSearchParams({
+    _author: "true",
+    _comments: "true",
+    _reactions: "true",
+    limit: "10",
+    page: "1",
+  }),
+  false,
+);
+
+if (response) {
+  console.log("Fetched items:", response);
+}
+// Handle errors
+if (response instanceof Error) {
+  renderErrors(response);
+}
