@@ -24,3 +24,11 @@ if (signInLink) {
     signInTab.show();
   });
 }
+
+// Clickable cards
+
+document.querySelectorAll(".card").forEach((card) => {
+  card.addEventListener("click", () => {
+    window.location.href = "detail.html";
+  });
+});
