@@ -1,11 +1,16 @@
 @use "../variables";
 
-.btn-secondary {
-  color: variables.$body-bg;
-}
 .add-listing-button {
   background-color: variables.$secondary;
   border-color: variables.$secondary;
+  &:hover {
+    background-color: variables.$secondary-hover;
+    border-color: variables.$secondary-hover;
+  }
+  &:active {
+    background-color: variables.$secondary-active !important;
+    border-color: variables.$secondary-active !important;
+  }
   padding: 10px 24px;
   font-family: "Lato", sans-serif;
   i {
@@ -20,6 +25,14 @@
 .place-bid-button {
   background: variables.$secondary;
   border-color: variables.$secondary;
+  &:hover {
+    background: variables.$secondary-hover;
+    border-color: variables.$secondary-hover;
+  }
+  &:active {
+    background: variables.$secondary-active !important;
+    border-color: variables.$secondary-active !important;
+  }
 }
 
 .card-tags a {
@@ -36,6 +49,16 @@
   background-color: variables.$primary;
   border-color: variables.$primary;
   color: variables.$body-bg;
+  &:hover {
+    background-color: variables.$primary-hover;
+    border-color: variables.$primary-hover;
+    color: variables.$body-bg;
+  }
+  &:active {
+    background-color: variables.$primary-active !important;
+    border-color: variables.$primary-active !important;
+    color: variables.$body-bg !important;
+  }
   padding: 10px 24px;
   font-size: 14px;
   font-weight: 700;
