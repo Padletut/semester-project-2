@@ -1,6 +1,6 @@
 import "../scss/index.scss";
-//import "~bootstrap/dist/js/bootstrap.bundle.js";
 import * as bootstrap from "bootstrap";
+
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
 
@@ -27,7 +27,7 @@ if (signInLink) {
 
 // Clickable cards
 
-document.querySelectorAll(".card").forEach((card) => {
+document.querySelectorAll(".card-auction-item").forEach((card) => {
   card.addEventListener("click", () => {
     window.location.href = "detail.html";
   });
