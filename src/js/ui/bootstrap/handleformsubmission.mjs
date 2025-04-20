@@ -1,5 +1,5 @@
 import { validateInputs } from "./validateinputs.mjs";
-import { onAuth } from "../../events/onauth.mjs";
+import { onAuth } from "../../API/events/onauth.mjs";
 
 /**
  * Handles form submission for authentication forms.
