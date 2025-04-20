@@ -15,7 +15,7 @@ export async function onAuth(event) {
   const name = form.firstName ? form.firstName.value : null;
 
   if (form.signInButton) {
-    const email = form.Email.value;
+    const email = form.email.value;
     const password = form.Password.value;
     await login(email, password);
   } else {

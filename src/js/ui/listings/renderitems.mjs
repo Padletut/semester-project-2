@@ -3,9 +3,7 @@ import { createItemCard } from "./createcard.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 
-let nextPage;
-let isLastPage = false;
-let isSearch = false;
+//let isSearch = false;
 
 /**
  * Render items in the listings view.
@@ -27,6 +25,8 @@ export async function renderItems(
   append = false,
   tag = null,
 ) {
+  let nextPage;
+  let isLastPage = false;
   const itemsContainer = document.querySelector(".items-container");
   const loaderContainer = document.getElementById("loader");
 
@@ -57,8 +57,12 @@ export async function renderItems(
       isLastPage = meta.isLastPage;
 
       items.forEach((item) => {
-        const card = createItemCard(item, itemsContainer);
+        createItemCard(item, itemsContainer);
       });
+
+      if (!isLastPage) {
+        // show load more button
+      }
     }
   } catch (error) {
     renderErrors(error);
