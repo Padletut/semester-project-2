@@ -43,7 +43,7 @@ export default {
           dest: "assets/fonts",
         },
         {
-          src: "img",
+          src: "img/*",
           dest: "img",
         },
       ],
