@@ -2,6 +2,7 @@ import { getProfile } from "../../API/profile/getprofile.mjs";
 import { renderProfileBanner } from "./renderprofilebanner.mjs";
 import { renderProfileAvatar } from "./renderprofileavatar.mjs";
 import { renderProfileName } from "./renderprofilename.mjs";
+import { renderProfileCredits } from "./renderprofilecredits.mjs";
 import { renderProfileBio } from "./renderprofilebio.mjs";
 //import { renderProfileCounters } from "./renderprofilecounters.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
@@ -9,6 +10,7 @@ import { renderErrors } from "../shared/rendererrors.mjs";
 //import { setupEditButtons } from "./setupeditbuttons.mjs";
 //import { setupFollowButton } from "./setupfollowbutton.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
+import { render } from "sass";
 //import { handleFollowSection } from "./handlefollowsection.mjs";
 
 /**
@@ -41,6 +43,7 @@ export async function renderProfile() {
     renderProfileBanner(profile);
     renderProfileAvatar(profile);
     renderProfileName(profile, profile.email);
+    renderProfileCredits(profile);
     renderProfileBio(profile);
 
     //  setupEditButtons(profile);
