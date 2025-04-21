@@ -17,8 +17,8 @@ const { API_BASE_URL, API_LISTINGS, API_SEARCH } = global;
  */
 export async function getItems(
   queryParams = new URLSearchParams({
-    _seller: "true",
-    _bids: "true",
+    _seller: "false",
+    _bids: "false",
     _active: "false",
     limit: "10",
     page: "1",

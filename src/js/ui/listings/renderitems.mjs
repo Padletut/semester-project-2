@@ -37,42 +37,62 @@ export async function renderItems(
     itemsContainer.innerHTML = ""; // Clear existing items
   }
 
-  try {
-    toggleLoader(true, loaderContainer);
+  const loadItems = async () => {
+    if (isLastPage) return; // Stop fetching if it's the last page
 
-    if (!nextPage) nextPage = 1;
+    try {
+      toggleLoader(true, loaderContainer);
 
-    const isActive = activeSwitch.checked;
+      if (!nextPage) nextPage = 1;
 
-    const queryParams = new URLSearchParams({
-      _seller: "true",
-      _bids: "true",
-      _active: isActive.toString(), // Use the value of the activeSwitch
-      limit: "100",
-      page: "1",
-      page: nextPage,
-    });
+      const isActive = activeSwitch.checked;
 
-    const response = await getItems(queryParams, profileName, tag);
-
-    if (response.data.length > 0) {
-      const items = response.data;
-      const meta = response.meta;
-      nextPage = meta.nextPage;
-      isLastPage = meta.isLastPage;
-
-      items.forEach((item) => {
-        createItemCard(item, itemsContainer);
+      const queryParams = new URLSearchParams({
+        _seller: "true",
+        _bids: "true",
+        _active: isActive.toString(), // Use the value of the activeSwitch
+        limit: "10",
+        page: "1",
+        page: nextPage,
       });
 
-      if (!isLastPage) {
-        // show load more button
+      const response = await getItems(queryParams, profileName, tag);
+
+      if (response.data.length > 0) {
+        const items = response.data;
+        const meta = response.meta;
+        nextPage = meta.nextPage;
+        isLastPage = meta.isLastPage;
+
+        items.forEach((item) => {
+          createItemCard(item, itemsContainer);
+        });
+
+        if (!isLastPage) {
+          // show load more button
+        }
       }
+    } catch (error) {
+      renderErrors(error);
+      console.error("Error rendering items:", error);
+    } finally {
+      toggleLoader(false, loaderContainer);
     }
-  } catch (error) {
-    renderErrors(error);
-    console.error("Error rendering items:", error);
-  } finally {
-    toggleLoader(false, loaderContainer);
-  }
+  };
+
+  const observer = new IntersectionObserver(
+    async (entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        await loadItems(); // Fetch the next page when the sentinel is visible
+      }
+    },
+    {
+      root: null, // Use the viewport as the root
+      rootMargin: "0px 0px 200px 0px",
+      threshold: 0, // Trigger when the sentinel is fully visible
+    },
+  );
+
+  observer.observe(sentinel); // Start observing the sentinel
 }
