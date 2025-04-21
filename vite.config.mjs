@@ -1,6 +1,8 @@
 import { resolve } from "path";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
+console.log("Environment Variables:", process.env);
+
 export default {
   root: resolve(__dirname, "src"),
   resolve: {

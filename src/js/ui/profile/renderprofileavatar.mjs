@@ -1,0 +1,31 @@
+/**
+ * Handles the authentication process for login and registration forms.
+ * @memberof module:Profile
+ * @param {Event} event - The event object from the form submission.
+ * @returns {Promise<void>} A promise that resolves when the authentication process is complete.
+ * @example
+ * ```javascript
+ * document.querySelector("form").addEventListener("submit", onAuth);
+ * ```
+ */
+export async function renderProfileAvatar(profileName) {
+    const profileAvatar = document.getElementById("profile-image");
+
+    if (!profileAvatar) {
+        console.error("Profile avatar element not found");
+        return;
+    }
+
+    try {
+        const profileAvatarImage = document.createElement("img");
+        profileAvatarImage.classList.add("profile-avatar-image");
+        profileAvatarImage.src = profileName.avatar.url;
+        profileAvatarImage.alt = profileName.avatar.alt;
+        profileAvatarImage.style.width = "128px";
+
+        profileAvatar.appendChild(profileAvatarImage);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
