@@ -7,7 +7,7 @@ import { renderProfileBio } from "./renderprofilebio.mjs";
 //import { renderProfileCounters } from "./renderprofilecounters.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 //import { renderPosts } from "../feed/renderposts.mjs";
-//import { setupEditButtons } from "./setupeditbuttons.mjs";
+import { setupEditButtons } from "./setupeditbuttons.mjs";
 //import { setupFollowButton } from "./setupfollowbutton.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { render } from "sass";
@@ -46,7 +46,7 @@ export async function renderProfile() {
     renderProfileCredits(profile);
     renderProfileBio(profile);
 
-    //  setupEditButtons(profile);
+    setupEditButtons(profile);
     //  setupFollowButton(profile);
 
     //   }
