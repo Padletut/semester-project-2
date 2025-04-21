@@ -11,6 +11,7 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node, // Add Node.js globals
+        bootstrap: "readonly", // Add Bootstrap globals
       },
     },
     plugins: { js },

@@ -30,6 +30,8 @@ export async function renderItems(
   const itemsContainer = document.querySelector(".items-container");
   const loaderContainer = document.getElementById("loader");
   const activeSwitch = document.getElementById("switchCheckChecked");
+  const sentinel = document.getElementById("sentinel"); // The sentinel element for lazy loading
+  if (!sentinel) return; // Ensure the sentinel element exists
 
   if (!itemsContainer) return;
 
@@ -52,7 +54,6 @@ export async function renderItems(
         _bids: "true",
         _active: isActive.toString(), // Use the value of the activeSwitch
         limit: "10",
-        page: "1",
         page: nextPage,
       });
 
