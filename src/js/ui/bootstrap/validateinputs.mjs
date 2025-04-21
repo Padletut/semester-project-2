@@ -1,6 +1,6 @@
-import { validateEmail } from './validateemail.mjs';
-import { validateTags } from './validatetags.mjs';
-import { renderErrors } from '../shared/rendererrors.mjs';
+import { validateEmail } from "./validateemail.mjs";
+import { validateTags } from "./validatetags.mjs";
+import { renderErrors } from "../shared/rendererrors.mjs";
 
 /**
  * Validates the inputs of a form.
@@ -14,42 +14,42 @@ import { renderErrors } from '../shared/rendererrors.mjs';
  * ```
  */
 export function validateInputs(form) {
-    'use strict';
+  "use strict";
 
-    if (!form) {
-        console.error('Form element is not provided');
-        return false;
+  if (!form) {
+    console.error("Form element is not provided");
+    return false;
+  }
+
+  let isValid = form.checkValidity();
+
+  const emailInput = form.querySelector("#signUpEmail");
+  if (emailInput) {
+    try {
+      // Validate email input
+      isValid = validateEmail(emailInput) && isValid;
+    } catch (error) {
+      renderErrors(error);
+      isValid = false;
     }
+  }
 
-    let isValid = form.checkValidity();
-
-    const emailInput = form.querySelector("#signUpEmail");
-    if (emailInput) {
-        try {
-            // Validate email input
-            isValid = validateEmail(emailInput) && isValid;
-        } catch (error) {
-            renderErrors(error);
-            isValid = false;
-        }
+  const tagsInput = form.querySelector("#tags");
+  if (tagsInput) {
+    try {
+      // Validate tags input
+      isValid = validateTags(tagsInput) && isValid;
+    } catch (error) {
+      renderErrors(error);
+      isValid = false;
     }
+  }
 
-    const tagsInput = form.querySelector("#tags");
-    if (tagsInput) {
-        try {
-            // Validate tags input
-            isValid = validateTags(tagsInput) && isValid;
-        } catch (error) {
-            renderErrors(error);
-            isValid = false;
-        }
-    }
+  if (!isValid) {
+    form.classList.add("was-validated");
+  } else {
+    form.classList.remove("was-validated");
+  }
 
-    if (!isValid) {
-        form.classList.add('was-validated');
-    } else {
-        form.classList.remove('was-validated');
-    }
-
-    return isValid;
+  return isValid;
 }

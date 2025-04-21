@@ -27,6 +27,7 @@
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
     "prepare": "husky install",
+    "format": "prettier --write .",
     "test": "vitest"
   },
   "dependencies": {
