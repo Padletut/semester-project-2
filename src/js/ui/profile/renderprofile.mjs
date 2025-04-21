@@ -40,14 +40,11 @@ export async function renderProfile() {
     //  if (document.title === "Profile | ConnectSphere") {
     renderProfileBanner(profile);
     renderProfileAvatar(profile);
-    renderProfileName(profile);
+    renderProfileName(profile, profile.email);
     renderProfileBio(profile);
-    await handleFollowSection(profile);
-    await renderPosts(profile.name);
-    renderProfileCounters(profile);
 
-    setupEditButtons(profile);
-    setupFollowButton(profile);
+    //  setupEditButtons(profile);
+    //  setupFollowButton(profile);
 
     //   }
   } catch (error) {

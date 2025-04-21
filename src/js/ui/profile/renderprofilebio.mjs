@@ -9,8 +9,6 @@
  * ```
  */
 export async function renderProfileBio(profile) {
-    const bioContainer = document.getElementById("profile-bio");
-    const bio = document.createElement("p");
-    bio.textContent = profile.bio;
-    bioContainer.appendChild(bio);
+  const bioContainer = document.getElementById("profile-bio");
+  bioContainer.innerHTML = profile.bio;
 }
