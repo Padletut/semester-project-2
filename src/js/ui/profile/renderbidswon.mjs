@@ -32,8 +32,6 @@ export async function renderBidsWon(profile) {
       })}</div>
       <div class="bid-list-amount flex-grow-1 text-end">${bid.amount} Credits</div>
     `;
-    winElement.appendChild(bidElement);
+    bidsWonContainer.appendChild(bidElement);
   });
-
-  bidsWonContainer.appendChild(bidsList);
 }

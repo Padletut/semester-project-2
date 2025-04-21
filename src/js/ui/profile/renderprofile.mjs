@@ -1,5 +1,4 @@
 import { getProfile } from "../../API/profile/getprofile.mjs";
-import { getMyBids } from "../../API/profile/getmybids.mjs";
 import { renderProfileBanner } from "./renderprofilebanner.mjs";
 import { renderProfileAvatar } from "./renderprofileavatar.mjs";
 import { renderProfileName } from "./renderprofilename.mjs";
