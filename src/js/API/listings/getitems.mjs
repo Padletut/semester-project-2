@@ -28,14 +28,12 @@ export async function getItems(
   const endpoint = search
     ? `${API_BASE_URL}${API_LISTINGS}${API_SEARCH}?${queryParams.toString()}`
     : `${API_BASE_URL}${API_LISTINGS}?${queryParams.toString()}`;
-  console.log("Generated endpoint:", endpoint); // Debugging
   const response = await fetchData(endpoint, {
     method: "GET",
   });
 
   if (response.ok) {
     const data = await response.json();
-    console.log("Items data:", data);
     return data;
   } else {
     renderErrors(new Error("An error occurred while loading the auctions"));
