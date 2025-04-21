@@ -29,6 +29,7 @@ export async function renderItems(
   let isLastPage = false;
   const itemsContainer = document.querySelector(".items-container");
   const loaderContainer = document.getElementById("loader");
+  const activeSwitch = document.getElementById("switchCheckChecked");
 
   if (!itemsContainer) return;
 
@@ -41,10 +42,12 @@ export async function renderItems(
 
     if (!nextPage) nextPage = 1;
 
+    const isActive = activeSwitch.checked;
+
     const queryParams = new URLSearchParams({
       _seller: "true",
       _bids: "true",
-      _active: "true",
+      _active: isActive.toString(), // Use the value of the activeSwitch
       limit: "100",
       page: "1",
       page: nextPage,

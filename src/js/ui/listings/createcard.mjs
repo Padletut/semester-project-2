@@ -66,16 +66,17 @@ export function createItemCard(item, container) {
       <div class="container-fluid card-recent-bids p-0 pt-3 pb-4">
         <h2>Recent Bids:</h2>
         <ul>
-          ${
-            item.bids?.length
-              ? item.bids
-                  .map(
-                    (bid) =>
-                      `<li>${bid.amount} Credits By <a href="#">${bid.bidder.name || "Unknown"}</a></li>`,
-                  )
-                  .join("")
-              : "<li>No bids yet</li>"
-          }
+            ${
+              item.bids?.length
+                ? item.bids
+                    .slice(-5) // Get the last 5 bids
+                    .map(
+                      (bid) =>
+                        `<li>${bid.amount} Credits By <a href="#">${bid.bidder.name || "Unknown"}</a></li>`,
+                    )
+                    .join("")
+                : "<li>No bids yet</li>"
+            }
         </ul>
       </div>
       <form>

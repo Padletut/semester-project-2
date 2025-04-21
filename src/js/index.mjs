@@ -52,3 +52,15 @@ if (logoutNavItem) {
     logout();
   });
 }
+
+// Event listener for the active switch
+const activeSwitch = document.getElementById("switchCheckChecked");
+if (activeSwitch) {
+  activeSwitch.addEventListener("change", async () => {
+    const itemsContainer = document.querySelector(".items-container");
+    if (itemsContainer) {
+      itemsContainer.innerHTML = ""; // Clear existing items
+      await renderItems(null, false, null);
+    }
+  });
+}
