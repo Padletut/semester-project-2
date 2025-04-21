@@ -4,6 +4,12 @@
   width: 19rem;
   background: variables.$card-bg;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
   a {
     text-decoration: none;
   }

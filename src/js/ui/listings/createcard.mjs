@@ -4,13 +4,7 @@
 
 export function createItemCard(item, container) {
   const cardWrapper = document.createElement("div");
-  cardWrapper.classList.add(
-    "col",
-    "col-sm-8",
-    "col-md-6",
-    "col-lg-4",
-    "col-xxl-3",
-  );
+  cardWrapper.classList.add("col-12", "col-md-6", "col-lg-4", "col-xxl-3");
 
   const card = document.createElement("div");
   card.classList.add("card", "card-auction-item", "mb-4");
