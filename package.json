@@ -17,7 +17,7 @@
     "vitest": "^3.1.1"
   },
   "lint-staged": {
-    "*.{js,mjs}": "eslint --fix && eslint",
+    "*.{js,mjs}": "eslint --fix",
     "*.{js,mjs,css,md,html}": "prettier --write"
   },
   "scripts": {
