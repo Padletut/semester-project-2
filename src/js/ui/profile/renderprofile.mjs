@@ -1,17 +1,16 @@
 import { getProfile } from "../../API/profile/getprofile.mjs";
+import { getMyBids } from "../../API/profile/getmybids.mjs";
 import { renderProfileBanner } from "./renderprofilebanner.mjs";
 import { renderProfileAvatar } from "./renderprofileavatar.mjs";
 import { renderProfileName } from "./renderprofilename.mjs";
 import { renderProfileCredits } from "./renderprofilecredits.mjs";
 import { renderProfileBio } from "./renderprofilebio.mjs";
-//import { renderProfileCounters } from "./renderprofilecounters.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
-//import { renderPosts } from "../feed/renderposts.mjs";
 import { setupEditButtons } from "./setupeditbuttons.mjs";
-//import { setupFollowButton } from "./setupfollowbutton.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
+import { renderBidsWon } from "./renderbidswon.mjs";
+import { renderMyBids } from "./rendermybids.mjs";
 import { render } from "sass";
-//import { handleFollowSection } from "./handlefollowsection.mjs";
 
 /**
  * @module Profile
@@ -29,27 +28,23 @@ import { render } from "sass";
 export async function renderProfile() {
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
-  console.log("Profile name from URL:", profileName);
   if (profileName === null) {
     profileName = undefined;
   }
 
-  const loaderContainer = document.getElementById("loader-container");
+  const loaderContainer = document.getElementById("loader");
 
   try {
     toggleLoader(true, loaderContainer);
     const { data: profile } = await getProfile(profileName);
-    //  if (document.title === "Profile | ConnectSphere") {
     renderProfileBanner(profile);
     renderProfileAvatar(profile);
     renderProfileName(profile, profile.email);
     renderProfileCredits(profile);
     renderProfileBio(profile);
-
+    renderMyBids();
+    renderBidsWon(profile);
     setupEditButtons(profile);
-    //  setupFollowButton(profile);
-
-    //   }
   } catch (error) {
     renderErrors(new Error("An error occurred while loading the profile page"));
     console.error("Error rendering profile data:", error);

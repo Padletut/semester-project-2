@@ -109,41 +109,19 @@
           <div class="container-fluid p-0">
             <div class="container-fluid d-flex p-0 bids-container">
               <div class="container-fluid bid-history-list p-0 pe-md-5">
+                <div id="loader-my-bids">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
                 <h2 class="m-5 ms-0">My Bids</h2>
                 <div class="bid-history-list-body p-3 pb-1 rounded-3">
                   <ul class="p-0">
-                    <li class="d-flex justify-content-between">
-                      <div class="bid-list-name flex-grow-1 mb-1">
-                        Product name
-                      </div>
-                      <div class="bid-list-date flex-grow-1 text-center">
-                        Mars 26.2025
-                      </div>
-                      <div class="bid-list-amount flex-grow-1 text-end">
-                        5 Credits
-                      </div>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <div class="bid-list-name flex-grow-1 mb-1">
-                        Product name
-                      </div>
-                      <div class="bid-list-date flex-grow-1 text-center">
-                        Mars 26.2025
-                      </div>
-                      <div class="bid-list-amount flex-grow-1 text-end">
-                        5 Credits
-                      </div>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <div class="bid-list-name flex-grow-1 mb-1">
-                        Product name
-                      </div>
-                      <div class="bid-list-date flex-grow-1 text-center">
-                        Mars 26.2025
-                      </div>
-                      <div class="bid-list-amount flex-grow-1 text-end">
-                        5 Credits
-                      </div>
+                    <li
+                      class="d-flex justify-content-between"
+                      id="my-bids-container"
+                    >
+                      <!-- Dynamic content will be inserted here -->
                     </li>
                   </ul>
                 </div>
@@ -151,7 +129,7 @@
               <div class="container-fluid bid-history-list p-0 ps-md-5 pe-0">
                 <h2 class="m-5 ms-0">Bids Won</h2>
                 <div class="bid-history-list-body p-3 pb-1 rounded-3">
-                  <ul class="p-0">
+                  <ul class="p-0" id="bids-won-container">
                     <li class="d-flex justify-content-between">
                       <div class="bid-list-name flex-grow-1 mb-1">
                         Product name

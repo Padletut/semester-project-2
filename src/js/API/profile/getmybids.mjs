@@ -18,12 +18,7 @@ const loggedInUser = loadStorage("profile");
  * console.log(profile);
  * ```
  */
-export async function getProfile(profileName = loggedInUser) {
-  const queryParams = new URLSearchParams({
-    _listings: "true",
-    _wins: "true",
-  });
-
+export async function getMyBids(profileName = loggedInUser) {
   // Determine the profile name based on the structure of the profileName parameter
   const name =
     typeof profileName === "string"
@@ -34,7 +29,7 @@ export async function getProfile(profileName = loggedInUser) {
 
   // Fetch the profile data from the API
   const response = await fetchData(
-    `${API_BASE_URL}${API_PROFILES}/${name}?${queryParams.toString()}`,
+    `${API_BASE_URL}${API_PROFILES}/${name}/bids`,
     {
       headers: headers(false),
       method: "GET",
@@ -43,7 +38,7 @@ export async function getProfile(profileName = loggedInUser) {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("Profile data:", data);
+    console.log("My bids data:", data);
     return data;
   }
 

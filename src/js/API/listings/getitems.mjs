@@ -2,7 +2,7 @@ import * as global from "../../constants.mjs";
 import { fetchData } from "../utils/fetch.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 
-const { API_BASE_URL, API_POSTS, API_SEARCH } = global;
+const { API_BASE_URL, API_LISTINGS: API_POSTS, API_SEARCH } = global;
 
 /**
  * Gets all posts from the API.
