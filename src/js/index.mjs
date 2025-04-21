@@ -1,5 +1,6 @@
 import "../scss/index.scss";
 import * as bootstrap from "bootstrap";
+import { toggleDisplayCredits } from "./ui/shared/toggledisplaycredits.mjs";
 import { renderItems } from "./ui/listings/renderitems.mjs";
 import { authSwitchTabs } from "./ui/bootstrap/authswitchtabs.mjs";
 import { handleFormSubmission } from "./ui/bootstrap/handleformsubmission.mjs";
@@ -10,6 +11,9 @@ import { renderProfile } from "./ui/profile/renderprofile.mjs";
 
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
+
+// Call toggleDisplayCredits to initialize the display of credits
+toggleDisplayCredits();
 
 checkAuth();
 

@@ -9,26 +9,25 @@
  * ```
  */
 export async function renderProfileBanner(profileName) {
-    const profileBanner = document.getElementById("profile-cover");
+  const profileBanner = document.getElementById("profile-cover");
 
-    if (!profileBanner) {
-        console.error("Profile cover element not found");
-        return;
-    }
+  if (!profileBanner) {
+    console.error("Profile cover element not found");
+    return;
+  }
 
-    try {
-        const profileBannerImage = document.createElement("img");
-        profileBannerImage.classList.add("profile-banner-image", "rounded-top");
-        profileBannerImage.src = profileName.banner.url;
-        profileBannerImage.alt = profileName.banner.alt;
-        profileBannerImage.style.width = "100%";
-        // radiues: 5px on top
-        // profileBannerImage.style.borderTopLeftRadius = "5px";
-        //  profileBannerImage.style.borderTopRightRadius = "5px";
+  try {
+    const profileBannerImage = document.createElement("img");
+    profileBannerImage.classList.add(
+      "img-fluid",
+      "profile-banner-image",
+      "rounded-top",
+    );
+    profileBannerImage.src = profileName.banner.url;
+    profileBannerImage.alt = profileName.banner.alt;
 
-        profileBanner.appendChild(profileBannerImage);
-
-    } catch (error) {
-        console.error(error);
-    }
+    profileBanner.appendChild(profileBannerImage);
+  } catch (error) {
+    console.error(error);
+  }
 }

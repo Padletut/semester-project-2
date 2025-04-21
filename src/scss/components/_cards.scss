@@ -136,6 +136,7 @@
 
   .img-fluid {
     height: 100%;
+    min-height: 12rem;
     @media (max-width: 767px) {
       border-radius: 0.5rem 0.5rem 0 0 !important;
     }
@@ -145,6 +146,10 @@
     width: 120px;
     height: 120px;
     border-width: 2px;
+    @media (max-width: 767px) {
+      width: 90px;
+      height: 90px;
+    }
   }
 }
 
