@@ -17,9 +17,9 @@ const { API_BASE_URL, API_LISTINGS: API_POSTS, API_SEARCH } = global;
  */
 export async function getItems(
   queryParams = new URLSearchParams({
-    _author: "true",
-    _comments: "true",
-    _reactions: "true",
+    _seller: "true",
+    _bids: "true",
+    _active: "true",
     limit: "10",
     page: "1",
   }),
@@ -34,6 +34,7 @@ export async function getItems(
 
   if (response.ok) {
     const data = await response.json();
+    console.log("Posts data:", data);
     return data;
   } else {
     renderErrors(new Error("An error occurred while loading the posts"));

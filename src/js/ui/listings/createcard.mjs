@@ -13,22 +13,24 @@ export function createItemCard(item, container) {
   const imageAlt = item.media?.[0]?.alt || "Auction Item";
 
   card.innerHTML = `
-    <img
-      src="${imageUrl}"
-      class="card-img-top"
-      alt="${imageAlt}"
-    />
-    <div class="container position-absolute top-0 end-0 p-2 rounded-3 mt-2 me-2 text-center text-light card-display-bids">
-      ${item.bids?.length || 0} bids
-    </div>
-    <div class="container position-absolute top-0 end-0 p-2 rounded-3 me-2 text-center text-light card-display-ends">
-          Ends ${
-            new Date(item.endsAt).toLocaleDateString("en-US", {
-              month: "short",
-              day: "2-digit",
-              year: "numeric",
-            }) || "N/A"
-          }
+    <div class="card-header d-flex justify-content-between align-items-center position-relative p-0">
+      <img
+        src="${imageUrl}"
+        class="card-img-top"
+        alt="${imageAlt}"
+      />
+      <div class="container position-absolute top-0 end-0 p-2 rounded-3 mt-2 me-2 text-center text-light card-display-bids">
+        ${item.bids?.length || 0} bids
+      </div>
+      <div class="container position-absolute bottom-0 end-0 p-2 rounded-3 me-2 mb-2 text-center text-light card-display-ends">
+            Ends ${
+              new Date(item.endsAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "2-digit",
+                year: "numeric",
+              }) || "N/A"
+            }
+      </div>
     </div>
     <div class="card-body">
       <div class="d-flex flex-column justify-content-between">
