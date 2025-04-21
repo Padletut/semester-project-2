@@ -41,7 +41,7 @@ export function createItemCard(item, container) {
           <small class="text-nowrap">Posted ${new Date(item.created).toLocaleDateString() || "N/A"}</small>
         </div>
       </div>
-      <i class="card-author">By <a href="#">${item.author || "Unknown"}</a></i>
+      <i class="card-author">By <a href="#">${item.seller.name || "Unknown"}</a></i>
       <div class="d-flex gap-2 mt-3 mb-3 card-tags">
         ${
           item.tags
@@ -71,7 +71,7 @@ export function createItemCard(item, container) {
               ? item.bids
                   .map(
                     (bid) =>
-                      `<li>${bid.amount} Credits By <a href="#">${bid.bidder || "Unknown"}</a></li>`,
+                      `<li>${bid.amount} Credits By <a href="#">${bid.bidder.name || "Unknown"}</a></li>`,
                   )
                   .join("")
               : "<li>No bids yet</li>"

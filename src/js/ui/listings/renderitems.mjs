@@ -42,9 +42,11 @@ export async function renderItems(
     if (!nextPage) nextPage = 1;
 
     const queryParams = new URLSearchParams({
-      _author: "true",
-      _comments: "true",
-      limit: "10",
+      _seller: "true",
+      _bids: "true",
+      _active: "true",
+      limit: "100",
+      page: "1",
       page: nextPage,
     });
 
