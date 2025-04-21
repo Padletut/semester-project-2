@@ -10,7 +10,7 @@ import { setupEditButtons } from "./setupeditbuttons.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { renderBidsWon } from "./renderbidswon.mjs";
 import { renderMyBids } from "./rendermybids.mjs";
-import { render } from "sass";
+import { renderMyListings } from "./rendermylistings.mjs";
 
 /**
  * @module Profile
@@ -43,6 +43,7 @@ export async function renderProfile() {
     renderProfileCredits(profile);
     renderProfileBio(profile);
     renderMyBids();
+    renderMyListings(profile);
     renderBidsWon(profile);
     setupEditButtons(profile);
   } catch (error) {
