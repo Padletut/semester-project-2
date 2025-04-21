@@ -60,6 +60,7 @@ if (activeSwitch) {
     const itemsContainer = document.querySelector(".items-container");
     if (itemsContainer) {
       itemsContainer.innerHTML = ""; // Clear existing items
+
       await renderItems(null, false, null);
     }
   });

@@ -25,18 +25,23 @@ export async function renderItems(
   append = false,
   tag = null,
 ) {
-  let nextPage;
+  let nextPage = 1; // Start with page 1
   let isLastPage = false;
   const itemsContainer = document.querySelector(".items-container");
   const loaderContainer = document.getElementById("loader");
   const activeSwitch = document.getElementById("switchCheckChecked");
   const sentinel = document.getElementById("sentinel"); // The sentinel element for lazy loading
-  if (!sentinel) return; // Ensure the sentinel element exists
 
+  if (!sentinel) return; // Ensure the sentinel element exists
   if (!itemsContainer) return;
 
   if (!append) {
     itemsContainer.innerHTML = ""; // Clear existing items
+  }
+
+  // Disconnect any existing observer
+  if (window.currentObserver) {
+    window.currentObserver.disconnect();
   }
 
   const loadItems = async () => {
@@ -44,8 +49,6 @@ export async function renderItems(
 
     try {
       toggleLoader(true, loaderContainer);
-
-      if (!nextPage) nextPage = 1;
 
       const isActive = activeSwitch.checked;
 
@@ -68,10 +71,6 @@ export async function renderItems(
         items.forEach((item) => {
           createItemCard(item, itemsContainer);
         });
-
-        if (!isLastPage) {
-          // show load more button
-        }
       }
     } catch (error) {
       renderErrors(error);
@@ -81,6 +80,7 @@ export async function renderItems(
     }
   };
 
+  // Create a new observer
   const observer = new IntersectionObserver(
     async (entries) => {
       const [entry] = entries;
@@ -94,6 +94,9 @@ export async function renderItems(
       threshold: 0, // Trigger when the sentinel is fully visible
     },
   );
+
+  // Save the observer globally so it can be disconnected later
+  window.currentObserver = observer;
 
   observer.observe(sentinel); // Start observing the sentinel
 }
