@@ -42,6 +42,10 @@ export default {
           src: "../node_modules/bootstrap-icons/font/fonts/*",
           dest: "assets/fonts",
         },
+        {
+          src: "img",
+          dest: "img",
+        },
       ],
     }),
   ],
