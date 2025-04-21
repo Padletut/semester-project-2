@@ -32,6 +32,11 @@ export async function editProfile(profile = loggedInUser) {
                     <div class="modal-body">
                         <form id="editProfileForm" class="needs-validation" novalidate>
                             <div class="mb-3">
+                                <label for="coverUrl" class="form-label">Cover URL</label>
+                                <input type="url" class="form-control" id="coverUrl" value="${coverUrl}" required>
+                                <div class="invalid-feedback">Please provide a valid URL.</div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="avatarUrl" class="form-label">Avatar URL</label>
                                 <input type="url" class="form-control" id="avatarUrl" value="${avatarUrl}" required>
                                 <div class="invalid-feedback">Please provide a valid URL.</div>
@@ -70,6 +75,10 @@ export async function editProfile(profile = loggedInUser) {
       const bio = document.getElementById("bio").value;
 
       const updatedProfile = {
+        cover: {
+          url: coverUrl,
+          alt: `Cover for profile ${profile.name}`, // Set a default alt text
+        },
         avatar: {
           url: avatarUrl,
           alt: `Avatar for profile ${profile.name}`, // Set a default alt text
@@ -80,8 +89,8 @@ export async function editProfile(profile = loggedInUser) {
       await handleProfileUpdate(
         profile,
         updatedProfile,
-        "editAvatarBioModal",
-        "editAvatarBioForm",
+        "editProfileModal",
+        "editProfileForm",
       );
     });
 }

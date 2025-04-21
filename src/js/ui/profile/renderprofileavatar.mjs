@@ -9,23 +9,27 @@
  * ```
  */
 export async function renderProfileAvatar(profileName) {
-    const profileAvatar = document.getElementById("profile-image");
+  const profileAvatar = document.getElementById("profile-image");
 
-    if (!profileAvatar) {
-        console.error("Profile avatar element not found");
-        return;
-    }
+  if (!profileAvatar) {
+    console.error("Profile avatar element not found");
+    return;
+  }
 
-    try {
-        const profileAvatarImage = document.createElement("img");
-        profileAvatarImage.classList.add("profile-avatar-image");
-        profileAvatarImage.src = profileName.avatar.url;
-        profileAvatarImage.alt = profileName.avatar.alt;
-        profileAvatarImage.style.width = "128px";
+  try {
+    const profileAvatarImage = document.createElement("img");
+    profileAvatarImage.classList.add(
+      "profile-avatar-image",
+      "rounded-circle",
+      "card-profile-img",
+      "border",
+      "border-primary",
+    );
+    profileAvatarImage.src = profileName.avatar.url;
+    profileAvatarImage.alt = profileName.avatar.alt;
 
-        profileAvatar.appendChild(profileAvatarImage);
-
-    } catch (error) {
-        console.error(error);
-    }
+    profileAvatar.appendChild(profileAvatarImage);
+  } catch (error) {
+    console.error(error);
+  }
 }
