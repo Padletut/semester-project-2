@@ -1,0 +1,20 @@
+@use "../variables";
+
+.modal-dialog {
+  .modal-content {
+    background: variables.$modal-bg;
+    .modal-header {
+      div {
+        align-self: center;
+      }
+      .modal-title {
+        color: variables.$body-bg;
+      }
+    }
+    .modal-body {
+      label {
+        color: variables.$body-bg;
+      }
+    }
+  }
+}

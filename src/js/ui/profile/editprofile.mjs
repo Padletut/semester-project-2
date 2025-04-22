@@ -25,20 +25,17 @@ export async function editProfile(profile = loggedInUser) {
         <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" data-bs-theme="dark">
+                        <div class="w-100 text-center">
                         <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="editProfileForm" class="needs-validation" novalidate>
                             <div class="mb-3">
-                                <label for="coverUrl" class="form-label">Cover URL</label>
+                                <label for="coverUrl" class="form-label">Banner URL</label>
                                 <input type="url" class="form-control" id="coverUrl" value="${coverUrl}" required>
-                                <div class="invalid-feedback">Please provide a valid URL.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="avatarUrl" class="form-label">Avatar URL</label>
-                                <input type="url" class="form-control" id="avatarUrl" value="${avatarUrl}" required>
                                 <div class="invalid-feedback">Please provide a valid URL.</div>
                             </div>
                             <div class="mb-3">
@@ -46,7 +43,15 @@ export async function editProfile(profile = loggedInUser) {
                                 <textarea class="form-control" id="bio" rows="3" required>${bio}</textarea>
                                 <div class="invalid-feedback">Please provide a bio.</div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <div class="mb-4">
+                                <label for="avatarUrl" class="form-label">Avatar URL</label>
+                                <input type="url" class="form-control" id="avatarUrl" value="${avatarUrl}" required>
+                                <div class="invalid-feedback">Please provide a valid URL.</div>
+                            </div>
+                            <div class="d-flex justify-content-center gap-4 mb-3">
+                            <button type="submit" class="btn btn-custom-secondary">Save</button>
+                            <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Cancel</button>
+                            </div>
                         </form>
                     </div>
                 </div>

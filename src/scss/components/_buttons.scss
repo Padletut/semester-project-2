@@ -22,17 +22,26 @@
   }
 }
 
-.place-bid-button {
+.place-bid-button,
+.btn-custom-secondary {
   background: variables.$secondary;
   border-color: variables.$secondary;
+  color: variables.$body-bg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   &:hover {
     background: variables.$secondary-hover;
     border-color: variables.$secondary-hover;
+    color: variables.$body-bg;
   }
   &:active {
     background: variables.$secondary-active !important;
     border-color: variables.$secondary-active !important;
+    color: variables.$body-bg !important;
   }
+}
+
+.btn-custom-secondary {
+  padding: 10px 24px;
 }
 
 .card-tags a {
@@ -49,6 +58,10 @@
   background-color: variables.$primary;
   border-color: variables.$primary;
   color: variables.$body-bg;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   &:hover {
     background-color: variables.$primary-hover;
     border-color: variables.$primary-hover;
@@ -59,11 +72,4 @@
     border-color: variables.$primary-active !important;
     color: variables.$body-bg !important;
   }
-  padding: 10px 24px;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  box-shadow:
-    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
-    0px 1px 3px 0px rgba(0, 0, 0, 0.3);
 }
