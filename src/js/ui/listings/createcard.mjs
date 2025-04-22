@@ -42,7 +42,7 @@ export function createItemCard(item, container) {
         </div>
       </div>
       <i class="card-author">By <a href="#">${item.seller.name || "Unknown"}</a></i>
-      <div class="d-flex gap-2 mt-3 mb-3 card-tags">
+      <div class="d-flex flex-wrap gap-2 mt-3 mb-3 card-tags">
         ${
           item.tags
             ?.map(
