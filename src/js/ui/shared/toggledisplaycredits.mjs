@@ -1,6 +1,17 @@
+import { loadStorage } from "../../storage/loadstorage.mjs";
+
 export function toggleDisplayCredits() {
   const displayCreditsElements = document.querySelectorAll(".display-credits");
   const navbarToggler = document.querySelector(".navbar-toggler");
+  const accessToken = loadStorage("accessToken");
+
+  // If the user is not logged in, hide credits and return early
+  if (!accessToken) {
+    displayCreditsElements.forEach((element) => {
+      element.style.display = "none";
+    });
+    return;
+  }
 
   if (!navbarToggler) {
     console.error("Navbar toggler not found.");

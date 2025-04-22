@@ -8,6 +8,7 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 export function checkAuth() {
   const accessToken = loadStorage("accessToken");
   const navbarItem = document.querySelector(".nav-auth");
+  const profileNavItem = document.querySelector(".nav-profile");
 
   if (accessToken && navbarItem) {
     // Create a new "Logout" link
@@ -18,5 +19,10 @@ export function checkAuth() {
 
     // Replace the existing element with the new one
     navbarItem.replaceWith(logoutLink);
+  }
+
+  // Hide the nav-profile item if the user is not logged in
+  if (!accessToken && profileNavItem) {
+    profileNavItem.style.display = "none";
   }
 }
