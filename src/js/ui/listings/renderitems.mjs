@@ -20,11 +20,7 @@ import { toggleLoader } from "../shared/toggleLoader.mjs";
  * ```javascript
  */
 
-export async function renderItems(
-  profileName = null,
-  append = false,
-  tag = null,
-) {
+export async function renderItems(itemName = null, append = false, tag = null) {
   let nextPage = 1; // Start with page 1
   let isLastPage = false;
   const itemsContainer = document.querySelector(".items-container");
@@ -51,7 +47,6 @@ export async function renderItems(
       toggleLoader(true, loaderContainer);
 
       const isActive = activeSwitch.checked;
-
       const queryParams = new URLSearchParams({
         _seller: "true",
         _bids: "true",
@@ -60,7 +55,7 @@ export async function renderItems(
         page: nextPage,
       });
 
-      const response = await getItems(queryParams, profileName, tag);
+      const response = await getItems(queryParams, itemName, tag);
 
       if (response.data.length > 0) {
         const items = response.data;
@@ -70,6 +65,19 @@ export async function renderItems(
 
         items.forEach((item) => {
           createItemCard(item, itemsContainer);
+        });
+
+        // Add event listeners to the dynamically created cards
+        const auctionItems = document.querySelectorAll(".card-auction-item");
+        auctionItems.forEach((card) => {
+          card.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default behavior
+            const itemId = card.dataset.id; // Assuming each card has a data-id attribute
+            console.log("Card clicked:", event.target, "Item ID:", itemId); // Debugging line to check the clicked card
+            if (itemId) {
+              window.location.href = `detail.html?id=${itemId}`;
+            }
+          });
         });
       }
     } catch (error) {

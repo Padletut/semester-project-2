@@ -7,6 +7,7 @@ import { handleFormSubmission } from "./ui/bootstrap/handleformsubmission.mjs";
 import { checkAuth } from "./API/auth/checkauth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
+import { renderDetail } from "./ui/detail/renderdetail.mjs";
 //import { loadStorage } from "./storage/loadstorage.mjs";
 
 // Ensure bootstrap is globally available
@@ -42,6 +43,12 @@ if (document.title === "User Profile | Tradeauction") {
 
 // Render items in the listings view
 renderItems();
+
+// Render item detail in the detail view
+if (document.title === "Item Detail | Tradeauction") {
+  const itemId = new URLSearchParams(window.location.search).get("id");
+  await renderDetail(itemId);
+}
 
 // Event listener for logout navigation item
 
