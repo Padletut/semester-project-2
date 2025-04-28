@@ -104,7 +104,7 @@ export async function renderItems(
     },
     {
       root: null, // Use the viewport as the root
-      rootMargin: "0px 0px 200px 0px",
+      rootMargin: "0px 0px 40% 0px",
       threshold: 0, // Trigger when the sentinel is fully visible
     },
   );
