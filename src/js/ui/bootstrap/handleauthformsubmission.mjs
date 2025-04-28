@@ -14,7 +14,7 @@ import { onAuth } from "../../API/events/onauth.mjs";
  * handleFormSubmission(buttonElement, formId, redirectUrl);
  * ```
  */
-export function handleFormSubmission(buttonElement, formId, redirectUrl) {
+export function handleAuthFormSubmission(buttonElement, formId, redirectUrl) {
   if (buttonElement) {
     buttonElement.addEventListener("click", async function (event) {
       event.preventDefault();

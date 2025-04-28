@@ -20,7 +20,12 @@ import { toggleLoader } from "../shared/toggleLoader.mjs";
  * ```javascript
  */
 
-export async function renderItems(itemName = null, append = false, tag = null) {
+export async function renderItems(
+  itemName = null,
+  append = false,
+  tag = null,
+  sortListing = "created",
+) {
   let nextPage = 1; // Start with page 1
   let isLastPage = false;
   const itemsContainer = document.querySelector(".items-container");
@@ -52,6 +57,7 @@ export async function renderItems(itemName = null, append = false, tag = null) {
         _bids: "true",
         _active: isActive.toString(), // Use the value of the activeSwitch
         limit: "10",
+        sort: sortListing,
         page: nextPage,
       });
 
