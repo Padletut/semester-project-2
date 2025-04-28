@@ -19,8 +19,9 @@ export async function renderMyListings(profile) {
     return;
   }
 
+  const author = profile.name;
+
   profile.listings.forEach((listing) => {
-    const card = createCardMyListing(listing);
-    listingsContainer.appendChild(card);
+    createCardMyListing(listing, author, listingsContainer);
   });
 }

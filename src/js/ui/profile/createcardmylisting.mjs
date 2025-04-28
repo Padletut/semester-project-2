@@ -10,7 +10,7 @@
  *  title: "Item Title",
  */
 
-export function createCardMyListing(item, container) {
+export function createCardMyListing(item, author, container) {
   const cardWrapper = document.createElement("div");
   cardWrapper.classList.add("col", "col-md-6", "col-lg-4", "col-xxl-3");
 
@@ -49,7 +49,7 @@ export function createCardMyListing(item, container) {
           <small class="text-nowrap">Posted ${postedAt}</small>
         </div>
       </div>
-      <i class="card-author">By <a href="#">${item.author || "Unknown"}</a></i>
+      <i class="card-author">By <a href="#">${author || "Unknown"}</a></i>
       <div class="d-flex justify-content-between">
         <div class="mt-3">
           <div class="card-body-bid-info">
