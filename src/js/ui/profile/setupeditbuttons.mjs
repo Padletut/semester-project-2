@@ -11,7 +11,7 @@ import { checkProfileOwner } from "../../API/profile/checkprofileowner.mjs";
  * setupEditButtons(profile);
  * ```
  */
-export async function setupEditButtons(profile) {
+export async function setupEditProfileButton(profile) {
   const editProfileButton = document.querySelector('[name="edit-profile"]');
   const isOwner = checkProfileOwner(profile);
 

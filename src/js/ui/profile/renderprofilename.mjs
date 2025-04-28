@@ -13,6 +13,7 @@ import { capitalizeFirstLetter } from "../shared/capitalizefirstletter.mjs";
  */
 export async function renderProfileName(profileName, profileEmail) {
   const profileNameElement = document.getElementById("profile-id");
+  profileNameElement.innerHTML = ""; // Clear existing name
   if (!profileNameElement) {
     console.error("Profile name element not found");
     return;

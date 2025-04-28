@@ -10,6 +10,7 @@
  */
 export async function renderProfileAvatar(profileName) {
   const profileAvatar = document.getElementById("profile-image");
+  profileAvatar.innerHTML = ""; // Clear existing avatar
 
   if (!profileAvatar) {
     console.error("Profile avatar element not found");

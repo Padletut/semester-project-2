@@ -1,3 +1,4 @@
+import { createPostItemModal } from "../listings/createpostitemmodal.mjs";
 /**
  * Creates a post card element and appends it to my listings container.
  * @memberof module:Listings
@@ -23,7 +24,7 @@ export function createCardMyListing(item, author, container) {
   const totalBids = item.bids?.length || 0;
   const highestBid =
     item.bids?.reduce((max, bid) => Math.max(max, bid.amount), 0) || 0;
-  const endsAt = new Date(item.endsAt).toLocaleDateString("no-NO", {
+  const endsAt = new Date(item.endsAt).toLocaleDateString("en-US", {
     month: "long",
     day: "2-digit",
     year: "numeric",
@@ -62,7 +63,7 @@ export function createCardMyListing(item, author, container) {
             Ends at:<span>${endsAt}</span>
           </div>
         </div>
-        <div class="mt-3"><i class="bi bi-pencil"></i></div>
+        <div class="btn mt-3" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>
       </div>
       <p class="card-text mt-4 mb-5">
         ${item.description || "Beautiful auction item with no description."}
@@ -72,4 +73,10 @@ export function createCardMyListing(item, author, container) {
 
   cardWrapper.appendChild(card);
   container.appendChild(cardWrapper);
+
+  // Add event listener to the edit button to call updateitem modal
+  const editButton = card.querySelector('[name="edit-my-listing-item"]');
+  editButton.addEventListener("click", () => {
+    createPostItemModal("update", item);
+  });
 }

@@ -1,7 +1,10 @@
 import { createItem } from "../../API/listings/createitem.mjs";
 import { updateItem } from "../../API/listings/updateitem.mjs";
+import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
+import { loadStorage } from "../../storage/loadstorage.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
 import { renderItems } from "./renderitems.mjs";
+import { renderProfile } from "../profile/renderprofile.mjs";
 
 function generateModalHtml(state, item = null) {
   return `
@@ -35,11 +38,18 @@ function generateModalHtml(state, item = null) {
                             <label for="mediaUrl" class="form-label">Media URL</label>
                             <input type="url" class="form-control" id="mediaUrl" name="mediaUrl" ${state === "update" ? `value="${item.media[0].url}"` : ""}>
                         </div>
+                        ${
+                          state === "create"
+                            ? `
                         <div class="mb-3">
                             <label for="endsAt" class="form-label">Ends At</label>
-                            <input type="datetime-local" class="form-control" id="endsAt" name="endsAt" required ${state === "update" ? `value="${new Date(item.endsAt).toISOString().slice(0, 16)}"` : ""}>
+                            <input type="datetime-local" class="form-control" id="endsAt" name="endsAt" required>
                         </div>
+                        `
+                            : ""
+                        }
                         <div class="d-flex justify-content-center gap-4 mb-3">
+                            ${state === "update" ? `<button type="button" class="btn btn-danger" id="deleteItemBtn">Delete</button>` : ""}
                             <button type="submit" class="btn btn-primary">${state === "create" ? "Create" : "Update"}</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         </div>
@@ -62,28 +72,59 @@ export async function createPostItemModal(state, item = null) {
 
   const form = document.getElementById("postItemForm");
 
+  // Remove the modal from the DOM when it is hidden
+  const modalElement = document.getElementById("postItemModal");
+  modalElement.addEventListener("hidden.bs.modal", () => {
+    modalElement.remove();
+  });
+
+  // Add event listener to the delete button
+  if (state === "update") {
+    const deleteButton = document.getElementById("deleteItemBtn");
+    deleteButton.addEventListener("click", () => {
+      confirmDeleteItem(item.id, postItemModal);
+    });
+  }
+
   handleModalFormSubmission(form, async (formData) => {
     const tags = formData.tags
       ? formData.tags.split(",").map((tag) => tag.trim())
       : [];
     const media = formData.mediaUrl ? [{ url: formData.mediaUrl }] : [];
-    const endsAt = new Date(formData.endsAt).toISOString();
 
     const itemData = {
       title: formData.title,
       description: formData.description,
       tags,
       media,
-      endsAt,
     };
 
     if (state === "create") {
-      await createItem(itemData);
-    } else if (state === "update" && item?.id) {
-      await updateItem(item.id, itemData);
+      if (formData.endsAt) {
+        itemData.endsAt = new Date(formData.endsAt).toISOString();
+      } else {
+        console.error("Ends At field is required for creating a new item.");
+        return;
+      }
     }
 
-    postItemModal.hide();
-    renderItems(); // Refresh the listings after creating or updating an item
+    try {
+      if (state === "create") {
+        await createItem(itemData);
+      } else if (state === "update" && item?.id) {
+        await updateItem(item.id, itemData);
+      }
+
+      postItemModal.hide();
+      if (state === "create") {
+        renderItems();
+      } else {
+        const profile = loadStorage("profile");
+        console.log("Profile name:", profile.name);
+        renderProfile();
+      }
+    } catch (error) {
+      console.error("Error during form submission:", error);
+    }
   });
 }

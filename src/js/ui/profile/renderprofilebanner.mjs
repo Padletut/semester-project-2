@@ -10,6 +10,7 @@
  */
 export async function renderProfileBanner(profileName) {
   const profileBanner = document.getElementById("profile-cover");
+  profileBanner.innerHTML = ""; // Clear existing banner
 
   if (!profileBanner) {
     console.error("Profile cover element not found");

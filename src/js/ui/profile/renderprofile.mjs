@@ -5,7 +5,7 @@ import { renderProfileName } from "./renderprofilename.mjs";
 import { renderProfileCredits } from "./renderprofilecredits.mjs";
 import { renderProfileBio } from "./renderprofilebio.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
-import { setupEditButtons } from "./setupeditbuttons.mjs";
+import { setupEditProfileButton } from "./setupeditbuttons.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { renderBidsWon } from "./renderbidswon.mjs";
 import { renderMyBids } from "./rendermybids.mjs";
@@ -45,7 +45,7 @@ export async function renderProfile() {
     renderMyBids();
     renderMyListings(profile);
     renderBidsWon(profile);
-    setupEditButtons(profile);
+    setupEditProfileButton(profile);
   } catch (error) {
     renderErrors(new Error("An error occurred while loading the profile page"));
     console.error("Error rendering profile data:", error);
