@@ -29,7 +29,7 @@ export async function getMyBids(profileName = loggedInUser) {
 
   // Fetch the profile data from the API
   const response = await fetchData(
-    `${API_BASE_URL}${API_PROFILES}/${name}/bids`,
+    `${API_BASE_URL}${API_PROFILES}/${name}/bids?_listings=true`,
     {
       headers: headers(false),
       method: "GET",

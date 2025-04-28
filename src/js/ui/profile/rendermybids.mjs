@@ -25,21 +25,32 @@ export async function renderMyBids() {
   try {
     toggleLoader(true, loaderContainer);
     const { data: bids } = await getMyBids(profileName);
+    console.log("Bids data:", bids); // Debugging line
 
     if (bids.length === 0) {
       myBidsContainer.innerHTML = `<div class="flex-grow-1 mb-1">No bids found.</div>`;
       return;
     }
 
+    const bidElement = document.createElement("li");
+    bidElement.className = "bid-item, d-flex";
+    bidElement.innerHTML = `
+      <div class="bid-list-name-heading flex-grow-1 mb-3 h6">Title</div>
+      <div class="bid-list-date-heading flex-grow-1 text-center h6">Ends At</div>
+      <div class="bid-list-amount-heading flex-grow-1 text-end h6">Bid Amount</div>
+    `;
+
+    myBidsContainer.appendChild(bidElement);
+
     bids.forEach((bid) => {
-      const bidElement = document.createElement("div");
-      bidElement.className = "bid-item";
+      const bidElement = document.createElement("li");
+      bidElement.className = "bid-item, d-flex";
       bidElement.innerHTML = `
-        <div class="bid-list-name flex-grow-1 mb-1">${bid.item}</div>
+        <div class="bid-list-name flex-grow-1 mb-1">${bid.listing.title}</div>
         <div class="bid-list-date flex-grow-1 text-center">${new Date(
-          bid.date,
-        ).toLocaleDateString("no-NO", {
-          month: "long",
+          bid.listing.endsAt,
+        ).toLocaleDateString("en-US", {
+          month: "short",
           day: "2-digit",
           year: "numeric",
         })}</div>
