@@ -1,5 +1,5 @@
 import { getItems } from "../../API/listings/getitems.mjs";
-import { createItemCard } from "./createcard.mjs";
+import { createItemCard } from "./createitemcard.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 

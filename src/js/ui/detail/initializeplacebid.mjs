@@ -1,6 +1,7 @@
 import { createBid } from "../../API/bid/createbid.mjs";
 import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { renderBidHistory } from "./renderbidhistory.mjs";
+import { renderCredits } from "../shared/rendercredits.mjs";
 import { getItem } from "../../API/listings/getitem.mjs";
 
 /**
@@ -33,6 +34,7 @@ export function initializePlaceBid(itemId) {
         // Fetch the item details again to get the updated bid history
         const updatedResponse = await getItem(itemId);
         renderBidHistory(updatedResponse); // Re-render the bid history to show the new bid
+        renderCredits(); // Update credits in the header
 
         // Show success feedback
         const feedbackElement = form.querySelector(".valid-feedback");

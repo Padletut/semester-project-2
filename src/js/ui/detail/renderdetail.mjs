@@ -1,5 +1,5 @@
 import { getItem } from "../../API/listings/getitem.mjs";
-import { createItemCard } from "./createdetailcard.mjs";
+import { createDetailItemCard } from "./createdetailcard.mjs";
 import { renderBidHistory } from "./renderbidhistory.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
@@ -40,7 +40,7 @@ export async function renderDetail(itemId) {
     }
 
     // Render the item details
-    createItemCard(response);
+    createDetailItemCard(response);
 
     // Render the bid history
     renderBidHistory(response);

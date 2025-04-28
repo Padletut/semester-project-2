@@ -17,7 +17,7 @@
  * createItemCard(item, container);
  * ```
  */
-export function createItemCard(item) {
+export function createDetailItemCard(item) {
   const container = document.querySelector(".item-detail-container");
   if (!container) {
     console.error("Container with class 'item-detail-container' not found.");
