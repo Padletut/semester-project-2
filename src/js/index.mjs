@@ -7,6 +7,7 @@ import { handleAuthFormSubmission } from "./ui/bootstrap/handleauthformsubmissio
 import { checkAuth } from "./API/auth/checkauth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
+import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
 import { createPostItemModal } from "./ui/listings/createpostitemmodal.mjs";
 //import { loadStorage } from "./storage/loadstorage.mjs";
@@ -44,6 +45,9 @@ if (document.title === "User Profile | Tradeauction") {
 
 // Render items in the listings view
 renderItems();
+
+// Render Credits in the header
+renderCredits();
 
 // Render item detail in the detail view
 if (document.title === "Item Detail | Tradeauction") {
