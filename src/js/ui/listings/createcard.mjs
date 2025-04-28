@@ -9,6 +9,7 @@ export function createItemCard(item, container) {
   const card = document.createElement("div");
   card.classList.add("card", "card-auction-item", "mb-4");
   card.setAttribute("data-id", item.id);
+  card.style.cursor = "pointer"; // Add cursor style for clickable card
 
   const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
   const imageAlt = item.media?.[0]?.alt || "Auction Item";
