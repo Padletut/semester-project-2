@@ -1,5 +1,10 @@
 import { getItem } from "../../API/listings/getitem.mjs";
 
+/**
+ * Validates the bid input and checks if the bid is valid.
+ * @param {HTMLFormElement} form - The form element containing the bid input.
+ * @returns {Promise<boolean>} - Returns true if the bid is valid, otherwise false.
+ */
 export async function validateBidInput(form) {
   if (!form) {
     console.error("Form element is not provided");
@@ -19,17 +24,24 @@ export async function validateBidInput(form) {
     // Check if the bid input is a valid number and greater than zero
     const bidValue = parseFloat(bidInput.value);
     if (isNaN(bidValue) || bidValue <= 0) {
-      feedbackElement.textContent = "You must enter a bid amount.";
+      feedbackElement.textContent = "You must enter a valid bid amount.";
       bidInput.classList.add("is-invalid");
       isValid = false;
       return isValid;
     }
 
-    // Get the item ID from the card's data-id attribute
+    // Get the item ID from the card's data-id attribute or the URL
     const card = form.closest(".card-auction-item");
-    const itemId = card?.dataset.id;
+    let itemId = card?.dataset.id;
+
     if (!itemId) {
-      feedbackElement.textContent = "Item ID is missing from the card.";
+      // If not found in the card, try to get it from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      itemId = urlParams.get("id");
+    }
+
+    if (!itemId) {
+      feedbackElement.textContent = "Item ID is missing.";
       bidInput.classList.add("is-invalid");
       isValid = false;
       return isValid;

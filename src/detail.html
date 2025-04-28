@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card-body rounded-3 p-3">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-wrap justify-content-between">
                       <div>
                         <h2 class="card-title text-nowrap">Flower Vase</h2>
                       </div>
@@ -111,14 +111,17 @@
               class="container-fluid d-flex flex-column pt-5 justify-content-center place-bid-card"
             >
               <h1 class="m-0 mb-5">Place a Bid</h1>
-              <form class="p-5 rounded-3">
+              <form class="p-5 rounded-3 needs-validation" novalidate>
                 <div class="container p-0 mb-3">
                   <input
                     type="number"
+                    name="bid-amount"
                     class="form-control mb-3"
                     placeholder="Enter your bid"
                     aria-label="Bid Amount"
                   />
+                  <div class="invalid-feedback"></div>
+                  <div class="valid-feedback"></div>
                 </div>
                 <button
                   class="btn btn-secondary place-bid-button w-100"

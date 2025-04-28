@@ -2,6 +2,7 @@ import { createBid } from "../../API/bid/createbid.mjs";
 import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import { renderCredits } from "../shared/rendercredits.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
@@ -149,6 +150,8 @@ export function createItemCard(item, container) {
           const newBidItem = document.createElement("li");
           newBidItem.innerHTML = `${bidAmount} Credits By <a href="#">${profileName}</a>`;
           recentBidsList.appendChild(newBidItem); // Append the new bid to the list
+          renderCredits(); // Update credits in the header
+          bidInput.value = ""; // Clear the input field after successful bid
         } catch (error) {
           handleErrors(error);
           console.error("Error placing bid:", error);
