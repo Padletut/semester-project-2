@@ -1,3 +1,4 @@
+import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
 /**
  * Creates a post card element and appends it to the listings container.
  * @param {Object} item - The item object containing details of the auction item.
@@ -67,7 +68,7 @@ export function createDetailItemCard(item) {
             <small class="text-nowrap">Posted ${postedAt}</small>
           </div>
         </div>
-        <i class="card-author">By <a href="#">${sellerName}</a></i>
+        <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
         <div>
           <div>Total Bids: <span>${totalBids}</span></div>
           <div>Highest Bid: <span>${highestBid}</span></div>
@@ -79,4 +80,6 @@ export function createDetailItemCard(item) {
       </div>
     </div>
   `;
+
+  linkAuthorToProfile(); // Link author to profile page
 }

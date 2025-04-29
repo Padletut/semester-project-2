@@ -3,6 +3,8 @@ import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { renderCredits } from "../shared/rendercredits.mjs";
+import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
+import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
@@ -54,7 +56,7 @@ export function createItemCard(item, container) {
           <small class="text-nowrap">Posted ${new Date(item.created).toLocaleDateString() || "N/A"}</small>
         </div>
       </div>
-      <i class="card-author">By <a href="#">${item.seller.name || "Unknown"}</a></i>
+      <i class="card-author" name="${item.seller.name}">By <a href="#">${item.seller.name || "Unknown"}</a></i>
       <div class="d-flex flex-wrap gap-2 mt-3 mb-3 card-tags">
         ${
           item.tags
@@ -86,7 +88,7 @@ export function createItemCard(item, container) {
                   .slice(0, 5) // Get the top 5 bids
                   .map(
                     (bid) =>
-                      `<li>${bid.amount} Credits By <a href="#">${bid.bidder.name || "Unknown"}</a></li>`,
+                      `<li>${bid.amount} Credits By <a class="bidder-link" href="#">${bid.bidder.name || "Unknown"}</a></li>`,
                   )
                   .join("")
               : "<li>No bids yet</li>"
@@ -128,27 +130,8 @@ export function createItemCard(item, container) {
   cardWrapper.appendChild(card);
   container.appendChild(cardWrapper);
 
-  // Add event listener to the card author for navigation to profile page
-  const authorLink = card.querySelector(".card-author a");
-  if (authorLink) {
-    authorLink.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent the card's click event from triggering
-      event.preventDefault(); // Prevent default link behavior
-      const profileId = item.seller.name; // Get the profile ID from the item data
-      window.location.href = `profile.html?profile=${profileId}`; // Redirect to the profile page
-    });
-  }
-
-  // Add event listeners to bid links for navigation to the bidder's profile page
-  const bidLinks = card.querySelectorAll(".card-recent-bids ul li a");
-  bidLinks.forEach((bidLink) => {
-    bidLink.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent the card's click event from triggering
-      event.preventDefault(); // Prevent default link behavior
-      const profileId = bidLink.textContent.trim(); // Get the bidder's profile name from the link text
-      window.location.href = `profile.html?profile=${profileId}`; // Redirect to the bidder's profile page
-    });
-  });
+  linkAuthorToProfile(); // Link author to profile page
+  linkBidderToProfile(); // Link bidder to profile page
 
   // Add event listener to the card for bid submission
   const form = card.querySelector("form");
