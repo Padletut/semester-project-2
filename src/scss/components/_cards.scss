@@ -24,10 +24,6 @@
     text-decoration: none;
   }
 
-  img {
-    aspect-ratio: 326/218;
-  }
-
   small {
     color: #49454f;
   }
@@ -110,6 +106,7 @@
   }
   .img-fluid {
     height: 100%;
+    object-fit: cover;
   }
 }
 
