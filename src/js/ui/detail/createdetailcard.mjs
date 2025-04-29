@@ -68,13 +68,15 @@ export function createDetailItemCard(item) {
             <small class="text-nowrap">Posted ${postedAt}</small>
           </div>
         </div>
-        <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
+        <div class="mb-3">
+          <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
+        </div>
         <div>
           <div>Total Bids: <span>${totalBids}</span></div>
           <div>Highest Bid: <span>${highestBid}</span></div>
           <div>Ends at: <span>${endsAt}</span></div>
         </div>
-        <p class="card-text mt-5">
+        <p class="card-text mt-4 mb-3">
           ${description}
         </p>
       </div>
