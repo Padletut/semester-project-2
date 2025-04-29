@@ -43,7 +43,6 @@ export async function getProfile(profileName = loggedInUser) {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("Profile data:", data);
     return data;
   }
 

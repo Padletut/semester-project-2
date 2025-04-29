@@ -25,7 +25,6 @@ export async function renderMyBids() {
   try {
     toggleLoader(true, loaderContainer);
     const { data: bids } = await getMyBids(profileName);
-    console.log("Bids data:", bids); // Debugging line
 
     if (bids.length === 0) {
       myBidsContainer.innerHTML = `<div class="flex-grow-1 mb-1">No bids found.</div>`;

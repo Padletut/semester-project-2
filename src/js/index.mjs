@@ -10,6 +10,7 @@ import { renderProfile } from "./ui/profile/renderprofile.mjs";
 import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
 import { createPostItemModal } from "./ui/listings/createpostitemmodal.mjs";
+import { loadStorage } from "./storage/loadstorage.mjs";
 //import { loadStorage } from "./storage/loadstorage.mjs";
 
 // Ensure bootstrap is globally available
@@ -47,7 +48,10 @@ if (document.title === "User Profile | Tradeauction") {
 renderItems();
 
 // Render Credits in the header
-renderCredits();
+const isLoggedIn = loadStorage("profile")?.name;
+if (isLoggedIn) {
+  renderCredits();
+}
 
 // Render item detail in the detail view
 if (document.title === "Item Detail | Tradeauction") {

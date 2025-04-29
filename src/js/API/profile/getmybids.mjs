@@ -38,7 +38,6 @@ export async function getMyBids(profileName = loggedInUser) {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("My bids data:", data);
     return data;
   }
 

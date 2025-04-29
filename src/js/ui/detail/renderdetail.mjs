@@ -14,17 +14,12 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
  * @returns {Promise<void>}
  */
 export async function renderDetail(itemId) {
-  console.log("Rendering item detail for ID:", itemId); // Debugging line to check the itemId
   const loaderContainer = document.getElementById("loader");
   toggleLoader(true, loaderContainer);
 
   try {
     const profileName = loadStorage("profile")?.name; // Get the logged-in user's profile name
     const response = await getItem(itemId);
-    console.log(response); // Debugging line to check the item data
-    console.log("EndsAt:", response.endsAt); // Debugging line to check the endsAt date
-
-    // If profileName = itemId.seller or auction has ended, disable the "Place Bid" button
     const placeBidButton = document.querySelector(".place-bid-button");
     if (placeBidButton) {
       const endsAtDate = new Date(response.endsAt);
