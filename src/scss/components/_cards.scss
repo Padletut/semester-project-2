@@ -108,6 +108,15 @@
     height: 100%;
     object-fit: cover;
     cursor: zoom-in;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease; // Smooth transition for hover effects
+
+    &:hover {
+      transform: scale(1.05); // Slightly enlarge the image on hover
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); // Add a shadow for emphasis
+      border: 1px solid rgba(25, 231, 87, 0.8); // Add a subtle white border
+    }
   }
 }
 
