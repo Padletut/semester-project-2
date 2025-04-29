@@ -56,6 +56,8 @@ export function createDetailItemCard(item) {
         src="${imageUrl}"
         class="img-fluid rounded-start"
         alt="${imageAlt}"
+        data-bs-toggle="modal"
+        data-bs-target="#imageModal"
       />
     </div>
     <div class="col-md-8">
@@ -82,6 +84,43 @@ export function createDetailItemCard(item) {
       </div>
     </div>
   `;
-
+  imageModal(title, imageAlt, imageUrl); // Create the image modal
   linkAuthorToProfile(); // Link author to profile page
+}
+
+function imageModal(title, imageAlt, imageUrl) {
+  const body = document.querySelector("body");
+
+  // Create the modal element
+  const modal = document.createElement("div");
+  modal.className = "modal fade";
+  modal.id = "imageModal";
+  modal.tabIndex = -1;
+  modal.setAttribute("aria-labelledby", "imageModalLabel");
+  modal.setAttribute("aria-hidden", "true");
+
+  // Set the modal's inner HTML
+  modal.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" data-bs-theme="dark">
+          <div class="w-100 text-center">
+              <h5 class="modal-title" id="imageModalLabel">${title}</h5>
+          </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+        </div>
+        <div class="modal-body">
+          <img src="${imageUrl}" class="img-fluid" alt="${imageAlt}" />
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Append the modal to the body
+  body.appendChild(modal);
 }
