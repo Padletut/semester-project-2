@@ -128,6 +128,28 @@ export function createItemCard(item, container) {
   cardWrapper.appendChild(card);
   container.appendChild(cardWrapper);
 
+  // Add event listener to the card author for navigation to profile page
+  const authorLink = card.querySelector(".card-author a");
+  if (authorLink) {
+    authorLink.addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevent the card's click event from triggering
+      event.preventDefault(); // Prevent default link behavior
+      const profileId = item.seller.name; // Get the profile ID from the item data
+      window.location.href = `profile.html?profile=${profileId}`; // Redirect to the profile page
+    });
+  }
+
+  // Add event listeners to bid links for navigation to the bidder's profile page
+  const bidLinks = card.querySelectorAll(".card-recent-bids ul li a");
+  bidLinks.forEach((bidLink) => {
+    bidLink.addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevent the card's click event from triggering
+      event.preventDefault(); // Prevent default link behavior
+      const profileId = bidLink.textContent.trim(); // Get the bidder's profile name from the link text
+      window.location.href = `profile.html?profile=${profileId}`; // Redirect to the bidder's profile page
+    });
+  });
+
   // Add event listener to the card for bid submission
   const form = card.querySelector("form");
   if (form) {
