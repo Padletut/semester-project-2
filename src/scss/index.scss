@@ -37,11 +37,3 @@ small {
 .product-section {
   max-width: 1080px;
 }
-
-[name="edit-profile"]:hover,
-[name="edit-my-listing-item"]:hover {
-  transform: scale(1.5);
-  transition: all 0.3s ease-in-out;
-  background-color: variables.$secondary-hover;
-  color: variables.$body-bg;
-}

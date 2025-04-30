@@ -73,3 +73,15 @@
     color: variables.$body-bg !important;
   }
 }
+
+[name="edit-profile"],
+[name="edit-my-listing-item"] {
+  height: fit-content;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.5);
+    background-color: variables.$secondary-hover;
+    color: variables.$body-bg;
+  }
+}
