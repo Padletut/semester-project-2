@@ -147,6 +147,15 @@
       padding: 0;
       margin: 0;
       list-style: none;
+
+      li {
+        cursor: pointer;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+          color: variables.$link-color;
+          transition: all 0.3s ease-in-out;
+        }
+      }
     }
 
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
