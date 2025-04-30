@@ -25,7 +25,6 @@ export async function register(name, email, password) {
   // Convert name and email to lowercase
   const lowerCaseName = name.toLowerCase();
   const lowerCaseEmail = email.toLowerCase();
-
   const response = await fetchData(API_BASE_URL + API_AUTH + API_REGISTER, {
     headers: headers(true),
     method: "POST",

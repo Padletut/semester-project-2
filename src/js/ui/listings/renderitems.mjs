@@ -59,7 +59,6 @@ export async function renderItems(
         sort: sortListing,
         page: nextPage,
       });
-
       const response = await getItems(queryParams, itemName, tag);
 
       if (response.data.length > 0) {
@@ -92,7 +91,6 @@ export async function renderItems(
       toggleLoader(false, loaderContainer);
     }
   };
-
   // Create a new observer
   const observer = new IntersectionObserver(
     async (entries) => {

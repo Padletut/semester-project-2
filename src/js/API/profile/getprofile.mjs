@@ -23,7 +23,6 @@ export async function getProfile(profileName = loggedInUser) {
     _listings: "true",
     _wins: "true",
   });
-
   // Determine the profile name based on the structure of the profileName parameter
   const name =
     typeof profileName === "string"
@@ -31,7 +30,6 @@ export async function getProfile(profileName = loggedInUser) {
       : profileName.data
         ? profileName.data.name
         : profileName.name;
-
   // Fetch the profile data from the API
   const response = await fetchData(
     `${API_BASE_URL}${API_PROFILES}/${name}?${queryParams.toString()}`,

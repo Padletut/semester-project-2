@@ -1,9 +1,10 @@
-import * as global from "../../constants.mjs";
+import * as constants from "../../constants.mjs";
 import { saveStorage } from "../../storage/savestorage.mjs";
 import { fetchData } from "../utils/fetch.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
 
-const { API_BASE_URL, API_AUTH, API_LOGIN } = global;
+const { API_BASE_URL, API_AUTH, API_LOGIN, STORAGE_KEYS } = constants;
+const { ACCESS_TOKEN, PROFILE } = STORAGE_KEYS;
 
 /**
  * Logs in a user with the provided email and password.
@@ -27,8 +28,8 @@ export async function login(email, password) {
 
   if (response.ok) {
     const { accessToken, ...profile } = (await response.json()).data;
-    saveStorage("accessToken", accessToken);
-    saveStorage("profile", profile);
+    saveStorage(ACCESS_TOKEN, accessToken);
+    saveStorage(PROFILE, profile);
     return profile;
   }
 

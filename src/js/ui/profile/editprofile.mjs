@@ -19,7 +19,6 @@ export async function editProfile(profile = loggedInUser) {
   // Ensure the avatar and bio properties exist and provide default values if they do not
   const { avatar: { url: coverUrl = "", url: avatarUrl = "" } = {}, bio = "" } =
     profile || {};
-
   // Create and show the Bootstrap modal
   const modalHtml = `
         <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
@@ -78,7 +77,6 @@ export async function editProfile(profile = loggedInUser) {
       const coverUrl = document.getElementById("coverUrl").value;
       const avatarUrl = document.getElementById("avatarUrl").value;
       const bio = document.getElementById("bio").value;
-
       const updatedProfile = {
         cover: {
           url: coverUrl,

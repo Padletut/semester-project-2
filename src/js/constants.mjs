@@ -6,3 +6,7 @@ export const API_LOGIN = "/login";
 export const API_LISTINGS = "/auction/listings";
 export const API_PROFILES = "/auction/profiles";
 export const API_SEARCH = "/search";
+export const STORAGE_KEYS = {
+  PROFILE: "profile",
+  ACCESS_TOKEN: "accessToken",
+};

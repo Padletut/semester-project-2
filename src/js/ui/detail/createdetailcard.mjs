@@ -113,7 +113,6 @@ function initializeItemObserver(detailContainer) {
 
 function imageModal(title, imageAlt, imageUrl) {
   const body = document.querySelector("body");
-
   // Create the modal element
   const modal = document.createElement("div");
   modal.className = "modal fade";

@@ -38,7 +38,6 @@ export function createItemCard(item, container) {
 
   const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
   const imageAlt = item.media?.[0]?.alt || "Auction Item";
-
   // Check if the auction has ended
   const endsAtDate = new Date(item.endsAt);
   const isAuctionEnded = endsAtDate <= new Date();

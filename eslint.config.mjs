@@ -16,6 +16,13 @@ export default defineConfig([
     },
     plugins: { js },
     extends: ["js/recommended"], // Combine the "js/recommended" extension here
+    rules: {
+      // Add the padding-line-between-statements rule
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "never", prev: "const", next: "const" },
+      ],
+    },
   },
   {
     // Add support for HTML files

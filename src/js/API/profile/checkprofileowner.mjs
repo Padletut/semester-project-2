@@ -1,6 +1,8 @@
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import * as constants from "../../constants.mjs";
 
-const loggedInUser = loadStorage("profile");
+const { PROFILE } = constants.STORAGE_KEYS;
+const loggedInUser = loadStorage(PROFILE);
 
 /**
  * Check if the logged in user is the owner of the profile and add the edit button

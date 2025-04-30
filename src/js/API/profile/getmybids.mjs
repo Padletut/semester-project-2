@@ -26,7 +26,6 @@ export async function getMyBids(profileName = loggedInUser) {
       : profileName.data
         ? profileName.data.name
         : profileName.name;
-
   // Fetch the profile data from the API
   const response = await fetchData(
     `${API_BASE_URL}${API_PROFILES}/${name}/bids?_listings=true`,

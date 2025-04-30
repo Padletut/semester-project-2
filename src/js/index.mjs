@@ -1,4 +1,5 @@
 import "../scss/index.scss";
+import * as constants from "./constants.mjs";
 import * as bootstrap from "bootstrap";
 import { toggleDisplayCredits } from "./ui/shared/toggledisplaycredits.mjs";
 import { renderItems } from "./ui/listings/renderitems.mjs";
@@ -41,7 +42,7 @@ if (document.title === "Listings | Tradeauction") {
 }
 
 // Render Credits in the header
-const isLoggedIn = loadStorage("profile")?.name;
+const isLoggedIn = loadStorage(constants.STORAGE_KEYS.PROFILE)?.name;
 if (isLoggedIn) {
   renderCredits();
 }

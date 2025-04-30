@@ -24,7 +24,6 @@ export function createCardMyListing(item, author, container) {
 
   const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
   const imageAlt = item.media?.[0]?.alt || "Auction Item";
-
   const totalBids = item.bids?.length || 0;
   const highestBid =
     item.bids?.reduce((max, bid) => Math.max(max, bid.amount), 0) || 0;

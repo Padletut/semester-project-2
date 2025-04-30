@@ -25,7 +25,6 @@ import * as constants from "../../constants.mjs";
  **/
 export async function updateItem(itemId, item) {
   const url = `${constants.API_BASE_URL + constants.API_LISTINGS}/${itemId}`;
-
   const body = JSON.stringify({
     ...(item.title && { title: item.title }), // Include only if provided
     ...(item.description && { description: item.description }),

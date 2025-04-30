@@ -100,7 +100,6 @@ export async function createPostItemModal(
     postItemModal.show();
 
     const form = document.getElementById("postItemForm");
-
     // Remove the modal from the DOM when it is hidden
     const modalElement = document.getElementById("postItemModal");
     modalElement.addEventListener("hidden.bs.modal", () => {
@@ -120,7 +119,6 @@ export async function createPostItemModal(
         ? formData.tags.split(",").map((tag) => tag.trim())
         : [];
       const media = formData.mediaUrl ? [{ url: formData.mediaUrl }] : [];
-
       const itemData = {
         title: formData.title,
         description: formData.description,

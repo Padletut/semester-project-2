@@ -27,7 +27,6 @@ export function renderBidHistory(response) {
           day: "2-digit",
           year: "numeric",
         });
-
         const bidItem = document.createElement("li");
         bidItem.classList.add("d-flex", "justify-content-between");
         bidItem.innerHTML = `

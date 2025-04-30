@@ -31,7 +31,6 @@ import * as constants from "../../constants.mjs";
  */
 export async function createItem(item) {
   const url = `${constants.API_BASE_URL + constants.API_LISTINGS}`;
-
   const body = {
     title: item.title,
     description: item.description || "",

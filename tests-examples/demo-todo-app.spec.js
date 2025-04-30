@@ -296,7 +296,6 @@ test.describe("Counter", () => {
   test("should display the current number of todo items", async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder("What needs to be done?");
-
     // create a todo count locator
     const todoCount = page.getByTestId("todo-count");
 
