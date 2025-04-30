@@ -78,7 +78,7 @@ export function createItemCard(item, container) {
       <p class="card-text mt-3">
         ${item.description || "Beautiful auction item with no description."}
       </p>
-      <div class="container-fluid card-recent-bids p-0 pt-3 pb-4">
+      <div class="container-fluid card-recent-bids p-0 pt-3 pb-5 mb-3">
         <h2>Recent Bids:</h2>
         <ul>
           ${
@@ -98,7 +98,7 @@ export function createItemCard(item, container) {
       ${
         item.seller.name !== profileName
           ? `
-      <form class="needs-validation" novalidate>
+      <form class="needs-validation fixed-bottom m-3" novalidate>
         <div class="input-group mb-3">
           <input
             type="number"

@@ -34,7 +34,9 @@ header {
     .nav-link {
       color: variables.$body-bg;
       &:hover {
-        color: variables.$body-bg;
+        color: variables.$nav-item-hover;
+        transform: scale(1.1);
+        transition: all 0.3s ease-in-out;
       }
     }
 
@@ -42,6 +44,7 @@ header {
       color: variables.$active-nav-item;
       &:hover {
         color: variables.$active-nav-item;
+        transform: scale(1);
       }
     }
     a {

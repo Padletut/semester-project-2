@@ -2,13 +2,13 @@
 
 .card {
   width: 19rem;
+  height: 100%;
   background: variables.$card-bg;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
 
   &:hover {
     filter: drop-shadow(0 0 0.5rem rgba(25, 231, 87, 0.8));
     transition: all 0.3s ease-in-out;
-    transform: scale(1.02);
   }
 
   .card-author {
