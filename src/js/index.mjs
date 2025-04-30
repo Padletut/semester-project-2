@@ -21,15 +21,6 @@ toggleDisplayCredits();
 
 checkAuth();
 
-// Check if user is logged in
-//let isLoggedIn = checkAuth();
-
-//const profileName = loadStorage("profile");
-
-/* if (isLoggedIn && profileName) {
-  loadModals(profileName.name);
-} */
-
 // Call authSwitchTabs to initialize the authentication tab switcher
 authSwitchTabs();
 
@@ -45,7 +36,9 @@ if (document.title === "User Profile | Tradeauction") {
 }
 
 // Render items in the listings view
-renderItems();
+if (document.title === "Listings | Tradeauction") {
+  renderItems();
+}
 
 // Render Credits in the header
 const isLoggedIn = loadStorage("profile")?.name;

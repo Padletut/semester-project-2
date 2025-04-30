@@ -8,8 +8,24 @@ import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
+ * * @param {Object} item - The item object containing details of the auction item.
+ * @param {HTMLElement} container - The container element to render the item into.
+ * * @example
+ * * ```javascript
+ * * const item = {
+ * *  media: [{ url: "https://example.com/image.jpg", alt: "Item Image" }],
+ * * title: "Auction Item",
+ * * description: "Description of the item",
+ * * seller: { name: "Seller Name" },
+ * * bids: [{ amount: 100 }, { amount: 200 }],
+ * * endsAt: "2023-10-01T00:00:00Z",
+ * * created: "2023-09-01T00:00:00Z",
+ * * };
+ * * };
+ * const container = document.getElementById("item-container");
+ * * createItemCard(item, container);
+ * * ```
  */
-
 export function createItemCard(item, container) {
   const profileName = loadStorage("profile")?.name || "Unknown User";
   const cardWrapper = document.createElement("div");

@@ -1,4 +1,9 @@
 import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
+import { loadStorage } from "../../storage/loadstorage.mjs";
+import { createPostItemModal } from "../listings/createpostitemmodal.mjs";
+import { observeItemChanges } from "../events/observeitemchanges.mjs";
+import { updateItemDetail } from "../events/updateitemdetail.mjs";
+
 /**
  * Creates a post card element and appends it to the listings container.
  * @param {Object} item - The item object containing details of the auction item.
@@ -19,6 +24,7 @@ import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
  * ```
  */
 export function createDetailItemCard(item) {
+  const profileName = loadStorage("profile")?.name || "Unknown User";
   const container = document.querySelector(".item-detail-container");
   if (!container) {
     console.error("Container with class 'item-detail-container' not found.");
@@ -70,15 +76,20 @@ export function createDetailItemCard(item) {
             <small class="text-nowrap">Posted ${postedAt}</small>
           </div>
         </div>
-        <div class="mb-3">
+        ${
+          profileName === item.seller.name
+            ? `<button class="btn border rounded-circle position-absolute end-0 me-3" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
+            : ""
+        }
+        <div class="ms-3 mb-3">
           <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
         </div>
-        <div>
+        <div class="ms-3">
           <div>Total Bids: <span>${totalBids}</span></div>
           <div>Highest Bid: <span>${highestBid}</span></div>
           <div>Ends at: <span>${endsAt}</span></div>
         </div>
-        <p class="card-text mt-4 mb-3">
+        <p class="card-text m-3 mt-4">
           ${description}
         </p>
       </div>
@@ -86,6 +97,18 @@ export function createDetailItemCard(item) {
   `;
   imageModal(title, imageAlt, imageUrl); // Create the image modal
   linkAuthorToProfile(); // Link author to profile page
+  addEditButtonListener(item);
+  initializeItemObserver(".item-detail-container"); // Initialize the item observer
+}
+
+function initializeItemObserver(detailContainer) {
+  if (detailContainer) {
+    observeItemChanges(detailContainer, (updatedItem) => {
+      createDetailItemCard(updatedItem); // Update the detail card with the new data
+    });
+  } else {
+    console.warn("Detail container not found. Skipping observeItemChanges.");
+  }
 }
 
 function imageModal(title, imageAlt, imageUrl) {
@@ -123,4 +146,20 @@ function imageModal(title, imageAlt, imageUrl) {
 
   // Append the modal to the body
   body.appendChild(modal);
+}
+
+function addEditButtonListener(item) {
+  const editButton = document.querySelector('[name="edit-my-listing-item"]');
+  if (!editButton) return;
+
+  editButton.addEventListener("click", async () => {
+    try {
+      const updatedItem = await createPostItemModal("update", item); // Open the modal and wait for the updated item
+      if (updatedItem) {
+        updateItemDetail(".item-detail-container", updatedItem); // Update the data-item attribute
+      }
+    } catch (error) {
+      console.error("Error opening edit modal:", error);
+    }
+  });
 }

@@ -1,10 +1,7 @@
 import { createItem } from "../../API/listings/createitem.mjs";
 import { updateItem } from "../../API/listings/updateitem.mjs";
 import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
-import { loadStorage } from "../../storage/loadstorage.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
-import { renderItems } from "./renderitems.mjs";
-import { renderProfile } from "../profile/renderprofile.mjs";
 
 function generateModalHtml(state, item = null) {
   return `
@@ -61,70 +58,114 @@ function generateModalHtml(state, item = null) {
   `;
 }
 
-export async function createPostItemModal(state, item = null) {
-  const modalHtml = generateModalHtml(state, item);
-  document.body.insertAdjacentHTML("beforeend", modalHtml);
+/**
+ * Creates a modal for creating or updating an item.
+ * @param {string} state - The state of the modal, either "create" or "update".
+ * @param {Object} [item=null] - The item object to update (only used in "update" state).
+ * @param {string} [targetSelector=null] - The selector for the target element to update (only used in "update" state).
+ * @returns {Promise<Object>} - A promise that resolves with the created or updated item data.
+ * @throws {Error} - Throws an error if the form submission fails.
+ * @example
+ * ``` javascript
+ * const item = {
+ *  id: 1,
+ * title: "Sample Item",
+ * description: "This is a sample item.",
+ * tags: ["tag1", "tag2"],
+ * media: [{ url: "https://example.com/image.jpg" }],
+ * };
+ * const targetSelector = "[data-item-id='1']";
+ * createPostItemModal("update", item, targetSelector)
+ *  .then((updatedItem) => {
+ *   console.log("Item updated:", updatedItem);
+ * })
+ * .catch((error) => {
+ *   console.error("Error updating item:", error);
+ * }
+ * );
+ * ```
+ */
+export async function createPostItemModal(
+  state,
+  item = null,
+  targetSelector = null,
+) {
+  return new Promise((resolve, reject) => {
+    const modalHtml = generateModalHtml(state, item);
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
 
-  const postItemModal = new bootstrap.Modal(
-    document.getElementById("postItemModal"),
-  );
-  postItemModal.show();
+    const postItemModal = new bootstrap.Modal(
+      document.getElementById("postItemModal"),
+    );
+    postItemModal.show();
 
-  const form = document.getElementById("postItemForm");
+    const form = document.getElementById("postItemForm");
 
-  // Remove the modal from the DOM when it is hidden
-  const modalElement = document.getElementById("postItemModal");
-  modalElement.addEventListener("hidden.bs.modal", () => {
-    modalElement.remove();
-  });
-
-  // Add event listener to the delete button
-  if (state === "update") {
-    const deleteButton = document.getElementById("deleteItemBtn");
-    deleteButton.addEventListener("click", () => {
-      confirmDeleteItem(item.id, postItemModal);
+    // Remove the modal from the DOM when it is hidden
+    const modalElement = document.getElementById("postItemModal");
+    modalElement.addEventListener("hidden.bs.modal", () => {
+      modalElement.remove();
     });
-  }
 
-  handleModalFormSubmission(form, async (formData) => {
-    const tags = formData.tags
-      ? formData.tags.split(",").map((tag) => tag.trim())
-      : [];
-    const media = formData.mediaUrl ? [{ url: formData.mediaUrl }] : [];
-
-    const itemData = {
-      title: formData.title,
-      description: formData.description,
-      tags,
-      media,
-    };
-
-    if (state === "create") {
-      if (formData.endsAt) {
-        itemData.endsAt = new Date(formData.endsAt).toISOString();
-      } else {
-        console.error("Ends At field is required for creating a new item.");
-        return;
-      }
+    // Add event listener to the delete button
+    if (state === "update") {
+      const deleteButton = document.getElementById("deleteItemBtn");
+      deleteButton.addEventListener("click", () => {
+        confirmDeleteItem(item.id, postItemModal);
+      });
     }
 
-    try {
+    handleModalFormSubmission(form, async (formData) => {
+      const tags = formData.tags
+        ? formData.tags.split(",").map((tag) => tag.trim())
+        : [];
+      const media = formData.mediaUrl ? [{ url: formData.mediaUrl }] : [];
+
+      const itemData = {
+        title: formData.title,
+        description: formData.description,
+        tags,
+        media,
+      };
+
       if (state === "create") {
-        await createItem(itemData);
-      } else if (state === "update" && item?.id) {
-        await updateItem(item.id, itemData);
+        if (formData.endsAt) {
+          itemData.endsAt = new Date(formData.endsAt).toISOString();
+        } else {
+          console.error("Ends At field is required for creating a new item.");
+          return;
+        }
       }
 
-      postItemModal.hide();
-      if (state === "create") {
-        renderItems();
-      } else {
-        const profile = loadStorage("profile");
-        console.log("Profile name:", profile.name);
-        renderProfile();
+      try {
+        if (state === "create") {
+          await createItem(itemData);
+        } else if (state === "update" && item?.id) {
+          await updateItem(item.id, itemData);
+
+          // Update the data-item attribute if a targetSelector is provided
+          if (targetSelector) {
+            const container = document.querySelector(targetSelector);
+            if (container) {
+              const updatedItem = { ...item, ...itemData }; // Merge updated data with the original item
+              container.setAttribute("data-item", JSON.stringify(updatedItem));
+            } else {
+              console.error(
+                `Target container with selector "${targetSelector}" not found.`,
+              );
+            }
+          }
+
+          // Resolve with the updated item
+          const updatedItem = { ...item, ...itemData };
+          resolve(updatedItem);
+        }
+
+        postItemModal.hide();
+      } catch (error) {
+        console.error("Error during form submission:", error);
+        reject(error);
       }
-    } catch (error) {
-      console.error("Error during form submission:", error);
-    }
+    });
   });
 }

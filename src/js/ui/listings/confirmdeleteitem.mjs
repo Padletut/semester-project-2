@@ -1,6 +1,16 @@
 import { deleteItem } from "../../API/listings/deleteitem.mjs"; // Import your delete API function
 import { renderProfile } from "../profile/renderprofile.mjs"; // Import the function to refresh the profile listings
 
+/**
+ * Displays a confirmation modal for deleting an item.
+ * @param {number} itemId - The ID of the item to be deleted.
+ * @param {Object} postItemModal - The modal object for the item being deleted.
+ * @returns {void}
+ * @example
+ * ```javascript
+ * confirmDeleteItem(12345, postItemModal);
+ * ```
+ */
 export function confirmDeleteItem(itemId, postItemModal) {
   const confirmationModalHtml = `
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">

@@ -1,5 +1,6 @@
 import { createPostItemModal } from "../listings/createpostitemmodal.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
+
 /**
  * Creates a post card element and appends it to my listings container.
  * @memberof module:Listings
@@ -19,6 +20,7 @@ export function createCardMyListing(item, author, container) {
 
   const card = document.createElement("div");
   card.classList.add("card");
+  card.setAttribute("data-item-id", item.id); // Unique identifier for the card
 
   const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
   const imageAlt = item.media?.[0]?.alt || "Auction Item";
@@ -68,10 +70,10 @@ export function createCardMyListing(item, author, container) {
         
         ${
           profileName === author
-            ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
+            ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
             : ""
         }
-      </button>
+      </div>
       <p class="card-text mt-4 mb-5">
         ${item.description || "Beautiful auction item with no description."}
       </p>
@@ -84,7 +86,19 @@ export function createCardMyListing(item, author, container) {
   // Add event listener to the edit button to call updateitem modal
   const editButton = card.querySelector('[name="edit-my-listing-item"]');
   if (!editButton) return;
-  editButton.addEventListener("click", () => {
-    createPostItemModal("update", item);
+  editButton.addEventListener("click", async () => {
+    try {
+      const updatedItem = await createPostItemModal(
+        "update",
+        item,
+        `[data-item-id="${item.id}"]`,
+      );
+      if (updatedItem) {
+        // Update the item object with the new data
+        Object.assign(item, updatedItem);
+      }
+    } catch (error) {
+      console.error("Error updating item:", error);
+    }
   });
 }

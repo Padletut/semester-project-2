@@ -7,6 +7,11 @@ import { getItem } from "../../API/listings/getitem.mjs";
 /**
  * Initializes the "Place Bid" button functionality.
  * @param {string} itemId - The ID of the auction item.
+ * @returns {void}
+ * @example
+ * ```javascript
+ * initializePlaceBid("12345");
+ * ```
  */
 export function initializePlaceBid(itemId) {
   const form = document.querySelector("form.needs-validation");

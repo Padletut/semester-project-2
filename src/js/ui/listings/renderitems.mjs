@@ -19,7 +19,6 @@ import { toggleLoader } from "../shared/toggleLoader.mjs";
  * renderItems(items, container, loaderContainer, isLoading, isSearch);
  * ```javascript
  */
-
 export async function renderItems(
   itemName = null,
   append = false,

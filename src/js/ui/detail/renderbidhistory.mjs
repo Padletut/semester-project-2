@@ -1,3 +1,17 @@
+/**
+ * Renders the bid history for a given auction item.
+ * @param {Object} response - The response object containing bid history data.
+ * @example
+ * ```javascript
+ * const response = {
+ *  bids: [
+ *   { created: "2023-10-01T12:00:00Z", bidder: { name: "Bidder1" }, amount: 100 },
+ *  { created: "2023-10-02T12:00:00Z", bidder: { name: "Bidder2" }, amount: 200 },
+ * ],
+ * };
+ * renderBidHistory(response);
+ * ```
+ */
 export function renderBidHistory(response) {
   // Render the bid history
   const bidHistoryContainer = document.querySelector(

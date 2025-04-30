@@ -12,6 +12,13 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
  * @param {HTMLElement} container - The container element to render the item into.
  * @param {HTMLElement} loaderContainer - The loading container element.
  * @returns {Promise<void>}
+ * @example
+ * ```javascript
+ * const itemId = 123;
+ * const container = document.querySelector(".item-detail-container");
+ * const loaderContainer = document.getElementById("loader");
+ * await renderDetail(itemId, container, loaderContainer);
+ * ```
  */
 export async function renderDetail(itemId) {
   const loaderContainer = document.getElementById("loader");

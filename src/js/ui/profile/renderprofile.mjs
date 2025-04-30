@@ -25,6 +25,7 @@ import { renderMyListings } from "./rendermylistings.mjs";
  * ```
  */
 export async function renderProfile() {
+  console.log(new Error().stack); // Debugging line to check the call stack
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
   if (profileName === null) {
