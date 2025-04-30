@@ -138,6 +138,10 @@
 }
 
 .bid-history-list {
+  a {
+    color: variables.$link-color;
+    text-decoration: none;
+  }
   .bid-history-list-body {
     background: variables.$card-bg;
     ul {
