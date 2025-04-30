@@ -1,3 +1,4 @@
+import * as constants from "../../constants.mjs";
 import { getProfile } from "../../API/profile/getprofile.mjs";
 import { renderProfileBanner } from "./renderprofilebanner.mjs";
 import { renderProfileAvatar } from "./renderprofileavatar.mjs";
@@ -10,6 +11,8 @@ import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { renderBidsWon } from "./renderbidswon.mjs";
 import { renderMyBids } from "./rendermybids.mjs";
 import { renderMyListings } from "./rendermylistings.mjs";
+import { renderCredits } from "../shared/rendercredits.mjs";
+import { loadStorage } from "../../storage/loadstorage.mjs";
 
 /**
  * @module Profile
@@ -25,6 +28,9 @@ import { renderMyListings } from "./rendermylistings.mjs";
  * ```
  */
 export async function renderProfile() {
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
+  const loggedInUser = loadStorage(PROFILE);
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
   if (profileName === null) {
@@ -40,7 +46,9 @@ export async function renderProfile() {
     renderProfileBanner(profile);
     renderProfileAvatar(profile);
     renderProfileName(profile, profile.email);
-    renderProfileCredits(profile);
+    if (profileName === loggedInUser) {
+      renderProfileCredits(profile);
+    }
     renderProfileBio(profile);
     renderMyBids();
     renderMyListings(profile);
@@ -48,10 +56,12 @@ export async function renderProfile() {
     setupEditProfileButton(profile);
 
     const creditsContainer = document.querySelector(".display-credits");
-    if (creditsContainer) {
+    if (creditsContainer && profileName === loggedInUser) {
       creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
+    } else if (creditsContainer && profileName !== loggedInUser) {
+      renderCredits();
     } else {
-      console.error("Credits container not found");
+      console.error("Credits container not found or profile name mismatch.");
     }
   } catch (error) {
     renderErrors(new Error("An error occurred while loading the profile page"));
