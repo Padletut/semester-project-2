@@ -25,7 +25,7 @@ export async function renderBidsWon(profile) {
   bidElement.className = "bid-item, d-flex";
   bidElement.innerHTML = `
       <div class="bid-list-name-heading flex-grow-1 mb-3 h6">Title</div>
-      <div class="bid-list-date-heading flex-grow-1 h6">Ends At</div>
+      <div class="bid-list-date-heading flex-grow-1 h6">Ended</div>
     `;
   bidsWonContainer.appendChild(bidElement);
 
@@ -34,12 +34,14 @@ export async function renderBidsWon(profile) {
     bidElement.className = "bid-item, d-flex";
     bidElement.innerHTML += `
       <div class="bid-list-name flex-grow-1 mb-1">${bid.title}</div>
-      <div class="bid-list-date flex-grow-1 ">${new Date(
+      <div class="bid-list-date flex-grow-1">${new Date(
         bid.endsAt,
-      ).toLocaleDateString("no-NO", {
+      ).toLocaleDateString("en-US", {
         month: "long",
         day: "2-digit",
         year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       })}</div>
       
     `;
