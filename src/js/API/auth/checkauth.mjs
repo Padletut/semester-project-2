@@ -3,8 +3,11 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 /**
  * Checks if the user is authenticated by verifying the presence of an access token in local storage.
  * Change navigation item to "Logout" if authenticated.
+ * @example
+ * ```javascript
+ * checkAuth();
+ * ```
  **/
-
 export function checkAuth() {
   const accessToken = loadStorage("accessToken");
   const navbarItem = document.querySelector(".nav-auth");

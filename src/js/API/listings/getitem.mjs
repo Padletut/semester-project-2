@@ -15,7 +15,6 @@ const { API_BASE_URL, API_LISTINGS } = constants;
  * console.log(post);
  * ```
  */
-
 export async function getItem(itemId) {
   const queryParams = new URLSearchParams({
     _seller: "true",

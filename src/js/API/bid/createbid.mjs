@@ -13,7 +13,6 @@ import { handleErrors } from "../utils/handleerrors.mjs";
  * const itemId = "12345";
  * const amount = 100;
  */
-
 export async function createBid(itemId, amount) {
   try {
     const response = await fetch(
