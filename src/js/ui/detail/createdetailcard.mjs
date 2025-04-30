@@ -1,3 +1,4 @@
+import * as constants from "../../constants.mjs";
 import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { createPostItemModal } from "../listings/createpostitemmodal.mjs";
@@ -24,7 +25,9 @@ import { updateItemDetail } from "../events/updateitemdetail.mjs";
  * ```
  */
 export function createDetailItemCard(item) {
-  const profileName = loadStorage("profile")?.name || "Unknown User";
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
+  const profileName = loadStorage(PROFILE)?.name || "Unknown User";
   const container = document.querySelector(".item-detail-container");
   if (!container) {
     console.error("Container with class 'item-detail-container' not found.");

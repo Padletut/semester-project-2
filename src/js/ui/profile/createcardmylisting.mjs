@@ -1,3 +1,4 @@
+import * as constants from "../../constants.mjs";
 import { createPostItemModal } from "../listings/createpostitemmodal.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 
@@ -14,7 +15,9 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
  */
 
 export function createCardMyListing(item, author, container) {
-  const profileName = loadStorage("profile")?.name;
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
+  const profileName = loadStorage(PROFILE)?.name;
   const cardWrapper = document.createElement("div");
   cardWrapper.classList.add("col", "col-md-6", "col-lg-4", "col-xxl-3");
 

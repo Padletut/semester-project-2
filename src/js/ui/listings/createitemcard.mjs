@@ -1,3 +1,4 @@
+import * as constants from "../../constants.mjs";
 import { createBid } from "../../API/bid/createbid.mjs";
 import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
@@ -27,7 +28,9 @@ import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
  * * ```
  */
 export function createItemCard(item, container) {
-  const profileName = loadStorage("profile")?.name || "Unknown User";
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
+  const profileName = loadStorage(PROFILE)?.name || "Unknown User";
   const cardWrapper = document.createElement("div");
   cardWrapper.classList.add("col-12", "col-md-6", "col-lg-4", "col-xxl-3");
 

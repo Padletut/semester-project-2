@@ -1,7 +1,10 @@
+import * as constants from "../../constants.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { handleProfileUpdate } from "./handleprofileupdate.mjs";
 
-const loggedInUser = loadStorage("profile");
+const { STORAGE_KEYS } = constants;
+const { PROFILE } = STORAGE_KEYS;
+const loggedInUser = loadStorage(PROFILE);
 
 /**
  * Function to edit profile.

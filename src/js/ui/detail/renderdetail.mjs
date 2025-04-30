@@ -1,3 +1,4 @@
+import * as constants from "../../constants.mjs";
 import { getItem } from "../../API/listings/getitem.mjs";
 import { createDetailItemCard } from "./createdetailcard.mjs";
 import { renderBidHistory } from "./renderbidhistory.mjs";
@@ -25,7 +26,9 @@ export async function renderDetail(itemId) {
   toggleLoader(true, loaderContainer);
 
   try {
-    const profileName = loadStorage("profile")?.name; // Get the logged-in user's profile name
+    const { STORAGE_KEYS } = constants;
+    const { PROFILE } = STORAGE_KEYS;
+    const profileName = loadStorage(PROFILE)?.name; // Get the logged-in user's profile name
     const response = await getItem(itemId);
     const placeBidButton = document.querySelector(".place-bid-button");
     if (placeBidButton) {
