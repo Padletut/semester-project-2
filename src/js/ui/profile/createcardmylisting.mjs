@@ -68,10 +68,10 @@ export function createCardMyListing(item, author, container) {
         
         ${
           profileName === author
-            ? `<div class="btn mt-3" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
+            ? `<button class="btn border rounded-circle mt-3" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
             : ""
         }
-      </div>
+      </button>
       <p class="card-text mt-4 mb-5">
         ${item.description || "Beautiful auction item with no description."}
       </p>
