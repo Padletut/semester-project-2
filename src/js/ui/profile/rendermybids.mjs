@@ -44,6 +44,7 @@ export async function renderMyBids() {
     bids.forEach((bid) => {
       const bidElement = document.createElement("li");
       bidElement.className = "bid-item, d-flex";
+      bidElement.id = `bid-${bid.id}`; // Set a unique ID for each bid item
       bidElement.innerHTML = `
         <div class="bid-list-name flex-grow-1 mb-1">${bid.listing.title}</div>
         <div class="bid-list-date flex-grow-1 text-center">${new Date(
@@ -56,6 +57,11 @@ export async function renderMyBids() {
         <div class="bid-list-amount flex-grow-1 text-end">${bid.amount} Credits</div>
       `;
       myBidsContainer.appendChild(bidElement);
+
+      // Event listener for bid item click
+      bidElement.addEventListener("click", () => {
+        window.location.href = `detail.html?id=${bid.listing.id}`;
+      });
     });
   } catch (error) {
     renderErrors(new Error("An error occurred while loading the profile page"));
