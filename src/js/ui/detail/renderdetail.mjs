@@ -52,7 +52,6 @@ export async function renderDetail(itemId) {
 
     // Initialize the "Place Bid" button functionality
     initializePlaceBid(itemId);
-    //
   } catch (error) {
     renderErrors(error);
     console.error("Error rendering item detail:", error);

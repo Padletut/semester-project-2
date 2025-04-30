@@ -1,5 +1,4 @@
 import "../scss/index.scss";
-import * as constants from "./constants.mjs";
 import * as bootstrap from "bootstrap";
 import { toggleDisplayCredits } from "./ui/shared/toggledisplaycredits.mjs";
 import { renderItems } from "./ui/listings/renderitems.mjs";
@@ -8,11 +7,9 @@ import { handleAuthFormSubmission } from "./ui/bootstrap/handleauthformsubmissio
 import { checkAuth } from "./API/auth/checkauth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
-import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
 import { createPostItemModal } from "./ui/listings/createpostitemmodal.mjs";
-import { loadStorage } from "./storage/loadstorage.mjs";
-//import { loadStorage } from "./storage/loadstorage.mjs";
+import { renderCredits } from "./ui/shared/rendercredits.mjs";
 
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
@@ -38,12 +35,7 @@ if (document.title === "User Profile | Tradeauction") {
 
 // Render items in the listings view
 if (document.title === "Listings | Tradeauction") {
-  renderItems();
-}
-
-// Render Credits in the header
-const isLoggedIn = loadStorage(constants.STORAGE_KEYS.PROFILE)?.name;
-if (isLoggedIn) {
+  await renderItems();
   renderCredits();
 }
 
@@ -51,6 +43,7 @@ if (isLoggedIn) {
 if (document.title === "Item Detail | Tradeauction") {
   const itemId = new URLSearchParams(window.location.search).get("id");
   await renderDetail(itemId);
+  renderCredits();
 }
 
 // Event listener for logout navigation item

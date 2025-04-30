@@ -25,7 +25,6 @@ import { renderMyListings } from "./rendermylistings.mjs";
  * ```
  */
 export async function renderProfile() {
-  console.log(new Error().stack); // Debugging line to check the call stack
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
   if (profileName === null) {
@@ -46,6 +45,13 @@ export async function renderProfile() {
     renderMyListings(profile);
     renderBidsWon(profile);
     setupEditProfileButton(profile);
+
+    const creditsContainer = document.querySelector(".display-credits");
+    if (creditsContainer) {
+      creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
+    } else {
+      console.error("Credits container not found");
+    }
   } catch (error) {
     renderErrors(new Error("An error occurred while loading the profile page"));
     console.error("Error rendering profile data:", error);
