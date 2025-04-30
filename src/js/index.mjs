@@ -11,6 +11,7 @@ import { renderDetail } from "./ui/detail/renderdetail.mjs";
 import { createPostItemModal } from "./ui/shared/createpostitemmodal.mjs";
 import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { loadStorage } from "./storage/loadstorage.mjs";
+import { SearchAndFilterItems } from "./API/search/searchandfilteritems.mjs";
 import * as constants from "./constants.mjs";
 
 const { STORAGE_KEYS } = constants;
@@ -38,12 +39,37 @@ if (document.title === "User Profile | Tradeauction") {
   await renderProfile();
 }
 
-// Render items in the listings view
 if (document.title === "Listings | Tradeauction") {
-  await renderItems();
-  if (loggedInUser) {
-    renderCredits();
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const itemsContainer = document.querySelector(".items-container");
+
+    // Render default items
+    renderItems();
+
+    // Lazy load SearchAndFilterItems
+    const searchInput = document.querySelector('input[name="search"]');
+    const filterInput = document.querySelector('input[name="filter-tags"]');
+
+    let searchAndFilter = null;
+
+    const initializeSearchAndFilter = () => {
+      if (!searchAndFilter) {
+        searchAndFilter = new SearchAndFilterItems(itemsContainer);
+      }
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener("input", initializeSearchAndFilter);
+    }
+
+    if (filterInput) {
+      filterInput.addEventListener("input", initializeSearchAndFilter);
+    }
+
+    if (loggedInUser) {
+      renderCredits();
+    }
+  });
 }
 
 // Render item detail in the detail view
