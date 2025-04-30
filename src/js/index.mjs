@@ -8,7 +8,7 @@ import { checkAuth } from "./API/auth/checkauth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
-import { createPostItemModal } from "./ui/listings/createpostitemmodal.mjs";
+import { createPostItemModal } from "./ui/shared/createpostitemmodal.mjs";
 import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { loadStorage } from "./storage/loadstorage.mjs";
 import * as constants from "./constants.mjs";

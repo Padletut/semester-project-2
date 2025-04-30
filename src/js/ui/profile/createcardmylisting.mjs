@@ -1,5 +1,5 @@
 import * as constants from "../../constants.mjs";
-import { createPostItemModal } from "../listings/createpostitemmodal.mjs";
+import { createPostItemModal } from "../shared/createpostitemmodal.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 
 /**
