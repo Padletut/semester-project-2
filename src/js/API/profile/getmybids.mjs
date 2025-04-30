@@ -1,11 +1,12 @@
 import { fetchData } from "../utils/fetch.mjs";
 import { headers } from "../utils/headers.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
-import * as global from "../../constants.mjs";
+import * as constants from "../../constants.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 
-const { API_BASE_URL, API_PROFILES } = global;
-const loggedInUser = loadStorage("profile");
+const { API_BASE_URL, API_PROFILES, STORAGE_KEYS } = constants;
+const { PROFILE } = STORAGE_KEYS;
+const loggedInUser = loadStorage(PROFILE);
 
 /**
  * Fetches the profile data from the API.
