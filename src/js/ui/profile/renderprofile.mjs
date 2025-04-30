@@ -36,6 +36,7 @@ export async function renderProfile() {
   try {
     toggleLoader(true, loaderContainer);
     const { data: profile } = await getProfile(profileName);
+    console.log(profile); // Debugging line to check the profile data
     renderProfileBanner(profile);
     renderProfileAvatar(profile);
     renderProfileName(profile, profile.email);
