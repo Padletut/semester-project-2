@@ -21,7 +21,7 @@
     "*.{js,mjs,css,md,html}": "prettier --write"
   },
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/",
     "lint-staged": "npx lint-staged",
     "serve": "vite preview",
