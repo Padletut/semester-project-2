@@ -22,7 +22,6 @@ export class SearchAndFilterItems {
     this.setupEventListeners();
     this.setupIntersectionObserver();
   }
-
   createQueryParams(additionalParams = {}) {
     const activeSwitch = document.getElementById("switchCheckChecked");
     const isActive = activeSwitch.checked;
@@ -30,7 +29,6 @@ export class SearchAndFilterItems {
     const searchQuery = this.searchInput.value.trim();
     // Include the tags if they exist
     const tags = this.tags.length > 0 ? this.tags : null;
-
     return new URLSearchParams({
       _seller: "true",
       _bids: "true",
