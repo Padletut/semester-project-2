@@ -58,7 +58,7 @@ export function createDetailItemCard(item) {
         year: "numeric",
       })
     : "N/A";
-
+  console.log("Item data:", item.endsAt); // Debugging line to check item data
   container.innerHTML = `
     <div class="col-md-4 p-0">
       <img
@@ -79,11 +79,15 @@ export function createDetailItemCard(item) {
             <small class="text-nowrap">Posted ${postedAt}</small>
           </div>
         </div>
-        ${
-          profileName === item.seller.name && new Date(item.endsAt) > new Date()
-            ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
-            : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
-        }
+                ${
+                  profileName === item.seller.name
+                    ? new Date(item.endsAt) > Date.now()
+                      ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
+                      : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
+                    : new Date(item.endsAt) > Date.now()
+                      ? ""
+                      : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
+                }
         <div class="ms-3 mb-3">
           <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
         </div>

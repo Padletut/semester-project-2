@@ -75,9 +75,13 @@ export async function createCardMyListing(item, author, container) {
             </div>
           </div>
             ${
-              profileName === author && new Date(fullItem.endsAt) > new Date()
-                ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
-                : `<span class="text-danger fw-bold">Auction Ended</span>`
+              profileName === author
+                ? new Date(item.endsAt) > Date.now()
+                  ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
+                  : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
+                : new Date(item.endsAt) > Date.now()
+                  ? ""
+                  : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
             }
         </div>
         <p class="card-text mt-4 mb-5">
