@@ -14,7 +14,6 @@
 export function observeItemChanges(targetSelector, callback) {
   const targetNode = document.querySelector(targetSelector);
   if (!targetNode) {
-    console.error(`Target node with selector "${targetSelector}" not found.`);
     return;
   }
 
