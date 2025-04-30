@@ -68,7 +68,7 @@ export function createCardMyListing(item, author, container) {
         
         ${
           profileName === author
-            ? `<button class="btn border rounded-circle mt-3" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
+            ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
             : ""
         }
       </button>
