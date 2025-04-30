@@ -80,9 +80,9 @@ export function createDetailItemCard(item) {
           </div>
         </div>
         ${
-          profileName === item.seller.name
-            ? `<button class="btn border rounded-circle position-absolute end-0 me-3" name="edit-my-listing-item"><i class="bi bi-pencil"></i></div>`
-            : ""
+          profileName === item.seller.name && new Date(item.endsAt) > new Date()
+            ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
+            : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
         }
         <div class="ms-3 mb-3">
           <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
