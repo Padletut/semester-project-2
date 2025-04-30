@@ -48,7 +48,15 @@ export function confirmDeleteItem(itemId, postItemModal) {
       await deleteItem(itemId); // Call the API to delete the item
       confirmationModal.hide();
       postItemModal.hide();
-      renderProfile(); // Refresh the profile listings
+
+      // Check if the user is on the item detail page
+      const currentUrl = window.location.href;
+      if (currentUrl.includes("detail.html")) {
+        // Redirect to the Listings page
+        window.location.href = "index.html";
+      } else {
+        renderProfile(); // Refresh the profile listings if not on the detail page
+      }
     } catch (error) {
       console.error("Error deleting item:", error);
     } finally {
