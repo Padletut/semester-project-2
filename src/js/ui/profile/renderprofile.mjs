@@ -30,7 +30,7 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 export async function renderProfile() {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
-  const loggedInUser = loadStorage(PROFILE);
+  const { name } = loadStorage(PROFILE);
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
   if (profileName === null) {
@@ -42,11 +42,10 @@ export async function renderProfile() {
   try {
     toggleLoader(true, loaderContainer);
     const { data: profile } = await getProfile(profileName);
-    console.log(profile); // Debugging line to check the profile data
     renderProfileBanner(profile);
     renderProfileAvatar(profile);
     renderProfileName(profile, profile.email);
-    if (profileName === loggedInUser) {
+    if (profileName === name) {
       renderProfileCredits(profile);
     }
     renderProfileBio(profile);
@@ -56,9 +55,9 @@ export async function renderProfile() {
     setupEditProfileButton(profile);
 
     const creditsContainer = document.querySelector(".display-credits");
-    if (creditsContainer && profileName === loggedInUser) {
+    if (creditsContainer && profileName === name) {
       creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
-    } else if (creditsContainer && profileName !== loggedInUser) {
+    } else if (creditsContainer && profileName !== name) {
       renderCredits();
     } else {
       console.error("Credits container not found or profile name mismatch.");
