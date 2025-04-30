@@ -10,3 +10,4 @@ node_modules/
 /.husky/
 # Local Netlify folder
 .netlify
+.vscode/settings.json
