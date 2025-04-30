@@ -2,6 +2,7 @@ import { createItem } from "../../API/listings/createitem.mjs";
 import { updateItem } from "../../API/listings/updateitem.mjs";
 import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
+import { renderItems } from "./renderitems.mjs";
 
 function generateModalHtml(state, item = null) {
   const mediaUrl =
@@ -141,6 +142,7 @@ export async function createPostItemModal(
       try {
         if (state === "create") {
           await createItem(itemData);
+          renderItems(); // Refresh the items after creating a new one
         } else if (state === "update" && item?.id) {
           await updateItem(item.id, itemData);
 

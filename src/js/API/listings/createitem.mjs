@@ -50,7 +50,6 @@ export async function createItem(item) {
       await handleErrors(response);
     }
 
-    console.log("Item posted successfully:", response);
     return await response.json();
   } catch (error) {
     handleErrors(error);
