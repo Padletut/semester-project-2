@@ -10,7 +10,12 @@ import { renderProfile } from "./ui/profile/renderprofile.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
 import { createPostItemModal } from "./ui/listings/createpostitemmodal.mjs";
 import { renderCredits } from "./ui/shared/rendercredits.mjs";
+import { loadStorage } from "./storage/loadstorage.mjs";
+import * as constants from "./constants.mjs";
 
+const { STORAGE_KEYS } = constants;
+const { PROFILE } = STORAGE_KEYS;
+const loggedInUser = loadStorage(PROFILE);
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
 
@@ -36,14 +41,18 @@ if (document.title === "User Profile | Tradeauction") {
 // Render items in the listings view
 if (document.title === "Listings | Tradeauction") {
   await renderItems();
-  renderCredits();
+  if (loggedInUser) {
+    renderCredits();
+  }
 }
 
 // Render item detail in the detail view
 if (document.title === "Item Detail | Tradeauction") {
   const itemId = new URLSearchParams(window.location.search).get("id");
   await renderDetail(itemId);
-  renderCredits();
+  if (loggedInUser) {
+    renderCredits();
+  }
 }
 
 // Event listener for logout navigation item

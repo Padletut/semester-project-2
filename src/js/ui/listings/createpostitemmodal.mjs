@@ -4,6 +4,9 @@ import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
 
 function generateModalHtml(state, item = null) {
+  const mediaUrl =
+    state === "update" && item.media?.[0]?.url ? item.media[0].url : ""; // Fallback to an empty string if media is undefined or empty
+
   return `
     <div class="modal fade" id="postItemModal" tabindex="-1" aria-labelledby="postItemModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -33,7 +36,7 @@ function generateModalHtml(state, item = null) {
                         </div>
                         <div class="mb-3">
                             <label for="mediaUrl" class="form-label">Media URL</label>
-                            <input type="url" class="form-control" id="mediaUrl" name="mediaUrl" ${state === "update" ? `value="${item.media[0].url}"` : ""}>
+                            <input type="url" class="form-control" id="mediaUrl" name="mediaUrl" value="${mediaUrl}">
                         </div>
                         ${
                           state === "create"
