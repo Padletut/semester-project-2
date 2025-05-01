@@ -3,7 +3,8 @@ import { createItemCard } from "./createitemcard.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
-
+import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
+import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
 /**
  * Render items in the listings view.
  * @param {Array} items - The array of items to render.
@@ -94,6 +95,8 @@ export async function renderItems(
 
         // Append the fragment to the itemsContainer after the loop
         itemsContainer.appendChild(fragment);
+        linkAuthorToProfile();
+        linkBidderToProfile();
 
         // Add event listeners to the dynamically created cards
         const auctionItems = document.querySelectorAll(".card-auction-item");

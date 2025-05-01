@@ -4,8 +4,6 @@ import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { renderCredits } from "../shared/rendercredits.mjs";
-import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
-import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
@@ -165,9 +163,6 @@ export function createItemCard(item) {
     // Initialize the tooltip for the wrapper only
     new bootstrap.Tooltip(wrapper);
   }
-
-  linkAuthorToProfile(); // Link author to profile page
-  linkBidderToProfile(); // Link bidder to profile page
 
   // Add event listener to the card for bid submission
   const form = card.querySelector("form");
