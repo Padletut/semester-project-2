@@ -66,12 +66,12 @@ export function createItemCard(item, container) {
       </div>
     </div>
     <div class="card-body">
-      <div class="d-flex flex-column justify-content-between">
+      <div class="d-flex flex-wrap column-gap-2 justify-content-between">
         <div>
-          <h2 class="card-title">${item.title || "Untitled"}</h2>
+          <h2 class="card-title m-0">${item.title || "Untitled"}</h2>
         </div>
-        <div>
-          <small class="text-nowrap">Posted ${new Date(item.created).toLocaleDateString() || "N/A"}</small>
+        <div class="d-flex">
+          <small class="text-nowrap">Posted ${new Date(item.created).toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }) || "N/A"}</small>
         </div>
       </div>
       <i class="card-author" name="${item.seller.name}">By <a href="#">${item.seller.name || "Unknown"}</a></i>
