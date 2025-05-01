@@ -4,6 +4,7 @@ import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import { debounce } from "../utils/debounce.mjs";
 import * as constants from "../../constants.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
+import { toggleLoader } from "../../ui/shared/toggleLoader.mjs";
 
 export class SearchAndFilterItems {
   constructor(itemsContainer) {
@@ -13,6 +14,8 @@ export class SearchAndFilterItems {
     this.currentPage = 1;
     this.isLastPage = false;
     this.isSearchOrFilterActive = false; // Flag to track if search or filter is active
+    this.fragment = document.createDocumentFragment();
+    this.loaderContainer = document.getElementById("loader");
 
     // Update selectors to match index.html
     this.searchForm = document.querySelector('form[role="search"]');
@@ -100,11 +103,25 @@ export class SearchAndFilterItems {
     }
 
     try {
+      toggleLoader(true, this.loaderContainer); // Show loader
       const queryParams = this.createQueryParams({ limit: "10" }); // Set limit to 10 for default items
       const items = await this.fetchPage(queryParams);
 
+      // Clear the container before rendering
       this.itemsContainer.innerHTML = "";
-      items.forEach((item) => createItemCard(item, this.itemsContainer));
+
+      // Render the items
+      items.forEach((item) => {
+        const card = createItemCard(item, this.itemsContainer);
+        if (card) {
+          this.fragment.appendChild(card); // Append the card to the fragment
+        } else {
+          console.error("Failed to create card for item:", item);
+        }
+      });
+
+      // Append the fragment to the itemsContainer
+      this.itemsContainer.appendChild(this.fragment);
 
       this.initializeObserver(); // Initialize the observer for lazy loading
 
@@ -112,6 +129,8 @@ export class SearchAndFilterItems {
     } catch (error) {
       renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
       console.error("Error rendering items:", error);
+    } finally {
+      toggleLoader(false, this.loaderContainer); // Hide loader
     }
   }
 
@@ -134,6 +153,7 @@ export class SearchAndFilterItems {
     try {
       this.currentPage = 1;
       this.isLastPage = false;
+      toggleLoader(true, this.loaderContainer); // Show loader
 
       // Disconnect the observer if it exists
       if (window.currentObserver) {
@@ -153,9 +173,17 @@ export class SearchAndFilterItems {
         this.itemsContainer.innerHTML = "";
 
         // Render the filtered items
-        filteredItems.forEach((item) =>
-          createItemCard(item, this.itemsContainer),
-        );
+        filteredItems.forEach((item) => {
+          const card = createItemCard(item);
+          if (card) {
+            this.fragment.appendChild(card); // Append the card to the fragment
+          } else {
+            console.error("Failed to create card for item:", item);
+          }
+        });
+
+        // Append the fragment to the itemsContainer
+        this.itemsContainer.appendChild(this.fragment);
 
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
@@ -182,8 +210,16 @@ export class SearchAndFilterItems {
         const items = data.data || [];
 
         // Render the search results
-        this.itemsContainer.innerHTML = "";
-        items.forEach((item) => createItemCard(item, this.itemsContainer));
+        items.forEach((item) => {
+          const card = createItemCard(item);
+          if (card) {
+            this.fragment.appendChild(card); // Append the card to the fragment
+          } else {
+            console.error("Failed to create card for item:", item);
+          }
+        });
+        this.itemsContainer.innerHTML = ""; // Clear the container before rendering
+        this.itemsContainer.appendChild(this.fragment);
 
         // Attach click event listeners to the rendered cards
         this.attachCardClickListeners();
@@ -192,6 +228,8 @@ export class SearchAndFilterItems {
     } catch (error) {
       renderErrors(new Error(ERROR_MESSAGES.LOADING_SEARCH_ERROR));
       console.error("Error searching items:", error);
+    } finally {
+      toggleLoader(false, this.loaderContainer); // Hide loader
     }
   }
 
@@ -211,7 +249,7 @@ export class SearchAndFilterItems {
       window.currentObserver = null;
     }
 
-    if (this.tags.length === 0) {
+    if (this.tags.length === 0 && !this.searchInput.value.trim()) {
       this.isSearchOrFilterActive = false; // Reset the flag if no tags are selected
 
       this.rerenderItems(); // Fetch and display default items
@@ -227,6 +265,7 @@ export class SearchAndFilterItems {
   async fetchAndRenderFilteredItems() {
     let allItems = [];
     try {
+      toggleLoader(true, this.loaderContainer); // Show loader
       // Disconnect the observer if it exists
       if (window.currentObserver) {
         window.currentObserver.disconnect();
@@ -264,9 +303,17 @@ export class SearchAndFilterItems {
       this.itemsContainer.innerHTML = "";
 
       // Render the filtered items
-      this.uniqueItems.forEach((item) =>
-        createItemCard(item, this.itemsContainer),
-      );
+      this.uniqueItems.forEach((item) => {
+        const card = createItemCard(item);
+        if (card) {
+          this.fragment.appendChild(card); // Append the card to the fragment
+        } else {
+          console.error("Failed to create card for item:", item);
+        }
+      });
+
+      // Append the fragment to the itemsContainer
+      this.itemsContainer.appendChild(this.fragment);
 
       this.attachCardClickListeners(); // Attach click event listeners to the rendered cards
 
@@ -274,6 +321,8 @@ export class SearchAndFilterItems {
     } catch (error) {
       renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
       console.error("Error rendering items:", error);
+    } finally {
+      toggleLoader(false, this.loaderContainer); // Hide loader
     }
   }
 
