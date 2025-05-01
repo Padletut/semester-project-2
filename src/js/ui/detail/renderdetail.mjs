@@ -6,6 +6,7 @@ import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { initializePlaceBid } from "./initializeplacebid.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 /**
  * Renders the details of an item in the detail view.
@@ -53,7 +54,7 @@ export async function renderDetail(itemId) {
     // Initialize the "Place Bid" button functionality
     initializePlaceBid(itemId);
   } catch (error) {
-    renderErrors(error);
+    renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
     console.error("Error rendering item detail:", error);
   } finally {
     toggleLoader(false, loaderContainer); // Hide the loader

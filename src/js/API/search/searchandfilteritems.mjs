@@ -3,6 +3,7 @@ import { createItemCard } from "../../ui/listings/createitemcard.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import { debounce } from "../utils/debounce.mjs";
 import * as constants from "../../constants.mjs";
+import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 
 export class SearchAndFilterItems {
   constructor(itemsContainer) {
@@ -109,7 +110,7 @@ export class SearchAndFilterItems {
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
-      renderErrors(new Error("Failed to load items " + error));
+      renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
       console.error("Error rendering items:", error);
     }
   }
@@ -189,7 +190,7 @@ export class SearchAndFilterItems {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } catch (error) {
-      renderErrors(new Error("Failed to load search results"));
+      renderErrors(new Error(ERROR_MESSAGES.LOADING_SEARCH_ERROR));
       console.error("Error searching items:", error);
     }
   }
@@ -271,7 +272,7 @@ export class SearchAndFilterItems {
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
-      renderErrors(new Error("Failed to load items " + error));
+      renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
       console.error("Error rendering items:", error);
     }
   }

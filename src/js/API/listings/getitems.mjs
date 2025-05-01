@@ -1,6 +1,7 @@
 import * as global from "../../constants.mjs";
 import { fetchData } from "../utils/fetch.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
+import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 
 const { API_BASE_URL, API_LISTINGS, API_SEARCH } = global;
 
@@ -36,7 +37,7 @@ export async function getItems(
     const data = await response.json();
     return data;
   } else {
-    renderErrors(new Error("An error occurred while loading the auctions"));
+    renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
     console.error("Error fetching auction items:", response);
   }
 }

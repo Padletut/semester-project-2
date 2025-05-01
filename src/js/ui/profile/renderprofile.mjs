@@ -13,6 +13,7 @@ import { renderMyBids } from "./rendermybids.mjs";
 import { renderMyListings } from "./rendermylistings.mjs";
 import { renderCredits } from "../shared/rendercredits.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 /**
  * @module Profile
@@ -63,7 +64,7 @@ export async function renderProfile() {
       console.error("Credits container not found or profile name mismatch.");
     }
   } catch (error) {
-    renderErrors(new Error("An error occurred while loading the profile page"));
+    renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     console.error("Error rendering profile data:", error);
   } finally {
     toggleLoader(false, loaderContainer);

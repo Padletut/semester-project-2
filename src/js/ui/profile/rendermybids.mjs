@@ -1,6 +1,7 @@
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { getMyBids } from "../../API/profile/getmybids.mjs";
+import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 /**
  * Renders the user's bids on the profile page.
@@ -64,7 +65,7 @@ export async function renderMyBids() {
       });
     });
   } catch (error) {
-    renderErrors(new Error("An error occurred while loading the profile page"));
+    renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     console.error("Error rendering profile data:", error);
   } finally {
     toggleLoader(false, loaderContainer);

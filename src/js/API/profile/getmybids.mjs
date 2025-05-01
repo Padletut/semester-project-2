@@ -3,6 +3,7 @@ import { headers } from "../utils/headers.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import * as constants from "../../constants.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 
 const { API_BASE_URL, API_PROFILES, STORAGE_KEYS } = constants;
 const { PROFILE } = STORAGE_KEYS;
@@ -42,7 +43,8 @@ export async function getMyBids(profileName = loggedInUser) {
   }
 
   // Render error if profile not found with both original and lowercase names
-  renderErrors(new Error("We couldn't find the profile you were looking for"));
+
+  renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
   console.error(
     `Error fetching profile data: ${response.status} - ${response.statusText}`,
   );

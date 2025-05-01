@@ -2,6 +2,7 @@ import { getItems } from "../../API/listings/getitems.mjs";
 import { createItemCard } from "./createitemcard.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
+import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 //let isSearch = false;
 
@@ -99,7 +100,7 @@ export async function renderItems(
         });
       }
     } catch (error) {
-      renderErrors(error);
+      renderErrors(ERROR_MESSAGES.LOADING_PAGE_ERROR);
       console.error("Error rendering items:", error);
     } finally {
       toggleLoader(false, loaderContainer);
