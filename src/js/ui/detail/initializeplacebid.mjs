@@ -3,6 +3,7 @@ import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { renderBidHistory } from "./renderbidhistory.mjs";
 import { renderCredits } from "../shared/rendercredits.mjs";
 import { getItem } from "../../API/listings/getitem.mjs";
+import { loadStorage } from "../../storage/loadstorage.mjs";
 
 /**
  * Initializes the "Place Bid" button functionality.
@@ -16,6 +17,21 @@ import { getItem } from "../../API/listings/getitem.mjs";
 export function initializePlaceBid(itemId) {
   const form = document.querySelector("form.needs-validation");
   const placeBidButton = form?.querySelector(".place-bid-button");
+  const profileName = loadStorage("PROFILE")?.name; // Get the logged-in user's profile name
+
+  if (!profileName) {
+    // Wrap the button in a div for the tooltip to work
+    const wrapper = document.createElement("div");
+    wrapper.setAttribute("data-bs-toggle", "tooltip");
+    wrapper.setAttribute("title", "Please log in to place a bid");
+    placeBidButton.parentNode.insertBefore(wrapper, placeBidButton);
+    wrapper.appendChild(placeBidButton);
+
+    placeBidButton.disabled = true;
+
+    // Initialize the tooltip for the wrapper only
+    new bootstrap.Tooltip(wrapper);
+  }
 
   if (form && placeBidButton) {
     placeBidButton.addEventListener("click", async (event) => {
