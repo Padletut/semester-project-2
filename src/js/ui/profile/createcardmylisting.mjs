@@ -26,7 +26,7 @@ export async function createCardMyListing(item, author, container) {
     cardWrapper.classList.add("col", "col-md-6", "col-lg-4", "col-xxl-3");
 
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.classList.add("card", "card-auction-item");
     card.setAttribute("data-item-id", fullItem.id); // Unique identifier for the card
 
     const imageUrl =

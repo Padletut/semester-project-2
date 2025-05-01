@@ -60,7 +60,6 @@ export function createDetailItemCard(item) {
         year: "numeric",
       })
     : "N/A";
-  console.log("Item data:", item.endsAt); // Debugging line to check item data
   container.innerHTML = `
     <div class="col-md-4 p-0">
       <img

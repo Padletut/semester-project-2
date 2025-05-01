@@ -1,8 +1,12 @@
 @use "../variables";
 
+.card-auction-item {
+  height: 100%;
+}
+
 .card {
   width: 19rem;
-  height: 100%;
+
   background: variables.$card-bg;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
 
