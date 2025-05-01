@@ -21,17 +21,22 @@ const { ACCESS_TOKEN, PROFILE } = STORAGE_KEYS;
  * ```
  */
 export async function login(email, password) {
-  const response = await fetchData(API_BASE_URL + API_AUTH + API_LOGIN, {
-    method: "POST",
-    body: JSON.stringify({ email, password }),
-  });
+  try {
+    const response = await fetchData(API_BASE_URL + API_AUTH + API_LOGIN, {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    });
 
-  if (response.ok) {
-    const { accessToken, ...profile } = (await response.json()).data;
-    saveStorage(ACCESS_TOKEN, accessToken);
-    saveStorage(PROFILE, profile);
-    return profile;
+    if (response.ok) {
+      const { accessToken, ...profile } = (await response.json()).data;
+      saveStorage(ACCESS_TOKEN, accessToken);
+      saveStorage(PROFILE, profile);
+      return profile;
+    }
+
+    await handleErrors(response);
+  } catch (error) {
+    console.error("Unexpected error during login:", error);
+    throw new Error("An unexpected error occurred. Please try again later.");
   }
-
-  await handleErrors(response);
 }
