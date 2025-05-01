@@ -4,6 +4,7 @@ import { renderBidHistory } from "./renderbidhistory.mjs";
 import { renderCredits } from "../shared/rendercredits.mjs";
 import { getItem } from "../../API/listings/getitem.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import * as constants from "../../constants.mjs";
 
 /**
  * Initializes the "Place Bid" button functionality.
@@ -15,9 +16,12 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
  * ```
  */
 export function initializePlaceBid(itemId) {
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
   const form = document.querySelector("form.needs-validation");
   const placeBidButton = form?.querySelector(".place-bid-button");
-  const profileName = loadStorage("PROFILE")?.name; // Get the logged-in user's profile name
+  const profileName = loadStorage(PROFILE).name; // Get the logged-in user's profile name
+  console.log("Profile Name:", profileName);
 
   if (!profileName) {
     // Wrap the button in a div for the tooltip to work

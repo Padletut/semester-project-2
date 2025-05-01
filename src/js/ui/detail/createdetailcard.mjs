@@ -123,7 +123,7 @@ function imageModal(title, imageAlt, imageUrl) {
   const body = document.querySelector("body");
   // Create the modal element
   const modal = document.createElement("div");
-  modal.className = "modal fade";
+  modal.className = "modal modal-xl fade";
   modal.id = "imageModal";
   modal.tabIndex = -1;
   modal.setAttribute("aria-labelledby", "imageModalLabel");
@@ -144,8 +144,8 @@ function imageModal(title, imageAlt, imageUrl) {
               aria-label="Close"
             ></button>
         </div>
-        <div class="modal-body">
-          <img src="${imageUrl}" class="img-fluid" alt="${imageAlt}" />
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <img src="${imageUrl}" class="img-fluid rounded-3" alt="${imageAlt}" />
         </div>
       </div>
     </div>
