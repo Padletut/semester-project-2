@@ -29,8 +29,7 @@ export async function deleteItem(itemId) {
       await handleErrors(response);
     }
 
-    console.log("Item deleted successfully");
-    return; // No content to return for 204 No Content
+    return;
   } catch (error) {
     handleErrors(error);
     console.error("Error deleting item:", error);

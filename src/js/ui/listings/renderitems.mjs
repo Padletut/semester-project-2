@@ -91,7 +91,7 @@ export async function renderItems(
           card.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default behavior
             const itemId = card.dataset.id; // Assuming each card has a data-id attribute
-            console.log("Card clicked:", event.target, "Item ID:", itemId); // Debugging line to check the clicked card
+
             if (itemId) {
               window.location.href = `detail.html?id=${itemId}`;
             }

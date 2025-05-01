@@ -20,7 +20,6 @@ const loggedInUser = loadStorage(PROFILE);
  * ```
  */
 export async function getProfile(profileName = loggedInUser) {
-  //console.log(new Error().stack); // Debugging line to check the call stack
   const queryParams = new URLSearchParams({
     _listings: "true",
     _wins: "true",

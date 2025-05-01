@@ -28,7 +28,6 @@ export async function createBid(itemId, amount) {
       await handleErrors(response);
     }
 
-    console.log("Bid created successfully"); // Debugging log
     return; // No content to return for 204 No Content
   } catch (error) {
     handleErrors(error);

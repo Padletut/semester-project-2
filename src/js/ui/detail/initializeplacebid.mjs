@@ -21,7 +21,6 @@ export function initializePlaceBid(itemId) {
   const form = document.querySelector("form.needs-validation");
   const placeBidButton = form?.querySelector(".place-bid-button");
   const profileName = loadStorage(PROFILE).name; // Get the logged-in user's profile name
-  console.log("Profile Name:", profileName);
 
   if (!profileName) {
     // Wrap the button in a div for the tooltip to work
@@ -65,7 +64,6 @@ export function initializePlaceBid(itemId) {
         const feedbackElement = form.querySelector(".valid-feedback");
         feedbackElement.classList.remove("d-none");
         feedbackElement.textContent = "Bid placed successfully!";
-        console.log("Bid placed successfully:", bidAmount);
       } catch (error) {
         console.error("Error placing bid:", error);
       }
