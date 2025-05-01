@@ -4,8 +4,6 @@ import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
-//let isSearch = false;
-
 /**
  * Render items in the listings view.
  * @param {Array} items - The array of items to render.
