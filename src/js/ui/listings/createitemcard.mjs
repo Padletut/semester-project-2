@@ -129,13 +129,13 @@ export function createItemCard(item, container) {
               aria-label="Bid Amount"
               name="bid-amount"
               required
-              ${isAuctionEnded || !profileName ? "disabled" : ""} 
+              ${isAuctionEnded ? "disabled" : ""} 
             />
             <button
               class="btn btn-secondary rounded-end place-bid-button"
               type="submit"
-              title="Submit Bid"
-              ${isAuctionEnded || !profileName ? "disabled" : ""} 
+              title="Place a Bid"
+              ${isAuctionEnded ? "disabled" : ""} 
             >
               Place Bid
             </button>
@@ -151,6 +151,21 @@ export function createItemCard(item, container) {
 
   cardWrapper.appendChild(card);
   container.appendChild(cardWrapper);
+
+  if (!profileName) {
+    // Wrap the button in a div for the tooltip to work
+    const wrapper = document.createElement("div");
+    const placeBidButton = card.querySelector(".place-bid-button");
+    wrapper.setAttribute("data-bs-toggle", "tooltip");
+    wrapper.setAttribute("title", "Please log in to place a bid");
+    placeBidButton.parentNode.insertBefore(wrapper, placeBidButton);
+    wrapper.appendChild(placeBidButton);
+
+    placeBidButton.disabled = true;
+
+    // Initialize the tooltip for the wrapper only
+    new bootstrap.Tooltip(wrapper);
+  }
 
   linkAuthorToProfile(); // Link author to profile page
   linkBidderToProfile(); // Link bidder to profile page
