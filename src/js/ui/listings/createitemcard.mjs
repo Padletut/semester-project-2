@@ -37,7 +37,7 @@ export function createItemCard(item, container) {
   const card = document.createElement("div");
   card.classList.add("card", "card-auction-item", "mb-4");
   card.setAttribute("data-id", item.id);
-  card.style.cursor = "pointer"; // Add cursor style for clickable card
+  card.style.cursor = "pointer";
 
   const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
   const imageAlt = item.media?.[0]?.alt || "Auction Item";
@@ -128,7 +128,7 @@ export function createItemCard(item, container) {
             ${isAuctionEnded ? "disabled" : ""} 
           />
           <button
-            class="btn btn-secondary place-bid-button"
+            class="btn btn-secondary rounded-end place-bid-button"
             type="submit"
             title="Submit Bid"
             ${isAuctionEnded ? "disabled" : ""} 
