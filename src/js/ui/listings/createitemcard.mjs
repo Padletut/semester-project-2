@@ -27,7 +27,7 @@ import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
  * * createItemCard(item, container);
  * * ```
  */
-export function createItemCard(item, container) {
+export function createItemCard(item) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
   const profileName = loadStorage(PROFILE)?.name;
@@ -150,7 +150,6 @@ export function createItemCard(item, container) {
   `;
 
   cardWrapper.appendChild(card);
-  container.appendChild(cardWrapper);
 
   if (!profileName) {
     // Wrap the button in a div for the tooltip to work
@@ -202,4 +201,5 @@ export function createItemCard(item, container) {
       }
     });
   }
+  return cardWrapper;
 }

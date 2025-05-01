@@ -82,9 +82,20 @@ export async function renderItems(
         nextPage = meta.nextPage;
         isLastPage = meta.isLastPage;
 
+        // Create a document fragment for better performance
+        const fragment = document.createDocumentFragment();
+
         items.forEach((item) => {
-          createItemCard(item, itemsContainer);
+          const card = createItemCard(item, itemsContainer);
+          if (card) {
+            fragment.appendChild(card); // Append the card to the fragment
+          } else {
+            console.error("Failed to create card for item:", item);
+          }
         });
+
+        // Append the fragment to the itemsContainer after the loop
+        itemsContainer.appendChild(fragment);
 
         // Add event listeners to the dynamically created cards
         const auctionItems = document.querySelectorAll(".card-auction-item");
