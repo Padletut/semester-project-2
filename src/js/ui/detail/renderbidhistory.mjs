@@ -1,4 +1,5 @@
 import { loadStorage } from "../../storage/loadstorage.mjs";
+import * as constants from "../../constants.mjs";
 
 /**
  * Renders the bid history for a given auction item.
@@ -16,7 +17,9 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
  */
 export function renderBidHistory(response) {
   // Render the bid history
-  const profileName = loadStorage("PROFILE")?.name;
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
+  const profileName = loadStorage(PROFILE)?.name;
   const bidHistoryContainer = document.querySelector(
     ".bid-history-list-body ul",
   );
