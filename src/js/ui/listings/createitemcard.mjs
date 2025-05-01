@@ -30,7 +30,7 @@ import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
 export function createItemCard(item, container) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
-  const profileName = loadStorage(PROFILE)?.name || "Unknown User";
+  const profileName = loadStorage(PROFILE)?.name;
   const cardWrapper = document.createElement("div");
   cardWrapper.classList.add("col-12", "col-md-6", "col-lg-4", "col-xxl-3");
 
@@ -96,7 +96,7 @@ export function createItemCard(item, container) {
       <p class="card-text mt-3">
         ${item.description || "Beautiful auction item with no description."}
       </p>
-      <div class="container-fluid card-recent-bids p-0 pt-3 pb-5 mb-3">
+            <div class="container-fluid card-recent-bids p-0 pt-3 pb-5 mb-3">
         <h2>Recent Bids:</h2>
         <ul>
           ${
@@ -106,42 +106,46 @@ export function createItemCard(item, container) {
                   .slice(0, 5) // Get the top 5 bids
                   .map(
                     (bid) =>
-                      `<li>${bid.amount} Credits By <a class="bidder-link" href="#">${bid.bidder.name || "Unknown"}</a></li>`,
+                      `<li>${bid.amount} Credits By ${
+                        profileName
+                          ? `<a class="bidder-link" href="#">${bid.bidder.name || "Unknown"}</a>`
+                          : `${bid.bidder.name || "Unknown"}`
+                      }</li>`,
                   )
                   .join("")
               : "<li>No bids yet</li>"
           }
         </ul>
       </div>
-      ${
-        item.seller.name !== profileName
-          ? `
-      <form class="needs-validation fixed-bottom m-3" novalidate>
-        <div class="input-group mb-3">
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Enter your bid"
-            aria-label="Bid Amount"
-            name="bid-amount"
-            required
-            ${isAuctionEnded ? "disabled" : ""} 
-          />
-          <button
-            class="btn btn-secondary rounded-end place-bid-button"
-            type="submit"
-            title="Submit Bid"
-            ${isAuctionEnded ? "disabled" : ""} 
-          >
-            Place Bid
-          </button>
-          <div class="invalid-feedback">Please enter a valid bid amount.</div>
-          <div class="valid-feedback d-none">Bid placed successfully!</div>
-        </div>
-      </form>
-      `
-          : ""
-      }
+            ${
+              item.seller.name !== profileName
+                ? `
+        <form class="needs-validation fixed-bottom m-3" novalidate>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Enter your bid"
+              aria-label="Bid Amount"
+              name="bid-amount"
+              required
+              ${isAuctionEnded || !profileName ? "disabled" : ""} 
+            />
+            <button
+              class="btn btn-secondary rounded-end place-bid-button"
+              type="submit"
+              title="Submit Bid"
+              ${isAuctionEnded || !profileName ? "disabled" : ""} 
+            >
+              Place Bid
+            </button>
+            <div class="invalid-feedback">Please enter a valid bid amount.</div>
+            <div class="valid-feedback d-none">Bid placed successfully!</div>
+          </div>
+        </form>
+        `
+                : ""
+            }
     </div>
   `;
 
