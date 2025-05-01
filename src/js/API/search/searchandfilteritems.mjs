@@ -20,29 +20,30 @@ export class SearchAndFilterItems {
     this.sentinel = document.getElementById("sentinel");
 
     this.setupEventListeners();
-    this.setupIntersectionObserver();
   }
   createQueryParams(additionalParams = {}) {
     const activeSwitch = document.getElementById("switchCheckChecked");
     const isActive = activeSwitch.checked;
     // Include the search query if it exists
     const searchQuery = this.searchInput.value.trim();
-    // Include the tags if they exist
-    const tags = this.tags.length > 0 ? this.tags : null;
+    // Include the first tag if tags are active, or leave it empty
+    const tag = this.tags.length > 0 ? this.tags[0] : "";
+
     return new URLSearchParams({
       _seller: "true",
       _bids: "true",
       _active: isActive.toString(),
-      limit: "10",
+      limit: "100", // Fetch more items at once
       sort: "created",
       ...(searchQuery && { q: searchQuery }), // Add search query if it exists
-      ...(tags && { _tags: tags.join(",") }), // Add tags if they exist
-      ...additionalParams,
+      ...(tag && { _tag: tag }), // Add _tag if it exists
+      ...additionalParams, // Add additional parameters like `_tag`
     });
   }
 
   async fetchPage(queryParams) {
     queryParams.set("page", this.currentPage);
+
     const response = await getItems(queryParams);
 
     if (response && response.data) {
@@ -55,17 +56,56 @@ export class SearchAndFilterItems {
     }
   }
 
+  initializeObserver() {
+    if (!this.sentinel) {
+      console.error("Sentinel element not found for observer.");
+      return;
+    }
+
+    // Disconnect any existing observer
+    if (window.currentObserver) {
+      window.currentObserver.disconnect();
+      window.currentObserver = null;
+    }
+
+    // Create a new observer
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !this.isLastPage) {
+          const queryParams = this.createQueryParams({ limit: "10" }); // Ensure limit is consistent
+          const items = await this.fetchPage(queryParams);
+
+          // Render the new items
+          items.forEach((item) => createItemCard(item, this.itemsContainer));
+        }
+      },
+      {
+        root: null, // Use the viewport as the root
+        rootMargin: "0px 0px 40% 0px", // Adjust margin for earlier triggering
+        threshold: 0, // Trigger when the sentinel is fully visible
+      },
+    );
+
+    // Save the observer globally so it can be disconnected later
+    window.currentObserver = observer;
+
+    observer.observe(this.sentinel); // Start observing the sentinel
+  }
+
   async rerenderItems() {
     if (this.searchInput.value.trim() || this.filterInput.value.trim()) {
       return;
     }
 
     try {
-      const queryParams = this.createQueryParams();
+      const queryParams = this.createQueryParams({ limit: "10" }); // Set limit to 10 for default items
       const items = await this.fetchPage(queryParams);
 
       this.itemsContainer.innerHTML = "";
       items.forEach((item) => createItemCard(item, this.itemsContainer));
+
+      this.initializeObserver(); // Initialize the observer for lazy loading
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
@@ -77,47 +117,77 @@ export class SearchAndFilterItems {
   async handleSearchSubmit(event) {
     event.preventDefault();
 
-    const query = this.searchInput.value.trim();
-    if (!query) {
-      this.isSearchOrFilterActive = false; // Reset the flag if the search input is empty
+    const query = this.searchInput.value.trim().toLowerCase();
+    const isTagActive = this.tags.length > 0;
+
+    if (!query && !isTagActive) {
+      // If both search and tags are empty, reset and rerender items
+      this.isSearchOrFilterActive = false;
+      this.currentPage = 1; // Reset to the first page
       this.rerenderItems(); // Fetch and display default items
       return;
     }
 
-    this.isSearchOrFilterActive = true; // Set the flag to indicate search is active
+    this.isSearchOrFilterActive = true; // Set the flag to indicate search or filter is active
 
     try {
       this.currentPage = 1;
       this.isLastPage = false;
 
-      // Construct query parameters
-      const queryParams = new URLSearchParams({
-        _seller: "true",
-        _bids: "true",
-        _active: "true",
-        limit: "10",
-        sort: "created",
-        q: query,
-      });
-      // Construct the full search endpoint with API_BASE_URL
-      const searchEndpoint = `${constants.API_BASE_URL}/auction/listings/search?${queryParams.toString()}`;
-      // Fetch search results
-      const response = await fetch(searchEndpoint);
-      if (!response.ok) {
-        console.error(`HTTP Error: ${response.status} ${response.statusText}`);
-        const responseText = await response.text(); // Log raw response for debugging
-        console.error("Raw Response:", responseText);
-        throw new Error(
-          `Failed to fetch search results: ${response.statusText}`,
-        );
+      // Disconnect the observer if it exists
+      if (window.currentObserver) {
+        window.currentObserver.disconnect();
+        window.currentObserver = null; // Clear the observer reference
       }
 
-      const data = await response.json();
-      const items = data.data || [];
+      if (isTagActive) {
+        // Filter the already fetched items locally
+        const filteredItems = this.uniqueItems.filter(
+          (item) =>
+            item.title.toLowerCase().includes(query) ||
+            item.description.toLowerCase().includes(query),
+        );
 
-      // Render the search results
-      this.itemsContainer.innerHTML = "";
-      items.forEach((item) => createItemCard(item, this.itemsContainer));
+        // Clear the container before rendering
+        this.itemsContainer.innerHTML = "";
+
+        // Render the filtered items
+        filteredItems.forEach((item) =>
+          createItemCard(item, this.itemsContainer),
+        );
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        // Construct query parameters with dynamic limit
+        const queryParams = this.createQueryParams({
+          ...(query && { q: query }), // Include the search query if it exists
+        });
+        // Construct the full search endpoint with API_BASE_URL
+        const searchEndpoint = `${constants.API_BASE_URL}/auction/listings/search?${queryParams.toString()}`;
+        // Fetch search results
+        const response = await fetch(searchEndpoint);
+        if (!response.ok) {
+          console.error(
+            `HTTP Error: ${response.status} ${response.statusText}`,
+          );
+          const responseText = await response.text(); // Log raw response for debugging
+          console.error("Raw Response:", responseText);
+          throw new Error(
+            `Failed to fetch search results: ${response.statusText}`,
+          );
+        }
+
+        const data = await response.json();
+        const items = data.data || [];
+
+        // Render the search results
+        this.itemsContainer.innerHTML = "";
+        items.forEach((item) => createItemCard(item, this.itemsContainer));
+
+        // Attach click event listeners to the rendered cards
+        this.attachCardClickListeners();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } catch (error) {
       renderErrors(new Error("Failed to load search results"));
       console.error("Error searching items:", error);
@@ -134,20 +204,29 @@ export class SearchAndFilterItems {
     this.currentPage = 1;
     this.isLastPage = false;
 
-    if (this.tags.length === 0) {
-      this.isSearchOrFilterActive = false; // Reset the flag if no tags are selected
-      this.rerenderItems(); // Fetch and display default items
+    // Disconnect the observer if it exists
+    if (window.currentObserver) {
+      window.currentObserver.disconnect();
+      window.currentObserver = null;
     }
 
-    if (this.tags.length > 0) {
-      await this.fetchAndRenderFilteredItems();
+    if (this.tags.length === 0) {
+      this.isSearchOrFilterActive = false; // Reset the flag if no tags are selected
+
+      this.rerenderItems(); // Fetch and display default items
+      return;
     }
+
+    this.isSearchOrFilterActive = true; // Set the flag
+
+    // Fetch and render items with local search filtering
+    await this.fetchAndRenderFilteredItems();
   }
 
   async fetchAndRenderFilteredItems() {
     let allItems = [];
     try {
-      // Disconnect the observer to prevent interference
+      // Disconnect the observer if it exists
       if (window.currentObserver) {
         window.currentObserver.disconnect();
         window.currentObserver = null;
@@ -165,43 +244,35 @@ export class SearchAndFilterItems {
       // Flatten the results into a single array
       allItems = results.flat();
 
-      // Filter items to ensure they match all selected tags
-      const filteredItems = allItems.filter((item) =>
-        this.tags.every((tag) => item.tags.includes(tag)),
-      );
+      // Filter items locally by the search query
+      const query = this.searchInput.value.trim().toLowerCase();
+      if (query) {
+        allItems = allItems.filter(
+          (item) =>
+            item.title.toLowerCase().includes(query) ||
+            item.description.toLowerCase().includes(query),
+        );
+      }
 
       // Remove duplicates
       this.uniqueItems = Array.from(
-        new Set(filteredItems.map((item) => item.id)),
-      ).map((id) => filteredItems.find((item) => item.id === id));
+        new Set(allItems.map((item) => item.id)),
+      ).map((id) => allItems.find((item) => item.id === id));
 
       // Clear the container before rendering
       this.itemsContainer.innerHTML = "";
 
       // Render the filtered items
-
       this.uniqueItems.forEach((item) =>
         createItemCard(item, this.itemsContainer),
       );
+
+      this.attachCardClickListeners(); // Attach click event listeners to the rendered cards
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       renderErrors(new Error("Failed to load items " + error));
       console.error("Error rendering items:", error);
-    }
-  }
-
-  async fetchNextPage() {
-    if (this.isLastPage || this.isSearchOrFilterActive) return;
-
-    try {
-      const queryParams = this.createQueryParams();
-      const items = await this.fetchPage(queryParams);
-
-      items.forEach((item) => createItemCard(item, this.itemsContainer));
-    } catch (error) {
-      renderErrors(new Error("Failed to load more items " + error));
-      console.error("Error fetching next page:", error);
     }
   }
 
@@ -238,23 +309,17 @@ export class SearchAndFilterItems {
     }
   }
 
-  setupIntersectionObserver() {
-    if (!this.sentinel) return;
+  attachCardClickListeners() {
+    const auctionItems = document.querySelectorAll(".card-auction-item");
+    auctionItems.forEach((card) => {
+      card.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent default behavior
+        const itemId = card.dataset.id; // Assuming each card has a data-id attribute
 
-    const observer = new IntersectionObserver(
-      async (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          await this.fetchNextPage(); // Fetch the next page when the sentinel is visible
+        if (itemId) {
+          window.location.href = `detail.html?id=${itemId}`;
         }
-      },
-      {
-        root: null, // Use the viewport as the root
-        rootMargin: "0px 0px 40% 0px",
-        threshold: 0, // Trigger when the sentinel is fully visible
-      },
-    );
-
-    observer.observe(this.sentinel);
+      });
+    });
   }
 }

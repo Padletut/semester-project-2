@@ -25,6 +25,20 @@ export async function renderItems(
   tag = null,
   sortListing = "created",
 ) {
+  const searchInput = document.querySelector('input[name="search"]');
+  const filterInput = document.querySelector('input[name="filter-tags"]');
+  // Do not render if search or tag input element is not empty
+  if (
+    (searchInput && searchInput.value.trim() !== "") ||
+    (filterInput && filterInput.value.trim() !== "")
+  ) {
+    // Disconnect the observer if search or filter is active
+    if (window.currentObserver) {
+      window.currentObserver.disconnect();
+      window.currentObserver = null; // Clear the observer reference
+    }
+    return;
+  }
   let nextPage = 1; // Start with page 1
   let isLastPage = false;
   const itemsContainer = document.querySelector(".items-container");
