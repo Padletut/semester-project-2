@@ -14,7 +14,7 @@ import { getItem } from "../../API/listings/getitem.mjs";
  * createCardMyListing(item, "Author Name", container);
  * ```
  */
-export async function createCardMyListing(item, author, container) {
+export async function createCardMyListing(item, author) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
   const profileName = loadStorage(PROFILE)?.name;
@@ -91,27 +91,30 @@ export async function createCardMyListing(item, author, container) {
     `;
 
     cardWrapper.appendChild(card);
-    container.appendChild(cardWrapper);
 
     // Add event listener to the edit button to call updateitem modal
     const editButton = card.querySelector('[name="edit-my-listing-item"]');
-    if (!editButton) return;
-    editButton.addEventListener("click", async () => {
-      try {
-        const updatedItem = await createPostItemModal(
-          "update",
-          fullItem,
-          `[data-item-id="${fullItem.id}"]`,
-        );
-        if (updatedItem) {
-          // Update the item object with the new data
-          Object.assign(fullItem, updatedItem);
+    if (editButton) {
+      editButton.addEventListener("click", async () => {
+        try {
+          const updatedItem = await createPostItemModal(
+            "update",
+            fullItem,
+            `[data-item-id="${fullItem.id}"]`,
+          );
+          if (updatedItem) {
+            // Update the item object with the new data
+            Object.assign(fullItem, updatedItem);
+          }
+        } catch (error) {
+          console.error("Error updating item:", error);
         }
-      } catch (error) {
-        console.error("Error updating item:", error);
-      }
-    });
+      });
+    }
+
+    return cardWrapper; // Return the card wrapper instead of appending it to the container
   } catch (error) {
     console.error(`Error fetching details for listing ID ${item.id}:`, error);
+    return null; // Return null if an error occurs
   }
 }

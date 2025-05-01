@@ -1,3 +1,5 @@
+import { renderErrors } from "../shared/rendererrors.mjs";
+import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 /**
  * Renders the profile credits in the element with id "profile-credits".
  * @memberof module:Profile
@@ -9,6 +11,11 @@
  * ```
  */
 export async function renderProfileCredits(profile) {
-  const creditsContainer = document.getElementById("profile-credits");
-  creditsContainer.innerHTML = `${profile.credits} Credits`;
+  try {
+    const creditsContainer = document.getElementById("profile-credits");
+    creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
+  } catch (error) {
+    renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
+    console.error(`Error rendering profile credits: ${error.message}`);
+  }
 }
