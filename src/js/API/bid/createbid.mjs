@@ -4,6 +4,7 @@ import { handleErrors } from "../utils/handleerrors.mjs";
 
 /**
  * Function to call API to create a bid for an item.
+ * @memberof module:API/bid
  * @param {string} itemId - The ID of the item to bid on.
  * @param {number} amount - The bid amount.
  * @returns {Promise<void>} - Resolves if the bid is created successfully.
