@@ -5,8 +5,8 @@
  * It includes API endpoints, storage keys, and other configuration values.
  * @example
  * ```javascript
- * import * as contants from './constants.mjs';
- * console.log(API_BASE_URL); // Outputs the base URL for the API
+ * import * as constants from './constants.mjs';
+ * console.log(constants.API_BASE_URL); // Outputs the base URL for the API
  * ```
  */
 export const API_KEY = import.meta.env.VITE_API_KEY;
