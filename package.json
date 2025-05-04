@@ -29,7 +29,9 @@
     "serve": "vite preview",
     "prepare": "husky install",
     "format": "prettier --write .",
-    "test": "vitest"
+    "test": "vitest",
+    "docs": "jsdoc -c ./conf.json -r",
+    "serve-docs": "vite preview --outDir docs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
