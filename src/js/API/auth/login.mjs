@@ -33,10 +33,9 @@ export async function login(email, password) {
       saveStorage(PROFILE, profile);
       return profile;
     }
-
     await handleErrors(response);
   } catch (error) {
-    console.error("Unexpected error during login:", error);
-    throw new Error("An unexpected error occurred. Please try again later.");
+    console.error("Error during login:", error);
+    throw error;
   }
 }

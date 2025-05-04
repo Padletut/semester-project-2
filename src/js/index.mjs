@@ -20,6 +20,8 @@ const loggedInUser = loadStorage(PROFILE);
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
 
+console.log("api key", constants.API_KEY);
+
 // Call toggleDisplayCredits to initialize the display of credits
 toggleDisplayCredits();
 
