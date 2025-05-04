@@ -49,6 +49,16 @@ export class SearchAndFilterItems {
 
     this.setupEventListeners();
   }
+  /**
+   * Creates query parameters for fetching items from the API.
+   * @private
+   * @param {Object} additionalParams - Additional query parameters to include.
+   * @returns {URLSearchParams} - The constructed query parameters.
+   * @example
+   * ```javascript
+   * const queryParams = this.createQueryParams({ _tag: "electronics" });
+   * ```
+   */
   createQueryParams(additionalParams = {}) {
     const activeSwitch = document.getElementById("switchCheckChecked");
     const isActive = activeSwitch.checked;
@@ -83,7 +93,15 @@ export class SearchAndFilterItems {
       return [];
     }
   }
-
+  /**
+   * Initializes the Intersection Observer for lazy loading items.
+   * This method sets up an observer that triggers when the sentinel element is in view.
+   * @private
+   * @example
+   * ```javascript
+   * this.initializeObserver();
+   * ```
+   */
   initializeObserver() {
     if (!this.sentinel) {
       console.error("Sentinel element not found for observer.");
@@ -120,7 +138,15 @@ export class SearchAndFilterItems {
 
     observer.observe(this.sentinel); // Start observing the sentinel
   }
-
+  /**
+   * Rerenders the items in the container based on the current search and filter state.
+   * This method fetches items from the API and updates the DOM accordingly.
+   * @private
+   * @example
+   * ```javascript
+   * this.rerenderItems();
+   * ```
+   */
   async rerenderItems() {
     if (this.searchInput.value.trim() || this.filterInput.value.trim()) {
       return;
@@ -157,7 +183,17 @@ export class SearchAndFilterItems {
       toggleLoader(false, this.loaderContainer); // Hide loader
     }
   }
-
+  /**
+   * Handles the search form submission event.
+   * This method fetches items based on the search query and updates the DOM accordingly.
+   * @private
+   * @param {Event} event - The form submission event.
+   * @returns {Promise<void>} - A promise that resolves when the search is complete.
+   * @example
+   * ```javascript
+   * this.searchForm.addEventListener("submit", this.handleSearchSubmit.bind(this));
+   * ```
+   */
   async handleSearchSubmit(event) {
     event.preventDefault();
 
@@ -256,7 +292,16 @@ export class SearchAndFilterItems {
       toggleLoader(false, this.loaderContainer); // Hide loader
     }
   }
-
+  /**
+   * Handles the filter input change event.
+   * This method updates the tags based on the filter input and fetches items accordingly.
+   * * @private
+   * @returns {Promise<void>} - A promise that resolves when the filter change is complete.
+   * @example
+   * ```javascript
+   * this.filterInput.addEventListener("input", this.handleFilterChange.bind(this));
+   * ```
+   */
   async handleFilterChange() {
     const tags = this.filterInput.value
       .split(",")
@@ -285,7 +330,21 @@ export class SearchAndFilterItems {
     // Fetch and render items with local search filtering
     await this.fetchAndRenderFilteredItems();
   }
-
+  /**
+   * Fetches items based on the current tags and search input, and renders them in the container.
+   * This method handles the filtering and rendering of items based on the current state.
+   * @private
+   * @returns {Promise<void>} - A promise that resolves when the items are fetched and rendered.
+   * @example
+   * ```javascript
+   * await this.fetchAndRenderFilteredItems();
+   * ```javascript
+   * this.itemsContainer.innerHTML = ""; // Clear the container before rendering
+   * this.itemsContainer.appendChild(this.fragment); // Append the fragment to the itemsContainer
+   * this.attachCardClickListeners(); // Attach click event listeners to the rendered cards
+   * window.scrollTo({ top: 0, behavior: "smooth" });
+   * ```
+   */
   async fetchAndRenderFilteredItems() {
     let allItems = [];
     try {
@@ -349,7 +408,15 @@ export class SearchAndFilterItems {
       toggleLoader(false, this.loaderContainer); // Hide loader
     }
   }
-
+  /**
+   * Sets up event listeners for the search and filter inputs.
+   * This method attaches event listeners to handle user interactions with the search form and filter input.
+   * @private
+   * @example
+   * ```javascript
+   * this.setupEventListeners();
+   * ```
+   */
   setupEventListeners() {
     // Search form submit listener
     if (this.searchForm) {
@@ -382,7 +449,15 @@ export class SearchAndFilterItems {
       );
     }
   }
-
+  /**
+   * Attaches click event listeners to the item cards.
+   * This method adds event listeners to each card to handle navigation to the item detail page.
+   * @private
+   * @example
+   * ```javascript
+   * this.attachCardClickListeners();
+   * ```
+   */
   attachCardClickListeners() {
     const auctionItems = document.querySelectorAll(".card-auction-item");
     auctionItems.forEach((card) => {
