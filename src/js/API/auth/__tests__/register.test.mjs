@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { register } from "../register.mjs";
 import { fetchData } from "../../utils/fetch.mjs";
-import { validateEmail } from "../../../ui/bootstrap/validateemail.mjs";
+import { validateEmail } from "../../utils/validateemail.mjs";
 
 vi.mock("../utils/headers.mjs", () => ({
   headers: vi.fn(() => ({ "Content-Type": "application/json" })),
@@ -19,10 +19,8 @@ vi.mock("../utils/headers.mjs", () => ({
   headers: vi.fn(() => ({ "Content-Type": "application/json" })),
 }));
 
-vi.mock("../../../ui/bootstrap/validateemail.mjs", async () => {
-  const actual = await vi.importActual(
-    "../../../ui/bootstrap/validateemail.mjs",
-  );
+vi.mock("../../utils/validateemail.mjs", async () => {
+  const actual = await vi.importActual("../../utils/validateemail.mjs");
   return {
     ...actual,
     validateEmail: vi.fn(),

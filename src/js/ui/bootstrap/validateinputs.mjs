@@ -1,4 +1,4 @@
-import { validateEmail } from "./validateemail.mjs";
+import { validateEmail } from "../../API/utils/validateemail.mjs";
 import { validateTags } from "./validatetags.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 
