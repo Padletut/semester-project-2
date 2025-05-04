@@ -31,7 +31,6 @@ export async function createBid(itemId, amount) {
 
     return; // No content to return for 204 No Content
   } catch (error) {
-    handleErrors(error);
     console.error("Error creating bid:", error);
     throw error;
   }
