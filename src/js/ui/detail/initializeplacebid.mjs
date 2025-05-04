@@ -8,6 +8,7 @@ import * as constants from "../../constants.mjs";
 
 /**
  * Initializes the "Place Bid" button functionality.
+ * @memberof module:UI/detail
  * @param {string} itemId - The ID of the auction item.
  * @returns {void}
  * @example

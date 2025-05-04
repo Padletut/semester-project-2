@@ -2,6 +2,12 @@ import { getProfile } from "../../API/profile/getprofile.mjs";
 
 /**
  * Renders the credits in header of the page.
+ * @memberof module:UI/shared
+ * @returns {void}
+ * @example
+ * ```javascript
+ * renderCredits();
+ * ```
  */
 
 export async function renderCredits() {

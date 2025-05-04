@@ -2,7 +2,7 @@ import { renderErrors } from "../shared/rendererrors.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 /**
  * Renders the profile credits in the element with id "profile-credits".
- * @memberof module:Profile
+ * @memberof module:UI/profile
  * @param {Object} profile - The profile object containing credits data.
  * @example
  * ```javascript

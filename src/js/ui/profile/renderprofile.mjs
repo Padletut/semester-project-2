@@ -16,12 +16,10 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 /**
- * @module Profile
- */
-
-/**
  * Renders the profile page.
- * @memberof module:Profile
+ * This function fetches the profile data, renders the profile banner, avatar, name, credits,
+ * bio, and listings. It also sets up the edit profile button and handles loading states.
+ * @memberof module:UI/profile
  * @returns {Promise<void>} A promise that resolves when the profile page is rendered.
  * @example
  * ```javascript

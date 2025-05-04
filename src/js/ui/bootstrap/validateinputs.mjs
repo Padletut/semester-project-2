@@ -4,6 +4,7 @@ import { renderErrors } from "../shared/rendererrors.mjs";
 
 /**
  * Validates the inputs of a form.
+ * @memberof module:UI/bootstrap
  * @param {HTMLFormElement} form - The form element to validate.
  * @returns {boolean} True if the form inputs are valid, false otherwise.
  * @example

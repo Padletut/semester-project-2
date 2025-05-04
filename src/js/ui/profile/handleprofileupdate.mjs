@@ -6,7 +6,9 @@ const { API_BASE_URL, API_PROFILES } = global;
 
 /**
  * Generic function to handle profile updates.
- * @memberof module:Profile
+ * This function takes a profile object and updated profile data,
+ * and sends a PUT request to update the profile on the server.
+ * @memberof module:UI/profile
  * @param {Object} profile - The profile object.
  * @param {Object} updatedProfile - The updated profile data.
  * @param {string} modalId - The ID of the modal to hide.

@@ -1,7 +1,9 @@
 import { createCardMyListing } from "./createcardmylisting.mjs";
 /**
  * Renders listings for the current profile.
- * @memberof module:Profile
+ * This function fetches the listings data from the profile object and creates a card for each listing.
+ * It appends the cards to the listings container in the DOM.
+ * @memberof module:UI/profile
  * @param {Object} profile - The profile object containing listings data for current profile.
  * @example
  * ```javascript

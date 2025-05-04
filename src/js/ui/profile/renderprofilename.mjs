@@ -3,7 +3,7 @@ import { capitalizeFirstLetter } from "../shared/capitalizefirstletter.mjs";
 
 /**
  * Renders the profile name in the element with id "profile-id".
- * @memberof module:Profile
+ * @memberof module:UI/profile
  * @param {Object} profileName - The profile object containing name data.
  * @example
  * ```javascript

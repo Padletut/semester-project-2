@@ -1,6 +1,6 @@
 /**
  * Handles the authentication process for login and registration forms.
- * @memberof module:Profile
+ * @memberof module:UI/profile
  * @param {Event} event - The event object from the form submission.
  * @returns {Promise<void>} A promise that resolves when the authentication process is complete.
  * @example

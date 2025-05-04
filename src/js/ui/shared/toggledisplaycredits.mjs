@@ -1,5 +1,14 @@
 import { loadStorage } from "../../storage/loadstorage.mjs";
 
+/**
+ * Toggles the display of credits based on the user's login status and menu state.
+ * @memberof module:UI/shared
+ * @returns {void}
+ * @example
+ * ```javascript
+ * toggleDisplayCredits();
+ * ```
+ */
 export function toggleDisplayCredits() {
   const displayCreditsElements = document.querySelectorAll(".display-credits");
   const navbarToggler = document.querySelector(".navbar-toggler");

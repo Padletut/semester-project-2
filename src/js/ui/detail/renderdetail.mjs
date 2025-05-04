@@ -10,17 +10,14 @@ import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 /**
  * Renders the details of an item in the detail view.
+ * @memberof module:UI/detail
  * @param {number} itemId - The ID of the item to render.
- * @param {HTMLElement} container - The container element to render the item into.
- * @param {HTMLElement} loaderContainer - The loading container element.
- * @returns {Promise<void>}
+ * @returns {Promise<void>} A promise that resolves when the rendering is complete.
  * @example
  * ```javascript
  * const itemId = 123;
- * const container = document.querySelector(".item-detail-container");
- * const loaderContainer = document.getElementById("loader");
- * await renderDetail(itemId, container, loaderContainer);
- * ```
+ * await renderDetail(itemId);
+ * ```javascript
  */
 export async function renderDetail(itemId) {
   const loaderContainer = document.getElementById("loader");

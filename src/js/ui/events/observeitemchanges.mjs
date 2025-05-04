@@ -1,5 +1,8 @@
 /**
  * Observe changes to a specific item in the DOM and trigger a callback function.
+ * This function uses the MutationObserver API to watch for changes in the attributes of the target element.
+ * When a change is detected, it retrieves the updated item data from the target element's `data-item` attribute
+ * @memberof module:UI/events
  * @param {string} targetSelector - The CSS selector for the target element to observe.
  * @param {function} callback - The callback function to execute when changes are detected.
  * @example

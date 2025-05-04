@@ -2,7 +2,7 @@ import { renderErrors } from "../shared/rendererrors.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 /**
  * Renders the profile bio in the element with id "profile-bio".
- * @memberof module:Profile
+ * @memberof module:UI/profile
  * @param {Object} profile - The profile object containing bio data.
  * @example
  * ```javascript

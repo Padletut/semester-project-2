@@ -3,6 +3,7 @@ import { onAuth } from "../../API/events/onauth.mjs";
 
 /**
  * Handles form submission for authentication forms.
+ * @memberof module:UI/bootstrap
  * @param {HTMLElement} buttonElement - The button element that triggers the form submission.
  * @param {string} formId - The ID of the form to validate and submit.
  * @param {string} redirectUrl - The URL to redirect to upon successful submission.

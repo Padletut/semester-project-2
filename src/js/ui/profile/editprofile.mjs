@@ -8,7 +8,9 @@ const loggedInUser = loadStorage(PROFILE);
 
 /**
  * Function to edit profile.
- * @memberof module:Profile
+ * It creates a modal for the user to input their profile avatar and bio.
+ * The modal is created using Bootstrap and includes form validation.
+ * @memberof module:UI/profile
  * @param {Object} [profile=loggedInUser] - The profile object.
  * @returns {Promise<void>} A promise that resolves when the profile avatar and bio update is complete.
  * @example

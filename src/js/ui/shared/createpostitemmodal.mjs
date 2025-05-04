@@ -64,6 +64,7 @@ function generateModalHtml(state, item = null) {
 
 /**
  * Creates a modal for creating or updating an item.
+ * @memberof module:UI/shared
  * @param {string} state - The state of the modal, either "create" or "update".
  * @param {Object} [item=null] - The item object to update (only used in "update" state).
  * @param {string} [targetSelector=null] - The selector for the target element to update (only used in "update" state).

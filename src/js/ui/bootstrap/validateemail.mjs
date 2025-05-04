@@ -1,5 +1,6 @@
 /**
  * Validates if an email input ends with @stud.noroff.no.
+ * @memberof module:UI/bootstrap
  * @param {HTMLFormElement} form - The form element containing the email input.
  * @param {HTMLInputElement} emailInput - The email input element to validate.
  * @returns {boolean} True if the email is valid, false otherwise.

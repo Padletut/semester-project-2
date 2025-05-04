@@ -7,16 +7,19 @@ import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
 import { linkBidderToProfile } from "../shared/linkbiddertoprofile.mjs";
 /**
  * Render items in the listings view.
- * @param {Array} items - The array of items to render.
- * @param {HTMLElement} container - The container element to render the items into.
- * @param {HTMLElement} loaderContainer - The loading container element.
- * * @param {boolean} isLoading - Whether to show the loading state.
- * @param {boolean} isSearch - Whether the items are being searched.
- * @returns {Promise<void>}
+ * @memberof module:UI/listings
+ * @param {string} itemName - The name of the item to search for.
+ * @param {boolean} append - Whether to append items to the existing list or replace it.
+ * @param {string} tag - The tag to filter items by.
+ * @param {string} sortListing - The sorting criteria for the items.
+ * @returns {Promise<void>} A promise that resolves when the rendering is complete.
  * @example
  * ```javascript
- * const items = await getItems(queryParams, isSearch);
- * renderItems(items, container, loaderContainer, isLoading, isSearch);
+ * const itemName = "exampleItem";
+ * const append = false;
+ * const tag = "exampleTag";
+ * const sortListing = "created";
+ * await renderItems(itemName, append, tag, sortListing);
  * ```javascript
  */
 export async function renderItems(

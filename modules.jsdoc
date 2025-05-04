@@ -42,6 +42,11 @@
  * @module UI/detail
  */
 
+ /**
+ * Functions for event listeners.
+ * @module UI/events
+ */
+
 /**
  * Functions for rendering shared UI components.
  * @module UI/shared

@@ -1,11 +1,18 @@
 /**
  * Toggles the visibility of the loading container.
- * @param {boolean} isLoading - Whether to show or hide the loading container.
+ * This function is typically used to show or hide a loading spinner or overlay
+ * while waiting for an asynchronous operation to complete.
+ * @memberof module:UI/shared
+ * @param {boolean} isLoading - If true, the loader will be shown; if false, it will be hidden.
+ * @param {HTMLElement} loaderContainer - The HTML element representing the loader container.
  * @example
  * ```javascript
- * toggleLoader(true); // Show the loader
- * toggleLoader(false); // Hide the loader
+ * const loaderContainer = document.getElementById("loader");
+ * toggleLoader(true, loaderContainer); // Show the loader
+ * // Perform some async operation
+ * toggleLoader(false, loaderContainer); // Hide the loader
  * ```
+ * @returns {void}
  */
 export function toggleLoader(isLoading, loaderContainer) {
   if (loaderContainer) {

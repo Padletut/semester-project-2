@@ -2,6 +2,7 @@ import * as bootstrap from "bootstrap";
 
 /**
  * Switches between Login and Register account tabs.
+ * @memberof module:UI/Bootstrap
  * @example
  * ```javascript
  * authSwitchTabs();

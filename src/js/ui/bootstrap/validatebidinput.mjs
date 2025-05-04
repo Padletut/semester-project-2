@@ -2,6 +2,7 @@ import { getItem } from "../../API/listings/getitem.mjs";
 
 /**
  * Validates the bid input and checks if the bid is valid.
+ * @memberof module:UI/bootstrap
  * @param {HTMLFormElement} form - The form element containing the bid input.
  * @returns {Promise<boolean>} - Returns true if the bid is valid, otherwise false.
  */

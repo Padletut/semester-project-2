@@ -5,13 +5,23 @@ import { getItem } from "../../API/listings/getitem.mjs";
 
 /**
  * Creates a post card element and appends it to my listings container.
- * @memberof module:Listings
- * @param {Object} item - The item object containing auction data (partial data).
- * @param {HTMLElement} container - The container element to append the card to.
+ * @memberof module:UI/profile
+ * @param {Object} item - The item object containing details of the auction item.
+ * @param {string} author - The name of the author of the item.
  * @example
  * ```javascript
- * const item = { id: "123" }; // Partial data with only the ID
- * createCardMyListing(item, "Author Name", container);
+ * const item = {
+ *  media: [{ url: "https://example.com/image.jpg", alt: "Item Image" }],
+ * title: "Auction Item",
+ * description: "Description of the item",
+ * seller: { name: "Seller Name" },
+ * bids: [{ amount: 100 }, { amount: 200 }],
+ * endsAt: "2023-10-01T00:00:00Z",
+ * created: "2023-09-01T00:00:00Z",
+ * };
+ * const author = "Author Name";
+ * const container = document.getElementById("my-listings-container");
+ * createCardMyListing(item, author, container);
  * ```
  */
 export async function createCardMyListing(item, author) {

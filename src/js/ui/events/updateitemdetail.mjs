@@ -1,5 +1,8 @@
 /**
  * Updates the item detail in the specified container.
+ * This function sets the updated item data in the target container's `data-item` attribute.
+ * It is typically used to refresh the item detail after an update or modification.
+ * @memberof module:UI/events
  * @param {string} targetSelector - The CSS selector for the target container.
  * @param {Object} updatedItem - The updated item data to set in the container.
  * @example

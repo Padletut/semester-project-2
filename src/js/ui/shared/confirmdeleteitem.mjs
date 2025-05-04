@@ -3,6 +3,7 @@ import { renderProfile } from "../profile/renderprofile.mjs"; // Import the func
 
 /**
  * Displays a confirmation modal for deleting an item.
+ * @memberof module:UI/shared
  * @param {number} itemId - The ID of the item to be deleted.
  * @param {Object} postItemModal - The modal object for the item being deleted.
  * @returns {void}

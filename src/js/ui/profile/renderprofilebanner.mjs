@@ -1,6 +1,6 @@
 /**
  * Renders the profile banner in the element with id "profile-cover".
- * @memberof module:Profile
+ * @memberof module:UI/profile
  * @param {Object} profileName - The profile object containing banner data.
  * @example
  * ```javascript

@@ -3,6 +3,7 @@ import * as constants from "../../constants.mjs";
 
 /**
  * Renders the bid history for a given auction item.
+ * @memberof module:UI/detail
  * @param {Object} response - The response object containing bid history data.
  * @example
  * ```javascript

@@ -1,5 +1,6 @@
 /**
  * Validates the tags input.
+ * @memberof module:UI/bootstrap
  * @param {HTMLInputElement} tagsInput - The tags input element to validate.
  * @returns {boolean} True if the tags are valid, false otherwise.
  * @example

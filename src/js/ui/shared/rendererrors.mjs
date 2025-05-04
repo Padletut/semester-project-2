@@ -4,7 +4,9 @@
 
 /**
  * Renders authorization errors as alert messages.
- * @memberof module:Rendererrors
+ * This function removes any existing alert messages and creates a new one with the error message.
+ * It also sets a timeout to remove the alert after 5 seconds.
+ * @memberof module:UI/shared
  * @param {Error} error - The error object containing the error message.
  * @example
  * ```javascript

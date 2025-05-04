@@ -5,8 +5,8 @@ import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 /**
  * Renders the user's bids on the profile page.
- * @memberof module:Profile
- * Example usage:
+ * @memberof module:UI/profile
+ * @example
  * ```javascript
  * await renderMyBids();
  * ```

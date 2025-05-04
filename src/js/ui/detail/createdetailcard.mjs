@@ -7,6 +7,7 @@ import { updateItemDetail } from "../events/updateitemdetail.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
+ * @memberof module:UI/detail
  * @param {Object} item - The item object containing details of the auction item.
  * @param {HTMLElement} container - The container element to render the item into.
  * @example

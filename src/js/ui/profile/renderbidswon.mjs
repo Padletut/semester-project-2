@@ -1,6 +1,8 @@
 /**
  * Renders the bids won on the profile page.
- * @memberof module:Profile
+ * This function fetches the bids won data from the profile object and displays it in a list format.
+ * It creates a list item for each bid won, including the title and the date it ended.
+ * @memberof module:UI/profile
  * @param {Object} profile - The profile object containing bids won data.
  * @example
  * ```javascript
