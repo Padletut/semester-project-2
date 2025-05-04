@@ -8,6 +8,8 @@ import { toggleLoader } from "../../ui/shared/toggleLoader.mjs";
 
 /**
  * Class representing a search and filter functionality for items.
+ * This class handles fetching, rendering, and filtering items based on search queries and tags.
+ * It also manages pagination and lazy loading of items as the user scrolls.
  * @memberof module:API/search
  * @class
  * @param {HTMLElement} itemsContainer - The container element for the items.
