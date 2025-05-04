@@ -7,6 +7,7 @@ const { API_BASE_URL, API_LISTINGS, API_SEARCH } = global;
 
 /**
  * Gets all items from the API.
+ * @memberof module:API/listings
  * @param {URLSearchParams} queryParams - The query parameters for the request.
  * @param {boolean} [search=false] - Whether to use the search endpoint.
  * @returns {Promise<Object>} A promise that resolves to the items data.

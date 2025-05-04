@@ -6,6 +6,28 @@ import * as constants from "../../constants.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 import { toggleLoader } from "../../ui/shared/toggleLoader.mjs";
 
+/**
+ * Class representing a search and filter functionality for items.
+ * @memberof module:API/search
+ * @class
+ * @param {HTMLElement} itemsContainer - The container element for the items.
+ * @property {string[]} tags - An array of tags to filter the items by.
+ * @property {Object[]} uniqueItems - A list of unique items fetched from the API.
+ * @property {number} currentPage - The current page number for pagination.
+ * @property {boolean} isLastPage - A flag indicating if the last page has been reached.
+ * @property {boolean} isSearchOrFilterActive - A flag indicating if a search or filter is active.
+ * @property {DocumentFragment} fragment - A document fragment used for efficient DOM updates.
+ * @property {HTMLElement} loaderContainer - The loader element for showing loading states.
+ * @property {HTMLFormElement} searchForm - The search form element.
+ * @property {HTMLInputElement} searchInput - The search input element.
+ * @property {HTMLInputElement} filterInput - The filter input element.
+ * @property {HTMLElement} sentinel - The sentinel element for lazy loading.
+ * @example
+ * ```javascript
+ * const itemsContainer = document.getElementById("items-container");
+ * const searchAndFilter = new SearchAndFilterItems(itemsContainer);
+ * ```
+ */
 export class SearchAndFilterItems {
   constructor(itemsContainer) {
     this.itemsContainer = itemsContainer;

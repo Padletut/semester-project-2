@@ -1,5 +1,6 @@
 /**
  * Loads a value from local storage and parses it as JSON.
+ * @memberof module:Storage
  * @param {string} key - The key of the item to load from local storage.
  * @returns {any} The parsed value from local storage.
  * @example

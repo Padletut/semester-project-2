@@ -1,9 +1,4 @@
 /**
- * Functions for managing local storage.
- * @module API/storage
- */
-
-/**
  * Constants used across the application.
  * @module API/constants
  */
@@ -17,6 +12,10 @@
  * Functions for managing bids.
  * @module API/bid
  */
+
+ /**
+ * Functions for events.
+ * @module API/events
 
 /**
  * Functions for managing listings.

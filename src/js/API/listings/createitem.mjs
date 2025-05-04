@@ -5,6 +5,7 @@ import * as constants from "../../constants.mjs";
 
 /**
  * Post a new auction item to the listings API.
+ * @memberof module:API/listings
  * @param {Object} item - The item to post.
  * @param {string} item.title - The title of the item (required).
  * @param {string} [item.description] - The description of the item (optional).

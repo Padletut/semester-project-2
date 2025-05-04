@@ -6,6 +6,7 @@ const { API_BASE_URL, API_LISTINGS } = constants;
 
 /**
  * Gets a single item by ID.
+ * @memberof module:API/listings
  * @param {number} itemId - The ID of the item to get.
  * @returns {Promise<Object>} A promise that resolves to the item data.
  * @example

@@ -5,6 +5,7 @@ import * as constants from "../../constants.mjs";
 
 /**
  * Update an auction item in the listings API.
+ * @memberof module:API/listings
  * @param {string} itemId - The ID of the item to update.
  * @param {Object} item - The item to update.
  * @example

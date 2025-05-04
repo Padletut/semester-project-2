@@ -4,6 +4,7 @@ import { headers } from "../utils/headers.mjs";
 
 /**
  * Deletes an item from the server.
+ * @memberof module:API/listings
  * @param {string} itemId - The ID of the item to delete.
  * @returns {Promise<void>} - Resolves if the deletion is successful.
  * @throws {Error} - Throws an error if the request fails.

@@ -1,5 +1,6 @@
 /**
  * Saves a value to local storage after stringifying it as JSON.
+ * @memberof module:Storage
  * @param {string} key - The key under which to save the item in local storage.
  * @param {any} value - The value to save to local storage.
  * @example

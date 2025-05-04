@@ -6,7 +6,7 @@ const loggedInUser = loadStorage(PROFILE);
 
 /**
  * Check if the logged in user is the owner of the profile and add the edit button
- * @memberof module:Profile
+ * @memberof module:API/profile
  * @param {Object} profile - The profile object.
  * @example
  * ```javascript
