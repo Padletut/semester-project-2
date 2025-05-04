@@ -3,6 +3,8 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 /**
  * Checks if the user is authenticated by verifying the presence of an access token in local storage.
  * Change navigation item to "Logout" if authenticated.
+ * @memberof module:API/auth
+ * @returns {void}
  * @example
  * ```javascript
  * checkAuth();

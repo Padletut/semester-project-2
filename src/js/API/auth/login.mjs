@@ -8,7 +8,7 @@ const { ACCESS_TOKEN, PROFILE } = STORAGE_KEYS;
 
 /**
  * Logs in a user with the provided email and password.
- * @memberof module:Authorization
+ * @memberof module:API/auth
  * @param {string} email - The email of the user.
  * @param {string} password - The password of the user.
  * @returns {Promise<Object>} A promise that resolves to the user's profile data.

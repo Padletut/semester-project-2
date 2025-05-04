@@ -7,7 +7,7 @@ const { API_BASE_URL, API_AUTH, API_REGISTER } = constants;
 
 /**
  * Registers a new user with the provided name, email, and password.
- * @memberof module:Authorization
+ * @memberof module:API/auth
  * @param {string} name - The name of the user.
  * @param {string} email - The email of the user.
  * @param {string} password - The password of the user.
