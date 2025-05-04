@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src"],
+    "include": ["src", "modules.jsdoc"],
     "exclude": [
       "node_modules/",
       "dist/",
@@ -8,7 +8,7 @@
       "tests/",
       "tests-examples/"
     ],
-    "includePattern": ".+\\.(js|mjs|ts)$",
+    "includePattern": ".+\\.(js|mjs|jsdoc)$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "opts": {

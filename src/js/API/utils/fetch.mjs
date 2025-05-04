@@ -1,12 +1,8 @@
 import { headers } from "./headers.mjs";
 
 /**
- * @module Fetch
- */
-
-/**
  * Performs an fetch request.
- * @memberof module:Fetch
+ * @memberof module:API/utils
  * @param {string} url - The URL to fetch.
  * @param {Object} [options={}] - The options for the fetch request.
  * @param {string} [options.method] - The HTTP method to use (e.g., "GET", "POST").

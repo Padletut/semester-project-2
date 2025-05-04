@@ -3,6 +3,7 @@ import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 
 /**
  * Handles authorization errors and other response errors.
+ * @memberof module:API/utils
  * @param {Response} response - The fetch response object.
  * @returns {Promise<Response>} A promise that resolves to the response if no errors are found.
  * @throws {Error} Throws an error if the response contains errors.
