@@ -1,19 +1,7 @@
 @use "../variables";
+@use "~bootstrap/scss/bootstrap" as *;
 
 .add-listing-button {
-  background-color: variables.$secondary;
-  border-color: variables.$secondary;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  &:hover {
-    background-color: variables.$secondary-hover;
-    border-color: variables.$secondary-hover;
-    box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.3);
-  }
-  &:active {
-    background-color: variables.$secondary-active !important;
-    border-color: variables.$secondary-active !important;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-  }
   padding: 10px 24px;
   font-family: "Lato", sans-serif;
   i {
@@ -26,27 +14,28 @@
 }
 
 .place-bid-button,
-.btn-custom-secondary {
-  background: variables.$secondary;
-  border-color: variables.$secondary;
-  color: variables.$body-bg;
+.add-listing-button {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  &:hover {
-    background: variables.$secondary-hover;
-    border-color: variables.$secondary-hover;
-    color: variables.$body-bg;
-  }
-  &:active {
-    background: variables.$secondary-active !important;
-    border-color: variables.$secondary-active !important;
-    color: variables.$body-bg !important;
-  }
-  &:focus {
-    background: variables.$secondary-hover !important;
-    border-color: variables.$secondary-hover !important;
-    color: variables.$body-bg !important;
-    box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
-  }
+  @include button-variant(
+    // Background color
+    variables.$secondary,
+    // Border color
+    variables.$secondary,
+    // Text color
+    variables.$body-bg,
+    // Hover background color
+    variables.$secondary-hover,
+    // Hover border color
+    variables.$secondary-hover,
+    // Hover text color
+    variables.$body-bg,
+    // Active background color
+    variables.$secondary-active,
+    // Active border color
+    variables.$secondary-active,
+    // Active text color
+    variables.$body-bg
+  );
 }
 
 .btn-custom-secondary {
