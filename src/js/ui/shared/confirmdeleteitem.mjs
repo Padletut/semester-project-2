@@ -52,9 +52,9 @@ export function confirmDeleteItem(itemId, postItemModal) {
 
       // Check if the user is on the item detail page
       const currentUrl = window.location.href;
-      if (currentUrl.includes("detail.html")) {
+      if (currentUrl.includes("detail")) {
         // Redirect to the Listings page
-        window.location.href = "index.html";
+        window.location.href = "/";
       } else {
         renderProfile(); // Refresh the profile listings if not on the detail page
       }

@@ -33,7 +33,7 @@ export function linkAuthorToProfile() {
     authorLink.addEventListener("click", (event) => {
       event.stopPropagation(); // Prevent the card's click event from triggering
       event.preventDefault(); // Prevent default link behavior
-      window.location.href = `profile.html?profile=${profileName}`; // Redirect to the profile page
+      window.location.href = `profile?profile=${profileName}`; // Redirect to the profile page
     });
   });
 }

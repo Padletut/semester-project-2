@@ -35,7 +35,7 @@ describe("checkAuth", () => {
     const logoutLink = document.querySelector(".nav-logout");
     expect(logoutLink).toBeTruthy();
     expect(logoutLink.textContent).toBe("Logout");
-    expect(logoutLink.href).toContain("authorization.html");
+    expect(logoutLink.href).toContain("authorization");
   });
 
   it("should hide the nav-profile item if the user is not authenticated", () => {

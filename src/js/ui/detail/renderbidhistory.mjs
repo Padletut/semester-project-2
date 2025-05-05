@@ -39,7 +39,7 @@ export function renderBidHistory(response) {
         bidItem.innerHTML = `
           <div class="bid-list-name flex-grow-1">${
             profileName
-              ? `<a href="profile.html?profile=${bid.bidder.name}">${bid.bidder.name}</a>` // Render as a link if logged in
+              ? `<a href="profile?profile=${bid.bidder.name}">${bid.bidder.name}</a>` // Render as a link if logged in
               : `${bid.bidder.name}` // Render as plain text if not logged in
           }</div>
           <div class="bid-list-date flex-grow-1">${bidDate}</div>

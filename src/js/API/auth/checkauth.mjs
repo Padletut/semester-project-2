@@ -19,7 +19,7 @@ export function checkAuth() {
     // Create a new "Logout" link
     const logoutLink = document.createElement("a");
     logoutLink.className = "nav-link nav-auth nav-logout";
-    logoutLink.href = "authorization.html";
+    logoutLink.href = "authorization";
     logoutLink.textContent = "Logout";
 
     // Replace the existing element with the new one

@@ -13,5 +13,5 @@ export function logout() {
   const { ACCESS_TOKEN, PROFILE } = STORAGE_KEYS;
   saveStorage(ACCESS_TOKEN, "");
   saveStorage(PROFILE, "");
-  window.location.replace("../index.html");
+  window.location.replace("/");
 }

@@ -61,7 +61,7 @@ export async function renderMyBids() {
 
       // Event listener for bid item click
       bidElement.addEventListener("click", () => {
-        window.location.href = `detail.html?id=${bid.listing.id}`;
+        window.location.href = `detail?id=${bid.listing.id}`;
       });
     });
   } catch (error) {
