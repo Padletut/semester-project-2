@@ -5,15 +5,18 @@ import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
  * Handles authorization errors and other response errors.
  * @memberof module:API/utils
  * @param {Response} response - The fetch response object.
- * @returns {Promise<Response>} A promise that resolves to the response if no errors are found.
- * @throws {Error} Throws an error if the response contains errors.
+ * @param {string|null} context - The context in which the error occurred (e.g., "login").
+ * @returns {Promise<Response>} - The original response if no error occurred.
+ * @throws {Error} - Throws an error if the response is not ok.
  * @example
  * ```javascript
- * const response = await fetch("https://api.example.com/data");
- * await handleErrors(response);
+ * fetch(url)
+ *   .then((response) => handleErrors(response, "login"))
+ *  .then((data) => console.log(data))
+ * .catch((error) => console.error(error));
  * ```
  */
-export async function handleErrors(response) {
+export async function handleErrors(response, context = null) {
   if (response.ok) {
     return response;
   }
@@ -25,6 +28,10 @@ export async function handleErrors(response) {
     errorData.errors &&
     errorData.errors.length > 0
   ) {
+    if (context === "login") {
+      renderErrors(new Error(ERROR_MESSAGES.LOGIN_FAILED));
+      throw new Error(ERROR_MESSAGES.LOGIN_FAILED);
+    }
     renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
     throw new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR);
   }

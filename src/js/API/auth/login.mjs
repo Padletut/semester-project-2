@@ -33,7 +33,7 @@ export async function login(email, password) {
       saveStorage(PROFILE, profile);
       return profile;
     }
-    await handleErrors(response);
+    await handleErrors(response, "login");
   } catch (error) {
     console.error("Error during login:", error);
     throw error;

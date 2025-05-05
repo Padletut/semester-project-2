@@ -30,9 +30,9 @@ authSwitchTabs();
 
 // Eventlistener Sign in and Sign up
 const signInButton = document.getElementById("signInButton");
-handleAuthFormSubmission(signInButton, "signInForm", "index.html");
+handleAuthFormSubmission(signInButton, "signInForm", "index");
 const signUpButton = document.getElementById("signUpButton");
-handleAuthFormSubmission(signUpButton, "signUpForm", "index.html");
+handleAuthFormSubmission(signUpButton, "signUpForm", "index");
 
 // Render profile data
 if (document.title === "User Profile | Tradeauction") {

@@ -23,5 +23,7 @@ export const ERROR_MESSAGES = {
     "An error occurred while loading the search results, please try again later.",
   AUTHORIZATION_ERROR:
     "You are not authorized to perform this action. Please log in and try again.",
+  LOGIN_FAILED: "Your email or password is incorrect. Please try again.",
+
   TOO_MANY_REQUESTS_ERROR: "Too many requests. Please try again later.",
 };
