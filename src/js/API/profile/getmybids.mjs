@@ -22,30 +22,36 @@ const loggedInUser = loadStorage(PROFILE);
  */
 export async function getMyBids(profileName = loggedInUser) {
   // Determine the profile name based on the structure of the profileName parameter
-  const name =
-    typeof profileName === "string"
-      ? profileName
-      : profileName.data
-        ? profileName.data.name
-        : profileName.name;
-  // Fetch the profile data from the API
-  const response = await fetchData(
-    `${API_BASE_URL}${API_PROFILES}/${name}/bids?_listings=true`,
-    {
-      headers: headers(false),
-      method: "GET",
-    },
-  );
+  try {
+    const name =
+      typeof profileName === "string"
+        ? profileName
+        : profileName.data
+          ? profileName.data.name
+          : profileName.name;
 
-  if (response.ok) {
+    if (!name) {
+      throw new Error("Error loading profile data");
+    }
+    // Fetch the profile data from the API
+    const response = await fetchData(
+      `${API_BASE_URL}${API_PROFILES}/${name}/bids?_listings=true`,
+      {
+        headers: headers(false),
+        method: "GET",
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Error loading profile data");
+    }
+
     const data = await response.json();
     return data;
+
+    // Handle errors if the response is not ok
+  } catch (error) {
+    console.error(`Error fetching profile data: ${error.message}`);
+    renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
   }
-
-  // Render error if profile not found with both original and lowercase names
-
-  renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
-  console.error(
-    `Error fetching profile data: ${response.status} - ${response.statusText}`,
-  );
 }

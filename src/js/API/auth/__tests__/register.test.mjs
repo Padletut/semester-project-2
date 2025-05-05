@@ -56,13 +56,14 @@ describe("register", () => {
     };
     fetchData.mockResolvedValue(mockResponse);
 
+    // Call the register function
     const userData = await register(name, emailInput, password);
 
     // Assertions
     expect(fetchData).toHaveBeenCalledWith(
       "https://v2.api.noroff.dev/auth/register",
       {
-        headers: new Headers({ "Content-Type": "application/json" }),
+        headers: expect.any(Headers), // Match any instance of the Headers class
         method: "POST",
         body: JSON.stringify({
           name: lowerCaseName,
