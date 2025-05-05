@@ -25,6 +25,13 @@ export async function handleModalFormSubmission(form, submitCallback) {
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
 
+      if (data.tags) {
+        data.tags = data.tags
+          .split(",")
+          .map((tag) => tag.trim().toLowerCase())
+          .join(",");
+      }
+
       try {
         await submitCallback(data);
         form.reset();

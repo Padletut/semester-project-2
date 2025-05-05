@@ -77,7 +77,7 @@ export function createDetailItemCard(item) {
     </div>
     <div class="col-md-8">
       <div class="card-body rounded-3 p-3">
-        <div class="d-flex flex-wrap mb-3 justify-content-between">
+        <div class="d-flex flex-wrap ms-3 justify-content-between">
           <div>
             <h2 class="card-title text-nowrap">${title}</h2>
           </div>
@@ -88,7 +88,7 @@ export function createDetailItemCard(item) {
                 ${
                   profileName === item.seller.name
                     ? new Date(item.endsAt) > Date.now()
-                      ? `<button class="btn border rounded-circle" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
+                      ? `<button class="btn border rounded-circle position-absolute end-0" name="edit-my-listing-item"><i class="bi bi-pencil"></i></button>`
                       : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
                     : new Date(item.endsAt) > Date.now()
                       ? ""
