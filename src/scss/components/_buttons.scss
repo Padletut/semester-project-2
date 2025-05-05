@@ -41,6 +41,12 @@
     border-color: variables.$secondary-active !important;
     color: variables.$body-bg !important;
   }
+  &:focus {
+    background: variables.$secondary-hover !important;
+    border-color: variables.$secondary-hover !important;
+    color: variables.$body-bg !important;
+    box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .btn-custom-secondary {
