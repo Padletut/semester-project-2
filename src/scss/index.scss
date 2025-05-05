@@ -35,21 +35,5 @@ small {
 }
 
 .product-section {
-  max-width: 1080px;
-  @media (max-width: 767px) {
-    padding: 0;
-    .product-detail-container {
-      .container-fluid {
-        padding: 0.5rem;
-        .place-bid-card {
-          padding: 0;
-        }
-      }
-    }
-  }
-}
-
-.bid-history-list {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  max-width: 1400px;
 }

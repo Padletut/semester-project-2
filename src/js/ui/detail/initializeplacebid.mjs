@@ -21,7 +21,8 @@ export function initializePlaceBid(itemId) {
   const { PROFILE } = STORAGE_KEYS;
   const form = document.querySelector("form.needs-validation");
   const placeBidButton = form?.querySelector(".place-bid-button");
-  const profileName = loadStorage(PROFILE).name; // Get the logged-in user's profile name
+  const profile = loadStorage(PROFILE);
+  const profileName = profile ? profile.name : null;
 
   if (!profileName) {
     // Wrap the button in a div for the tooltip to work

@@ -62,7 +62,7 @@ export function createDetailItemCard(item) {
       })
     : "N/A";
   container.innerHTML = `
-    <div class="col-md-4 p-0 position-relative">
+    <div class="col-md-4 position-relative">
       <img
         src="${imageUrl}"
         class="img-fluid rounded-start"
