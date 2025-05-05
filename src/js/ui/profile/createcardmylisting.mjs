@@ -63,7 +63,7 @@ export async function createCardMyListing(item, author) {
         alt="${imageAlt}"
       />
       <div class="card-body">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex flex-wrap justify-content-between">
           <div>
             <h2 class="card-title text-nowrap">${fullItem.title || "Untitled"}</h2>
           </div>

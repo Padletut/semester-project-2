@@ -10,6 +10,7 @@
 
 .card {
   width: 19rem;
+  min-width: min-content;
 
   background: variables.$card-bg;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
