@@ -11,6 +11,11 @@ export const ERROR_MESSAGES = {
   INVALID_PROFILE_BANNER: "Profile banner URL is invalid.",
   INVALID_BID_AMOUNT:
     "Bid amount must be a positive number and greater than the current highest bid.",
+  PROFILE_UPDATE_FAILED: "Failed to update profile. Please try again later.",
+  ITEM_CREATION_FAILED:
+    "Failed to create item. Please check your input and try again.",
+  ITEM_UPDATE_FAILED:
+    "Failed to update item. Please check your input and try again.",
   LOADING_PAGE_ERROR:
     "An error occurred while loading the page, please try again later.",
   LOADING_PROFILE_ERROR: "We couldn't find the profile you were looking for.",

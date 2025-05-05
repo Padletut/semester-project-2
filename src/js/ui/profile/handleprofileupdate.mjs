@@ -1,6 +1,8 @@
 import * as global from "../../constants.mjs";
 import { fetchData } from "../../API/utils/fetch.mjs";
 import { headers } from "../../API/utils/headers.mjs";
+import { handleErrors } from "../../API/utils/handleerrors.mjs";
+import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 
 const { API_BASE_URL, API_PROFILES } = global;
 
@@ -36,15 +38,26 @@ export async function handleProfileUpdate(profile, updatedProfile, modalId) {
       const modal = bootstrap.Modal.getInstance(
         document.getElementById(modalId),
       );
-      modal.hide();
+      if (modal) {
+        modal.hide();
+      }
       document.getElementById(modalId).remove();
 
-      // Reload the page to reflect the changes
-      window.location.reload();
+      const profileContainer = document.querySelector(".card-profile");
+      if (profileContainer) {
+        const updatedProfileData = { ...profile, ...updatedProfile };
+        profileContainer.setAttribute(
+          "data-profile",
+          JSON.stringify(updatedProfileData),
+        );
+      }
+      return response;
     } else {
-      throw new Error("Failed to update profile");
+      console.error("Error updating profile:", response.statusText);
+      handleErrors(new Error(ERROR_MESSAGES.PROFILE_UPDATE_FAILED));
     }
   } catch (error) {
     console.error("Error updating profile:", error);
+    handleErrors(error);
   }
 }
