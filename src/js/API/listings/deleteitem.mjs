@@ -27,7 +27,9 @@ export async function deleteItem(itemId) {
     );
 
     if (!response.ok) {
-      await handleErrors(response);
+      const errorData = await response.json(); // Parse the error response
+      await handleErrors(response); // Call handleErrors
+      throw new Error(errorData.message || "Failed to delete item"); // Explicitly throw an error
     }
 
     return;

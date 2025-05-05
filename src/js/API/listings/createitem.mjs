@@ -48,7 +48,9 @@ export async function createItem(item) {
     });
 
     if (!response.ok) {
+      const errorData = await response.json();
       await handleErrors(response);
+      throw new Error(errorData.message || "Failed to create item");
     }
 
     return await response.json();
