@@ -52,8 +52,8 @@ function generateModalHtml(state, item = null) {
                         }
                         <div class="d-flex justify-content-center gap-4 mb-3">
                             ${state === "update" ? `<button type="button" class="btn btn-danger" id="deleteItemBtn">Delete</button>` : ""}
-                            <button type="submit" class="btn btn-primary">${state === "create" ? "Create" : "Update"}</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-custom-secondary">${state === "create" ? "Create" : "Update"}</button>
+                            <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>
