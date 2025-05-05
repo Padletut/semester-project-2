@@ -77,9 +77,9 @@ export function createDetailItemCard(item) {
     </div>
     <div class="col-md-8">
       <div class="card-body rounded-3 p-3">
-        <div class="d-flex flex-wrap ms-3 justify-content-between">
+        <div class="d-flex flex-wrap ms-md-3 justify-content-between">
           <div>
-            <h2 class="card-title text-nowrap">${title}</h2>
+            <h2 class="card-title">${title}</h2>
           </div>
           <div>
             <small class="text-nowrap">Posted ${postedAt}</small>
@@ -94,15 +94,15 @@ export function createDetailItemCard(item) {
                       ? ""
                       : `<span class="text-danger position-absolute end-0 me-3 fw-bold">Auction Ended</span>`
                 }
-        <div class="ms-3 mb-3">
+        <div class="ms-md-3 mb-3">
           <i class="card-author" name="${sellerName}">By <a href="#">${sellerName}</a></i>
         </div>
-        <div class="ms-3">
+        <div class="ms-md-3">
           <div>Total Bids: <span>${totalBids}</span></div>
           <div>Highest Bid: <span>${highestBid}</span></div>
           <div>Ends at: <span>${endsAt}</span></div>
         </div>
-        <p class="card-text m-3 mt-4">
+        <p class="card-text m-3 ms-0 ms-md-3 mt-4">
           ${description}
         </p>
       </div>
