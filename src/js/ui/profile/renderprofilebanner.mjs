@@ -22,7 +22,7 @@ export async function renderProfileBanner(profileName) {
     profileBannerImage.classList.add(
       "img-fluid",
       "profile-banner-image",
-      "rounded-top",
+      "rounded-start",
     );
     profileBannerImage.src = profileName.banner.url;
     profileBannerImage.alt = profileName.banner.alt;
