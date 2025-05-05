@@ -3,6 +3,7 @@ import { updateItem } from "../../API/listings/updateitem.mjs";
 import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
 import { renderItems } from "../listings/renderitems.mjs";
+import { createCardMyListing } from "../profile/createcardmylisting.mjs";
 
 function generateModalHtml(state, item = null) {
   const mediaUrl =
@@ -152,7 +153,13 @@ export async function createPostItemModal(
             const container = document.querySelector(targetSelector);
             if (container) {
               const updatedItem = { ...item, ...itemData }; // Merge updated data with the original item
-              container.setAttribute("data-item", JSON.stringify(updatedItem));
+              // container.setAttribute("data-item", JSON.stringify(updatedItem));
+              // Replace the card with the updated card
+              const newCard = await createCardMyListing(
+                updatedItem,
+                updatedItem.seller?.name || "Unknown",
+              );
+              container.replaceWith(newCard); // Replace the existing card with the new card
             } else {
               console.error(
                 `Target container with selector "${targetSelector}" not found.`,
