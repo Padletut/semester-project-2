@@ -106,9 +106,18 @@ if (activeSwitch) {
 
 // Event listener for the add listing button
 const addListingButton = document.querySelector(".add-listing-button");
-if (addListingButton) {
+if (addListingButton && loggedInUser) {
   addListingButton.addEventListener("click", (event) => {
     event.preventDefault();
     createPostItemModal("create");
   });
+} else if (addListingButton && !loggedInUser) {
+  // Disable the button and show a tooltip
+  const wrapper = document.createElement("div");
+  wrapper.setAttribute("data-bs-toggle", "tooltip");
+  wrapper.setAttribute("title", "Please log in to add a listing");
+  addListingButton.parentNode.insertBefore(wrapper, addListingButton);
+  wrapper.appendChild(addListingButton);
+  addListingButton.disabled = true;
+  new bootstrap.Tooltip(wrapper);
 }

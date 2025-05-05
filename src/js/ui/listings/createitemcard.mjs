@@ -154,8 +154,12 @@ export function createItemCard(item) {
     // Wrap the button in a div for the tooltip to work
     const wrapper = document.createElement("div");
     const placeBidButton = card.querySelector(".place-bid-button");
+    const bidInput = card.querySelector("input[name='bid-amount']");
     wrapper.setAttribute("data-bs-toggle", "tooltip");
     wrapper.setAttribute("title", "Please log in to place a bid");
+    bidInput.setAttribute("disabled", "true");
+    bidInput.setAttribute("data-bs-toggle", "tooltip");
+    bidInput.setAttribute("title", "Please log in to place a bid");
     placeBidButton.parentNode.insertBefore(wrapper, placeBidButton);
     wrapper.appendChild(placeBidButton);
 
@@ -163,13 +167,14 @@ export function createItemCard(item) {
 
     // Initialize the tooltip for the wrapper only
     new bootstrap.Tooltip(wrapper);
+    new bootstrap.Tooltip(bidInput);
   }
 
   // Add event listener to the card for bid submission
   const form = card.querySelector("form");
   if (form) {
     form.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent the card's click event from triggering
+      event.stopPropagation();
     });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -177,19 +182,17 @@ export function createItemCard(item) {
       if (isValid) {
         try {
           const bidInput = form.querySelector("input[name='bid-amount']");
-          const bidAmount = parseFloat(bidInput.value); // Get the bid amount from the input field
+          const bidAmount = parseFloat(bidInput.value);
           await createBid(item.id, bidAmount);
           const feedbackElement = form.querySelector(".valid-feedback");
-          feedbackElement.classList.add("d-block"); // Ensure the success message is visible
-
-          // Optionally, you can refresh the card or show a success message here
+          feedbackElement.classList.add("d-block");
           // Refresh card Recent Bids section
           const recentBidsList = card.querySelector(".card-recent-bids ul");
           const newBidItem = document.createElement("li");
           newBidItem.innerHTML = `${bidAmount} Credits By <a href="#">${profileName}</a>`;
-          recentBidsList.appendChild(newBidItem); // Append the new bid to the list
-          renderCredits(); // Update credits in the header
-          bidInput.value = ""; // Clear the input field after successful bid
+          recentBidsList.appendChild(newBidItem);
+          renderCredits();
+          bidInput.value = "";
         } catch (error) {
           handleErrors(error);
           console.error("Error placing bid:", error);
