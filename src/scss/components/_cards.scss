@@ -126,6 +126,11 @@
       box-shadow: 0 4px 8px variables.$primary-hover; // Add a shadow effect on hover
     }
   }
+
+  .col-md-4:hover .magnifying-glass-icon {
+    transform: scale(1.2); // Enlarge the icon on hover
+    transition: transform 0.3s ease; // Smooth transition for the icon
+  }
 }
 
 .place-bid-card {

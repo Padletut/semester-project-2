@@ -62,7 +62,7 @@ export function createDetailItemCard(item) {
       })
     : "N/A";
   container.innerHTML = `
-    <div class="col-md-4 p-0">
+    <div class="col-md-4 p-0 position-relative">
       <img
         src="${imageUrl}"
         class="img-fluid rounded-start"
@@ -70,6 +70,10 @@ export function createDetailItemCard(item) {
         data-bs-toggle="modal"
         data-bs-target="#imageModal"
       />
+      <div class="magnifying-glass-icon position-absolute bottom-0 end-0 p-3" data-bs-toggle="modal"
+        data-bs-target="#imageModal">
+        <i class="bi bi-search fs-3 text-white"></i>
+      </div>
     </div>
     <div class="col-md-8">
       <div class="card-body rounded-3 p-3">
