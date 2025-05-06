@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { getMyBids } from "../getmybids.mjs";
-import { fetchData } from "../../utils/fetch.mjs";
+import { fetchData } from "../../utils/fetchdata.mjs";
 import { renderErrors } from "../../../ui/shared/rendererrors.mjs";
 import { loadStorage } from "../../../storage/loadstorage.mjs";
 
-vi.mock("../../utils/fetch.mjs", () => ({
+vi.mock("../../utils/fetchdata.mjs", () => ({
   fetchData: vi.fn(),
 }));
 

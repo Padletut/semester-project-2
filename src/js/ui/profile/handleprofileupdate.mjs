@@ -1,5 +1,5 @@
 import * as global from "../../constants.mjs";
-import { fetchData } from "../../API/utils/fetch.mjs";
+import { fetchData } from "../../API/utils/fetchdata.mjs";
 import { headers } from "../../API/utils/headers.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";

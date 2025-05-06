@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { register } from "../register.mjs";
-import { fetchData } from "../../utils/fetch.mjs";
+import { fetchData } from "../../utils/fetchdata.mjs";
 import { validateEmail } from "../../utils/validateemail.mjs";
 
 vi.mock("../utils/headers.mjs", () => ({
   headers: vi.fn(() => ({ "Content-Type": "application/json" })),
 }));
 
-vi.mock("../../utils/fetch.mjs", () => ({
+vi.mock("../../utils/fetchdata.mjs", () => ({
   fetchData: vi.fn(),
 }));
 

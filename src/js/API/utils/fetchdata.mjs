@@ -1,7 +1,8 @@
 import { headers } from "./headers.mjs";
+import { handleErrors } from "./handleerrors.mjs";
 
 /**
- * Performs an fetch request.
+ * Performs a fetch request and delegates error handling to handleErrors.
  * @memberof module:API/utils
  * @param {string} url - The URL to fetch.
  * @param {Object} [options={}] - The options for the fetch request.
@@ -9,19 +10,18 @@ import { headers } from "./headers.mjs";
  * @param {Object} [options.headers] - Additional headers to include in the request.
  * @param {Object} [options.body] - The body of the request.
  * @returns {Promise<Response>} A promise that resolves to the response of the fetch request.
- * @example
- * ```javascript
- * const response = await fetchData("https://api.example.com/data", {
- *     method: "POST",
- *     body: JSON.stringify({ key: "value" })
- * });
- * const data = await response.json();
- * console.log(data);
- * ```
+ * @throws {Error} Throws an error if the response is not ok.
  */
-export function fetchData(url, options = {}) {
-  return fetch(url, {
-    ...options,
-    headers: headers(Boolean(options.body)),
-  });
+export async function fetchData(url, options = {}) {
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers: headers(Boolean(options.body)),
+    });
+
+    return await handleErrors(response);
+  } catch (error) {
+    console.error("Error in fetchData:", error);
+    throw error;
+  }
 }

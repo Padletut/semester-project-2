@@ -1,6 +1,6 @@
 import * as constants from "../../constants.mjs";
 import { headers } from "../utils/headers.mjs";
-import { fetchData } from "../utils/fetch.mjs";
+import { fetchData } from "../utils/fetchdata.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
 import { validateEmail } from "../utils/validateemail.mjs";
 

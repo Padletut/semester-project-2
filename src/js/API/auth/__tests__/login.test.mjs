@@ -1,11 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
 import { login } from "../login.mjs";
-import { fetchData } from "../../utils/fetch.mjs";
+import { fetchData } from "../../utils/fetchdata.mjs";
 import { saveStorage } from "../../../storage/savestorage.mjs";
 import { handleErrors } from "../../utils/handleerrors.mjs";
 
 // Mock the dependencies
-vi.mock("../../utils/fetch.mjs", () => ({
+vi.mock("../../utils/fetchdata.mjs", () => ({
   fetchData: vi.fn(),
 }));
 
@@ -64,6 +64,6 @@ describe("login", () => {
     );
 
     // Assertions
-    expect(handleErrors).toHaveBeenCalledWith(mockResponse);
+    expect(handleErrors).toHaveBeenCalledWith(mockResponse, "login");
   });
 });
