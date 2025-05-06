@@ -1,7 +1,6 @@
 import * as constants from "../../constants.mjs";
 import { saveStorage } from "../../storage/savestorage.mjs";
 import { fetchData } from "../utils/fetchdata.mjs";
-import { handleErrors } from "../utils/handleerrors.mjs";
 
 const { API_BASE_URL, API_AUTH, API_LOGIN, STORAGE_KEYS } = constants;
 const { ACCESS_TOKEN, PROFILE } = STORAGE_KEYS;
@@ -21,21 +20,19 @@ const { ACCESS_TOKEN, PROFILE } = STORAGE_KEYS;
  * ```
  */
 export async function login(email, password) {
-  try {
-    const response = await fetchData(API_BASE_URL + API_AUTH + API_LOGIN, {
+  const response = await fetchData(
+    API_BASE_URL + API_AUTH + API_LOGIN,
+    {
       method: "POST",
       body: JSON.stringify({ email, password }),
-    });
+    },
+    "login",
+  );
 
-    if (response.ok) {
-      const { accessToken, ...profile } = (await response.json()).data;
-      saveStorage(ACCESS_TOKEN, accessToken);
-      saveStorage(PROFILE, profile);
-      return profile;
-    }
-    await handleErrors(response, "login");
-  } catch (error) {
-    console.error("Error during login:", error);
-    throw error;
+  if (response.ok) {
+    const { accessToken, ...profile } = (await response.json()).data;
+    saveStorage(ACCESS_TOKEN, accessToken);
+    saveStorage(PROFILE, profile);
+    return profile;
   }
 }

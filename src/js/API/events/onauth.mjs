@@ -22,7 +22,8 @@ export async function onAuth(event) {
   } else {
     const email = form.signUpEmail.value;
     const password = form.signUpPassword.value;
-    await register(name, email, password);
+    const confirmPassword = form.confirmPassword.value;
+    await register(name, email, password, confirmPassword);
     await login(email, password);
   }
 }

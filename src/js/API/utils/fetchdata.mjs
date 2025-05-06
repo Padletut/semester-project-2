@@ -12,16 +12,15 @@ import { handleErrors } from "./handleerrors.mjs";
  * @returns {Promise<Response>} A promise that resolves to the response of the fetch request.
  * @throws {Error} Throws an error if the response is not ok.
  */
-export async function fetchData(url, options = {}) {
-  try {
-    const response = await fetch(url, {
-      ...options,
-      headers: headers(Boolean(options.body)),
-    });
+export async function fetchData(url, options = {}, context = null) {
+  const response = await fetch(url, {
+    ...options,
+    headers: headers(Boolean(options.body)),
+  });
 
-    return await handleErrors(response);
-  } catch (error) {
-    console.error("Error in fetchData:", error);
-    throw error;
+  if (!response.ok) {
+    await handleErrors(response, context);
   }
+
+  return response;
 }

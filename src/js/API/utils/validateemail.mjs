@@ -12,18 +12,14 @@
  */
 export function validateEmail(emailInput) {
   try {
+    console.log("Validating email:", emailInput.value);
     const emailPattern = /^[^\s@]+@(stud\.noroff\.no)$/;
     const isValid = emailPattern.test(emailInput.value);
 
     if (!isValid) {
-      emailInput.setCustomValidity(
-        "Sorry, only users with email ending @stud.noroff.no can register",
-      );
       throw new Error(
         "Sorry, only users with email ending @stud.noroff.no can register",
       );
-    } else {
-      emailInput.setCustomValidity("");
     }
 
     return isValid;

@@ -2,6 +2,7 @@ export const ERROR_MESSAGES = {
   INVALID_EMAIL: "Invalid email address format.",
   INVALID_PASSWORD:
     "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+  INVALID_CONFIRM_PASSWORD: "Passwords do not match. Please try again.",
   INVALID_NAME:
     "Name must be at least 3 characters long and can only contain letters, numbers, and spaces.",
   INVALID_BIO: "Bio must be at least 10 characters long.",

@@ -17,6 +17,8 @@ import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
  * ```
  */
 export async function handleErrors(response, context = null) {
+  console.log(new Error().stack);
+  console.log("Context:", context);
   if (response.ok) {
     return response;
   }
@@ -31,9 +33,10 @@ export async function handleErrors(response, context = null) {
     if (context === "login") {
       renderErrors(new Error(ERROR_MESSAGES.LOGIN_FAILED));
       throw new Error(ERROR_MESSAGES.LOGIN_FAILED);
+    } else {
+      renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
+      throw new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR);
     }
-    renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
-    throw new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR);
   }
 
   if (

@@ -1,5 +1,6 @@
 import { validateEmail } from "../../API/utils/validateemail.mjs";
 import { validateTags } from "./validatetags.mjs";
+import { validatePasswordMatching } from "./validatepasswordmatching.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 
 /**
@@ -33,6 +34,12 @@ export function validateInputs(form) {
       renderErrors(error);
       isValid = false;
     }
+  }
+
+  const passwordInput = form.querySelector("#signUpPassword");
+  const confirmPasswordInput = form.querySelector("#confirmPassword");
+  if (passwordInput && confirmPasswordInput) {
+    isValid = validatePasswordMatching(form) && isValid;
   }
 
   const tagsInput = form.querySelector("#tags");

@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     root, // Set Vitest root directory to ./src
     test: {
       environment: "jsdom",
-      exclude: ["**/node_modules/**", "**/tests/**", "**/dist/**"],
+      exclude: ["**/node_modules/**", "**/e2e/**", "**/dist/**"],
     },
     define: {
       "import.meta.env": env, // Inject env variables into import.meta.env

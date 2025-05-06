@@ -32,7 +32,12 @@
     "format": "prettier --write .",
     "test": "vitest",
     "docs": "jsdoc -c ./conf.json -r",
-    "serve-docs": "vite preview --outDir docs"
+    "serve-docs": "vite preview --outDir docs",
+    "e2e": "npx playwright test",
+    "e2e:ui": "npx playwright test --ui",
+    "e2e:debug": "npx playwright test --debug",
+    "e2e:headed": "npx playwright test --headed",
+    "e2e:report": "npx playwright show-report"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
