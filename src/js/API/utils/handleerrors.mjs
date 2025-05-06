@@ -17,8 +17,6 @@ import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
  * ```
  */
 export async function handleErrors(response, context = null) {
-  console.log(new Error().stack);
-  console.log("Context:", context);
   if (response.ok) {
     return response;
   }
