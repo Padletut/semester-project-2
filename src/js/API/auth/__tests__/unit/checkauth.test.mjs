@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { checkAuth } from "../checkauth.mjs";
-import { loadStorage } from "../../../storage/loadstorage.mjs";
+import { checkAuth } from "../../checkauth.mjs";
+import { loadStorage } from "../../../../storage/loadstorage.mjs";
 
 // Mock the loadStorage function
-vi.mock("../../../storage/loadstorage.mjs", () => ({
+vi.mock("../../../../storage/loadstorage.mjs", () => ({
   loadStorage: vi.fn(),
 }));
 

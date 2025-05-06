@@ -1,19 +1,19 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { fetchData } from "../fetchdata.mjs";
-import { headers } from "../headers.mjs";
-import { handleErrors } from "../handleerrors.mjs";
+import { fetchData } from "../../fetchdata.mjs";
+import { headers } from "../../headers.mjs";
+import { handleErrors } from "../../handleerrors.mjs";
 
 // Mock the `fetch` function globally
 global.fetch = vi.fn();
 
-vi.mock("../headers.mjs", () => ({
+vi.mock("../../headers.mjs", () => ({
   headers: vi.fn((hasBody) =>
     hasBody ? { "Content-Type": "application/json" } : undefined,
   ),
 }));
 
 // Mock the `handleErrors` function
-vi.mock("../handleerrors.mjs", () => ({
+vi.mock("../../handleerrors.mjs", () => ({
   handleErrors: vi.fn(),
 }));
 

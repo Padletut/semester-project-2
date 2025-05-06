@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
-import { validateBidInput } from "../validatebidinput.mjs";
-import { getItem } from "../../../API/listings/getitem.mjs";
+import { validateBidInput } from "../../validatebidinput.mjs";
+import { getItem } from "../../../../API/listings/getitem.mjs";
 
 // Mock the getItem function
-vi.mock("../../../API/listings/getitem.mjs", () => ({
+vi.mock("../../../../API/listings/getitem.mjs", () => ({
   getItem: vi.fn(),
 }));
 

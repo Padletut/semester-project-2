@@ -1,22 +1,22 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { getMyBids } from "../getmybids.mjs";
-import { fetchData } from "../../utils/fetchdata.mjs";
-import { renderErrors } from "../../../ui/shared/rendererrors.mjs";
-import { loadStorage } from "../../../storage/loadstorage.mjs";
+import { getMyBids } from "../../getmybids.mjs";
+import { fetchData } from "../../../utils/fetchdata.mjs";
+import { renderErrors } from "../../../../ui/shared/rendererrors.mjs";
+import { loadStorage } from "../../../../storage/loadstorage.mjs";
 
-vi.mock("../../utils/fetchdata.mjs", () => ({
+vi.mock("../../../utils/fetchdata.mjs", () => ({
   fetchData: vi.fn(),
 }));
 
-vi.mock("../../../ui/shared/rendererrors.mjs", () => ({
+vi.mock("../../../../ui/shared/rendererrors.mjs", () => ({
   renderErrors: vi.fn(),
 }));
 
-vi.mock("../../../storage/loadstorage.mjs", () => ({
+vi.mock("../../../../storage/loadstorage.mjs", () => ({
   loadStorage: vi.fn(),
 }));
 
-vi.mock("../utils/headers.mjs", () => ({
+vi.mock("../../utils/headers.mjs", () => ({
   headers: vi.fn(() => ({
     Authorization: "Bearer mock-access-token",
     "Content-Type": "application/json",

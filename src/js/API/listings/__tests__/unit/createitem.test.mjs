@@ -1,17 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { createItem } from "../createitem.mjs";
-import { fetchData } from "../../utils/fetchdata.mjs";
-import { handleErrors } from "../../utils/handleerrors.mjs";
+import { createItem } from "../../createitem.mjs";
+import { fetchData } from "../../../utils/fetchdata.mjs";
+import { handleErrors } from "../../../utils/handleerrors.mjs";
 
-vi.mock("../utils/headers.mjs", () => ({
+vi.mock("../../utils/headers.mjs", () => ({
   headers: vi.fn(() => ({ "Content-Type": "application/json" })),
 }));
 
-vi.mock("../../utils/fetchdata.mjs", () => ({
+vi.mock("../../../utils/fetchdata.mjs", () => ({
   fetchData: vi.fn(),
 }));
 
-vi.mock("../../utils/handleerrors.mjs", () => ({
+vi.mock("../../../utils/handleerrors.mjs", () => ({
   handleErrors: vi.fn(),
 }));
 

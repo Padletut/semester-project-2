@@ -1,19 +1,19 @@
 import { describe, it, expect, vi } from "vitest";
-import { login } from "../login.mjs";
-import { fetchData } from "../../utils/fetchdata.mjs";
-import { saveStorage } from "../../../storage/savestorage.mjs";
-import { handleErrors } from "../../utils/handleerrors.mjs";
+import { login } from "../../login.mjs";
+import { fetchData } from "../../../utils/fetchdata.mjs";
+import { saveStorage } from "../../../../storage/savestorage.mjs";
+import { handleErrors } from "../../../utils/handleerrors.mjs";
 
 // Mock the dependencies
-vi.mock("../../utils/fetchdata.mjs", () => ({
+vi.mock("../../../utils/fetchdata.mjs", () => ({
   fetchData: vi.fn(),
 }));
 
-vi.mock("../../../storage/savestorage.mjs", () => ({
+vi.mock("../../../../storage/savestorage.mjs", () => ({
   saveStorage: vi.fn(),
 }));
 
-vi.mock("../../utils/handleerrors.mjs", () => ({
+vi.mock("../../../utils/handleerrors.mjs", () => ({
   handleErrors: vi.fn(() => {
     throw new Error("Mocked error from handleErrors");
   }),

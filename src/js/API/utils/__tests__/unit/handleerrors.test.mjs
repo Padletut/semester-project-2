@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
-import { handleErrors } from "../handleerrors.mjs";
-import { renderErrors } from "../../../ui/shared/rendererrors.mjs";
-import { ERROR_MESSAGES } from "../errormessages.mjs";
+import { handleErrors } from "../../handleerrors.mjs";
+import { renderErrors } from "../../../../ui/shared/rendererrors.mjs";
+import { ERROR_MESSAGES } from "../../errormessages.mjs";
 
 // Mock the renderErrors function
-vi.mock("../../../ui/shared/rendererrors.mjs", () => ({
+vi.mock("../../../../ui/shared/rendererrors.mjs", () => ({
   renderErrors: vi.fn(),
 }));
 
