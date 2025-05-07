@@ -2,10 +2,6 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Registration Flow", () => {
   test("should register successfully with valid details", async ({ page }) => {
-    // Capture browser console logs
-    page.on("console", (msg) => {
-      console.log(`Browser console: ${msg.text()}`);
-    });
     await page.route("**/auth/register", (route) => {
       route.fulfill({
         status: 201,
