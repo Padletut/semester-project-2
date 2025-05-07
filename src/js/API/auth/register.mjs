@@ -47,7 +47,7 @@ export async function register(name, emailInput, password, confirmPassword) {
 
     // Handle the response
     if (response.ok) {
-      return await response.json();
+      return true;
     }
 
     await handleErrors(response, "register");

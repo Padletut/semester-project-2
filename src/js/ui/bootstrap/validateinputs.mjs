@@ -15,9 +15,7 @@ import { renderErrors } from "../shared/rendererrors.mjs";
  * console.log(isValid); // true or false
  * ```
  */
-export function validateInputs(form) {
-  "use strict";
-
+export function validateInputs(form, register = false) {
   if (!form) {
     console.error("Form element is not provided");
     return false;
@@ -25,11 +23,12 @@ export function validateInputs(form) {
 
   let isValid = form.checkValidity();
 
-  const emailInput = form.querySelector("#signUpEmail");
+  const emailInput =
+    form.querySelector("#signUpEmail") || form.querySelector("#email");
   if (emailInput) {
     try {
       // Validate email input
-      isValid = validateEmail(emailInput) && isValid;
+      isValid = validateEmail(emailInput, register) && isValid;
     } catch (error) {
       renderErrors(error);
       isValid = false;

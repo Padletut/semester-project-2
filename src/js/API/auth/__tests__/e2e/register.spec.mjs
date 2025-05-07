@@ -2,8 +2,10 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Registration Flow", () => {
   test("should register successfully with valid details", async ({ page }) => {
-    // Intercept the registration request and mock the response
-    console.log("Intercepted register request");
+    // Capture browser console logs
+    page.on("console", (msg) => {
+      console.log(`Browser console: ${msg.text()}`);
+    });
     await page.route("**/auth/register", (route) => {
       route.fulfill({
         status: 201,
@@ -12,7 +14,7 @@ test.describe("Registration Flow", () => {
           data: {
             id: "mockUserId",
             name: "Test User",
-            email: "user@example.com",
+            email: "user@stud.noroff.no",
           },
         }),
       });
@@ -27,7 +29,7 @@ test.describe("Registration Flow", () => {
         body: JSON.stringify({
           data: {
             accessToken: "mockAccessToken",
-            profile: { name: "Test User", email: "user@example.com" },
+            profile: { name: "Test User", email: "user@stud.noroff.no" },
           },
         }),
       });
@@ -42,7 +44,7 @@ test.describe("Registration Flow", () => {
 
     // Fill in the registration form with valid details
     await page.fill("input#firstName", "Test User");
-    await page.fill("input#signUpEmail", "user@example.com");
+    await page.fill("input#signUpEmail", "user@stud.noroff.no");
     await page.fill("input#signUpPassword", "password123");
     await page.fill("input#confirmPassword", "password123");
 
@@ -82,8 +84,18 @@ test.describe("Registration Flow", () => {
     // Click the "Sign Up" button
     await page.click("button#signUpButton");
 
-    // Assert that an error message is displayed
-    await expect(page.locator(".alert-danger")).toHaveText(
+    // Assert that the error message is displayed in the invalid-feedback for the password fields
+    const passwordFeedback = page.locator(
+      "input#signUpPassword ~ .invalid-feedback",
+    );
+    const confirmPasswordFeedback = page.locator(
+      "input#confirmPassword ~ .invalid-feedback",
+    );
+
+    await expect(passwordFeedback).toHaveText(
+      "Passwords do not match. Please try again.",
+    );
+    await expect(confirmPasswordFeedback).toHaveText(
       "Passwords do not match. Please try again.",
     );
   });
@@ -104,5 +116,30 @@ test.describe("Registration Flow", () => {
     await expect(page.locator("input#signUpEmail:invalid")).toBeVisible();
     await expect(page.locator("input#signUpPassword:invalid")).toBeVisible();
     await expect(page.locator("input#confirmPassword:invalid")).toBeVisible();
+  });
+
+  test("should show an error for invalid email domain during registration", async ({
+    page,
+  }) => {
+    // Navigate to the authorization page
+    await page.goto("http://localhost:5000/authorization");
+
+    // Click the "Sign Up" link to switch to the registration form
+    const signUpLink = page.locator("#signUpLink");
+    await signUpLink.click();
+
+    // Fill in the registration form with an invalid email domain
+    await page.fill("input#firstName", "Test User");
+    await page.fill("input#signUpEmail", "user@example.com");
+    await page.fill("input#signUpPassword", "password123");
+    await page.fill("input#confirmPassword", "password123");
+
+    // Click the "Sign Up" button
+    await page.click("button#signUpButton");
+
+    // Assert that the error message is displayed
+    await expect(page.locator(".alert")).toHaveText(
+      "Sorry, only users with email ending @stud.noroff.no can register",
+    );
   });
 });

@@ -15,12 +15,17 @@ import { onAuth } from "../../API/events/onauth.mjs";
  * handleFormSubmission(buttonElement, formId, redirectUrl);
  * ```
  */
-export function handleAuthFormSubmission(buttonElement, formId, redirectUrl) {
+export function handleAuthFormSubmission(
+  buttonElement,
+  formId,
+  redirectUrl,
+  register = false,
+) {
   if (buttonElement) {
     buttonElement.addEventListener("click", async function (event) {
       event.preventDefault();
       const form = document.getElementById(formId);
-      if (validateInputs(form)) {
+      if (validateInputs(form, register)) {
         try {
           await onAuth(event);
           window.location.href = redirectUrl;

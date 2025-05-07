@@ -23,7 +23,25 @@ export async function onAuth(event) {
     const email = form.signUpEmail.value;
     const password = form.signUpPassword.value;
     const confirmPassword = form.confirmPassword.value;
-    await register(name, email, password, confirmPassword);
-    await login(email, password);
+
+    try {
+      const isRegistered = await register(
+        name,
+        email,
+        password,
+        confirmPassword,
+      );
+      if (isRegistered) {
+        await login(email, password);
+      }
+    } catch (error) {
+      // Display the error message to the user
+      const errorContainer = form.querySelector(".alert-message");
+      if (errorContainer) {
+        errorContainer.textContent = error.message;
+        errorContainer.classList.remove("d-none");
+      }
+      console.error("Error during registration:", error);
+    }
   }
 }
