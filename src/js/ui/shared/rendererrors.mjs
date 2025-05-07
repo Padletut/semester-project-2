@@ -26,7 +26,8 @@ export function renderErrors(error) {
 
   const mainElement = document.querySelector("main");
   const errorElement = document.createElement("div");
-  errorElement.className = "alert alert-danger alert-dismissible fade show";
+  errorElement.className =
+    "alert alert-danger alert-dismissible fade show text-center";
   errorElement.role = "alert";
   errorElement.innerHTML = `
         <div class="alert-message">${error.message}</div>

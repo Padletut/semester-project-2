@@ -42,6 +42,11 @@ export async function handleErrors(response, context = null) {
     errorData.errors &&
     errorData.errors.length > 0
   ) {
+    const errorMessage = errorData.errors[0].message;
+    if (errorMessage === "Profile already exists") {
+      renderErrors(new Error(ERROR_MESSAGES.ACCOUNT_EXISTS));
+      throw new Error(ERROR_MESSAGES.ACCOUNT_EXISTS);
+    }
     renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
     console.error("Error fetching auction items:", errorData.errors);
     throw new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR);
