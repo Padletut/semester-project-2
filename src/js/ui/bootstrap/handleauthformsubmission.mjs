@@ -27,11 +27,7 @@ export function handleAuthFormSubmission(
       const form = document.getElementById(formId);
       if (validateInputs(form, register)) {
         try {
-          await onAuth(event);
-          window.location.href = redirectUrl;
-          setTimeout(() => {
-            form.reset();
-          }, 2000);
+          await onAuth(event, redirectUrl);
         } catch (error) {
           console.error("Error during form submission:", error);
         }

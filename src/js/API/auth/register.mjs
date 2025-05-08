@@ -44,16 +44,14 @@ export async function register(name, emailInput, password, confirmPassword) {
         password,
       }),
     });
-
-    // Handle the response
     if (response.ok) {
       return true;
     }
-
     await handleErrors(response, "register");
   } catch (error) {
     // Log the error and rethrow it
     console.error("Error during registration:", error);
+    handleErrors(error, "register");
     throw error;
   }
 }

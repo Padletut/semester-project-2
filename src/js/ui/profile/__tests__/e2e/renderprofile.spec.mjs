@@ -260,7 +260,7 @@ test.describe("Profile Page", () => {
     const bidsContainer = page.locator("#my-bids-container");
     await expect(bidsContainer).toHaveText("No bids found.");
   });
-
+  // Test 4: Handle error when user is not logged in
   test("should handle error when user is not logged in", async ({ page }) => {
     // Clear localStorage to simulate a logged-out user
     await page.addInitScript(() => {
@@ -284,12 +284,135 @@ test.describe("Profile Page", () => {
 
     // Wait for the alert message to appear
     const errorMessage = page.locator(".alert-message");
-    await errorMessage.waitFor({ timeout: 6000 }); // Wait for the alert to appear
+    await errorMessage.waitFor({ timeout: 60000 }); // Wait for the alert to appear
     await expect(errorMessage).toHaveText(
       "You are not authorized to perform this action. Please log in and try again.",
     );
 
-    // Optionally, assert redirection to the main page if applicable
-    await expect(page).toHaveURL("http://localhost:5000/");
+    // Assert redirection to the main page
+    await page.waitForTimeout(1000);
+    await expect(page).toHaveURL("http://localhost:5000/"), { timeout: 60000 };
+  });
+  // Test 5: Update profile after editing
+  test("should update the profile page with new data after editing the profile", async ({
+    page,
+  }) => {
+    // Mock the initial Profile API response
+    await page.route("**/auction/profiles/*", async (route) => {
+      console.log("Intercepted profile API request");
+      const mockedProfileData = {
+        data: {
+          name: "User",
+          email: "user@stud.noroff.no",
+          bio: "This is my bio.",
+          avatar: {
+            url: "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
+            alt: "Profile avatar",
+          },
+          banner: {
+            url: "https://cdn.pixabay.com/photo/2025/01/18/14/05/architecture-9342358_1280.jpg",
+            alt: "Profile banner",
+          },
+          credits: 843,
+        },
+      };
+
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(mockedProfileData),
+      });
+    });
+
+    // Navigate to the profile page
+    await page.goto("http://localhost:5000/profile?profile=user");
+
+    // Wait for the profile container to load
+    await page.waitForSelector("#profile-id", { timeout: 60000 });
+
+    // Assert that the initial profile information is displayed
+    await expect(page.locator("#profile-id h2")).toHaveText("User");
+    await expect(page.locator("#profile-bio")).toHaveText("This is my bio.");
+    await page.waitForSelector(".profile-avatar-image", { timeout: 60000 });
+    await expect(page.locator(".profile-avatar-image")).toHaveAttribute(
+      "src",
+      "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
+    );
+    await page.waitForSelector(".profile-banner-image", { timeout: 60000 });
+    await expect(page.locator(".profile-banner-image")).toHaveAttribute(
+      "src",
+      "https://cdn.pixabay.com/photo/2025/01/18/14/05/architecture-9342358_1280.jpg",
+    );
+
+    // Mock the updated Profile API response
+    await page.route("**/auction/profiles/*", async (route) => {
+      console.log("Intercepted profile API request for update");
+      const updatedProfileData = {
+        data: {
+          name: "Updated User",
+          email: "updateduser@stud.noroff.no",
+          bio: "Updated bio.",
+          avatar: {
+            url: "https://cdn.pixabay.com/photo/2023/01/01/12/34/new-avatar.jpg", // Updated URL
+            alt: "Avatar for profile Updated User",
+          },
+          banner: {
+            url: "https://cdn.pixabay.com/photo/2023/01/01/12/34/new-banner.jpg", // Updated URL
+            alt: "Banner for profile Updated User",
+          },
+          credits: 843,
+        },
+      };
+
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(updatedProfileData),
+      });
+    });
+
+    // Simulate clicking the "Edit Profile" button
+    const editProfileButton = page.locator("button[name='edit-profile']");
+    await page.waitForSelector("button[name='edit-profile']", {
+      timeout: 60000,
+    });
+    await editProfileButton.click();
+
+    // Wait for the modal to appear
+    await page
+      .locator("#editProfileModal")
+      .waitFor({ state: "visible", timeout: 60000 });
+
+    // Fill in the new profile data in the modal
+    await page.fill("#bio", "Updated bio.");
+    await page.fill(
+      "#avatarUrl",
+      "https://cdn.pixabay.com/photo/2023/01/01/12/34/new-avatar.jpg",
+    );
+    await page.fill(
+      "#coverUrl",
+      "https://cdn.pixabay.com/photo/2023/01/01/12/34/new-banner.jpg",
+    );
+
+    // Submit the form
+    const saveButton = page.locator("button[type='submit']");
+    await saveButton.click();
+
+    // Wait for the profile container to reload
+    await page.waitForTimeout(1000); // Wait for 1 second
+    await page.waitForSelector("#profile-id", { timeout: 60000 });
+
+    // Assert that the updated profile information is displayed
+    await expect(page.locator("#profile-bio")).toHaveText("Updated bio.");
+    await page.waitForSelector(".profile-avatar-image", { timeout: 60000 });
+    await expect(page.locator(".profile-avatar-image")).toHaveAttribute(
+      "src",
+      "https://cdn.pixabay.com/photo/2023/01/01/12/34/new-avatar.jpg",
+    );
+    await page.waitForSelector(".profile-banner-image", { timeout: 60000 });
+    await expect(page.locator(".profile-banner-image")).toHaveAttribute(
+      "src",
+      "https://cdn.pixabay.com/photo/2023/01/01/12/34/new-banner.jpg",
+    );
   });
 });

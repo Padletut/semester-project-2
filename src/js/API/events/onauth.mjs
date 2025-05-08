@@ -11,14 +11,14 @@ import { register } from "../auth/register.mjs";
  * document.querySelector("form").addEventListener("submit", onAuth);
  * ```
  */
-export async function onAuth(event) {
+export async function onAuth(event, redirectUrl) {
   const form = event.target.closest("form");
   const name = form.firstName ? form.firstName.value : null;
 
   if (form.signInButton) {
     const email = form.email.value;
     const password = form.Password.value;
-    await login(email, password);
+    await login(email, password, redirectUrl);
   } else {
     const email = form.signUpEmail.value;
     const password = form.signUpPassword.value;
@@ -32,7 +32,7 @@ export async function onAuth(event) {
         confirmPassword,
       );
       if (isRegistered) {
-        await login(email, password);
+        await login(email, password, redirectUrl);
       }
     } catch (error) {
       // Display the error message to the user

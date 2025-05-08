@@ -1,6 +1,13 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Login Flow", () => {
+  test.beforeEach(async ({ page }) => {
+    // Clear cookies and storage before each test
+    await page.context().clearCookies();
+    page.on("console", (msg) => {
+      console.log(`Browser console: ${msg.type()}: ${msg.text()}`);
+    });
+  });
   test("should log in successfully with mocked credentials", async ({
     page,
   }) => {
@@ -34,10 +41,10 @@ test.describe("Login Flow", () => {
     await signInButton.click();
 
     // Wait for navigation to the listings page
-    await page.waitForURL("http://localhost:5000/index", { timeout: 10000 });
+    await page.waitForURL("http://localhost:5000/", { timeout: 10000 });
 
     // Assert that the user is redirected to the listings page
-    await expect(page).toHaveURL("http://localhost:5000/index");
+    await expect(page).toHaveURL("http://localhost:5000/");
 
     // Alternatively, assert that the Logout link has the correct class
     await expect(page.locator("a.nav-auth")).toHaveClass(/nav-logout/);

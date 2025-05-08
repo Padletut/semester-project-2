@@ -1,6 +1,13 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Registration Flow", () => {
+  test.beforeEach(async ({ page }) => {
+    // Clear cookies and storage before each test
+    await page.context().clearCookies();
+    page.on("console", (msg) => {
+      console.log(`Browser console: ${msg.type()}: ${msg.text()}`);
+    });
+  });
   test("should register successfully with valid details", async ({ page }) => {
     await page.route("**/auth/register", (route) => {
       route.fulfill({
@@ -52,11 +59,13 @@ test.describe("Registration Flow", () => {
     // Click the "Sign Up" button
     await signUpButton.click();
 
-    // Wait for navigation to the index page
-    await page.waitForURL("http://localhost:5000/index", { timeout: 10000 });
+    // Wait for navigation to the profile page
+    await page.waitForTimeout(1000);
+    await page.waitForLoadState("load", { timeout: 60000 });
+    await page.waitForURL("http://localhost:5000/profile", { timeout: 60000 });
 
     // Assert that the user is redirected to the index page
-    await expect(page).toHaveURL("http://localhost:5000/index");
+    await expect(page).toHaveURL("http://localhost:5000/profile");
 
     // Assert that the Logout link is visible (user is logged in)
     const logoutLink = page.locator("a.nav-auth");

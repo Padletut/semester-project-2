@@ -1,6 +1,14 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Logout Flow", () => {
+  test.beforeEach(async ({ page }) => {
+    // Clear cookies and storage before each test
+    await page.context().clearCookies();
+    page.on("console", (msg) => {
+      console.log(`Browser console: ${msg.type()}: ${msg.text()}`);
+    });
+  });
+
   test("should log out successfully and redirect to the listings page", async ({
     page,
   }) => {
@@ -26,7 +34,7 @@ test.describe("Logout Flow", () => {
     await signInButton.click();
 
     // Wait for navigation to the listings page
-    await page.waitForURL("http://localhost:5000/index", { timeout: 10000 });
+    await page.waitForURL("http://localhost:5000/", { timeout: 10000 });
 
     // Check if the hamburger menu is visible (mobile view)
     const hamburgerMenuButton = page.locator("button.navbar-toggler");
