@@ -1,5 +1,4 @@
 import { headers } from "./headers.mjs";
-import { handleErrors } from "./handleerrors.mjs";
 
 /**
  * Performs a fetch request and delegates error handling to handleErrors.
@@ -12,15 +11,11 @@ import { handleErrors } from "./handleerrors.mjs";
  * @returns {Promise<Response>} A promise that resolves to the response of the fetch request.
  * @throws {Error} Throws an error if the response is not ok.
  */
-export async function fetchData(url, options = {}, context = null) {
+export async function fetchData(url, options = {}) {
   const response = await fetch(url, {
     ...options,
     headers: headers(Boolean(options.body)),
   });
-
-  if (!response.ok) {
-    await handleErrors(response, context);
-  }
 
   return response;
 }

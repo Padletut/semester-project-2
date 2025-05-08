@@ -12,8 +12,9 @@ import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
  */
 export async function renderProfileCredits(profile) {
   try {
+    console.log("testProfileCredits", profile);
     const creditsContainer = document.getElementById("profile-credits");
-    creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
+    creditsContainer.innerHTML = `${profile.credits} Cr`;
   } catch (error) {
     renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     console.error(`Error rendering profile credits: ${error.message}`);

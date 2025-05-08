@@ -27,13 +27,11 @@ import { handleErrors } from "../../API/utils/handleerrors.mjs";
  * ```
  */
 export async function renderProfile() {
-  const { STORAGE_KEYS } = constants;
-  const { PROFILE } = STORAGE_KEYS;
-  const { name } = loadStorage(PROFILE);
+  const name = loadStorage(constants.STORAGE_KEYS.PROFILE)?.name;
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
   if (profileName === null) {
-    profileName = undefined;
+    profileName = name;
   }
 
   const loaderContainer = document.getElementById("loader");
@@ -53,7 +51,9 @@ export async function renderProfile() {
     renderMyListings(profile);
     renderBidsWon(profile);
     setupEditProfileButton(profile);
-
+    if (profileName?.toLowerCase() === name?.toLowerCase()) {
+      renderProfileCredits(profile);
+    }
     // Set up an observer to watch for changes in the profile data
     if (profileContainer) {
       const observer = new MutationObserver(async (mutationsList) => {
@@ -69,7 +69,7 @@ export async function renderProfile() {
             renderProfileBanner(updatedProfile);
             renderProfileAvatar(updatedProfile);
             renderProfileName(updatedProfile, updatedProfile.email);
-            if (profileName === name) {
+            if (profileName === name || profileName === undefined) {
               renderProfileCredits(updatedProfile);
             }
             renderProfileBio(updatedProfile);
@@ -82,6 +82,8 @@ export async function renderProfile() {
     }
 
     const creditsContainer = document.querySelector(".display-credits");
+    console.log("Profile Name:", profileName);
+    console.log("Name:", name);
     if (creditsContainer && profileName === name) {
       creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
     } else if (creditsContainer && profileName !== name) {

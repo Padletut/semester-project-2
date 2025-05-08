@@ -1,5 +1,6 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
+import { handleErrors } from "../utils/handleerrors.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import * as constants from "../../constants.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
@@ -7,7 +8,8 @@ import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 
 const { API_BASE_URL, API_PROFILES, STORAGE_KEYS } = constants;
 const { PROFILE } = STORAGE_KEYS;
-const loggedInUser = loadStorage(PROFILE);
+const storedUser = loadStorage(PROFILE);
+const loggedInUser = storedUser ? storedUser.name : null;
 
 /**
  * Fetches the profile data from the API.
@@ -20,35 +22,35 @@ const loggedInUser = loadStorage(PROFILE);
  * console.log(profile);
  * ```
  */
-export async function getProfile(profileName = loggedInUser) {
-  const queryParams = new URLSearchParams({
-    _listings: "true",
-    _wins: "true",
-  });
-  // Determine the profile name based on the structure of the profileName parameter
-  const name =
-    typeof profileName === "string"
-      ? profileName
-      : profileName.data
-        ? profileName.data.name
-        : profileName.name;
-  // Fetch the profile data from the API
-  const response = await fetchData(
-    `${API_BASE_URL}${API_PROFILES}/${name}?${queryParams.toString()}`,
-    {
-      headers: headers(false),
-      method: "GET",
-    },
-  );
-
-  if (response.ok) {
+export async function getProfile(username = loggedInUser) {
+  try {
+    const queryParams = new URLSearchParams({
+      _listings: "true",
+      _wins: "true",
+    });
+    const response = await fetchData(
+      `${API_BASE_URL}${API_PROFILES}/${username}?${queryParams}`,
+      {
+        headers: headers(false),
+        method: "GET",
+      },
+    );
     const data = await response.json();
-    return data;
+    if (!response.ok) {
+      // Handle 401 Unauthorized
+      if (response.status === 401) {
+        console.error("Unauthorized access. Redirecting to login page.");
+        renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 5000);
+      }
+      throw new Error("Error loading profile data");
+    }
+    return await data;
+  } catch (error) {
+    console.error("Error fetching profile:", error.message);
+    handleErrors(ERROR_MESSAGES.AUTHORIZATION_ERROR);
+    return null;
   }
-
-  // Render error if profile not found with both original and lowercase names
-  renderErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
-  console.error(
-    `Error fetching profile data: ${response.status} - ${response.statusText}`,
-  );
 }

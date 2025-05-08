@@ -12,7 +12,7 @@ test.describe("Logout Flow", () => {
         body: JSON.stringify({
           data: {
             accessToken: "mockAccessToken",
-            profile: { name: "Test User", email: "user@example.com" },
+            profile: { name: "Test User", email: "user@stud.noroff.no" },
           },
         }),
       });
@@ -20,7 +20,7 @@ test.describe("Logout Flow", () => {
 
     // Navigate to the login page and log in
     await page.goto("http://localhost:5000/authorization");
-    await page.fill("input#email", "user@example.com");
+    await page.fill("input#email", "user@stud.noroff.no");
     await page.fill("input#Password", "password123");
     const signInButton = page.locator("button#signInButton");
     await signInButton.click();
