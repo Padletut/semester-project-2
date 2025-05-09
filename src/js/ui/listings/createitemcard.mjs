@@ -8,23 +8,23 @@ import { renderCredits } from "../shared/rendercredits.mjs";
 /**
  * Creates a post card element and appends it to the listings container.
  * @memberof module:UI/listings
- * @param {Object} item - The item object containing details of the auction item.
- * @param {HTMLElement} container - The container element to render the item into.
+ * @param {Object} item - The item object containing details about the auction item.
  * @example
  * ```javascript
- *  const item = {
- *   media: [{ url: "https://example.com/image.jpg", alt: "Item Image" }],
- *  title: "Auction Item",
- *  description: "Description of the item",
- *  seller: { name: "Seller Name" },
- *  bids: [{ amount: 100 }, { amount: 200 }],
- *  endsAt: "2023-10-01T00:00:00Z",
- *  created: "2023-09-01T00:00:00Z",
- *  };
- *  };
- * const container = document.getElementById("item-container");
- *  createItemCard(item, container);
- *  ```
+ * const item = {
+ *  id: "123",
+ * title: "Beautiful Painting",
+ * description: "A beautiful painting of a sunset.",
+ * seller: { name: "John Doe" },
+ * media: [{ url: "img/painting.jpg", alt: "Painting" }],
+ * bids: [{ amount: 100, bidder: { name: "Jane Doe" } }],
+ * endsAt: "2023-12-31T23:59:59Z",
+ * tags: ["art", "painting"],
+ * created: "2023-01-01T00:00:00Z",
+ * };
+ * const card = createItemCard(item);
+ * document.querySelector(".items-container").appendChild(card);
+ * ```
  */
 export function createItemCard(item) {
   const { STORAGE_KEYS } = constants;

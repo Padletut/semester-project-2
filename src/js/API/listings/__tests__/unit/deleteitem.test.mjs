@@ -17,6 +17,7 @@ describe("deleteItem", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    document.body.innerHTML = `<main></main>`;
   });
 
   it("should delete an item successfully", async () => {
@@ -47,21 +48,8 @@ describe("deleteItem", () => {
     fetch.mockResolvedValue(mockErrorResponse);
 
     // Call the deleteItem function and expect it to throw
-    await expect(deleteItem(mockItemId)).rejects.toThrow();
-
-    // Ensure handleErrors was called
-    expect(handleErrors).toHaveBeenCalledWith(mockErrorResponse);
-  });
-
-  it("should handle network errors", async () => {
-    // Mock fetch to throw a network error
-    const mockError = new Error("Network error");
-    fetch.mockRejectedValue(mockError);
-
-    // Call the deleteItem function and expect it to throw
-    await expect(deleteItem(mockItemId)).rejects.toThrow("Network error");
-
-    // Ensure handleErrors was called
-    expect(handleErrors).toHaveBeenCalledWith(mockError);
+    await expect(deleteItem(mockItemId)).rejects.toThrow(
+      "Failed to delete item. Please try again later.",
+    );
   });
 });

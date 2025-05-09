@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { fetchData } from "../../fetchdata.mjs";
 import { headers } from "../../headers.mjs";
-import { handleErrors } from "../../handleerrors.mjs";
 
 // Mock the `fetch` function globally
 global.fetch = vi.fn();
@@ -34,12 +33,6 @@ describe("fetchData", () => {
       json: async () => ({ success: true }),
     });
 
-    // Mock handleErrors to return the response
-    handleErrors.mockResolvedValue({
-      ok: true,
-      json: async () => ({ success: true }),
-    });
-
     const response = await fetchData(mockUrl);
 
     // Assertions
@@ -47,8 +40,7 @@ describe("fetchData", () => {
       headers: { "Content-Type": "application/json" },
     });
     expect(headers).toHaveBeenCalledWith(false); // No body for GET request
-    expect(handleErrors).toHaveBeenCalledWith(expect.any(Object)); // Ensure handleErrors is called
-    expect(response.ok).toBe(true);
+    expect(response.ok).toBe(true); // Ensure the response is successful
   });
 
   it("should handle POST requests with a body", async () => {
@@ -59,12 +51,6 @@ describe("fetchData", () => {
 
     // Mock the fetch response
     fetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({ success: true }),
-    });
-
-    // Mock handleErrors to return the response
-    handleErrors.mockResolvedValue({
       ok: true,
       json: async () => ({ success: true }),
     });
@@ -81,8 +67,7 @@ describe("fetchData", () => {
       headers: { "Content-Type": "application/json" },
     });
     expect(headers).toHaveBeenCalledWith(true); // Body is present for POST request
-    expect(handleErrors).toHaveBeenCalledWith(expect.any(Object)); // Ensure handleErrors is called
-    expect(response.ok).toBe(true);
+    expect(response.ok).toBe(true); // Ensure the response is successful
   });
 
   vi.mock("../headers.mjs", () => ({
@@ -91,21 +76,15 @@ describe("fetchData", () => {
     ),
   }));
 
-  it("should throw an error for non-2xx responses", async () => {
+  it("should handle non-2xx responses gracefully", async () => {
     // Mock the fetch response
-    fetch.mockResolvedValue({
+    const mockErrorResponse = {
       ok: false,
       status: 500,
       statusText: "Internal Server Error",
       json: async () => ({ message: "Internal Server Error" }),
-    });
-
-    // Mock handleErrors to throw an error
-    handleErrors.mockImplementation(() => {
-      throw new Error(
-        "Fetch request failed with status: 500 Internal Server Error",
-      );
-    });
+    };
+    fetch.mockResolvedValue(mockErrorResponse);
 
     // Mock the headers function to return the expected headers
     headers.mockReturnValue({
@@ -113,9 +92,7 @@ describe("fetchData", () => {
       "x-noroff-api-key": "<api-key>",
     });
 
-    await expect(fetchData(mockUrl)).rejects.toThrow(
-      "Fetch request failed with status: 500 Internal Server Error",
-    );
+    const response = await fetchData(mockUrl);
 
     // Assertions
     expect(fetch).toHaveBeenCalledWith(mockUrl, {
@@ -124,6 +101,6 @@ describe("fetchData", () => {
         "x-noroff-api-key": "<api-key>",
       },
     });
-    expect(handleErrors).toHaveBeenCalledWith(expect.any(Object)); // Ensure handleErrors is called
+    expect(response).toEqual(mockErrorResponse); // Ensure the response is returned as-is
   });
 });

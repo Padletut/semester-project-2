@@ -30,7 +30,7 @@ export async function renderItems(
 ) {
   const searchInput = document.querySelector('input[name="search"]');
   const filterInput = document.querySelector('input[name="filter-tags"]');
-  // Do not render if search or tag input element is not empty
+  // Check if search or filter inputs are active
   if (
     (searchInput && searchInput.value.trim() !== "") ||
     (filterInput && filterInput.value.trim() !== "")
@@ -76,7 +76,7 @@ export async function renderItems(
         sort: sortListing,
         page: nextPage,
       });
-      const response = await getItems(queryParams, itemName, tag);
+      const response = await getItems(queryParams, false, itemName, tag);
 
       if (response.data.length > 0) {
         const items = response.data;
@@ -85,10 +85,17 @@ export async function renderItems(
         isLastPage = meta.isLastPage;
 
         // Create a document fragment for better performance
+        if (
+          itemsContainer.style.display === "none" ||
+          itemsContainer.style.visibility === "hidden"
+        ) {
+          itemsContainer.style.display = "block";
+          itemsContainer.style.visibility = "visible";
+        }
         const fragment = document.createDocumentFragment();
 
         items.forEach((item) => {
-          const card = createItemCard(item, itemsContainer);
+          const card = createItemCard(item);
           if (card) {
             fragment.appendChild(card); // Append the card to the fragment
           } else {
@@ -131,8 +138,8 @@ export async function renderItems(
     },
     {
       root: null, // Use the viewport as the root
-      rootMargin: "0px 0px 40% 0px",
-      threshold: 0, // Trigger when the sentinel is fully visible
+      rootMargin: "0px",
+      threshold: 0.01, // Trigger when the sentinel is fully visible
     },
   );
 

@@ -26,6 +26,7 @@ describe("createItem", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    document.body.innerHTML = `<main></main>`;
   });
 
   it("should create an item and return the response on success", async () => {
@@ -60,11 +61,15 @@ describe("createItem", () => {
     };
     fetchData.mockResolvedValue(mockErrorResponse);
 
-    // Call the createItem function and expect it to throw
-    await expect(createItem(mockItem)).rejects.toThrow();
+    // Call the createItem function and expect it to throw the custom error message
+    await expect(createItem(mockItem)).rejects.toThrow(
+      "Failed to create the listing. Please try again later.",
+    );
 
-    // Ensure handleErrors was called
-    expect(handleErrors).toHaveBeenCalledWith(mockErrorResponse);
+    // Ensure handleErrors was called with the custom error message
+    expect(handleErrors).toHaveBeenCalledWith(
+      "Failed to create item. Please check your input and try again.",
+    );
   });
 
   it("should handle network errors", async () => {

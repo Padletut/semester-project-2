@@ -26,7 +26,15 @@ export async function getItems(
     page: "1",
   }),
   search = false,
+  itemName = null,
+  tag = null,
 ) {
+  if (itemName) {
+    queryParams.append("itemName", itemName);
+  }
+  if (tag) {
+    queryParams.append("tag", tag);
+  }
   const endpoint = search
     ? `${API_BASE_URL}${API_LISTINGS}${API_SEARCH}?${queryParams.toString()}`
     : `${API_BASE_URL}${API_LISTINGS}?${queryParams.toString()}`;
