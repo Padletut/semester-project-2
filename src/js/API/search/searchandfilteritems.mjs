@@ -1,5 +1,5 @@
 import { getItems } from "../../API/listings/getitems.mjs";
-import { createItemCard } from "../../ui/listings/createitemcard.mjs";
+import { renderListingCard } from "../../ui/listings/renderlistingcard.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import { debounce } from "../utils/debounce.mjs";
 import * as constants from "../../constants.mjs";
@@ -123,7 +123,7 @@ export class SearchAndFilterItems {
           const items = await this.fetchPage(queryParams);
 
           // Render the new items
-          items.forEach((item) => createItemCard(item, this.itemsContainer));
+          items.forEach((item) => renderListingCard(item, this.itemsContainer));
         }
       },
       {
@@ -162,7 +162,7 @@ export class SearchAndFilterItems {
 
       // Render the items
       items.forEach((item) => {
-        const card = createItemCard(item, this.itemsContainer);
+        const card = renderListingCard(item, this.itemsContainer);
         if (card) {
           this.fragment.appendChild(card); // Append the card to the fragment
         } else {
@@ -234,7 +234,7 @@ export class SearchAndFilterItems {
 
         // Render the filtered items
         filteredItems.forEach((item) => {
-          const card = createItemCard(item);
+          const card = renderListingCard(item);
           if (card) {
             this.fragment.appendChild(card); // Append the card to the fragment
           } else {
@@ -271,7 +271,7 @@ export class SearchAndFilterItems {
 
         // Render the search results
         items.forEach((item) => {
-          const card = createItemCard(item);
+          const card = renderListingCard(item);
           if (card) {
             this.fragment.appendChild(card); // Append the card to the fragment
           } else {
@@ -387,7 +387,7 @@ export class SearchAndFilterItems {
 
       // Render the filtered items
       this.uniqueItems.forEach((item) => {
-        const card = createItemCard(item);
+        const card = renderListingCard(item);
         if (card) {
           this.fragment.appendChild(card); // Append the card to the fragment
         } else {

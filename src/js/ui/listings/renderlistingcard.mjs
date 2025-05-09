@@ -22,11 +22,11 @@ import { renderCredits } from "../shared/rendercredits.mjs";
  * tags: ["art", "painting"],
  * created: "2023-01-01T00:00:00Z",
  * };
- * const card = createItemCard(item);
+ * const card = renderListingCard(item);
  * document.querySelector(".items-container").appendChild(card);
  * ```
  */
-export function createItemCard(item) {
+export function renderListingCard(item) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
   const profileName = loadStorage(PROFILE)?.name;

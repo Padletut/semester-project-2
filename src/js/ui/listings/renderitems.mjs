@@ -1,5 +1,5 @@
 import { getItems } from "../../API/listings/getitems.mjs";
-import { createItemCard } from "./createitemcard.mjs";
+import { renderListingCard } from "./renderlistingcard.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
@@ -95,7 +95,7 @@ export async function renderItems(
         const fragment = document.createDocumentFragment();
 
         items.forEach((item) => {
-          const card = createItemCard(item);
+          const card = renderListingCard(item);
           if (card) {
             fragment.appendChild(card); // Append the card to the fragment
           } else {

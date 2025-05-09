@@ -22,7 +22,7 @@ import { updateItemDetail } from "../events/updateitemdetail.mjs";
  * created: "2023-09-01T00:00:00Z",
  * };
  * const container = document.getElementById("item-container");
- * createItemCard(item, container);
+ * renderDetailItemCard(item, container);
  * ```
  */
 export function renderDetailItemCard(item) {
