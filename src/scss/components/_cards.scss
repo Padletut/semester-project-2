@@ -5,6 +5,7 @@
   &:hover {
     filter: drop-shadow(0 0 0.5rem rgba(25, 231, 87, 0.8));
     transition: all 0.3s ease-in-out;
+    transform: scale(1.005);
   }
 }
 
@@ -234,14 +235,6 @@
     @media (max-width: 767px) {
       width: 100% !important;
       padding-right: 0.5rem;
-    }
-  }
-}
-
-#my-listings {
-  .card {
-    &:hover {
-      filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
     }
   }
 }

@@ -37,7 +37,8 @@ export async function renderMyListingCard(item, author) {
 
     const card = document.createElement("div");
     card.classList.add("card", "card-auction-item");
-    card.setAttribute("data-item-id", fullItem.id); // Unique identifier for the card
+    card.setAttribute("data-item-id", fullItem.id);
+    card.style.cursor = "pointer";
 
     const imageUrl =
       fullItem.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
@@ -102,10 +103,16 @@ export async function renderMyListingCard(item, author) {
 
     cardWrapper.appendChild(card);
 
+    // Add click event to navigate to the detail page
+    card.addEventListener("click", () => {
+      window.location.href = `/detail?id=${fullItem.id}`;
+    });
+
     // Add event listener to the edit button to call updateitem modal
     const editButton = card.querySelector('[name="edit-my-listing-item"]');
     if (editButton) {
       editButton.addEventListener("click", async () => {
+        event.stopPropagation();
         try {
           const updatedItem = await createPostItemModal(
             "update",
