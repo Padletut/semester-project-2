@@ -1,3 +1,5 @@
+import * as bootstrap from "bootstrap";
+import { createToastContainer } from "./createtoastcontainer.mjs";
 /**
  * @module Rendererrors
  */
@@ -18,24 +20,31 @@
  * ```
  */
 export function renderErrors(error) {
-  const existingAlert = document.querySelector(".alert");
+  const toastContainer =
+    document.getElementById("toastContainer") || createToastContainer();
+  const toast = document.createElement("div");
+  toast.className = "toast align-items-center text-bg-danger border-0";
+  toast.setAttribute("role", "alert");
+  toast.setAttribute("aria-live", "assertive");
+  toast.setAttribute("aria-atomic", "true");
+  toast.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">
+        ${error.message || "An unexpected error occurred."}
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
 
-  if (existingAlert) {
-    existingAlert.remove();
-  }
+  toastContainer.appendChild(toast);
 
-  const mainElement = document.querySelector("main");
-  const errorElement = document.createElement("div");
-  errorElement.className =
-    "alert alert-danger alert-dismissible fade show text-center";
-  errorElement.role = "alert";
-  errorElement.innerHTML = `
-        <div class="alert-message">${error.message}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    `;
+  const bootstrapToast = new bootstrap.Toast(toast);
+  bootstrapToast.show();
 
-  mainElement.prepend(errorElement);
-  setTimeout(() => {
-    errorElement.remove();
-  }, 5000);
+  // Remove the toast from the DOM after it hides
+  toast.addEventListener("hidden.bs.toast", () => {
+    toast.remove();
+  });
 }
+
+// Function to create a toast container if it doesn't exist
