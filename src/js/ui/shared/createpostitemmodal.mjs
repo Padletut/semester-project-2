@@ -3,7 +3,7 @@ import { updateItem } from "../../API/listings/updateitem.mjs";
 import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
 import { renderItems } from "../listings/renderitems.mjs";
-import { createCardMyListing } from "../profile/createcardmylisting.mjs";
+import { renderMyListingCard } from "../profile/rendermylistingcard.mjs";
 
 function generateModalHtml(state, item = null) {
   const mediaUrl =
@@ -155,7 +155,7 @@ export async function createPostItemModal(
               const updatedItem = { ...item, ...itemData }; // Merge updated data with the original item
               // container.setAttribute("data-item", JSON.stringify(updatedItem));
               // Replace the card with the updated card
-              const newCard = await createCardMyListing(
+              const newCard = await renderMyListingCard(
                 updatedItem,
                 updatedItem.seller?.name || "Unknown",
               );

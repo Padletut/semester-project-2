@@ -21,10 +21,10 @@ import { getItem } from "../../API/listings/getitem.mjs";
  * };
  * const author = "Author Name";
  * const container = document.getElementById("my-listings-container");
- * createCardMyListing(item, author, container);
+ * renderMyListingCard(item, author, container);
  * ```
  */
-export async function createCardMyListing(item, author) {
+export async function renderMyListingCard(item, author) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
   const profileName = loadStorage(PROFILE)?.name;

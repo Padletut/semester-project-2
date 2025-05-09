@@ -1,4 +1,4 @@
-import { createCardMyListing } from "./createcardmylisting.mjs";
+import { renderMyListingCard } from "./rendermylistingcard.mjs";
 /**
  * Renders listings for the current profile.
  * This function fetches the listings data from the profile object and creates a card for each listing.
@@ -25,7 +25,7 @@ export async function renderMyListings(profile) {
 
   for (const listing of profile.listings) {
     // Render each listing card
-    const card = await createCardMyListing(listing, author); // Await the returned card
+    const card = await renderMyListingCard(listing, author); // Await the returned card
     if (card) {
       fragment.appendChild(card); // Append the card to the fragment only if it's valid
     } else {
