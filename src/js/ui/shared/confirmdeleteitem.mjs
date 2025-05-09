@@ -1,6 +1,4 @@
 import { deleteItem } from "../../API/listings/deleteitem.mjs"; // Import your delete API function
-import { renderProfile } from "../profile/renderprofile.mjs"; // Import the function to refresh the profile listings
-
 /**
  * Displays a confirmation modal for deleting an item.
  * @memberof module:UI/shared
@@ -49,17 +47,10 @@ export function confirmDeleteItem(itemId, postItemModal) {
       await deleteItem(itemId); // Call the API to delete the item
       confirmationModal.hide();
       postItemModal.hide();
-
-      // Check if the user is on the item detail page
-      const currentUrl = window.location.href;
-      if (currentUrl.includes("detail")) {
-        // Redirect to the Listings page
-        window.location.href = "/";
-      } else {
-        renderProfile(); // Refresh the profile listings if not on the detail page
-      }
     } catch (error) {
       console.error("Error deleting item:", error);
+      confirmationModal.hide();
+      postItemModal.hide();
     } finally {
       document.getElementById("deleteConfirmationModal").remove(); // Remove the modal from the DOM
     }

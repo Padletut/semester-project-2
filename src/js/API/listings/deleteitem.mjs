@@ -1,6 +1,9 @@
 import * as constants from "../../constants.mjs";
-import { handleErrors } from "../utils/handleerrors.mjs";
 import { headers } from "../utils/headers.mjs";
+import { rendersuccess } from "../../ui/shared/rendersuccess.mjs";
+import { handleItemDeletionNavigation } from "../../ui/shared/handleitemdeletionnavigation.mjs";
+import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
+import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 
 /**
  * Deletes an item from the server.
@@ -27,15 +30,16 @@ export async function deleteItem(itemId) {
     );
 
     if (!response.ok) {
-      const errorData = await response.json(); // Parse the error response
-      await handleErrors(response); // Call handleErrors
-      throw new Error(errorData.message || "Failed to delete item"); // Explicitly throw an error
+      renderErrors(new Error(ERROR_MESSAGES.ITEM_DELETION_FAILED));
+      throw new Error(ERROR_MESSAGES.ITEM_DELETION_FAILED);
     }
 
-    return;
+    rendersuccess({ message: "Listing deleted successfully!" });
+    setTimeout(() => {
+      handleItemDeletionNavigation(itemId);
+    }, 5000);
   } catch (error) {
-    handleErrors(error);
-    console.error("Error deleting item:", error);
+    console.error("Error deleting listing:", error);
     throw error;
   }
 }

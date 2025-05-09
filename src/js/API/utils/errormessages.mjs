@@ -19,6 +19,7 @@ export const ERROR_MESSAGES = {
     "Failed to create item. Please check your input and try again.",
   ITEM_UPDATE_FAILED:
     "Failed to update item. Please check your input and try again.",
+  ITEM_DELETION_FAILED: "Failed to delete item. Please try again later.",
   LOADING_PAGE_ERROR:
     "An error occurred while loading the page, please try again later.",
   LOADING_PROFILE_ERROR: "We couldn't find the profile you were looking for.",

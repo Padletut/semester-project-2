@@ -1,6 +1,7 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
+import { rendersuccess } from "../../ui/shared/rendersuccess.mjs";
 import * as constants from "../../constants.mjs";
 
 /**
@@ -40,9 +41,10 @@ export async function updateItem(itemId, item) {
       body,
     });
 
-    if (!response.ok) {
-      await handleErrors(response);
+    if (response.ok) {
+      rendersuccess("Listing updated successfully!");
     }
+    await handleErrors(response);
 
     return await response.json();
   } catch (error) {
