@@ -27,6 +27,16 @@ export function renderBidHistory(response) {
   if (bidHistoryContainer) {
     bidHistoryContainer.innerHTML = ""; // Clear existing bid history
 
+    // Add headings for the bid history list
+    const headerRow = document.createElement("li");
+    headerRow.classList.add("d-flex", "justify-content-between", "fw-bold");
+    headerRow.innerHTML = `
+      <div class="bid-name-heading flex-grow-1">Bidder</div>
+      <div class="bid-date-heading flex-grow-1">Ends At</div>
+      <div class="bid-amount-heading flex-grow-1 text-end">Bid Amount</div>
+    `;
+    bidHistoryContainer.appendChild(headerRow);
+
     if (response.bids && response.bids.length > 0) {
       response.bids.forEach((bid) => {
         const bidDate = new Date(bid.created).toLocaleDateString("en-US", {
