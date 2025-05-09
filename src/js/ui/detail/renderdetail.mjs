@@ -1,6 +1,6 @@
 import * as constants from "../../constants.mjs";
 import { getItem } from "../../API/listings/getitem.mjs";
-import { createDetailItemCard } from "./createdetailcard.mjs";
+import { renderDetailItemCard } from "./renderdetailcard.mjs";
 import { renderBidHistory } from "./renderbidhistory.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
 import { toggleLoader } from "../shared/toggleLoader.mjs";
@@ -44,7 +44,7 @@ export async function renderDetail(itemId) {
     }
 
     // Render the item details
-    createDetailItemCard(response);
+    renderDetailItemCard(response);
 
     // Render the bid history
     renderBidHistory(response);

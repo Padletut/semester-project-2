@@ -25,7 +25,7 @@ import { updateItemDetail } from "../events/updateitemdetail.mjs";
  * createItemCard(item, container);
  * ```
  */
-export function createDetailItemCard(item) {
+export function renderDetailItemCard(item) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
   const profileName = loadStorage(PROFILE)?.name || "Unknown User";
@@ -117,7 +117,7 @@ export function createDetailItemCard(item) {
 function initializeItemObserver(detailContainer) {
   if (detailContainer) {
     observeItemChanges(detailContainer, (updatedItem) => {
-      createDetailItemCard(updatedItem); // Update the detail card with the new data
+      renderDetailItemCard(updatedItem); // Update the detail card with the new data
     });
   } else {
     console.warn("Detail container not found. Skipping observeItemChanges.");
