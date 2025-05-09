@@ -325,7 +325,9 @@ test.describe("Profile Page", () => {
     });
 
     // Navigate to the profile page
-    await page.goto("http://localhost:5000/profile?profile=user");
+    await page.goto("http://localhost:5000/profile?profile=user", {
+      waitUntil: "networkidle",
+    });
 
     // Wait for the profile container to load
     await page.waitForSelector("#profile-id", { timeout: 60000 });

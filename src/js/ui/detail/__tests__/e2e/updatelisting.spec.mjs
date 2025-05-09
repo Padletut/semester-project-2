@@ -50,7 +50,9 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
     });
 
     // Perform login
-    await page.goto("http://localhost:5000/authorization");
+    await page.goto("http://localhost:5000/authorization", {
+      waitUntil: "networkidle",
+    });
     await page.fill("input#email", "user@stud.noroff.no");
     await page.fill("input#Password", "password123");
     await page.click("button#signInButton");

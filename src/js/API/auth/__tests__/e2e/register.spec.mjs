@@ -127,7 +127,9 @@ test.describe("Registration Flow", () => {
     page,
   }) => {
     // Navigate to the authorization page
-    await page.goto("http://localhost:5000/authorization");
+    await page.goto("http://localhost:5000/authorization", {
+      waitUntil: "networkidle",
+    });
 
     // Click the "Sign Up" link to switch to the registration form
     const signUpLink = page.locator("#signUpLink");
