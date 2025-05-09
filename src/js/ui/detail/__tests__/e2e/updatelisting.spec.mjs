@@ -147,4 +147,103 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
       "An updated description for the bowling ball.",
     );
   });
+
+  // Handle API errors during update
+  // This test case simulates an API error during the update process
+  test("should handle API errors during update", async ({ page }) => {
+    // Mock the API response for fetching the listing details
+    await page.route("**/auction/listings/**", async (route) => {
+      const mockedResponse = {
+        data: {
+          id: "a0ed0109-0699-4097-b160-888e405250cb",
+          title: "Bowling Ball",
+          description: "Cool bowling ball that will make you play good!",
+          media: [[Object]],
+          tags: ["bowling", "ball", "sport"],
+          created: "2025-05-08T16:57:50.984Z",
+          updated: "2025-05-08T16:57:50.984Z",
+          endsAt: "2025-05-09T16:57:00.000Z",
+          bids: [],
+          seller: {
+            name: "User",
+            email: "memespot@stud.noroff.no",
+            bio: "This is my new bio. I am from Norway, studying Front End Development at Noroff. Currently doing my Semester Project 2 assignment! Its going so well!",
+            avatar: {
+              url: "https://i.pinimg.com/736x/c0/4b/01/c04b017b6b9d1c189e15e6559aeb3ca8.jpg",
+              alt: "User avatar",
+            },
+            banner: {
+              url: "https://media.istockphoto.com/id/1410766826/photo/full-frame-of-green-leaves-pattern-background.webp?b=1&s=612x612&w=0&k=20&c=LGngoLNpLG2gl_0uUNIKfNpVMzr61qBew8oRvVUMnCQ=",
+              alt: "User banner",
+            },
+          },
+          _count: { bids: 0 },
+        },
+        meta: {},
+      };
+      await route.fulfill({
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mockedResponse),
+      });
+    });
+
+    // Mock the API response for updating the listing to return an error
+    await page.route(
+      "**/auction/listings/a0ed0109-0699-4097-b160-888e405250cb",
+      async (route) => {
+        const mockedResponse = {
+          error: {
+            message: "Failed to update the item.",
+            status: 500,
+          },
+        };
+        await route.fulfill({
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mockedResponse),
+        });
+      },
+      { method: "PUT" }, // Ensure this mock only applies to PUT requests
+    );
+    // Navigate to the detail page for the listing
+    await page.goto(
+      "http://localhost:5000/detail?id=a0ed0109-0699-4097-b160-888e405250cb",
+    );
+
+    // Verify that the detail page is loaded
+    const detailTitle = page.locator(".card-title");
+    await expect(detailTitle).toHaveText("Bowling Ball");
+
+    // Click the Edit button to open the update modal
+    await page.click('[name="edit-my-listing-item"]');
+
+    // Wait for the update modal to appear
+    const updateModal = page.locator("#postItemModal");
+    await expect(updateModal).toBeVisible();
+
+    // Fill in the updated form fields
+    await page.fill("#title", "Updated Bowling Ball");
+    await page.fill(
+      "#description",
+      "An updated description for the bowling ball.",
+    );
+    await page.fill("#tags", "bowling, ball, updated");
+
+    // Submit the form
+    await page.locator("#postItemModal button[type='submit']").click();
+
+    // Wait for an error message to be displayed
+    const errorMessage = page.locator(".alert-message");
+    await expect(errorMessage).toHaveText(
+      "Failed to update the listing. Please try again later.",
+    );
+
+    // Verify that the modal is still open (indicating an error occurred)
+    await expect(updateModal).toBeVisible();
+  });
 });

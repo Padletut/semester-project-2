@@ -3,6 +3,7 @@ import { headers } from "../utils/headers.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
 import { rendersuccess } from "../../ui/shared/rendersuccess.mjs";
 import * as constants from "../../constants.mjs";
+import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 
 /**
  * Update an auction item in the listings API.
@@ -42,13 +43,17 @@ export async function updateItem(itemId, item) {
     });
 
     if (response.ok) {
-      rendersuccess("Listing updated successfully!");
+      rendersuccess({ message: "Listing updated successfully!" });
+      return;
     }
-    await handleErrors(response);
+    renderErrors(
+      new Error("Failed to update the listing. Please try again later."),
+    );
 
     return await response.json();
   } catch (error) {
     console.error("Error updating item:", error);
+    handleErrors(error);
     throw error;
   }
 }
