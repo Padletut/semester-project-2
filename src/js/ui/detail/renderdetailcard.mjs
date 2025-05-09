@@ -4,6 +4,7 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 import { createEditDeleteItemModal } from "../shared/createeditdeleteitemmodal.mjs";
 import { observeItemChanges } from "../events/observeitemchanges.mjs";
 import { updateItemDetail } from "../events/updateitemdetail.mjs";
+import { imageModal } from "../shared/imagemodal.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
@@ -157,63 +158,22 @@ export function renderDetailItemCard(item) {
   images.forEach((image) => {
     image.addEventListener("click", () => {
       const title = image.getAttribute("data-title");
-      const alt = image.getAttribute("data-alt");
       const url = image.getAttribute("data-url");
-      imageModal(title, alt, url); // Trigger the image modal
+      const imagesArray = Array.from(images).map((img) => ({
+        url: img.getAttribute("data-url"),
+        alt: img.getAttribute("data-alt"),
+      }));
+      imageModal(
+        title,
+        imagesArray,
+        imagesArray.findIndex((img) => img.url === url),
+      );
     });
   });
 
   linkAuthorToProfile(); // Link author to profile page
   addEditButtonListener(item);
   initializeItemObserver(".item-detail-container"); // Initialize the item observer
-}
-
-function imageModal(title, imageAlt, imageUrl) {
-  const body = document.querySelector("body");
-  const existingModal = document.getElementById("imageModal");
-
-  // Remove existing modal if it exists
-  if (existingModal) {
-    existingModal.remove();
-  }
-
-  // Create the modal element
-  const modal = document.createElement("div");
-  modal.className = "modal modal-xl fade";
-  modal.id = "imageModal";
-  modal.tabIndex = -1;
-  modal.setAttribute("aria-labelledby", "imageModalLabel");
-  modal.setAttribute("aria-hidden", "true");
-
-  // Set the modal's inner HTML
-  modal.innerHTML = `
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header" data-bs-theme="dark">
-          <div class="w-100 text-center">
-              <h5 class="modal-title" id="imageModalLabel">${title}</h5>
-          </div>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-        </div>
-        <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-          <img src="${imageUrl}" class="img-fluid rounded-3 mb-3" alt="${imageAlt}" />
-          <p class="text-muted text-center" data-bs-theme="dark">${imageAlt}</p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Append the modal to the body
-  body.appendChild(modal);
-
-  // Initialize and show the modal
-  const bootstrapModal = new bootstrap.Modal(modal);
-  bootstrapModal.show();
 }
 
 function initializeItemObserver(detailContainer) {

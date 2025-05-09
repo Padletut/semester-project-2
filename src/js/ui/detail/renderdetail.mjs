@@ -35,8 +35,20 @@ export async function renderDetail(itemId) {
       const currentDate = new Date();
 
       if (profileName === response.seller.name || currentDate > endsAtDate) {
-        placeBidButton.disabled = true; // Disable the button
-        placeBidButton.classList.add("disabled"); // Add a disabled class for styling
+        // Wrap the button in a div for the tooltip to work
+        const wrapper = document.createElement("div");
+        wrapper.setAttribute("data-bs-toggle", "tooltip");
+        wrapper.setAttribute(
+          "title",
+          "Sorry, you can not place a bid on your own item.",
+        );
+        placeBidButton.parentNode.insertBefore(wrapper, placeBidButton);
+        wrapper.appendChild(placeBidButton);
+        placeBidButton.classList.add("disabled");
+        placeBidButton.disabled = true;
+
+        // Initialize the tooltip for the wrapper only
+        new bootstrap.Tooltip(wrapper);
       } else {
         placeBidButton.disabled = false; // Enable the button
         placeBidButton.classList.remove("disabled"); // Remove the disabled class

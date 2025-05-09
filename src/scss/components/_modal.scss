@@ -18,3 +18,14 @@
     }
   }
 }
+
+#imageModal {
+  .modal-content {
+    max-height: 80vh;
+  }
+  .carousel-item {
+    img {
+      object-fit: contain;
+    }
+  }
+}
