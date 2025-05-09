@@ -174,6 +174,7 @@ export async function createPostItemModal(
 
         postItemModal.hide();
       } catch (error) {
+        postItemModal.hide();
         console.error("Error during form submission:", error);
         reject(error);
       }

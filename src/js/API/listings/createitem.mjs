@@ -1,8 +1,9 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
-import { handleErrors } from "../utils/handleerrors.mjs";
 import { rendersuccess } from "../../ui/shared/rendersuccess.mjs";
 import * as constants from "../../constants.mjs";
+import { renderErrors } from "../../ui/shared/rendererrors.mjs";
+import { handleErrors } from "../utils/handleerrors.mjs";
 
 /**
  * Post a new auction item to the listings API.
@@ -52,10 +53,9 @@ export async function createItem(item) {
       rendersuccess({ message: "Listing created successfully!" });
       return await response.json();
     }
-
-    const errorData = await response.json();
-    await handleErrors(response);
-    throw new Error(errorData.message || "Failed to create item");
+    renderErrors(
+      new Error("Failed to create the listing. Please try again later."),
+    );
   } catch (error) {
     handleErrors(error);
     console.error("Error posting item:", error);

@@ -159,4 +159,52 @@ test.describe("Add Listing Modal - API Mocking", () => {
     const successMessage = page.locator(".alert-success-message");
     await expect(successMessage).toHaveText("Listing created successfully!");
   });
+  // Test for API error handling during listing creation
+  test("should handle API errors during listing creation", async ({ page }) => {
+    // Mock the API response for creating a new listing with an error
+    await page.route("**/auction/listings", async (route) => {
+      const mockedResponse = {
+        error: {
+          message: "Failed to create the listing.",
+          status: 500,
+        },
+      };
+
+      await route.fulfill({
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mockedResponse),
+      });
+    });
+
+    // Navigate to the page with the Add Listing button
+    await page.goto("http://localhost:5000");
+
+    // Click the Add Listing button to open the modal
+    await page.click(".add-listing-button");
+
+    // Wait for the modal to appear
+    const modal = page.locator("#postItemModal");
+    await expect(modal).toBeVisible();
+
+    // Fill in the form fields
+    await page.fill("#title", "Vintage Clock");
+    await page.fill(
+      "#description",
+      "A beautiful vintage clock from the 19th century.",
+    );
+    await page.fill("#tags", "antique, clock");
+    await page.fill("#endsAt", "2025-12-31T23:59");
+
+    // Submit the form
+    await page.locator("#postItemModal button[type='submit']").click();
+
+    // Wait for the error message to appear
+    const errorMessage = page.locator(".alert-message");
+    await expect(errorMessage).toHaveText(
+      "Failed to create the listing. Please try again later.",
+    );
+  });
 });
