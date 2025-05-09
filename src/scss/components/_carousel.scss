@@ -26,7 +26,7 @@
     button {
       background-color: variables.$primary;
       height: 0.8em;
-      border: 1.5px solid rgba(0, 0, 0, 0.8);
+      border: variables.$body-bg 1px solid;
     }
   }
 }

@@ -23,7 +23,7 @@ export function imageModal(title, images, currentIndex = 0) {
 
   // Create the modal element
   const modal = document.createElement("div");
-  modal.className = "modal modal-fullscreen-xl-down fade";
+  modal.className = "modal modal-lg fade";
   modal.id = "imageModal";
   modal.tabIndex = -1;
   modal.setAttribute("aria-labelledby", "imageModalLabel");
@@ -34,7 +34,7 @@ export function imageModal(title, images, currentIndex = 0) {
     .map(
       (image, index) => `
       <div class="carousel-item ${index === currentIndex ? "active" : ""}">
-        <img src="${image.url}" class="d-block w-100 img-fluid rounded-3" alt="${image.alt || "Image"}">
+        <img src="${image.url}" class="d-block w-100" alt="${image.alt || "Image"}">
         <p class="text-center text-light mt-2">${image.alt || ""}</p>
       </div>
     `,

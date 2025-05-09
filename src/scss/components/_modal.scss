@@ -20,12 +20,11 @@
 }
 
 #imageModal {
-  .modal-content {
-    max-height: 80vh;
-  }
   .carousel-item {
     img {
       object-fit: contain;
+      max-height: 70vh;
+      padding: 2rem 0;
     }
   }
 }
