@@ -135,6 +135,13 @@ export async function createEditDeleteItemModal(
 
     // Add new media input group
     addMediaBtn.addEventListener("click", () => {
+      const currentMediaCount =
+        mediaInputsContainer.querySelectorAll(".media-input-group").length;
+
+      if (currentMediaCount >= 8) {
+        showToast("You can only add up to 8 media items.");
+        return;
+      }
       const mediaInputGroup = document.createElement("div");
       mediaInputGroup.classList.add("media-input-group", "mb-2");
       mediaInputGroup.innerHTML = `
@@ -232,4 +239,41 @@ export async function createEditDeleteItemModal(
       modalElement.remove();
     });
   });
+}
+
+// Function to show a toast notification
+function showToast(message) {
+  const toastContainer =
+    document.getElementById("toastContainer") || createToastContainer();
+  const toast = document.createElement("div");
+  toast.className = "toast align-items-center text-bg-warning border-0";
+  toast.setAttribute("role", "alert");
+  toast.setAttribute("aria-live", "assertive");
+  toast.setAttribute("aria-atomic", "true");
+  toast.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">
+        ${message}
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
+  toastContainer.appendChild(toast);
+
+  const bootstrapToast = new bootstrap.Toast(toast);
+  bootstrapToast.show();
+
+  // Remove the toast from the DOM after it hides
+  toast.addEventListener("hidden.bs.toast", () => {
+    toast.remove();
+  });
+}
+
+// Function to create a toast container if it doesn't exist
+function createToastContainer() {
+  const container = document.createElement("div");
+  container.id = "toastContainer";
+  container.className = "toast-container position-fixed top-50 start-25 p-3";
+  document.body.appendChild(container);
+  return container;
 }
