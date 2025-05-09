@@ -16,7 +16,7 @@ test.describe("Profile Page", () => {
     });
   });
 
-  // Test 1: Leave this untouched
+  // Test 1: Load profile page with user information
   test("should load the profile page with the user's information", async ({
     page,
   }) => {
