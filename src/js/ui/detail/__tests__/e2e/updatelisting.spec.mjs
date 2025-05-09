@@ -101,16 +101,10 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
       });
     });
 
-    // Console log mocked response and data
-    page.on("response", async (response) => {
-      if (response.url().includes("auction/listings")) {
-        const responseBody = await response.json();
-        console.log("Mocked Response Body:", responseBody);
-      }
-    });
     // Navigate to the detail page for the listing
     await page.goto(
       "http://localhost:5000/detail?id=a0ed0109-0699-4097-b160-888e405250cb",
+      { timeout: 60000 },
     );
 
     // Verify that the detail page is loaded

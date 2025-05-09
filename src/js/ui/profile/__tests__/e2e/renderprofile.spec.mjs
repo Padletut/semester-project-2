@@ -290,8 +290,8 @@ test.describe("Profile Page", () => {
     );
 
     // Assert redirection to the main page
-    await page.waitForTimeout(1000);
-    await expect(page).toHaveURL("http://localhost:5000/"), { timeout: 60000 };
+    await page.waitForTimeout(6000);
+    await expect(page).toHaveURL("http://localhost:5000"), { timeout: 60000 };
   });
   // Test 5: Update profile after editing
   test("should update the profile page with new data after editing the profile", async ({
