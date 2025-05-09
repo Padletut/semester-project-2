@@ -6,8 +6,7 @@ import { renderItems } from "../listings/renderitems.mjs";
 import { renderMyListingCard } from "../profile/rendermylistingcard.mjs";
 
 function generateModalHtml(state, item = null) {
-  const mediaUrl =
-    state === "update" && item.media?.[0]?.url ? item.media[0].url : ""; // Fallback to an empty string if media is undefined or empty
+  const media = state === "update" && item.media ? item.media : []; // Use existing media if updating
 
   return `
     <div class="modal fade" id="postItemModal" tabindex="-1" aria-labelledby="postItemModalLabel" aria-hidden="true">
@@ -37,8 +36,31 @@ function generateModalHtml(state, item = null) {
                             <div class="invalid-feedback">Maximum 8 tags allowed.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="mediaUrl" class="form-label">Media URL</label>
-                            <input type="url" class="form-control" id="mediaUrl" name="mediaUrl" value="${mediaUrl}">
+                            <label class="form-label">Media</label>
+                            <div id="mediaInputsContainer">
+                                ${
+                                  media.length
+                                    ? media
+                                        .map(
+                                          (mediaItem, index) => `
+                                <div class="media-input-group mb-2" data-index="${index}">
+                                    <input type="url" class="form-control mb-1" name="mediaUrl" placeholder="Media URL" value="${mediaItem.url}" >
+                                    <input type="text" class="form-control" name="mediaAlt" placeholder="Alt text (optional)" value="${mediaItem.alt || ""}">
+                                    <button type="button" class="btn btn-danger btn-sm mt-2 remove-media-btn">Remove</button>
+                                </div>
+                                `,
+                                        )
+                                        .join("")
+                                    : `
+                                <div class="media-input-group mb-2">
+                                    <input type="url" class="form-control mb-1" name="mediaUrl" placeholder="Media URL">
+                                    <input type="text" class="form-control" name="mediaAlt" placeholder="Alt text (optional)">
+                                    <button type="button" class="btn btn-danger btn-sm mt-2 remove-media-btn">Remove</button>
+                                </div>
+                                `
+                                }
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm mt-2" id="addMediaBtn">Add Media</button>
                         </div>
                         ${
                           state === "create"
@@ -51,7 +73,7 @@ function generateModalHtml(state, item = null) {
                             : ""
                         }
                         <div class="d-flex justify-content-center gap-4 mb-3">
-                            ${state === "update" ? `<button type="button" class="btn btn-danger" id="deleteItemBtn">Delete</button>` : ""}
+                            ${state === "update" ? `<button type="button" class="btn btn-custom-delete" id="deleteItemBtn">Delete</button>` : ""}
                             <button type="submit" class="btn btn-custom-secondary">${state === "create" ? "Create" : "Update"}</button>
                             <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Cancel</button>
                         </div>
@@ -91,7 +113,7 @@ function generateModalHtml(state, item = null) {
  * );
  * ```
  */
-export async function createPostItemModal(
+export async function createEditDeleteItemModal(
   state,
   item = null,
   targetSelector = null,
@@ -100,31 +122,65 @@ export async function createPostItemModal(
     const modalHtml = generateModalHtml(state, item);
     document.body.insertAdjacentHTML("beforeend", modalHtml);
 
-    const postItemModal = new bootstrap.Modal(
+    const auctionItemModal = new bootstrap.Modal(
       document.getElementById("postItemModal"),
     );
-    postItemModal.show();
+    auctionItemModal.show();
 
     const form = document.getElementById("postItemForm");
-    // Remove the modal from the DOM when it is hidden
-    const modalElement = document.getElementById("postItemModal");
-    modalElement.addEventListener("hidden.bs.modal", () => {
-      modalElement.remove();
+    const mediaInputsContainer = document.getElementById(
+      "mediaInputsContainer",
+    );
+    const addMediaBtn = document.getElementById("addMediaBtn");
+
+    // Add new media input group
+    addMediaBtn.addEventListener("click", () => {
+      const mediaInputGroup = document.createElement("div");
+      mediaInputGroup.classList.add("media-input-group", "mb-2");
+      mediaInputGroup.innerHTML = `
+        <input type="url" class="form-control mb-1" name="mediaUrl" placeholder="Media URL" required>
+        <input type="text" class="form-control" name="mediaAlt" placeholder="Alt text (optional)">
+        <button type="button" class="btn btn-danger btn-sm mt-2 remove-media-btn">Remove</button>
+      `;
+      mediaInputsContainer.appendChild(mediaInputGroup);
+
+      // Add event listener to the remove button
+      mediaInputGroup
+        .querySelector(".remove-media-btn")
+        .addEventListener("click", () => {
+          mediaInputGroup.remove();
+        });
     });
+
+    // Add event listeners to existing remove buttons
+    mediaInputsContainer
+      .querySelectorAll(".remove-media-btn")
+      .forEach((btn) => {
+        btn.addEventListener("click", (event) => {
+          event.target.closest(".media-input-group").remove();
+        });
+      });
 
     // Add event listener to the delete button
     if (state === "update") {
       const deleteButton = document.getElementById("deleteItemBtn");
       deleteButton.addEventListener("click", () => {
-        confirmDeleteItem(item.id, postItemModal);
+        confirmDeleteItem(item.id, auctionItemModal);
       });
     }
 
+    // Handle form submission
     handleModalFormSubmission(form, async (formData) => {
       const tags = formData.tags
         ? formData.tags.split(",").map((tag) => tag.trim())
         : [];
-      const media = formData.mediaUrl ? [{ url: formData.mediaUrl }] : [];
+      const media = Array.from(
+        mediaInputsContainer.querySelectorAll(".media-input-group"),
+      ).map((group) => {
+        const url = group.querySelector("input[name='mediaUrl']").value;
+        const alt = group.querySelector("input[name='mediaAlt']").value;
+        return { url, alt };
+      });
       const itemData = {
         title: formData.title,
         description: formData.description,
@@ -152,32 +208,28 @@ export async function createPostItemModal(
           if (targetSelector) {
             const container = document.querySelector(targetSelector);
             if (container) {
-              const updatedItem = { ...item, ...itemData }; // Merge updated data with the original item
-              // container.setAttribute("data-item", JSON.stringify(updatedItem));
-              // Replace the card with the updated card
+              const updatedItem = { ...item, ...itemData };
               const newCard = await renderMyListingCard(
                 updatedItem,
                 updatedItem.seller?.name || "Unknown",
               );
-              container.replaceWith(newCard); // Replace the existing card with the new card
-            } else {
-              console.error(
-                `Target container with selector "${targetSelector}" not found.`,
-              );
+              container.replaceWith(newCard);
             }
           }
 
-          // Resolve with the updated item
-          const updatedItem = { ...item, ...itemData };
-          resolve(updatedItem);
+          resolve({ ...item, ...itemData });
         }
 
-        postItemModal.hide();
+        auctionItemModal.hide();
       } catch (error) {
-        postItemModal.hide();
+        auctionItemModal.hide();
         console.error("Error during form submission:", error);
         reject(error);
       }
+    });
+    const modalElement = document.getElementById("postItemModal");
+    modalElement.addEventListener("hidden.bs.modal", () => {
+      modalElement.remove();
     });
   });
 }

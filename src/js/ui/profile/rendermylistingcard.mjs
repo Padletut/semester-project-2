@@ -1,5 +1,5 @@
 import * as constants from "../../constants.mjs";
-import { createPostItemModal } from "../shared/createpostitemmodal.mjs";
+import { createEditDeleteItemModal } from "../shared/createeditdeleteitemmodal.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { getItem } from "../../API/listings/getitem.mjs";
 
@@ -114,7 +114,7 @@ export async function renderMyListingCard(item, author) {
       editButton.addEventListener("click", async () => {
         event.stopPropagation();
         try {
-          const updatedItem = await createPostItemModal(
+          const updatedItem = await createEditDeleteItemModal(
             "update",
             fullItem,
             `[data-item-id="${fullItem.id}"]`,

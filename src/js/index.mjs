@@ -8,7 +8,7 @@ import { checkAuth } from "./API/auth/checkauth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
-import { createPostItemModal } from "./ui/shared/createpostitemmodal.mjs";
+import { createEditDeleteItemModal } from "./ui/shared/createeditdeleteitemmodal.mjs";
 import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { loadStorage } from "./storage/loadstorage.mjs";
 import { SearchAndFilterItems } from "./API/search/searchandfilteritems.mjs";
@@ -109,7 +109,7 @@ const addListingButton = document.querySelector(".add-listing-button");
 if (addListingButton && loggedInUser) {
   addListingButton.addEventListener("click", (event) => {
     event.preventDefault();
-    createPostItemModal("create");
+    createEditDeleteItemModal("create");
   });
 } else if (addListingButton && !loggedInUser) {
   // Disable the button and show a tooltip

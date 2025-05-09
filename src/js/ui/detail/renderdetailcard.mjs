@@ -1,7 +1,7 @@
 import * as constants from "../../constants.mjs";
 import { linkAuthorToProfile } from "../shared/linkauthortoprofile.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
-import { createPostItemModal } from "../shared/createpostitemmodal.mjs";
+import { createEditDeleteItemModal } from "../shared/createeditdeleteitemmodal.mjs";
 import { observeItemChanges } from "../events/observeitemchanges.mjs";
 import { updateItemDetail } from "../events/updateitemdetail.mjs";
 
@@ -166,7 +166,7 @@ function addEditButtonListener(item) {
 
   editButton.addEventListener("click", async () => {
     try {
-      const updatedItem = await createPostItemModal("update", item); // Open the modal and wait for the updated item
+      const updatedItem = await createEditDeleteItemModal("update", item); // Open the modal and wait for the updated item
       if (updatedItem) {
         updateItemDetail(".item-detail-container", updatedItem); // Update the data-item attribute
       }
