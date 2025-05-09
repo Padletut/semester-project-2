@@ -29,6 +29,7 @@ import { renderCredits } from "../shared/rendercredits.mjs";
 export function renderListingCard(item) {
   const { STORAGE_KEYS } = constants;
   const { PROFILE } = STORAGE_KEYS;
+  const mediaContent = generateMediaContent(item);
   const profileName = loadStorage(PROFILE)?.name;
   const cardWrapper = document.createElement("div");
   cardWrapper.classList.add("col-12", "col-md-6", "col-lg-4", "col-xxl-3");
@@ -38,19 +39,13 @@ export function renderListingCard(item) {
   card.setAttribute("data-id", item.id);
   card.style.cursor = "pointer";
 
-  const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
-  const imageAlt = item.media?.[0]?.alt || "Auction Item";
   // Check if the auction has ended
   const endsAtDate = new Date(item.endsAt);
   const isAuctionEnded = endsAtDate <= new Date();
 
   card.innerHTML = `
     <div class="card-header d-flex justify-content-between align-items-center position-relative p-0">
-      <img
-        src="${imageUrl}"
-        class="card-img-top"
-        alt="${imageAlt}"
-      />
+      ${mediaContent}
       <div class="container position-absolute top-0 end-0 p-2 rounded-3 mt-2 me-2 text-center text-light card-display-bids">
         ${item.bids?.length || 0} bids
       </div>
@@ -200,5 +195,64 @@ export function renderListingCard(item) {
       }
     });
   }
+  // Prevent card click event when clicking on carousel controls
+  const prevButton = card.querySelector(".carousel-control-prev");
+  const nextButton = card.querySelector(".carousel-control-next");
+
+  if (prevButton && nextButton) {
+    prevButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+
+    nextButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+  }
   return cardWrapper;
+}
+
+function generateMediaContent(item) {
+  // Generate media content
+  let mediaContent = "";
+  if (item.media?.length > 1) {
+    // Bootstrap carousel for multiple media
+    mediaContent = `
+      <div id="mediaCarousel-${item.id}" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          ${item.media
+            .map(
+              (mediaItem, index) => `
+            <div class="carousel-item ${index === 0 ? "active" : ""}">
+              <img src="${mediaItem.url}" class="d-block w-100 carousel-image" alt="${mediaItem.alt || "Auction Item"}" data-title="${item.title}" data-alt="${mediaItem.alt || "Auction Item"}" data-url="${mediaItem.url}">
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mediaCarousel-${item.id}" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mediaCarousel-${item.id}" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    `;
+  } else {
+    // Single image
+    const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
+    const imageAlt = item.media?.[0]?.alt || "Auction Item";
+    mediaContent = `
+      <img
+        src="${imageUrl}"
+        class="img-top rounded-top single-image"
+        alt="${imageAlt}"
+        data-title="${item.title}"
+        data-alt="${imageAlt}"
+        data-url="${imageUrl}"
+      />
+    `;
+  }
+  return mediaContent;
 }

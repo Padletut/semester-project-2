@@ -1,0 +1,32 @@
+@use "../variables";
+
+.carousel {
+  width: 100%;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: variables.$primary;
+  border: 1.5px solid rgba(0, 0, 0, 0.8);
+  border-radius: 50%; /* Circular shape */
+  aspect-ratio: 1/1; /* Maintain aspect ratio */
+  width: 3rem; /* Adjust size */
+  height: 3rem;
+}
+
+.carousel-control-next-icon {
+  position: absolute;
+  right: 5px;
+}
+.carousel-control-prev-icon {
+  position: absolute;
+  left: 5px;
+}
+
+.carousel-indicators {
+  gap: 1rem;
+  button {
+    background-color: variables.$primary;
+    height: 1rem;
+    border: 1.5px solid rgba(0, 0, 0, 0.8);
+  }
+}

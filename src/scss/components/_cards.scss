@@ -17,8 +17,15 @@
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
 
   .card-header,
-  .card-img-top {
+  .img-top {
     border-width: 0;
+    height: 19rem;
+    max-width: 304px;
+  }
+
+  .carousel-image {
+    height: 19rem;
+    width: 100%;
   }
 
   .card-author {
@@ -113,7 +120,8 @@
 
   @media (max-width: 767px) {
     width: 100%;
-    .img-fluid {
+    .img-fluid,
+    .carousel-image {
       height: 100%;
       min-height: 12rem;
       border-radius: 0.5rem 0.5rem 0 0 !important;
@@ -134,8 +142,11 @@
     background: variables.$card-bg;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
   }
-  .img-fluid {
-    height: 100%;
+  .img-fluid,
+  .carousel-image {
+    // height: 100%;
+    width: 20rem;
+    aspect-ratio: 1/1;
     object-fit: cover;
     cursor: zoom-in;
     transition:

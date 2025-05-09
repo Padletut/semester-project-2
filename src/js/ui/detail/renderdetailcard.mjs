@@ -35,12 +35,10 @@ export function renderDetailItemCard(item) {
     return;
   }
 
-  const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
-  const imageAlt = item.media?.[0]?.alt || "Auction Item";
-  const title = item.title || "Untitled";
+  const title = item.title;
   const description =
     item.description || "Beautiful auction item with no description.";
-  const sellerName = item.seller?.name || "Unknown";
+  const sellerName = item.seller.name;
   const totalBids = item.bids?.length || 0;
   const highestBid = item.bids?.length
     ? Math.max(...item.bids.map((bid) => bid.amount))
@@ -61,19 +59,64 @@ export function renderDetailItemCard(item) {
         year: "numeric",
       })
     : "N/A";
-  container.innerHTML = `
-    <div class="col-md-4 position-relative">
+
+  // Generate media content
+  let mediaContent = "";
+  if (item.media?.length > 1) {
+    // Bootstrap carousel for multiple media
+    mediaContent = `
+      <div id="mediaCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          ${item.media
+            .map(
+              (_, index) => `
+            <button type="button" data-bs-target="#mediaCarousel" data-bs-slide-to="${index}" ${
+              index === 0 ? 'class="active" aria-current="true"' : ""
+            } aria-label="Slide ${index + 1}"></button>
+          `,
+            )
+            .join("")}
+        </div>
+        <div class="carousel-inner">
+          ${item.media
+            .map(
+              (mediaItem, index) => `
+            <div class="carousel-item ${index === 0 ? "active" : ""}">
+              <img src="${mediaItem.url}" class="d-block carousel-image rounded-start" alt="${mediaItem.alt || "Auction Item"}" data-title="${title}" data-alt="${mediaItem.alt || "Auction Item"}" data-url="${mediaItem.url}">
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mediaCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mediaCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    `;
+  } else {
+    // Single image
+    const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
+    const imageAlt = item.media?.[0]?.alt || "Auction Item";
+    mediaContent = `
       <img
         src="${imageUrl}"
-        class="img-fluid rounded-start"
+        class="img-fluid rounded-start single-image"
         alt="${imageAlt}"
-        data-bs-toggle="modal"
-        data-bs-target="#imageModal"
+        data-title="${title}"
+        data-alt="${imageAlt}"
+        data-url="${imageUrl}"
       />
-      <div class="magnifying-glass-icon position-absolute bottom-0 end-0 p-3" data-bs-toggle="modal"
-        data-bs-target="#imageModal">
-        <i class="bi bi-search fs-3 text-white"></i>
-      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="col-md-4 position-relative">
+      ${mediaContent}
     </div>
     <div class="col-md-8">
       <div class="card-body rounded-3 p-3">
@@ -108,24 +151,32 @@ export function renderDetailItemCard(item) {
       </div>
     </div>
   `;
-  imageModal(title, imageAlt, imageUrl); // Create the image modal
+
+  // Add event listeners for images to open the modal
+  const images = container.querySelectorAll(".carousel-image, .single-image");
+  images.forEach((image) => {
+    image.addEventListener("click", () => {
+      const title = image.getAttribute("data-title");
+      const alt = image.getAttribute("data-alt");
+      const url = image.getAttribute("data-url");
+      imageModal(title, alt, url); // Trigger the image modal
+    });
+  });
+
   linkAuthorToProfile(); // Link author to profile page
   addEditButtonListener(item);
   initializeItemObserver(".item-detail-container"); // Initialize the item observer
 }
 
-function initializeItemObserver(detailContainer) {
-  if (detailContainer) {
-    observeItemChanges(detailContainer, (updatedItem) => {
-      renderDetailItemCard(updatedItem); // Update the detail card with the new data
-    });
-  } else {
-    console.warn("Detail container not found. Skipping observeItemChanges.");
-  }
-}
-
 function imageModal(title, imageAlt, imageUrl) {
   const body = document.querySelector("body");
+  const existingModal = document.getElementById("imageModal");
+
+  // Remove existing modal if it exists
+  if (existingModal) {
+    existingModal.remove();
+  }
+
   // Create the modal element
   const modal = document.createElement("div");
   modal.className = "modal modal-xl fade";
@@ -149,8 +200,9 @@ function imageModal(title, imageAlt, imageUrl) {
               aria-label="Close"
             ></button>
         </div>
-        <div class="modal-body d-flex justify-content-center align-items-center">
-          <img src="${imageUrl}" class="img-fluid rounded-3" alt="${imageAlt}" />
+        <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+          <img src="${imageUrl}" class="img-fluid rounded-3 mb-3" alt="${imageAlt}" />
+          <p class="text-muted text-center" data-bs-theme="dark">${imageAlt}</p>
         </div>
       </div>
     </div>
@@ -158,6 +210,20 @@ function imageModal(title, imageAlt, imageUrl) {
 
   // Append the modal to the body
   body.appendChild(modal);
+
+  // Initialize and show the modal
+  const bootstrapModal = new bootstrap.Modal(modal);
+  bootstrapModal.show();
+}
+
+function initializeItemObserver(detailContainer) {
+  if (detailContainer) {
+    observeItemChanges(detailContainer, (updatedItem) => {
+      renderDetailItemCard(updatedItem); // Update the detail card with the new data
+    });
+  } else {
+    console.warn("Detail container not found. Skipping observeItemChanges.");
+  }
 }
 
 function addEditButtonListener(item) {
