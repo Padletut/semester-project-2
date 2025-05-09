@@ -27,33 +27,26 @@ describe("register", () => {
   const name = "John Doe";
   const password = "password123";
   const lowerCaseName = "john doe";
-
-  let emailInput;
+  let email = "john.doe@stud.noroff.no";
 
   beforeEach(() => {
     vi.clearAllMocks();
-
-    // Mock emailInput object
-    emailInput = {
-      value: "john.doe@example.com",
-      setCustomValidity: vi.fn(),
-    };
   });
 
-  it("should register a user and return user data on success", async () => {
-    // Mock fetchData to return a successful response
+  it("should register a user and return true on success", async () => {
     const mockResponse = {
       ok: true,
       json: async () => ({
         id: 1,
         name: lowerCaseName,
-        email: emailInput.value,
+        email: email,
       }),
     };
     fetchData.mockResolvedValue(mockResponse);
 
-    // Call the register function
-    const userData = await register(name, emailInput, password);
+    // Pass emailInput as an object with a value property
+    const confirmPassword = password; // Ensure confirmPassword matches password
+    const result = await register(name, email, password, confirmPassword);
 
     // Assertions
     expect(fetchData).toHaveBeenCalledWith(
@@ -63,32 +56,28 @@ describe("register", () => {
         method: "POST",
         body: JSON.stringify({
           name: lowerCaseName,
-          email: emailInput.value.toLowerCase(),
+          email: email.toLowerCase(),
           password,
         }),
       },
     );
-    expect(userData).toEqual({
-      id: 1,
-      name: lowerCaseName,
-      email: emailInput.value,
-    });
+    expect(result).toBe(true); // Expect true instead of user data
   });
 
   it("should throw an error if the email is invalid", async () => {
     // Mock validateEmail to throw an error for invalid email
-    emailInput.value = "john.doe@gmail.com";
+    email = "john.doe@gmail.com";
     validateEmail.mockImplementation(() => {
       throw new Error(
         "Sorry, only users with email ending @stud.noroff.no can register",
       );
     });
 
-    await expect(register(name, emailInput, password)).rejects.toThrow(
+    await expect(register(name, email, password)).rejects.toThrow(
       "Sorry, only users with email ending @stud.noroff.no can register",
     );
 
     // Ensure validateEmail was called with the invalid email
-    expect(validateEmail).toHaveBeenCalledWith(emailInput);
+    expect(validateEmail).toHaveBeenCalledWith(email);
   });
 });

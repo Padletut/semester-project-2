@@ -3,6 +3,7 @@ import { headers } from "../utils/headers.mjs";
 import { fetchData } from "../utils/fetchdata.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
+import { validateEmail } from "../utils/validateemail.mjs";
 
 const { API_BASE_URL, API_AUTH, API_REGISTER } = constants;
 
@@ -24,8 +25,11 @@ const { API_BASE_URL, API_AUTH, API_REGISTER } = constants;
  * console.log(userData);
  * ```
  */
-export async function register(name, emailInput, password, confirmPassword) {
+export async function register(name, email, password, confirmPassword) {
   try {
+    // Validate the email using the validateEmail utility
+    validateEmail(email);
+
     // Check if password and confirmPassword match
     if (password !== confirmPassword) {
       throw new Error(ERROR_MESSAGES.INVALID_CONFIRM_PASSWORD);
@@ -33,7 +37,7 @@ export async function register(name, emailInput, password, confirmPassword) {
 
     // Convert name and email to lowercase
     const lowerCaseName = name.toLowerCase();
-    const lowerCaseEmail = emailInput.toLowerCase();
+    const lowerCaseEmail = email.toLowerCase();
     // Make the API request
     const response = await fetchData(API_BASE_URL + API_AUTH + API_REGISTER, {
       headers: headers(true),
@@ -44,12 +48,12 @@ export async function register(name, emailInput, password, confirmPassword) {
         password,
       }),
     });
+
     if (response.ok) {
       return true;
     }
     await handleErrors(response, "register");
   } catch (error) {
-    // Log the error and rethrow it
     console.error("Error during registration:", error);
     handleErrors(error, "register");
     throw error;

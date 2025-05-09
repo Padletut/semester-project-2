@@ -28,7 +28,8 @@ export function validateInputs(form, register = false) {
   if (emailInput) {
     try {
       // Validate email input
-      isValid = validateEmail(emailInput, register) && isValid;
+      const email = emailInput.value.trim().toLowerCase();
+      isValid = validateEmail(email, register) && isValid;
     } catch (error) {
       renderErrors(error);
       isValid = false;

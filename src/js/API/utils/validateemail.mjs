@@ -1,7 +1,7 @@
 /**
  * Validates if an email input ends with @stud.noroff.no.
  * @memberof module:API/utils
- * @param {HTMLInputElement} emailInput - The email input element to validate.
+ * @param {string} email - The email input to validate. Can be a string or an HTML input element.
  * @returns {boolean} True if the email is valid, false otherwise.
  * @example
  * ```javascript
@@ -10,11 +10,11 @@
  * console.log(isValid); // true or false
  * ```
  */
-export function validateEmail(emailInput, register = false) {
+export function validateEmail(email, register = false) {
   try {
-    console.log("Validating email:", emailInput.value);
+    console.log("Validating email:", email);
     const emailPattern = /^[^\s@]+@(stud\.noroff\.no)$/;
-    const isValid = emailPattern.test(emailInput.value);
+    const isValid = emailPattern.test(email);
 
     if (!isValid) {
       if (register) {

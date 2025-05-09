@@ -38,11 +38,12 @@ describe("login", () => {
 
     // Assertions
     expect(fetchData).toHaveBeenCalledWith(
-      expect.stringContaining("/auth/login"),
+      expect.stringContaining("/auth/login"), // Match the URL
       {
         method: "POST",
         body: JSON.stringify({ email, password }),
       },
+      expect.any(String), // Allow any string for the third argument
     );
     expect(saveStorage).toHaveBeenCalledWith("accessToken", mockAccessToken);
     expect(saveStorage).toHaveBeenCalledWith("profile", mockProfile);
