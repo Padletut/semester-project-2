@@ -283,7 +283,7 @@ test.describe("Profile Page", () => {
     await page.goto("http://localhost:5000/profile");
 
     // Wait for the alert message to appear
-    const errorMessage = page.locator(".alert-message");
+    const errorMessage = page.locator(".toast");
     await errorMessage.waitFor({ timeout: 60000 }); // Wait for the alert to appear
     await expect(errorMessage).toHaveText(
       "You are not authorized to perform this action. Please log in and try again.",

@@ -67,7 +67,7 @@ test.describe("Delete Item", () => {
           tags: ["bowling", "ball", "sport"],
           created: "2025-05-08T16:57:50.984Z",
           updated: "2025-05-08T16:57:50.984Z",
-          endsAt: "2025-05-09T16:57:00.000Z",
+          endsAt: "2028-05-09T16:57:00.000Z",
           bids: [],
           seller: {
             name: "User",
@@ -124,7 +124,7 @@ test.describe("Delete Item", () => {
     await expect(confirmationModal).not.toBeVisible();
 
     // Verify that a success message is displayed (if applicable)
-    const successMessage = page.locator(".alert-success-message");
+    const successMessage = page.locator(".toast");
     await expect(successMessage).toHaveText("Listing deleted successfully!");
 
     // Verify that the user is redirected to the homepage
@@ -164,7 +164,7 @@ test.describe("Delete Item", () => {
     await page.click("#confirmDeleteBtn");
 
     // Wait for the error message to be displayed
-    const errorMessage = page.locator(".alert");
+    const errorMessage = page.locator(".toast");
     await expect(errorMessage).toHaveText(
       "Failed to delete item. Please try again later.",
     );

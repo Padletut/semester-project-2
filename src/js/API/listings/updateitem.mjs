@@ -1,9 +1,7 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
-import { rendersuccess } from "../../ui/shared/rendersuccess.mjs";
 import * as constants from "../../constants.mjs";
-import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 
 /**
  * Update an auction item in the listings API.
@@ -27,7 +25,7 @@ import { renderErrors } from "../../ui/shared/rendererrors.mjs";
  * ```
  **/
 export async function updateItem(itemId, item) {
-  const url = `${constants.API_BASE_URL + constants.API_LISTINGS}/${itemId}`;
+  let url = `${constants.API_BASE_URL + constants.API_LISTINGS}/${itemId}`;
   const body = JSON.stringify({
     ...(item.title && { title: item.title }), // Include only if provided
     ...(item.description && { description: item.description }),
@@ -41,14 +39,9 @@ export async function updateItem(itemId, item) {
       headers: headers(),
       body,
     });
-
-    if (response.ok) {
-      rendersuccess({ message: "Listing updated successfully!" });
-      return;
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
-    renderErrors(
-      new Error("Failed to update the listing. Please try again later."),
-    );
 
     return await response.json();
   } catch (error) {

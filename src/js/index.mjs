@@ -8,7 +8,7 @@ import { checkAuth } from "./API/auth/checkauth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
-import { createEditDeleteItemModal } from "./ui/shared/createeditdeleteitemmodal.mjs";
+import { listingCRUDModal } from "./ui/shared/listingcrudmodal.mjs";
 import { renderCredits } from "./ui/shared/rendercredits.mjs";
 import { loadStorage } from "./storage/loadstorage.mjs";
 import { SearchAndFilterItems } from "./API/search/searchandfilteritems.mjs";
@@ -38,6 +38,8 @@ handleAuthFormSubmission(signUpButton, "signUpForm", "profile", true);
 if (document.title === "User Profile | Tradeauction") {
   await renderProfile();
 }
+
+renderItems();
 
 if (document.title === "Listings | Tradeauction") {
   document.addEventListener("DOMContentLoaded", () => {
@@ -109,7 +111,7 @@ const addListingButton = document.querySelector(".add-listing-button");
 if (addListingButton && loggedInUser) {
   addListingButton.addEventListener("click", (event) => {
     event.preventDefault();
-    createEditDeleteItemModal("create");
+    listingCRUDModal("create");
   });
 } else if (addListingButton && !loggedInUser) {
   // Disable the button and show a tooltip

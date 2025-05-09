@@ -71,11 +71,11 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
           id: "a0ed0109-0699-4097-b160-888e405250cb",
           title: "Bowling Ball",
           description: "Cool bowling ball that will make you play good!",
-          media: [[Object]],
+          media: [{ url: "https://example.com/image1.jpg", alt: "Image 1" }],
           tags: ["bowling", "ball", "sport"],
           created: "2025-05-08T16:57:50.984Z",
           updated: "2025-05-08T16:57:50.984Z",
-          endsAt: "2025-05-09T16:57:00.000Z",
+          endsAt: "2028-05-09T16:57:00.000Z",
           bids: [],
           seller: {
             name: "User",
@@ -106,7 +106,7 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
     // Navigate to the detail page for the listing
     await page.goto(
       "http://localhost:5000/detail?id=a0ed0109-0699-4097-b160-888e405250cb",
-      { timeout: 60000 },
+      { waitUntil: "domcontentloaded" },
     );
 
     // Verify that the detail page is loaded
@@ -127,6 +127,15 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
       "An updated description for the bowling ball.",
     );
     await page.fill("#tags", "bowling, ball, updated");
+
+    // Add multiple media URLs
+    await page.fill("input[name='mediaUrl']", "https://example.com/image1.jpg");
+    await page.fill("input[name='mediaAlt']", "Updated Image 1");
+    await page.click("#addMediaBtn"); // Add another media input
+    const secondMediaUrl = page.locator("input[name='mediaUrl']").nth(1);
+    const secondMediaAlt = page.locator("input[name='mediaAlt']").nth(1);
+    await secondMediaUrl.fill("https://example.com/image2.jpg");
+    await secondMediaAlt.fill("Updated Image 2");
 
     // Submit the form
     await page.locator("#postItemModal button[type='submit']").click();
@@ -142,59 +151,76 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
     await expect(updatedDescription).toHaveText(
       "An updated description for the bowling ball.",
     );
+
+    // Verify that the media URLs are updated
+    const mediaImages = page.locator(".carousel-item img");
+    await expect(mediaImages.nth(0)).toHaveAttribute(
+      "src",
+      "https://example.com/image1.jpg",
+    );
+    await expect(mediaImages.nth(1)).toHaveAttribute(
+      "src",
+      "https://example.com/image2.jpg",
+    );
   });
 
   // Handle API errors during update
   // This test case simulates an API error during the update process
   test("should handle API errors during update", async ({ page }) => {
-    // Mock the API response for fetching the listing details
-    await page.route("**/auction/listings/**", async (route) => {
-      const mockedResponse = {
-        data: {
-          id: "a0ed0109-0699-4097-b160-888e405250cb",
-          title: "Bowling Ball",
-          description: "Cool bowling ball that will make you play good!",
-          media: [[Object]],
-          tags: ["bowling", "ball", "sport"],
-          created: "2025-05-08T16:57:50.984Z",
-          updated: "2025-05-08T16:57:50.984Z",
-          endsAt: "2025-05-09T16:57:00.000Z",
-          bids: [],
-          seller: {
-            name: "User",
-            email: "memespot@stud.noroff.no",
-            bio: "This is my new bio. I am from Norway, studying Front End Development at Noroff. Currently doing my Semester Project 2 assignment! Its going so well!",
-            avatar: {
-              url: "https://i.pinimg.com/736x/c0/4b/01/c04b017b6b9d1c189e15e6559aeb3ca8.jpg",
-              alt: "User avatar",
-            },
-            banner: {
-              url: "https://media.istockphoto.com/id/1410766826/photo/full-frame-of-green-leaves-pattern-background.webp?b=1&s=612x612&w=0&k=20&c=LGngoLNpLG2gl_0uUNIKfNpVMzr61qBew8oRvVUMnCQ=",
-              alt: "User banner",
-            },
-          },
-          _count: { bids: 0 },
-        },
-        meta: {},
-      };
-      await route.fulfill({
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(mockedResponse),
-      });
-    });
-
-    // Mock the API response for updating the listing to return an error
+    // Mock the API response for fetching the listing details (GET request)
     await page.route(
-      "**/auction/listings/a0ed0109-0699-4097-b160-888e405250cb",
+      "**/auction/listings/a0ed0109-0699-4097-b160-888e405250cd*",
       async (route) => {
         const mockedResponse = {
-          error: {
-            message: "Failed to update the item.",
-            status: 500,
+          data: {
+            id: "a0ed0109-0699-4097-b160-888e405250cd",
+            title: "Bowling Ball",
+            description: "Cool bowling ball that will make you play good!",
+            media: [{ url: "https://example.com/image1.jpg", alt: "Image 1" }],
+            tags: ["bowling", "ball", "sport"],
+            created: "2025-05-08T16:57:50.984Z",
+            updated: "2025-05-08T16:57:50.984Z",
+            endsAt: "2028-05-09T16:57:00.000Z",
+            bids: [],
+            seller: {
+              name: "User",
+              email: "memespot@stud.noroff.no",
+              bio: "This is my new bio.",
+              avatar: {
+                url: "https://example.com/avatar.jpg",
+                alt: "User avatar",
+              },
+              banner: {
+                url: "https://example.com/banner.jpg",
+                alt: "User banner",
+              },
+            },
+            _count: { bids: 0 },
           },
+          meta: {},
+        };
+        await route.fulfill({
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mockedResponse),
+        });
+      },
+    );
+
+    // Navigate to the detail page for the listing
+    await page.goto(
+      "http://localhost:5000/detail?id=a0ed0109-0699-4097-b160-888e405250cd",
+      { waitUntil: "networkidle" }, // Wait until there are no more network requests
+    );
+
+    // Mock the API response for updating the listing (PUT request)
+    await page.route(
+      "**/auction/listings/a0ed0109-0699-4097-b160-888e405250cd*",
+      async (route) => {
+        const mockedResponse = {
+          message: "Failed to update the listing. Please try again later.",
         };
         await route.fulfill({
           status: 500,
@@ -204,11 +230,6 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
           body: JSON.stringify(mockedResponse),
         });
       },
-      { method: "PUT" }, // Ensure this mock only applies to PUT requests
-    );
-    // Navigate to the detail page for the listing
-    await page.goto(
-      "http://localhost:5000/detail?id=a0ed0109-0699-4097-b160-888e405250cb",
     );
 
     // Verify that the detail page is loaded
@@ -231,13 +252,17 @@ test.describe("Update Listing from Detail Page - API Mocking", () => {
     await page.fill("#tags", "bowling, ball, updated");
 
     // Submit the form
+    console.log("Submitting the form...");
     await page.locator("#postItemModal button[type='submit']").click();
 
     // Wait for an error message to be displayed
-    const errorMessage = page.locator(".alert-message");
+    console.log("Waiting for the toast...");
+    const errorMessage = page.locator(".toast");
+    await expect(errorMessage).toBeVisible({ timeout: 10000 });
     await expect(errorMessage).toHaveText(
       "Failed to update the listing. Please try again later.",
     );
+    console.log("Toast verified successfully.");
 
     // Verify that the modal is still open (indicating an error occurred)
     await expect(updateModal).toBeVisible();

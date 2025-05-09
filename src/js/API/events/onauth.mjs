@@ -1,5 +1,6 @@
 import { login } from "../auth/login.mjs";
 import { register } from "../auth/register.mjs";
+import { handleErrors } from "../utils/handleerrors.mjs";
 
 /**
  * Handles the authentication process for login and registration forms.
@@ -35,12 +36,7 @@ export async function onAuth(event, redirectUrl) {
         await login(email, password, redirectUrl);
       }
     } catch (error) {
-      // Display the error message to the user
-      const errorContainer = form.querySelector(".alert-message");
-      if (errorContainer) {
-        errorContainer.textContent = error.message;
-        errorContainer.classList.remove("d-none");
-      }
+      handleErrors(error);
       console.error("Error during registration:", error);
     }
   }

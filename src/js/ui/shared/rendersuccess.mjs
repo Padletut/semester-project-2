@@ -1,3 +1,5 @@
+import * as bootstrap from "bootstrap";
+import { createToastContainer } from "./createtoastcontainer.mjs";
 /**
  * @module Rendersuccess
  */
@@ -18,24 +20,29 @@
  * ```
  */
 export function rendersuccess(success) {
-  const existingAlert = document.querySelector(".alert-success");
+  const toastContainer =
+    document.getElementById("toastContainer") || createToastContainer();
+  const toast = document.createElement("div");
+  toast.className = "toast align-items-center text-bg-success border-0";
+  toast.setAttribute("role", "alert");
+  toast.setAttribute("aria-live", "assertive");
+  toast.setAttribute("aria-atomic", "true");
+  toast.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">
+        ${success.message || "Operation completed successfully!"}
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
 
-  if (existingAlert) {
-    existingAlert.remove();
-  }
+  toastContainer.appendChild(toast);
 
-  const mainElement = document.querySelector("main");
-  const successElement = document.createElement("div");
-  successElement.className =
-    "alert alert-success alert-dismissible fade show text-center";
-  successElement.role = "alert-success";
-  successElement.innerHTML = `
-          <div class="alert-success-message">${success.message}</div>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      `;
+  const bootstrapToast = new bootstrap.Toast(toast);
+  bootstrapToast.show();
 
-  mainElement.prepend(successElement);
-  setTimeout(() => {
-    successElement.remove();
-  }, 15000);
+  // Remove the toast from the DOM after it hides
+  toast.addEventListener("hidden.bs.toast", () => {
+    toast.remove();
+  });
 }

@@ -20,6 +20,7 @@ import { createToastContainer } from "./createtoastcontainer.mjs";
  * ```
  */
 export function renderErrors(error) {
+  console.log("Error passed to renderErrors:", error); // Debugging log
   const toastContainer =
     document.getElementById("toastContainer") || createToastContainer();
   const toast = document.createElement("div");
@@ -30,7 +31,7 @@ export function renderErrors(error) {
   toast.innerHTML = `
     <div class="d-flex">
       <div class="toast-body">
-        ${error.message || "An unexpected error occurred."}
+        ${error?.message || "An unexpected error occurred."}
       </div>
       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -46,5 +47,3 @@ export function renderErrors(error) {
     toast.remove();
   });
 }
-
-// Function to create a toast container if it doesn't exist

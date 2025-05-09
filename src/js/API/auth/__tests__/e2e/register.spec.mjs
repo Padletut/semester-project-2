@@ -145,7 +145,7 @@ test.describe("Registration Flow", () => {
     await page.click("button#signUpButton");
 
     // Assert that the error message is displayed
-    await expect(page.locator(".alert")).toHaveText(
+    await expect(page.locator(".toast")).toHaveText(
       "Sorry, only users with email ending @stud.noroff.no can register",
     );
   });

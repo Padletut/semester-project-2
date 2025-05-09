@@ -62,7 +62,7 @@ test.describe("Login Flow", () => {
     await page.click("button#signInButton");
 
     // Assert that an error message is displayed
-    await expect(page.locator(".alert")).toHaveText(
+    await expect(page.locator(".toast")).toHaveText(
       "Your email or password is incorrect. Please try again.",
     );
   });
@@ -91,7 +91,7 @@ test.describe("Login Flow", () => {
     await page.click("button#signInButton");
 
     // Assert that the error message is displayed
-    await expect(page.locator(".alert")).toHaveText(
+    await expect(page.locator(".toast")).toHaveText(
       "Sorry, only users with email ending @stud.noroff.no can login",
     );
   });

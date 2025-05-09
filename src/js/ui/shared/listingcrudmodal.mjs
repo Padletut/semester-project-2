@@ -4,6 +4,8 @@ import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
 import { renderItems } from "../listings/renderitems.mjs";
 import { renderMyListingCard } from "../profile/rendermylistingcard.mjs";
+import { renderErrors } from "./rendererrors.mjs";
+import { rendersuccess } from "./rendersuccess.mjs";
 
 function generateModalHtml(state, item = null) {
   const media = state === "update" && item.media ? item.media : []; // Use existing media if updating
@@ -113,7 +115,7 @@ function generateModalHtml(state, item = null) {
  * );
  * ```
  */
-export async function createEditDeleteItemModal(
+export async function listingCRUDModal(
   state,
   item = null,
   targetSelector = null,
@@ -145,7 +147,7 @@ export async function createEditDeleteItemModal(
       const mediaInputGroup = document.createElement("div");
       mediaInputGroup.classList.add("media-input-group", "mb-2");
       mediaInputGroup.innerHTML = `
-        <input type="url" class="form-control mb-1" name="mediaUrl" placeholder="Media URL" required>
+        <input type="url" class="form-control mb-1" name="mediaUrl" placeholder="Media URL" >
         <input type="text" class="form-control" name="mediaAlt" placeholder="Alt text (optional)">
         <button type="button" class="btn btn-danger btn-sm mt-2 remove-media-btn">Remove</button>
       `;
@@ -226,10 +228,22 @@ export async function createEditDeleteItemModal(
 
           resolve({ ...item, ...itemData });
         }
+        rendersuccess({
+          message:
+            state === "create"
+              ? "Listing created successfully!"
+              : "Listing updated successfully!",
+        });
 
         auctionItemModal.hide();
       } catch (error) {
         auctionItemModal.hide();
+        renderErrors({
+          message:
+            state === "create"
+              ? "Failed to create the listing. Please try again later."
+              : "Failed to update the listing. Please try again later.",
+        });
         console.error("Error during form submission:", error);
         reject(error);
       }

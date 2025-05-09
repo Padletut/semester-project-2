@@ -156,7 +156,7 @@ test.describe("Add Listing Modal - API Mocking", () => {
     await expect(modal).not.toBeVisible();
 
     // Verify that the API was called
-    const successMessage = page.locator(".alert-success-message");
+    const successMessage = page.locator(".toast");
     await expect(successMessage).toHaveText("Listing created successfully!");
   });
   // Test for API error handling during listing creation
@@ -202,7 +202,7 @@ test.describe("Add Listing Modal - API Mocking", () => {
     await page.locator("#postItemModal button[type='submit']").click();
 
     // Wait for the error message to appear
-    const errorMessage = page.locator(".alert-message");
+    const errorMessage = page.locator(".toast");
     await expect(errorMessage).toHaveText(
       "Failed to create the listing. Please try again later.",
     );
