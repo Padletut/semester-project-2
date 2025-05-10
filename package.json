@@ -27,7 +27,7 @@
     "dev": "vite",
     "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/",
     "lint-staged": "npx lint-staged",
-    "lint": "eslint . --fix",
+    "lint": "eslint src --fix",
     "serve": "vite preview",
     "prepare": "husky install",
     "format": "prettier --write .",
