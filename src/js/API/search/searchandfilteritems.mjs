@@ -172,8 +172,8 @@ export class SearchAndFilterItems {
 
       // Append the fragment to the itemsContainer
       this.itemsContainer.appendChild(this.fragment);
-
-      this.initializeObserver(); // Initialize the observer for lazy loading
+      this.initializeObserver();
+      this.attachCardClickListeners();
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
