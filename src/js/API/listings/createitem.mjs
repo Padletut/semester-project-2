@@ -48,7 +48,10 @@ export async function createItem(item) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
+      handleErrors(
+        "Failed to create item. Please check your input and try again.",
+      );
+      throw new Error("Failed to create the listing. Please try again later.");
     }
     return await response.json();
   } catch (error) {
