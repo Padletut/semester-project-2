@@ -348,7 +348,7 @@ test.describe("Profile Page", () => {
 
     // Mock the updated Profile API response
     await page.route("**/auction/profiles/*", async (route) => {
-      console.log("Intercepted profile API request for update");
+      
       const updatedProfileData = {
         data: {
           name: "Updated User",

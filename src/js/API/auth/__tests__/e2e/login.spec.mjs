@@ -5,7 +5,7 @@ test.describe("Login Flow", () => {
     // Clear cookies and storage before each test
     await page.context().clearCookies();
     page.on("console", (msg) => {
-      console.log(`Browser console: ${msg.type()}: ${msg.text()}`);
+     
     });
   });
   test("should log in successfully with mocked credentials", async ({

@@ -32,7 +32,6 @@ export async function getItem(itemId) {
       },
     );
     if (response.ok) {
-      console.log("Response", response);
       const postData = await response.json();
       return postData.data;
     }

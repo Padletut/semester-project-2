@@ -28,7 +28,6 @@ export async function renderDetail(itemId) {
     const { PROFILE } = STORAGE_KEYS;
     const profileName = loadStorage(PROFILE)?.name; // Get the logged-in user's profile name
     const response = await getItem(itemId);
-    console.log("Response data", response);
     const placeBidButton = document.querySelector(".place-bid-button");
     if (placeBidButton) {
       const endsAtDate = new Date(response.endsAt);

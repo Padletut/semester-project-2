@@ -12,7 +12,6 @@
  */
 export function validateEmail(email, register = false) {
   try {
-    console.log("Validating email:", email);
     const emailPattern = /^[^\s@]+@(stud\.noroff\.no)$/;
     const isValid = emailPattern.test(email);
 

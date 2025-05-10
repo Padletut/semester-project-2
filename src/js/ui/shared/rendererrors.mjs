@@ -20,7 +20,6 @@ import { createToastContainer } from "./createtoastcontainer.mjs";
  * ```
  */
 export function renderErrors(error) {
-  console.log("Error passed to renderErrors:", error); // Debugging log
   const toastContainer =
     document.getElementById("toastContainer") || createToastContainer();
   const toast = document.createElement("div");

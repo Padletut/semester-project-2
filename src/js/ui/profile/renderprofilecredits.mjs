@@ -12,7 +12,7 @@ import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
  */
 export async function renderProfileCredits(profile) {
   try {
-    console.log("testProfileCredits", profile);
+   
     const creditsContainer = document.getElementById("profile-credits");
     creditsContainer.innerHTML = `${profile.credits} Cr`;
   } catch (error) {

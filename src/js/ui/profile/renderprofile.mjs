@@ -93,8 +93,7 @@ export async function renderProfile() {
     }
 
     const creditsContainer = document.querySelector(".display-credits");
-    console.log("Profile Name:", profileName);
-    console.log("Name:", name);
+    
     if (creditsContainer && profileName === name) {
       creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
     } else if (creditsContainer && profileName !== name) {
