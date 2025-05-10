@@ -18,6 +18,10 @@ $bootstrap-icons-font-dir: "/fonts";
   scroll-behavior: smooth;
 }
 
+main {
+  overflow: hidden;
+}
+
 h1 {
   font-family: $font-family-base;
   font-size: 32px;

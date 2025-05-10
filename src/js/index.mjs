@@ -42,7 +42,6 @@ if (document.title === "User Profile | Tradeauction") {
 renderItems();
 
 if (document.title === "Listings | Tradeauction") {
-  console.log("User is logged in:", loggedInUser); // Debugging line
   if (loggedInUser) {
     renderCredits();
   }

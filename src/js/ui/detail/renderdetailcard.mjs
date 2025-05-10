@@ -116,10 +116,10 @@ export function renderDetailItemCard(item) {
   }
 
   container.innerHTML = `
-    <div class="col-md-4 position-relative">
+    <div class="col-md-5 position-relative">
       ${mediaContent}
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="card-body rounded-3 p-3">
         <div class="d-flex flex-wrap ms-md-3 justify-content-between">
           <div>

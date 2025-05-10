@@ -14,6 +14,7 @@ import { renderCredits } from "../shared/rendercredits.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
+import { renderErrors } from "../shared/rendererrors.mjs";
 
 /**
  * Renders the profile page.
@@ -31,7 +32,17 @@ export async function renderProfile() {
   const urlParams = new URLSearchParams(window.location.search);
   let profileName = urlParams.get("profile");
   if (profileName === null) {
-    profileName = name;
+    if (name) {
+      profileName = name;
+    } else {
+      console.error("Profile name not found in URL or local storage.");
+      renderErrors(new Error("You are not authorized to perform this action. Please log in and try again."));
+      // Wait for 3 seconds before redirecting
+      setTimeout(() => {
+      window.location.href = "/";
+      }, 3000);
+      return;
+    }
   }
 
   const loaderContainer = document.getElementById("loader");
@@ -93,7 +104,7 @@ export async function renderProfile() {
       handleErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     }
   } catch (error) {
-    handleErrors(error);
+    handleErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     console.error("Error rendering profile data:", error);
   } finally {
     toggleLoader(false, loaderContainer);
