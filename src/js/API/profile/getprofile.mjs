@@ -28,21 +28,26 @@ export async function getProfile(username = loggedInUser) {
       _listings: "true",
       _wins: "true",
     });
+    if (!username) {
+      throw new Error("Username is required");
+    }
     const response = await fetchData(
-      `${API_BASE_URL}${API_PROFILES}/${username}?${queryParams}`,
+      `${API_BASE_URL}${API_PROFILES}/${username}?${queryParams.toString()}`,
       {
         headers: headers(false),
         method: "GET",
       },
-    );
+    ); 
     const data = await response.json();
     if (!response.ok) {
       // Handle 401 Unauthorized
       if (response.status === 401) {
-        console.error("Unauthorized access. Redirecting to login page.");
+        console.error("Unauthorized access. Redirecting to listings.");
         renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
-        setTimeout(() => {
-          window.location.href = "/";
+                setTimeout(() => {
+          if (window.location.href === "/profile") {
+            window.location.href = "/";
+          }
         }, 5000);
       }
       throw new Error("Error loading profile data");

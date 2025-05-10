@@ -144,9 +144,9 @@
   }
   .img-fluid,
   .carousel-image {
-    // height: 100%;
-    width: 20rem;
-    aspect-ratio: 1/1;
+    
+    width: 100%;
+    
     object-fit: cover;
     cursor: zoom-in;
     transition:
@@ -226,7 +226,7 @@
 
   .img-fluid {
     height: 100%;
-    min-height: 12rem;
+    max-height: 12rem;
     @media (max-width: 767px) {
       border-radius: 0.5rem 0.5rem 0 0 !important;
     }

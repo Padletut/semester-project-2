@@ -114,7 +114,7 @@ export function renderListingCard(item) {
             ${
               item.seller.name !== profileName
                 ? `
-        <form class="needs-validation fixed-bottom m-3" novalidate>
+        <form class="needs-validation position-absolute bottom-0 m-3 ms-0" novalidate>
           <div class="input-group mb-3">
             <input
               type="number"

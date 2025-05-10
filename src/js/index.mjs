@@ -42,6 +42,10 @@ if (document.title === "User Profile | Tradeauction") {
 renderItems();
 
 if (document.title === "Listings | Tradeauction") {
+  console.log("User is logged in:", loggedInUser); // Debugging line
+  if (loggedInUser) {
+    renderCredits();
+  }
   document.addEventListener("DOMContentLoaded", () => {
     const itemsContainer = document.querySelector(".items-container");
 
@@ -66,10 +70,6 @@ if (document.title === "Listings | Tradeauction") {
 
     if (filterInput) {
       filterInput.addEventListener("input", initializeSearchAndFilter);
-    }
-
-    if (loggedInUser) {
-      renderCredits();
     }
   });
 }
