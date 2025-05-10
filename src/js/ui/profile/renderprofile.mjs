@@ -36,10 +36,14 @@ export async function renderProfile() {
       profileName = name;
     } else {
       console.error("Profile name not found in URL or local storage.");
-      renderErrors(new Error("You are not authorized to perform this action. Please log in and try again."));
+      renderErrors(
+        new Error(
+          "You are not authorized to perform this action. Please log in and try again.",
+        ),
+      );
       // Wait for 3 seconds before redirecting
       setTimeout(() => {
-      window.location.href = "/";
+        window.location.href = "/";
       }, 3000);
       return;
     }
@@ -93,7 +97,7 @@ export async function renderProfile() {
     }
 
     const creditsContainer = document.querySelector(".display-credits");
-    
+
     if (creditsContainer && profileName === name) {
       creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
     } else if (creditsContainer && profileName !== name) {

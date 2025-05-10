@@ -37,14 +37,14 @@ export async function getProfile(username = loggedInUser) {
         headers: headers(false),
         method: "GET",
       },
-    ); 
+    );
     const data = await response.json();
     if (!response.ok) {
       // Handle 401 Unauthorized
       if (response.status === 401) {
         console.error("Unauthorized access. Redirecting to listings.");
         renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
-                setTimeout(() => {
+        setTimeout(() => {
           if (window.location.href === "/profile") {
             window.location.href = "/";
           }

@@ -348,7 +348,6 @@ test.describe("Profile Page", () => {
 
     // Mock the updated Profile API response
     await page.route("**/auction/profiles/*", async (route) => {
-      
       const updatedProfileData = {
         data: {
           name: "Updated User",

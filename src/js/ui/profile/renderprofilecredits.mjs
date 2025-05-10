@@ -12,7 +12,6 @@ import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
  */
 export async function renderProfileCredits(profile) {
   try {
-   
     const creditsContainer = document.getElementById("profile-credits");
     creditsContainer.innerHTML = `${profile.credits} Cr`;
   } catch (error) {
