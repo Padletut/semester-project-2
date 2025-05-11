@@ -43,6 +43,11 @@
   padding: 10px 24px;
 }
 
+.btn-link {
+  color: variables.$link-color;
+  font-size: 18px;
+}
+
 .card-tags a {
   padding: 3px 15px;
   color: variables.$body-bg;
