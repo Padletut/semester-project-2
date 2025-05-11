@@ -69,6 +69,19 @@ cd semester-project-2
 npm install
 ```
 
+### Environment Variables
+
+This project uses environment variables for configuration.  
+A template is provided at `src/.env.example`.
+
+**To set up your environment:**
+
+1. Copy the example file:
+   ```bash
+   cp src/.env.example src/.env
+   ```
+2. Open src/.env and fill in your actual values (such as your API key).
+
 ## Usage
 
 To start the development server:
