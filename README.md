@@ -122,8 +122,6 @@ This will output the production-ready files to the `dist/` folder.
 
 ---
 
----
-
 ## Running Tests
 
 ### Unit Tests
