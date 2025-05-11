@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tradeauction is a auction website" />
+    <meta name="keywords" content="auction, trade, buy, sell" />
+    <script type="module" src="./js/index.mjs"></script>
+    <title>Listings | Tradeauction</title>
+  </head>
+
+  <body>
+    <header class="sticky-top">
+      <nav class="navbar navbar-dark navbar-expand-lg ms-3 me-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img
+              src="img/logo.png"
+              alt="Logo"
+              width="227"
+              height="170"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 mt-lg-4 gap-0 gap-lg-4">
+              <li class="nav-item nav-border-custom">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item nav-profile">
+                <a class="nav-link" href="profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-auth" href="authorization">Login</a>
+              </li>
+            </ul>
+            <div class="container-fluid pb-2 search-container">
+              <form class="d-flex" role="search">
+                <div class="input-group mb-3">
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    name="search"
+                  />
+                  <button
+                    class="btn btn-outline-success me-2 custom-search-button"
+                    type="submit"
+                    title="Search"
+                  >
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+                <div class="input-group mb-3">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Filter By Tags(comma separated)"
+                    aria-label="Filter"
+                    name="filter-tags"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="text-nowrap position-absolute display-credits">
+          <i><!-- Content loaded dynamic --></i>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div
+        id="loader"
+        class="position-absolute top-50 start-50 translate-middle z-3"
+      >
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <section class="container mt-2 mb-5">
+        <div class="container-fluid mb-5 ps-0 pe-0">
+          <div class="container-fluid d-flex mb-3">
+            <h1 class="text-center mt-5 ms-0">Listings</h1>
+          </div>
+          <div class="container-fluid d-flex gap-4 align-items-center">
+            <button type="button" class="btn add-listing-button">
+              <i class="bi bi-plus"></i>Add Listing
+            </button>
+            <div class="form-check form-switch d-flex align-items-center">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="switchCheckChecked"
+                checked
+              />
+              <label
+                class="form-check-label text-nowrap"
+                for="switchCheckChecked"
+                >Show Active Only</label
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="row row-cols-auto justify-content-center justify-content-md-start g-4 g-sm-5 items-container"
+        >
+          <!-- Listings will be dynamically generated here -->
+        </div>
+      </section>
+      <div id="sentinel"></div>
+    </main>
+    <footer>
+      <div class="container-fluid sticky-bottom">
+        <p class="text-light mt-3 p-3">Tradeauction &copy; 2025</p>
+      </div>
+    </footer>
+  </body>
+</html>

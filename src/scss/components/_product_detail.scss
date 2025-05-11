@@ -1,0 +1,5 @@
+.product-detail-container {
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+}

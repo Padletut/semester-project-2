@@ -1,0 +1,73 @@
+/**
+ * Constants used across the application.
+ * @module API/constants
+ */
+
+/**
+ * Functions for handling authentication.
+ * @module API/auth
+ */
+
+/**
+ * Functions for managing bids.
+ * @module API/bid
+ */
+
+ /**
+ * Functions for events.
+ * @module API/events
+
+/**
+ * Functions for managing listings.
+ * @module API/listings
+ */
+
+/**
+ * Functions for handling profiles.
+ * @module API/profile
+ */
+
+/**
+ * Utility functions for API operations.
+ * @module API/utils
+ */
+
+/**
+ * Functions for rendering profile-related UI components.
+ * @module UI/profile
+ */
+
+/**
+ * Functions for rendering detail-related UI components.
+ * @module UI/detail
+ */
+
+ /**
+ * Functions for event listeners.
+ * @module UI/events
+ */
+
+/**
+ * Functions for rendering shared UI components.
+ * @module UI/shared
+ */
+
+/**
+ * Functions for rendering listing-related UI components.
+ * @module UI/listings
+ */
+
+/**
+ * Functions for handling bootstrap-related UI components.
+ * @module UI/bootstrap
+ */
+
+/**
+ * Functions for managing application storage.
+ * @module Storage
+ */
+
+/**
+ * Functions for handling search and filtering.
+ * @module API/search
+ */

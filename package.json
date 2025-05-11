@@ -1,0 +1,51 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.13.14",
+    "cpx": "^1.5.0",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-html": "^8.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "husky": "^8.0.0",
+    "jsdoc": "^4.0.4",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.5.3",
+    "sass": "^1.86.0",
+    "vite": "^6.2.4",
+    "vite-plugin-static-copy": "^2.3.1",
+    "vitest": "^3.1.1"
+  },
+  "lint-staged": {
+    "*.{js,mjs}": "eslint --fix",
+    "*.{js,mjs,css,md,html}": "prettier --write"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && postcss dist/assets/*.css --use autoprefixer -d dist/assets/",
+    "lint-staged": "npx lint-staged",
+    "lint": "eslint src --fix",
+    "serve": "vite preview",
+    "prepare": "husky install",
+    "format": "prettier --write .",
+    "test": "vitest",
+    "docs": "jsdoc -c ./conf.json -r",
+    "serve-docs": "vite preview --outDir docs",
+    "e2e": "npx playwright test",
+    "e2e:ui": "npx playwright test --ui",
+    "e2e:debug": "npx playwright test --debug",
+    "e2e:headed": "npx playwright test --headed",
+    "e2e:report": "npx playwright show-report"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "autoprefixer": "^10.4.21",
+    "bootstrap": "^5.3.5",
+    "bootstrap-icons": "^1.11.3",
+    "postcss-cli": "^11.0.1",
+    "vitest": "^3.1.1"
+  }
+}

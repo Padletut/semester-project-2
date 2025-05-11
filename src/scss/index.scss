@@ -1,0 +1,49 @@
+$bootstrap-icons-font-dir: "/fonts";
+@use "variables.scss";
+@use "~bootstrap/scss/bootstrap" as *;
+@use "~bootstrap-icons/font/bootstrap-icons";
+@use "components/header";
+@use "components/buttons";
+@use "components/switches";
+@use "components/cards";
+@use "components/bidlist";
+@use "components/footer";
+@use "components/authorization";
+@use "components/product_detail";
+@use "components/modal";
+@use "components/carousel";
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+* {
+  scroll-behavior: smooth;
+}
+
+main {
+  overflow: hidden;
+}
+
+h1 {
+  font-family: $font-family-base;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: $font-family-base;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+small {
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.product-section {
+  max-width: 1400px;
+}
+
+#sentinel {
+  height: 150rem;
+}

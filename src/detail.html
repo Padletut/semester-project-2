@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tradeauction is a auction website" />
+    <meta name="keywords" content="auction, trade, buy, sell" />
+    <script type="module" src="js/index.mjs"></script>
+    <title>Item Detail | Tradeauction</title>
+  </head>
+  <body>
+    <header class="sticky-top">
+      <nav class="navbar navbar-dark navbar-expand-lg ms-3 me-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img
+              src="img/logo.png"
+              alt="Logo"
+              width="227"
+              height="170"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-0 gap-lg-4">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item nav-profile">
+                <a class="nav-link" href="profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-auth" href="authorization">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-nowrap position-absolute display-credits">
+          <i><!-- Content will be dynamically generated here --></i>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div
+        id="loader"
+        class="position-absolute top-50 start-50 translate-middle z-3"
+      >
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <section class="container-fluid mt-2 mb-5 product-section">
+        <div class="d-flex product-detail-container me-3 ms-3">
+          <div
+            class="container-fluid d-inline-flex flex-column col-12 col-lg-6"
+          >
+            <div class="card-detail mb-3">
+              <h1 class="mt-5 mb-5 ms-0">Product Detail</h1>
+              <div class="row g-0 item-detail-container">
+                <!-- Content will be dynamically generated here -->
+              </div>
+            </div>
+          </div>
+          <div
+            class="container-fluid d-inline-flex flex-column align-items-end col-12 col-lg-6"
+          >
+            <div
+              class="container-fluid d-flex flex-column pt-5 justify-content-center place-bid-card"
+            >
+              <h1 class="m-0 mb-5">Place a Bid</h1>
+              <form class="p-5 rounded-3 needs-validation" novalidate>
+                <div class="container p-0 mb-3">
+                  <input
+                    type="number"
+                    name="bid-amount"
+                    class="form-control mb-3"
+                    placeholder="Enter your bid"
+                    aria-label="Bid Amount"
+                  />
+                  <div class="invalid-feedback"></div>
+                  <div class="valid-feedback"></div>
+                </div>
+                <button
+                  class="btn btn-secondary place-bid-button w-100"
+                  type="submit"
+                  title="Place a Bid"
+                >
+                  Place Bid
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid bid-history-list p-4 pb-5">
+          <h1 class="mt-5 mb-4">Bid History</h1>
+          <div class="p-3 pb-2 rounded-3 bid-history-list-body">
+            <ul class="p-0">
+              <!-- Content will be dynamically generated here -->
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="fixed-bottom">
+      <div class="container-fluid">
+        <p class="text-light mt-3 p-3">Tradeauction &copy; 2025</p>
+      </div>
+    </footer>
+  </body>
+</html>

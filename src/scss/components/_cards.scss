@@ -1,0 +1,263 @@
+@use "../variables";
+
+.card-auction-item {
+  height: 100%;
+  &:hover {
+    filter: drop-shadow(0 0 0.5rem rgba(25, 231, 87, 0.8));
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.005);
+  }
+}
+
+.card {
+  width: 19rem;
+  min-width: min-content;
+  border-width: 0;
+  background: variables.$card-bg;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+
+  .card-header,
+  .img-top {
+    border-width: 0;
+    height: 19rem;
+    width: 100%;
+  }
+
+  .carousel-image {
+    height: 19rem;
+    width: 100%;
+  }
+
+  .card-author {
+    cursor: pointer;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    a {
+      color: variables.$link-color;
+    }
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  small {
+    color: #49454f;
+  }
+
+  .card-display-bids {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.66);
+    width: 35%;
+  }
+
+  .card-display-ends {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.66);
+    width: 50%;
+    margin-top: 9.5rem;
+  }
+
+  .card-text {
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .card-body {
+    background: variables.$card-bg;
+    border-radius: 0 0 0.5rem 0.5rem;
+    .card-body-bid-info {
+      font-family: "Lato", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      span {
+        font-weight: 400;
+        margin-left: 0.5em;
+      }
+    }
+  }
+
+  .card-recent-bids {
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-family: "Lato", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-family: "Lato", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    a {
+      color: variables.$link-color;
+      padding-left: 0.5em;
+    }
+  }
+}
+
+.card-detail {
+  a {
+    text-decoration: none;
+  }
+
+  .item-detail-container {
+    border-radius: 0.5rem;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    .img-fluid,
+    .carousel-image {
+      width: 100%;
+      min-height: 12rem;
+      border-radius: 0.5rem 0.5rem 0 0 !important;
+    }
+  }
+
+  .card-author {
+    cursor: pointer;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    a {
+      color: variables.$link-color;
+    }
+  }
+
+  .row {
+    background: variables.$card-bg;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+  }
+  .img-fluid,
+  .carousel-image {
+    height: 100%;
+    max-height: 35rem;
+
+    object-fit: cover;
+    cursor: zoom-in;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease; // Smooth transition for hover effects
+
+    &:hover {
+      transform: scale(1.05); // Slightly enlarge the image on hover
+      box-shadow: 0 4px 8px variables.$primary-hover; // Add a shadow effect on hover
+    }
+  }
+
+  .col-md-4:hover .magnifying-glass-icon {
+    transform: scale(1.2); // Enlarge the icon on hover
+    transition: transform 0.3s ease; // Smooth transition for the icon
+  }
+}
+
+.place-bid-card {
+  justify-self: flex-end;
+  padding-right: 0;
+  @media (max-width: 767px) {
+    padding-left: 0;
+  }
+  form {
+    background: variables.$card-bg;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+  }
+  input[type="number"] {
+    text-align: center;
+  }
+}
+
+.bid-history-list {
+  a {
+    color: variables.$link-color;
+    text-decoration: none;
+  }
+  .bid-history-list-body {
+    background: variables.$card-bg;
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        cursor: pointer;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+          color: variables.$link-color;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+    .bid-list-name .bid-list-amount {
+      font-family: "Lato", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .bid-list-name,
+    .bid-list-name-heading {
+      min-width: 50%;
+    }
+    .bid-list-date {
+      font-family: "Lato", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+.card-profile {
+  background: variables.$card-bg;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+
+  .img-fluid {
+    height: 100%;
+    max-height: 19rem;
+    @media (max-width: 767px) {
+      border-radius: 0.5rem 0.5rem 0 0 !important;
+      max-height: 12rem;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card-profile-img {
+    width: 120px;
+    height: 120px;
+    border-width: 2px;
+    @media (max-width: 767px) {
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  .card-text {
+    @media (max-width: 767px) {
+      width: 100% !important;
+      padding-right: 0.5rem;
+    }
+  }
+}
+
+.bids-container {
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,120 @@
+@use "../variables";
+@use "~bootstrap/scss/bootstrap" as *;
+
+.add-listing-button {
+  padding: 10px 24px;
+  font-family: "Lato", sans-serif;
+  i {
+    margin-right: 5px;
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}
+
+.place-bid-button,
+.add-listing-button,
+.btn-custom-secondary {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  @include button-variant(
+    // Background color
+    variables.$secondary,
+    // Border color
+    variables.$secondary,
+    // Text color
+    variables.$body-bg,
+    // Hover background color
+    variables.$secondary-hover,
+    // Hover border color
+    variables.$secondary-hover,
+    // Hover text color
+    variables.$body-bg,
+    // Active background color
+    variables.$secondary-active,
+    // Active border color
+    variables.$secondary-active,
+    // Active text color
+    variables.$body-bg
+  );
+}
+
+.btn-custom-secondary {
+  padding: 10px 24px;
+}
+
+.card-tags a {
+  padding: 3px 15px;
+  color: variables.$body-bg;
+  background: #4a4458;
+  border-color: #4a4458;
+  box-shadow:
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btn-custom {
+  @include button-variant(
+    // Background color
+    variables.$primary,
+    // Border color
+    variables.$primary,
+    // Text color
+    variables.$body-bg,
+    // Hover background color
+    variables.$primary-hover,
+    // Hover border color
+    variables.$primary-hover,
+    // Hover text color
+    variables.$body-bg,
+    // Active background color
+    variables.$primary-active,
+    // Active border color
+    variables.$primary-active,
+    // Active text color
+    variables.$body-bg
+  );
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 400;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-custom-delete {
+  @include button-variant(
+    // Background color
+    variables.$danger,
+    // Border color
+    variables.$danger,
+    // Text color
+    variables.$body-bg,
+    // Hover background color
+    variables.$danger-hover,
+    // Hover border color
+    variables.$danger-hover,
+    // Hover text color
+    variables.$body-bg,
+    // Active background color
+    variables.$danger-active,
+    // Active border color
+    variables.$danger-active,
+    // Active text color
+    variables.$body-bg
+  );
+  padding: 10px 24px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+[name="edit-profile"],
+[name="edit-my-listing-item"] {
+  height: fit-content;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.5);
+    background-color: variables.$secondary-hover;
+    color: variables.$body-bg;
+  }
+}
