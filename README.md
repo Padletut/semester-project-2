@@ -64,8 +64,8 @@ TradeAuction allows users to:
 To get started with TradeAuction, clone the repository and install dependencies:
 
 ```bash
-git clone <your-repo-url>
-cd <your-project-folder>
+git clone https://github.com/Padletut/semester-project-2
+cd semester-project-2
 npm install
 ```
 
