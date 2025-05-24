@@ -24,6 +24,7 @@ export default {
     assetsInlineLimit: 0,
     rollupOptions: {
       input: {
+        main: resolve(__dirname, "index.html"),
         authorization: resolve(__dirname, "authorization.html"),
         detail: resolve(__dirname, "detail.html"),
         profile: resolve(__dirname, "profile.html"),
