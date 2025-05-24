@@ -1,8 +1,8 @@
 import { resolve } from "path";
 
 export default {
-  root: resolve(__dirname, "src"),
-  publicDir: resolve(__dirname, "public"),
+  // root: resolve(__dirname, "src"),
+  // publicDir: resolve(__dirname, "public"),
   resolve: {
     alias: {
       "~bootstrap": resolve(__dirname, "node_modules/bootstrap"),
@@ -26,10 +26,9 @@ export default {
     assetsInlineLimit: 0,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "src/index.html"),
-        authorization: resolve(__dirname, "src/authorization.html"),
-        detail: resolve(__dirname, "src/detail.html"),
-        profile: resolve(__dirname, "src/profile.html"),
+        authorization: resolve(__dirname, "authorization.html"),
+        detail: resolve(__dirname, "detail.html"),
+        profile: resolve(__dirname, "profile.html"),
       },
     },
     emptyOutDir: true,

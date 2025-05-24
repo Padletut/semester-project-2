@@ -1,5 +1,6 @@
 import "../scss/index.scss";
 import * as bootstrap from "bootstrap";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { toggleDisplayCredits } from "./ui/shared/toggledisplaycredits.mjs";
 import { renderItems } from "./ui/listings/renderitems.mjs";
 import { authSwitchTabs } from "./ui/bootstrap/authswitchtabs.mjs";
