@@ -15,6 +15,7 @@ import { loadStorage } from "../../storage/loadstorage.mjs";
 import { ERROR_MESSAGES } from "../../API/utils/errormessages.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { renderErrors } from "../shared/rendererrors.mjs";
+import { observeProfileUpdates } from "../events/observerProfileUpdated.mjs";
 
 /**
  * Renders the profile page.
@@ -69,32 +70,8 @@ export async function renderProfile() {
     if (profileName?.toLowerCase() === name?.toLowerCase()) {
       renderProfileCredits(profile);
     }
-    // Set up an observer to watch for changes in the profile data
-    if (profileContainer) {
-      const observer = new MutationObserver(async (mutationsList) => {
-        for (const mutation of mutationsList) {
-          if (
-            mutation.type === "attributes" &&
-            mutation.attributeName === "data-profile"
-          ) {
-            const updatedProfile = JSON.parse(
-              profileContainer.getAttribute("data-profile"),
-            );
-            // Update specific profile elements dynamically
-            renderProfileBanner(updatedProfile);
-            renderProfileAvatar(updatedProfile);
-            renderProfileName(updatedProfile, updatedProfile.email);
-            if (profileName === name || profileName === undefined) {
-              renderProfileCredits(updatedProfile);
-            }
-            renderProfileBio(updatedProfile);
-          }
-        }
-      });
-
-      // Observe changes to the `data-profile` attribute
-      observer.observe(profileContainer, { attributes: true });
-    }
+    // Observe changes in the profile data
+    observeProfileUpdates(profileContainer, profileName);
 
     const creditsContainer = document.querySelector(".display-credits");
 
