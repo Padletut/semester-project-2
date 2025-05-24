@@ -1,8 +1,8 @@
 import { resolve } from "path";
-import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default {
   root: resolve(__dirname, "src"),
+  publicDir: resolve(__dirname, "public"),
   resolve: {
     alias: {
       "~bootstrap": resolve(__dirname, "node_modules/bootstrap"),
@@ -23,6 +23,7 @@ export default {
   build: {
     outDir: resolve(__dirname, "dist"),
     target: "esnext",
+    assetsInlineLimit: 0,
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"),
@@ -33,18 +34,4 @@ export default {
     },
     emptyOutDir: true,
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        {
-          src: "../node_modules/bootstrap-icons/font/fonts/*",
-          dest: "assets/fonts",
-        },
-        {
-          src: "img/*",
-          dest: "img",
-        },
-      ],
-    }),
-  ],
 };
