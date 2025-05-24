@@ -1,4 +1,4 @@
-import { createItem } from "../../API/listings/createitem.mjs";
+import { createItem } from "../../API/listings/createItem.mjs";
 import { updateItem } from "../../API/listings/updateitem.mjs";
 import { confirmDeleteItem } from "./confirmdeleteitem.mjs";
 import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmission.mjs";
