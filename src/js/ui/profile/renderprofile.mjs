@@ -73,16 +73,8 @@ export async function renderProfile() {
     // Observe changes in the profile data
     observeProfileUpdates(profileContainer, profileName);
 
-    const creditsContainer = document.querySelector(".display-credits");
-
-    if (creditsContainer && profileName === name) {
-      creditsContainer.innerHTML = `<i>${profile.credits} Cr</i>`;
-    } else if (creditsContainer && profileName !== name) {
-      renderCredits();
-    } else {
-      console.error("Credits container not found or profile name mismatch.");
-      handleErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
-    }
+    // Render credits in the header
+    await renderCredits(name);
   } catch (error) {
     handleErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     console.error("Error rendering profile data:", error);
