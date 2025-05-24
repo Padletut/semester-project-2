@@ -1,5 +1,5 @@
 import * as constants from "../../constants.mjs";
-import { createBid } from "../../API/bid/createbid.mjs";
+import { createBid } from "../../API/bid/createBid.mjs";
 import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
 import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
