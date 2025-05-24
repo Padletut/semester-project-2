@@ -41,7 +41,7 @@ export async function renderMyListingCard(item, author) {
     card.style.cursor = "pointer";
 
     const imageUrl =
-      fullItem.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
+      fullItem.media?.[0]?.url || "assets/img/sunflowers-1719119_640.jpg";
     const imageAlt = fullItem.media?.[0]?.alt || "Auction Item";
     const totalBids = fullItem.bids?.length || 0;
     const highestBid =

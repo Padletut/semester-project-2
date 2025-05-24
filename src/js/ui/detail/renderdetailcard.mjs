@@ -101,7 +101,8 @@ export function renderDetailItemCard(item) {
     `;
   } else {
     // Single image
-    const imageUrl = item.media?.[0]?.url || "img/sunflowers-1719119_640.jpg";
+    const imageUrl =
+      item.media?.[0]?.url || "assets/img/sunflowers-1719119_640.jpg";
     const imageAlt = item.media?.[0]?.alt || "Auction Item";
     mediaContent = `
       <img
