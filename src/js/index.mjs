@@ -5,7 +5,7 @@ import { toggleDisplayCredits } from "./ui/shared/toggledisplaycredits.mjs";
 import { renderItems } from "./ui/listings/renderitems.mjs";
 import { authSwitchTabs } from "./ui/bootstrap/authswitchtabs.mjs";
 import { handleAuthFormSubmission } from "./ui/bootstrap/handleauthformsubmission.mjs";
-import { checkAuth } from "./API/auth/checkauth.mjs";
+import { checkAuth } from "./API/auth/checkAuth.mjs";
 import { logout } from "./API/auth/logout.mjs";
 import { renderProfile } from "./ui/profile/renderprofile.mjs";
 import { renderDetail } from "./ui/detail/renderdetail.mjs";
@@ -21,13 +21,13 @@ const loggedInUser = loadStorage(PROFILE);
 // Ensure bootstrap is globally available
 window.bootstrap = bootstrap;
 
-// Call toggleDisplayCredits to initialize the display of credits
-toggleDisplayCredits();
-
-checkAuth();
-
-// Call authSwitchTabs to initialize the authentication tab switcher
-authSwitchTabs();
+try {
+  toggleDisplayCredits();
+  checkAuth();
+  authSwitchTabs(); // Call authSwitchTabs to initialize the authentication tab switcher
+} catch (error) {
+  console.error("Error during initialization:", error);
+}
 
 // Eventlistener Sign in and Sign up
 const signInButton = document.getElementById("signInButton");

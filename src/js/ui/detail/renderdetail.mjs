@@ -34,8 +34,7 @@ export async function renderDetail(itemId) {
       const currentDate = new Date();
 
       if (profileName === response.seller.name || currentDate > endsAtDate) {
-        // Wrap the button in a div for the tooltip to work
-        const wrapper = document.createElement("div");
+        const wrapper = document.createElement("div"); // Wrap the button in a div for the tooltip to work
         wrapper.setAttribute("data-bs-toggle", "tooltip");
         wrapper.setAttribute(
           "title",
@@ -46,26 +45,19 @@ export async function renderDetail(itemId) {
         placeBidButton.classList.add("disabled");
         placeBidButton.disabled = true;
 
-        // Initialize the tooltip for the wrapper only
         new bootstrap.Tooltip(wrapper);
       } else {
-        placeBidButton.disabled = false; // Enable the button
-        placeBidButton.classList.remove("disabled"); // Remove the disabled class
+        placeBidButton.disabled = false;
+        placeBidButton.classList.remove("disabled");
       }
     }
-
-    // Render the item details
     renderDetailItemCard(response);
-
-    // Render the bid history
     renderBidHistory(response);
-
-    // Initialize the "Place Bid" button functionality
     initializePlaceBid(itemId);
   } catch (error) {
     renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
     console.error("Error rendering item detail:", error);
   } finally {
-    toggleLoader(false, loaderContainer); // Hide the loader
+    toggleLoader(false, loaderContainer);
   }
 }
