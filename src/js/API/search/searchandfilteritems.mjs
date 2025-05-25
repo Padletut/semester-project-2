@@ -5,6 +5,7 @@ import { debounce } from "../utils/debounce.mjs";
 import * as constants from "../../constants.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 import { toggleLoader } from "../../ui/shared/toggleLoader.mjs";
+import { fetchAndRenderFilteredItems } from "./fetchAndRenderFilteredItems.mjs";
 
 /**
  * Class representing a search and filter functionality for items.
@@ -47,6 +48,7 @@ export class SearchAndFilterItems {
     this.filterInput = document.querySelector('input[name="filter-tags"]');
     this.sentinel = document.getElementById("sentinel");
 
+    this.fetchAndRenderFilteredItems = () => fetchAndRenderFilteredItems(this);
     this.setupEventListeners();
   }
   /**
@@ -330,88 +332,7 @@ export class SearchAndFilterItems {
     // Fetch and render items with local search filtering
     await this.fetchAndRenderFilteredItems();
   }
-  /**
-   * Fetches items based on the current tags and search input, and renders them in the container.
-   * This method handles the filtering and rendering of items based on the current state.
-   * @private
-   * @returns {Promise<void>} - A promise that resolves when the items are fetched and rendered.
-   * @example
-   * ```javascript
-   * await this.fetchAndRenderFilteredItems();
-   * ```javascript
-   * this.itemsContainer.innerHTML = ""; // Clear the container before rendering
-   * this.itemsContainer.appendChild(this.fragment); // Append the fragment to the itemsContainer
-   * this.attachCardClickListeners(); // Attach click event listeners to the rendered cards
-   * window.scrollTo({ top: 0, behavior: "smooth" });
-   * ```
-   */
-  async fetchAndRenderFilteredItems() {
-    let allItems = [];
-    try {
-      toggleLoader(true, this.loaderContainer); // Show loader
-      // Disconnect the observer if it exists
-      if (window.currentObserver) {
-        window.currentObserver.disconnect();
-        window.currentObserver = null;
-      }
 
-      // Fetch items for each tag
-      const fetchPromises = this.tags.flatMap((tag) => {
-        const normalizedTag = tag.trim().toLowerCase();
-        const capitalizedTag =
-          normalizedTag.charAt(0).toUpperCase() + normalizedTag.slice(1);
-        return [
-          this.fetchPage(this.createQueryParams({ _tag: normalizedTag })),
-          this.fetchPage(this.createQueryParams({ _tag: capitalizedTag })),
-        ];
-      });
-      // Wait for all fetches to complete
-      const results = await Promise.all(fetchPromises);
-
-      // Flatten the results into a single array
-      allItems = results.flat();
-
-      // Filter items locally by the search query
-      const query = this.searchInput.value.trim().toLowerCase();
-      if (query) {
-        allItems = allItems.filter(
-          (item) =>
-            item.title.toLowerCase().includes(query) ||
-            item.description.toLowerCase().includes(query),
-        );
-      }
-
-      // Remove duplicates
-      this.uniqueItems = Array.from(
-        new Set(allItems.map((item) => item.id)),
-      ).map((id) => allItems.find((item) => item.id === id));
-
-      // Clear the container before rendering
-      this.itemsContainer.innerHTML = "";
-
-      // Render the filtered items
-      this.uniqueItems.forEach((item) => {
-        const card = renderListingCard(item);
-        if (card) {
-          this.fragment.appendChild(card); // Append the card to the fragment
-        } else {
-          console.error("Failed to create card for item:", item);
-        }
-      });
-
-      // Append the fragment to the itemsContainer
-      this.itemsContainer.appendChild(this.fragment);
-
-      this.attachCardClickListeners(); // Attach click event listeners to the rendered cards
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (error) {
-      renderErrors(new Error(ERROR_MESSAGES.LOADING_PAGE_ERROR));
-      console.error("Error rendering items:", error);
-    } finally {
-      toggleLoader(false, this.loaderContainer); // Hide loader
-    }
-  }
   /**
    * Sets up event listeners for the search and filter inputs.
    * This method attaches event listeners to handle user interactions with the search form and filter input.
