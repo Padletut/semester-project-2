@@ -4,6 +4,7 @@ import { fetchData } from "../utils/fetchdata.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 import { validateEmail } from "../utils/validateemail.mjs";
+import { renderSuccess } from "../../ui/shared/rendersuccess.mjs";
 
 const { API_BASE_URL, API_AUTH, API_REGISTER } = constants;
 
@@ -50,6 +51,11 @@ export async function register(name, email, password, confirmPassword) {
     });
 
     if (response.ok) {
+      setTimeout(() => {
+        renderSuccess(
+          "Account successfully registrated! You will be automatically logged in now.",
+        );
+      }, 2000);
       return true;
     }
     await handleErrors(response, "register");
