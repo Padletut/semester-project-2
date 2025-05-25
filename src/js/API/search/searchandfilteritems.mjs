@@ -356,10 +356,14 @@ export class SearchAndFilterItems {
       }
 
       // Fetch items for each tag
-      const fetchPromises = this.tags.map(async (tag) => {
-        const queryParams = this.createQueryParams({ _tag: tag });
-        const items = await this.fetchPage(queryParams);
-        return items;
+      const fetchPromises = this.tags.flatMap((tag) => {
+        const normalizedTag = tag.trim().toLowerCase();
+        const capitalizedTag =
+          normalizedTag.charAt(0).toUpperCase() + normalizedTag.slice(1);
+        return [
+          this.fetchPage(this.createQueryParams({ _tag: normalizedTag })),
+          this.fetchPage(this.createQueryParams({ _tag: capitalizedTag })),
+        ];
       });
       // Wait for all fetches to complete
       const results = await Promise.all(fetchPromises);
