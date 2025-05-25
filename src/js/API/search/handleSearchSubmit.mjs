@@ -66,7 +66,6 @@ export async function handleSearchSubmit(instance) {
         ...(query && { q: query }), // Include the search query if it exists
       });
       const searchEndpoint = `${constants.API_BASE_URL}/auction/listings/search?${queryParams.toString()}`;
-      console.log("Search endpoint:", searchEndpoint);
       const response = await fetch(searchEndpoint);
       if (!response.ok) {
         console.error(`HTTP Error: ${response.status} ${response.statusText}`);
