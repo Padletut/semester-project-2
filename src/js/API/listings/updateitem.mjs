@@ -1,6 +1,7 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
 import { handleErrors } from "../utils/handleerrors.mjs";
+import { buildUpdateBody } from "../utils/buildupdatebody.mjs";
 import * as constants from "../../constants.mjs";
 
 /**
@@ -25,13 +26,8 @@ import * as constants from "../../constants.mjs";
  * ```
  **/
 export async function updateItem(itemId, item) {
-  let url = `${constants.API_BASE_URL + constants.API_LISTINGS}/${itemId}`;
-  const body = JSON.stringify({
-    ...(item.title && { title: item.title }), // Include only if provided
-    ...(item.description && { description: item.description }),
-    ...(item.tags && { tags: item.tags }),
-    ...(item.media && { media: item.media }),
-  });
+  const url = `${constants.API_BASE_URL + constants.API_LISTINGS}/${itemId}`;
+  const body = buildUpdateBody(item);
 
   try {
     const response = await fetchData(url, {
@@ -42,7 +38,6 @@ export async function updateItem(itemId, item) {
     if (!response.ok) {
       throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
-
     return await response.json();
   } catch (error) {
     console.error("Error updating item:", error);
