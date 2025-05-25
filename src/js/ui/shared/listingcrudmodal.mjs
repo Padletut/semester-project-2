@@ -5,7 +5,7 @@ import { handleModalFormSubmission } from "../bootstrap/handlemodalformsubmissio
 import { renderItems } from "../listings/renderitems.mjs";
 import { renderMyListingCard } from "../profile/rendermylistingcard.mjs";
 import { renderErrors } from "./rendererrors.mjs";
-import { rendersuccess } from "./rendersuccess.mjs";
+import { renderSuccess } from "./rendersuccess.mjs";
 
 function generateModalHtml(state, item = null) {
   const media = state === "update" && item.media ? item.media : []; // Use existing media if updating
@@ -228,7 +228,7 @@ export async function listingCRUDModal(
 
           resolve({ ...item, ...itemData });
         }
-        rendersuccess({
+        renderSuccess({
           message:
             state === "create"
               ? "Listing created successfully!"

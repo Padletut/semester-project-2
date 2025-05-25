@@ -1,6 +1,6 @@
 import * as constants from "../../constants.mjs";
 import { headers } from "../utils/headers.mjs";
-import { rendersuccess } from "../../ui/shared/rendersuccess.mjs";
+import { renderSuccess } from "../../ui/shared/rendersuccess.mjs";
 import { handleItemDeletionNavigation } from "../../ui/shared/handleitemdeletionnavigation.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
@@ -34,7 +34,7 @@ export async function deleteItem(itemId) {
       throw new Error(ERROR_MESSAGES.ITEM_DELETION_FAILED);
     }
 
-    rendersuccess({ message: "Listing deleted successfully!" });
+    renderSuccess({ message: "Listing deleted successfully!" });
     setTimeout(() => {
       handleItemDeletionNavigation(itemId);
     }, 5000);

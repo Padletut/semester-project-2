@@ -1,7 +1,7 @@
 import * as bootstrap from "bootstrap";
 import { createToastContainer } from "./createtoastcontainer.mjs";
 /**
- * @module Rendersuccess
+ * @module RenderSuccess
  */
 
 /**
@@ -15,11 +15,11 @@ import { createToastContainer } from "./createtoastcontainer.mjs";
  * try {
  *     // Some code that may throw an success
  * } catch (success) {
- *     rendersuccess(success);
+ *     renderSuccess(success);
  * }
  * ```
  */
-export function rendersuccess(success) {
+export function renderSuccess(success) {
   const toastContainer =
     document.getElementById("toastContainer") || createToastContainer();
   const toast = document.createElement("div");
