@@ -1,38 +1,47 @@
+import { renderErrors } from "../../ui/shared/rendererrors.mjs";
+import { fetchAndRenderFilteredItems } from "./fetchAndRenderFilteredItems.mjs";
+
 /**
  * Handles the filter input change event.
- * This method updates the tags based on the filter input and fetches items accordingly.
+ * instance method updates the tags based on the filter input and fetches items accordingly.
  * * @private
  * @returns {Promise<void>} - A promise that resolves when the filter change is complete.
  * @example
  * ```javascript
- * this.filterInput.addEventListener("input", this.handleFilterChange.bind(this));
+ * instance.filterInput.addEventListener("input", instance.handleFilterChange.bind(instance));
  * ```
  */
-export async function handleFilterChange() {
-  const tags = this.filterInput.value
-    .split(",")
-    .map((tag) => tag.trim())
-    .filter(Boolean);
+export async function handleFilterChange(instance) {
+  try {
+    const tags = instance.filterInput.value
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
 
-  this.tags = tags;
-  this.currentPage = 1;
-  this.isLastPage = false;
+    instance.tags = tags;
+    instance.currentPage = 1;
+    instance.isLastPage = false;
 
-  // Disconnect the observer if it exists
-  if (window.currentObserver) {
-    window.currentObserver.disconnect();
-    window.currentObserver = null;
+    // Disconnect the observer if it exists
+    if (window.currentObserver) {
+      window.currentObserver.disconnect();
+      window.currentObserver = null;
+    }
+
+    if (instance.tags.length === 0 && !instance.searchInput.value.trim()) {
+      instance.isSearchOrFilterActive = false;
+      instance.rerenderItems();
+      return;
+    }
+
+    instance.isSearchOrFilterActive = true;
+
+    await fetchAndRenderFilteredItems(instance);
+  } catch (error) {
+    renderErrors(
+      error,
+      "An error occurred while handling the filter change. Please try again later.",
+    );
+    console.error("Error in handleFilterChange:", error);
   }
-
-  if (this.tags.length === 0 && !this.searchInput.value.trim()) {
-    this.isSearchOrFilterActive = false; // Reset the flag if no tags are selected
-
-    this.rerenderItems(); // Fetch and display default items
-    return;
-  }
-
-  this.isSearchOrFilterActive = true; // Set the flag
-
-  // Fetch and render items with local search filtering
-  await this.fetchAndRenderFilteredItems();
 }

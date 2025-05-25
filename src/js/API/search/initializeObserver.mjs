@@ -1,4 +1,4 @@
-import { renderListingCard } from "../../ui/listings/renderlistingcard.mjs";
+import { renderListingCard } from "../../ui/listings/renderListingCard.mjs";
 
 /**
  * Initializes the Intersection Observer for lazy loading items.

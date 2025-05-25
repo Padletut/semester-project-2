@@ -12,10 +12,12 @@ import { debounce } from "../utils/debounce.mjs";
 export function setupEventListeners(instance) {
   // Search form submit listener
   if (instance.searchForm) {
-    instance.searchForm.addEventListener(
-      "submit",
-      instance.handleSearchSubmit.bind(instance),
-    );
+    instance.searchForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (typeof instance.handleSearchSubmit === "function") {
+        instance.handleSearchSubmit(event);
+      }
+    });
   }
 
   // Search input change listener

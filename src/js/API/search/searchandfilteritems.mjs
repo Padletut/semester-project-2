@@ -51,7 +51,7 @@ export class SearchAndFilterItems {
 
     this.fetchAndRenderFilteredItems = () => fetchAndRenderFilteredItems(this);
     this.rerenderItems = () => rerenderItems(this);
-    this.handleSearchSubmit = (event) => handleSearchSubmit.call(this, event);
+    this.handleSearchSubmit = () => handleSearchSubmit(this);
     this.handleFilterChange = () => handleFilterChange(this);
     this.createQueryParams = (params) => createQueryParams(this, params);
     this.fetchPage = (params) => fetchPage(this, params);

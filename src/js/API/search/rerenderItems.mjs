@@ -1,5 +1,5 @@
 import { toggleLoader } from "../../ui/shared/toggleLoader.mjs";
-import { renderListingCard } from "../../ui/listings/renderlistingcard.mjs";
+import { renderListingCard } from "../../ui/listings/renderListingCard.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import { ERROR_MESSAGES } from "../utils/errormessages.mjs";
 

@@ -46,8 +46,12 @@ if (document.title === "Listings | Tradeauction") {
   if (loggedInUser) {
     renderCredits();
   }
+
+  let searchAndFilter = null;
+
   document.addEventListener("DOMContentLoaded", () => {
     const itemsContainer = document.querySelector(".items-container");
+    searchAndFilter = new SearchAndFilterItems(itemsContainer);
 
     // Render default items
     renderItems();
@@ -55,9 +59,6 @@ if (document.title === "Listings | Tradeauction") {
     // Lazy load SearchAndFilterItems
     const searchInput = document.querySelector('input[name="search"]');
     const filterInput = document.querySelector('input[name="filter-tags"]');
-
-    let searchAndFilter = null;
-
     const initializeSearchAndFilter = () => {
       if (!searchAndFilter) {
         searchAndFilter = new SearchAndFilterItems(itemsContainer);
@@ -72,6 +73,15 @@ if (document.title === "Listings | Tradeauction") {
       filterInput.addEventListener("input", initializeSearchAndFilter);
     }
   });
+  const activeSwitch = document.getElementById("switchCheckChecked");
+  if (activeSwitch) {
+    activeSwitch.addEventListener("change", () => {
+      // if (searchAndFilter) {
+      searchAndFilter.handleSearchSubmit();
+      searchAndFilter.handleFilterChange();
+      //  }
+    });
+  }
 }
 
 // Render item detail in the detail view
@@ -90,19 +100,6 @@ if (logoutNavItem) {
   logoutNavItem.addEventListener("click", (event) => {
     event.preventDefault();
     logout();
-  });
-}
-
-// Event listener for the active switch
-const activeSwitch = document.getElementById("switchCheckChecked");
-if (activeSwitch) {
-  activeSwitch.addEventListener("change", async () => {
-    const itemsContainer = document.querySelector(".items-container");
-    if (itemsContainer) {
-      itemsContainer.innerHTML = ""; // Clear existing items
-
-      await renderItems(null, false, null);
-    }
   });
 }
 
