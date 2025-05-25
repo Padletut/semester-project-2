@@ -13,27 +13,25 @@ import * as constants from "../../constants.mjs";
  * ```
  */
 export function linkAuthorToProfile() {
-  const { STORAGE_KEYS } = constants; // Import constants for storage keys
-  const { PROFILE } = STORAGE_KEYS; // Destructure the PROFILE key from STORAGE_KEYS
-  const profile = loadStorage(PROFILE); // Load the logged-in user's profile from local storage
-  const authorLinks = document.querySelectorAll(".card-author"); // Select only the seller name links
+  const { STORAGE_KEYS } = constants;
+  const { PROFILE } = STORAGE_KEYS;
+  const profile = loadStorage(PROFILE);
+  const authorLinks = document.querySelectorAll(".card-author");
 
   authorLinks.forEach((authorLink) => {
-    const profileName = authorLink.getAttribute("name"); // Get the seller's name directly
+    const profileName = authorLink.getAttribute("name");
 
     // Check if the user is logged in
     if (!profile) {
-      // If not logged in, disable the link
-      authorLink.style.pointerEvents = "none"; // Disable clicking
-      authorLink.style.cursor = "default"; // Change cursor to indicate it's not clickable
-      return; // Skip adding the event listener
+      authorLink.style.pointerEvents = "none";
+      authorLink.style.cursor = "default";
+      return;
     }
 
-    // Add event listener if the user is logged in
     authorLink.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent the card's click event from triggering
-      event.preventDefault(); // Prevent default link behavior
-      window.location.href = `profile?profile=${profileName}`; // Redirect to the profile page
+      event.stopPropagation();
+      event.preventDefault();
+      window.location.assign(`/profile?profile=${profileName}`);
     });
   });
 }

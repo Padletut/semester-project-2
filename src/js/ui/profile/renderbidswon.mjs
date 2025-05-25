@@ -50,7 +50,7 @@ export async function renderBidsWon(profile) {
     bidsWonContainer.appendChild(bidElement);
     // Event listener for bid item click
     bidElement.addEventListener("click", () => {
-      window.location.href = `detail?id=${bid.id}`;
+      window.location.assign(`detail?id=${bid.id}`);
     });
   });
 }

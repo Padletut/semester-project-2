@@ -16,7 +16,7 @@ export function linkBidderToProfile() {
       event.stopPropagation(); // Prevent the card's click event from triggering
       event.preventDefault();
       const profileName = event.target.textContent;
-      window.location.href = `profile?profile=${profileName}`;
+      window.location.assign(`profile?profile=${profileName}`);
     });
   });
 }

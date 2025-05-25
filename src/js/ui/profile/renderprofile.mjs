@@ -44,7 +44,7 @@ export async function renderProfile() {
       );
       // Wait for 3 seconds before redirecting
       setTimeout(() => {
-        window.location.href = "/";
+        window.location.pathname = "/";
       }, 3000);
       return;
     }

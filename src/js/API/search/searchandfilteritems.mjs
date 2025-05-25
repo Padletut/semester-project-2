@@ -470,7 +470,7 @@ export class SearchAndFilterItems {
         const itemId = card.dataset.id; // Assuming each card has a data-id attribute
 
         if (itemId) {
-          window.location.href = `detail?id=${itemId}`;
+          window.location.assign(`/detail?id=${itemId}`);
         }
       });
     });

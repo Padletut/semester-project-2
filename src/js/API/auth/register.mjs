@@ -55,7 +55,5 @@ export async function register(name, email, password, confirmPassword) {
     await handleErrors(response, "register");
   } catch (error) {
     console.error("Error during registration:", error);
-    handleErrors(error, "register");
-    throw error;
   }
 }

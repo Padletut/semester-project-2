@@ -14,7 +14,7 @@ export function handleItemDeletionNavigation() {
   const currentUrl = window.location.href;
   if (currentUrl.includes("detail")) {
     // Redirect to the Listings page
-    window.location.href = "/";
+    window.location.pathname = "/";
   } else {
     renderProfile(); // Refresh the profile listings if not on the detail page
   }

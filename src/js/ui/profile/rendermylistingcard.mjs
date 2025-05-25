@@ -105,7 +105,7 @@ export async function renderMyListingCard(item, author) {
 
     // Add click event to navigate to the detail page
     card.addEventListener("click", () => {
-      window.location.href = `/detail?id=${fullItem.id}`;
+      window.location.assign(`/detail?id=${fullItem.id}`);
     });
 
     // Add event listener to the edit button to call updateitem modal

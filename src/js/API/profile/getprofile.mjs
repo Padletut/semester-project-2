@@ -45,14 +45,14 @@ export async function getProfile(username = loggedInUser) {
         console.error("Unauthorized access. Redirecting to listings.");
         renderErrors(new Error(ERROR_MESSAGES.AUTHORIZATION_ERROR));
         setTimeout(() => {
-          if (window.location.href === "/profile") {
-            window.location.href = "/";
+          if (window.location.pathname === "/profile") {
+            window.location.pathname = "/";
           }
         }, 5000);
       }
       throw new Error("Error loading profile data");
     }
-    return await data;
+    return data;
   } catch (error) {
     console.error("Error fetching profile:", error.message);
     handleErrors(ERROR_MESSAGES.AUTHORIZATION_ERROR);

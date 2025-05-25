@@ -36,7 +36,7 @@ export async function login(email, password, redirectUrl) {
       saveStorage(ACCESS_TOKEN, accessToken);
       saveStorage(PROFILE, profile);
 
-      window.location.href = redirectUrl;
+      window.location.pathname = redirectUrl;
 
       return profile;
     }
