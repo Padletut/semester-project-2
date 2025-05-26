@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { createBid } from "../../createbid.mjs";
+import { createBid } from "../../createBid.mjs";
 import { handleErrors } from "../../../utils/handleerrors.mjs";
 
 vi.mock("../../../utils/headers.mjs", () => ({

@@ -76,8 +76,8 @@ export async function renderProfile() {
     // Render credits in the header
     renderCredits(name);
   } catch (error) {
-    handleErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
     console.error("Error rendering profile data:", error);
+    handleErrors(new Error(ERROR_MESSAGES.LOADING_PROFILE_ERROR));
   } finally {
     toggleLoader(false, loaderContainer);
   }

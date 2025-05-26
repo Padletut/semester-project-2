@@ -1,6 +1,5 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
-import { handleErrors } from "../utils/handleerrors.mjs";
 import { renderErrors } from "../../ui/shared/rendererrors.mjs";
 import * as constants from "../../constants.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
@@ -55,7 +54,6 @@ export async function getProfile(username = loggedInUser) {
     return data;
   } catch (error) {
     console.error("Error fetching profile:", error.message);
-    handleErrors(ERROR_MESSAGES.AUTHORIZATION_ERROR);
     return null;
   }
 }

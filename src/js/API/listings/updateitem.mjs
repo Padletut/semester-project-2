@@ -1,6 +1,5 @@
 import { fetchData } from "../utils/fetchdata.mjs";
 import { headers } from "../utils/headers.mjs";
-import { handleErrors } from "../utils/handleerrors.mjs";
 import { buildUpdateBody } from "../utils/buildupdatebody.mjs";
 import * as constants from "../../constants.mjs";
 
@@ -41,7 +40,6 @@ export async function updateItem(itemId, item) {
     return await response.json();
   } catch (error) {
     console.error("Error updating item:", error);
-    handleErrors(error);
     throw error;
   }
 }

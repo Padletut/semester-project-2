@@ -1,9 +1,9 @@
 import * as constants from "../../constants.mjs";
 import { createBid } from "../../API/bid/createBid.mjs";
 import { validateBidInput } from "../bootstrap/validatebidinput.mjs";
-import { handleErrors } from "../../API/utils/handleerrors.mjs";
 import { loadStorage } from "../../storage/loadstorage.mjs";
 import { renderCredits } from "../shared/rendercredits.mjs";
+import { renderErrors } from "../shared/rendererrors.mjs";
 
 /**
  * Creates a post card element and appends it to the listings container.
@@ -189,7 +189,9 @@ export function renderListingCard(item) {
           renderCredits();
           bidInput.value = "";
         } catch (error) {
-          handleErrors(error);
+          renderErrors(
+            new Error("Failed to place bid. Please try again later."),
+          );
           console.error("Error placing bid:", error);
         }
       }

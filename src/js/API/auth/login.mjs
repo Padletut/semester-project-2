@@ -43,7 +43,6 @@ export async function login(email, password, redirectUrl) {
     handleErrors(response, "login");
   } catch (error) {
     console.error("Error during login:", error.message);
-    handleErrors(error, "login");
     throw new Error("Login failed. Please check your credentials.");
   }
   return null;

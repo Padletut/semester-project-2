@@ -55,7 +55,6 @@ export async function createItem(item) {
     }
     return await response.json();
   } catch (error) {
-    handleErrors(error);
     console.error("Error posting item:", error);
     throw error;
   }

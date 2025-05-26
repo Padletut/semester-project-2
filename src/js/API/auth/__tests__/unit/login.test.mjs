@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { login } from "../../login.mjs";
+import { login } from "../../logIn.mjs";
 import { fetchData } from "../../../utils/fetchdata.mjs";
 import { saveStorage } from "../../../../storage/savestorage.mjs";
 import { handleErrors } from "../../../utils/handleerrors.mjs";
