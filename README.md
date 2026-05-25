@@ -18,12 +18,12 @@ TradeAuction is a modern auction platform where users can list items for bidding
 ## Table of Contents
 
 - [Overview](#overview)
-- [UI Components](#ui-components)
-- [Features](#features)
-- [Development Process Management](#development-process-management)
 - [Getting Started](#getting-started)
   - [Installing](#installing)
   - [Running](#running)
+- [UI Components](#ui-components)
+- [Features](#features)
+- [Development Process Management](#development-process-management)
 - [Additional Setup](#additional-setup)
 - [Building for Production](#building-for-production)
 - [Running Tests](#running-tests)
@@ -42,39 +42,6 @@ TradeAuction allows users to:
 - Bid on other users’ listings
 - View bids on listings
 - Search and browse listings (available to all users)
-
-## UI Components
-
-### Authentication
-
-- **Registration/Login Form**: stud.noroff.no email required
-- **Profile Update**: Update avatar, banner, and bio after logging in
-- **Credits Display**: View available credits
-
-### Listings
-
-- **Listing Cards**: Title, images, description, tags, deadline, and bid info
-- **Create/Edit Listing Modal**: Add or update listings with media and tags
-- **Search/Filter Bar**: Search by title or filter by tags
-
-### Bidding
-
-- **Place Bid Form**: Enter bid amount on listing detail page
-- **Bid History**: View all bids for a listing
-
-### Profile
-
-- **User Listings**: View and manage your own listings
-- **My Bids**: View all bids placed by the user
-- **Bids Won**: See items won by the user
-
-## Features
-
-- **Account Management**: Register, login, logout, update profile, view credits
-- **Listing Management**: Create, update, delete, and search auction listings
-- **Bidding**: Place bids, view bid history, see bids won
-- **Credits System**: Earn credits by selling, spend credits by bidding
-- **Responsive UI**: Built with Bootstrap 5 and SCSS
 
 ## Getting Started
 
@@ -110,6 +77,39 @@ npm run dev
 ```
 
 This will run the SASS watcher and Vite dev server for live development.
+
+## UI Components
+
+### Authentication
+
+- **Registration/Login Form**: stud.noroff.no email required
+- **Profile Update**: Update avatar, banner, and bio after logging in
+- **Credits Display**: View available credits
+
+### Listings
+
+- **Listing Cards**: Title, images, description, tags, deadline, and bid info
+- **Create/Edit Listing Modal**: Add or update listings with media and tags
+- **Search/Filter Bar**: Search by title or filter by tags
+
+### Bidding
+
+- **Place Bid Form**: Enter bid amount on listing detail page
+- **Bid History**: View all bids for a listing
+
+### Profile
+
+- **User Listings**: View and manage your own listings
+- **My Bids**: View all bids placed by the user
+- **Bids Won**: See items won by the user
+
+## Features
+
+- **Account Management**: Register, login, logout, update profile, view credits
+- **Listing Management**: Create, update, delete, and search auction listings
+- **Bidding**: Place bids, view bid history, see bids won
+- **Credits System**: Earn credits by selling, spend credits by bidding
+- **Responsive UI**: Built with Bootstrap 5 and SCSS
 
 ## Additional Setup
 
