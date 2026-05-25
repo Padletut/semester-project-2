@@ -6,16 +6,29 @@
 
 TradeAuction is a modern auction platform where users can list items for bidding and place bids on items from other users. New users receive 1000 credits to get started. The site is built as a front-end application using the Noroff Auction API.
 
+## Built With
+
+- [Vite](https://vitejs.dev/)
+- [Bootstrap 5](https://getbootstrap.com)
+- [SCSS](https://sass-lang.com/)
+- [Vitest](https://vitest.dev/)
+- [Playwright](https://playwright.dev/)
+- [ESLint](https://eslint.org/)
+
 ## Table of Contents
 
 - [Overview](#overview)
 - [UI Components](#ui-components)
 - [Features](#features)
 - [Development Process Management](#development-process-management)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Getting Started](#getting-started)
+  - [Installing](#installing)
+  - [Running](#running)
 - [Additional Setup](#additional-setup)
+- [Building for Production](#building-for-production)
+- [Running Tests](#running-tests)
 - [Generating Documentation](#generating-documentation)
+- [Contributing](#contributing)
 - [Project Resources](#project-resources)
 
 ## Overview
@@ -63,7 +76,9 @@ TradeAuction allows users to:
 - **Credits System**: Earn credits by selling, spend credits by bidding
 - **Responsive UI**: Built with Bootstrap 5 and SCSS
 
-## Installation
+## Getting Started
+
+### Installing
 
 To get started with TradeAuction, clone the repository and install dependencies:
 
@@ -86,7 +101,7 @@ A template is provided at `src/.env.example`.
    ```
 2. Open src/.env and fill in your actual values (such as your API key).
 
-## Usage
+### Running
 
 To start the development server:
 
@@ -177,6 +192,17 @@ npm run docs
 ```
 
 This will generate the JSDoc documentation.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to TradeAuction, please follow these steps:
+
+1. Fork the repository
+2. Create a new branch for your feature or fix (`git checkout -b feature/your-feature-name`)
+3. Commit your changes with clear, descriptive messages
+4. Push your branch and open a pull request for review
+
+Please make sure your code passes all existing tests and linting checks before submitting a pull request.
 
 ## Project Resources
 
