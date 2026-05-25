@@ -6,6 +6,14 @@
 
 TradeAuction is a modern auction platform where users can list items for bidding and place bids on items from other users. New users receive 1000 credits to get started. The site is built as a front-end application using the Noroff Auction API.
 
+## Features
+
+- **Account Management**: Register, login, logout, update profile, view credits
+- **Listing Management**: Create, update, delete, and search auction listings
+- **Bidding**: Place bids, view bid history, see bids won
+- **Credits System**: Earn credits by selling, spend credits by bidding
+- **Responsive UI**: Built with Bootstrap 5 and SCSS
+
 ## Built With
 
 - [Vite](https://vitejs.dev/)
@@ -14,34 +22,6 @@ TradeAuction is a modern auction platform where users can list items for bidding
 - [Vitest](https://vitest.dev/)
 - [Playwright](https://playwright.dev/)
 - [ESLint](https://eslint.org/)
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Getting Started](#getting-started)
-  - [Installing](#installing)
-  - [Running](#running)
-- [UI Components](#ui-components)
-- [Features](#features)
-- [Development Process Management](#development-process-management)
-- [Additional Setup](#additional-setup)
-- [Building for Production](#building-for-production)
-- [Running Tests](#running-tests)
-- [Generating Documentation](#generating-documentation)
-- [Contributing](#contributing)
-- [Project Resources](#project-resources)
-
-## Overview
-
-TradeAuction allows users to:
-
-- Register with a `stud.noroff.no` email and receive 1000 credits
-- Log in, log out, and update their profile
-- View their total credits
-- Create listings with title, deadline, media gallery, and description
-- Bid on other users’ listings
-- View bids on listings
-- Search and browse listings (available to all users)
 
 ## Getting Started
 
@@ -103,14 +83,6 @@ This will run the SASS watcher and Vite dev server for live development.
 - **My Bids**: View all bids placed by the user
 - **Bids Won**: See items won by the user
 
-## Features
-
-- **Account Management**: Register, login, logout, update profile, view credits
-- **Listing Management**: Create, update, delete, and search auction listings
-- **Bidding**: Place bids, view bid history, see bids won
-- **Credits System**: Earn credits by selling, spend credits by bidding
-- **Responsive UI**: Built with Bootstrap 5 and SCSS
-
 ## Additional Setup
 
 ### Install Playwright Browsers
@@ -128,18 +100,6 @@ To enable pre-commit hooks for linting and formatting, initialize Husky:
 ```bash
 npm run prepare
 ```
-
-## Building for Production
-
-To build the project for production (including CSS autoprefixing):
-
-```bash
-npm run build
-```
-
-This will output the production-ready files to the `dist/` folder.
-
----
 
 ## Running Tests
 
@@ -183,7 +143,17 @@ To view the Playwright test report:
 npm run e2e:report
 ```
 
-### Generating Documentation
+## Building for Production
+
+To build the project for production (including CSS autoprefixing):
+
+```bash
+npm run build
+```
+
+This will output the production-ready files to the `dist/` folder.
+
+## Generating Documentation
 
 To generate the JSDocs for the project, run:
 
