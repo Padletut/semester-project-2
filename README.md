@@ -1,5 +1,9 @@
 # TradeAuction (Semester Project 2)
 
+![Project Screenshot](images/screenshot.png)
+
+## Description
+
 TradeAuction is a modern auction platform where users can list items for bidding and place bids on items from other users. New users receive 1000 credits to get started. The site is built as a front-end application using the Noroff Auction API.
 
 ## Table of Contents
